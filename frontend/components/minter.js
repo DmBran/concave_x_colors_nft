@@ -1,13 +1,17 @@
-//import TheSpirals from '../../artifacts/contracts/legacy_spirals/TheSpirals.sol/TheSpirals.json';
+import TheSpirals from '../../artifacts/contracts/legacy_spirals/TheSpirals.sol/TheSpirals.json';
 import TheColors from '../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json';
 import React, {useState, useEffect} from 'react';
+import { Loader } from './loader';
 import Web3 from 'web3';
 
 export const Minter = () => {
 
+  const MAX_COLORS = 4317
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
+  const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
   const [web3, setWeb3] = useState(null)
   const [svgs, setSvgs] = useState(null)
+  const [tokenId, setTokenId] = useState(null)
   const [address, setAddress] = useState(null)
   const [network, setNetwork] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
@@ -17,6 +21,8 @@ export const Minter = () => {
       console.log("Please install Metamask")
       return
     }
+
+    setTokenId(0)
 
     const accounts = await ethereum.request({ method: "eth_requestAccounts" })
     setAddress(accounts[0])
@@ -47,13 +53,37 @@ export const Minter = () => {
       const color = await contract.methods.getHexColor(web3.eth.abi.encodeParameter('uint256',tokenId)).call()
       svgs.push({
         svg: svg.replace(/"690"/g,"75", 'g'),
+        tokenId,
         color
       })
     }
+    console.log(svgs)
     setSvgs(svgs)
   }
 
-  async function triggerMint(){
+  async function mintSpiral(){
+    console.log("minting spiral token "+tokenId)
+    const nonce = await web3.eth.getTransactionCount(address, 'latest');
+    const contract = new web3.eth.Contract(TheSpirals.abi, SPIRALS_CONTRACT);
+    const tx = {
+      'from': address,
+      'to': SPIRALS_CONTRACT,
+      'nonce': nonce,
+      //"value": web3.utils.toWei('.01','ether'),
+      'gas': 500000,
+      'data': contract.methods.mintSpiral(web3.eth.abi.encodeParameter('uint256', tokenId)).encodeABI()
+    };
+
+    const tx2 = await web3.eth.sendTransaction(tx, address).catch(error => {
+      console.log(error)
+    })
+  }
+
+  function setToken(e, data){
+    setTokenId(parseInt(e.target.getAttribute('data-token')))
+  }
+
+  async function mintColor(){
 
     const nonce = await web3.eth.getTransactionCount(address, 'latest');
     const contract = new web3.eth.Contract(TheColors.abi, COLORS_CONTRACT);
@@ -82,22 +112,24 @@ export const Minter = () => {
           <div className={"mb-10"}>
             <p className={"text-center mb-3 font-bold"}>Your Colors:</p>
             <div className={"flex colors justify-center content-center"}>
-            {svgs && svgs.map(svg => (
-              <div key={svg.color} className={"shadow-md"} style={{
-                width: 75,
-                height: 75,
-                background: svg.color,
-                margin: 5
-              }}/>
-            ))}
+            {svgs && svgs.map(svg => {
+              return (
+                <div onClick={setToken} data-token={svg.tokenId} key={svg.color} className={"color shadow-md" + (svg.tokenId == tokenId ? " border-solid border-4 border-concave-50 active" : "")} style={{
+                  width: 75,
+                  height: 75,
+                  background: svg.color,
+                  margin: 5
+                }}/>
+            )})}
+            {!svgs.length && <Loader />}
             </div>
           </div>
 
           <div className={"content-center justify-center flex mb-10"}>
-            <button onClick={triggerMint} data-mint="color" className={"bg-blue-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
+            <button onClick={mintColor} data-mint="color" className={"bg-blue-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
               Mint a Colors NFT!
             </button>
-            <button onClick={triggerMint} data-mint="spiral" className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
+            <button onClick={mintSpiral} data-mint="spiral" className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
               Mint a Spiral NFT!
             </button>
           </div>
@@ -107,7 +139,7 @@ export const Minter = () => {
       return (
         <div className={"flex-1 mb-10"}>
           <p className={"text-red-600 font-bold"}>You must own a Colors NFT to Mint!</p>
-          <button onClick={triggerMint} className={"bg-blue-500 mx-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
+          <button onClick={mintColor} className={"bg-blue-500 mx-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
             Mint a Colors NFT!
           </button>
         </div>
