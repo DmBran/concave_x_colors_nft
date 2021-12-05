@@ -2,7 +2,7 @@ import styles from '../styles/meme.module.css'
 import { Navbar } from '../components/navbar'
 import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
-import { Minter } from '../components/minter'
+import Link from 'next/link';
 
 export default function Home() {
   function componentDidMount() {
@@ -14,26 +14,20 @@ export default function Home() {
       <MetaHead />
       <Navbar />
       <div className={styles.container}>
+        <div className={styles.hero}></div>
+        <div className={styles.herotext}>
+            100% on the Blockchain
+        </div>
 
-        <hero className={styles.hero}>
-          {/*<h1 className={styles.title}>*/}
-          {/*  Welcome to <br /><a>Concave NFT Minting</a>*/}
-          {/*</h1>*/}
+        <div className={styles.herotext2}>
+            A different kind of NFT
+        </div>
 
-          {/*<Minter />*/}
-        </hero>
-          <herotext className={styles.herotext}>
-              100% on the Blockchain
-          </herotext>
-
-          <herotext2 className={styles.herotext2}>
-              A different kind of NFT
-          </herotext2>
-
-          <main className={'pb-4 pt-10 mx-auto mt-10 flex flex-1 center-items'}>
-              <Minter />
-          </main>
-
+        <div className={styles.mintHome}>
+          <Link href="/mint">
+            <a className={"bg-green-500 text-black mx-5 hover:bg-green-700 font-bold py-2 px-4 rounded"}>SYNC NOW</a>
+          </Link>
+        </div>
         <Footer />
       </div>
     </div>
