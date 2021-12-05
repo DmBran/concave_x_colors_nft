@@ -24,7 +24,7 @@
 		
         <pattern id="pattern_squares" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
             <g id="square"><rect class="cls-2" width="81.35" height="81.35"/></g><g id="dia">
-							<rect class="cls-2" y="34.63" width="81.35" height="12.09" fill="grey"/> </g>
+							<rect class="cls-2" y="34.63" width="81.35" height="12.09" fill="gray"/> </g>
         </pattern>
         
          <pattern id="pattern_hori" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -36,12 +36,18 @@
          <pattern id="pattern_marks" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
             <g id="mark"><path class="cls-2" d="M119,153.87c0-3.71,2.55-6.39,6-6.39,
 							3.66,0,6,2.68,6,6.39s-2.35,6.37-6,6.37S119,157.47,119,153.87Zm2.55-14.72-1.43-49.39h9.78l-1.43,49.39Z"
-							fill="grey"/> </g>
+							fill="gray"/> </g>
         </pattern>
          <pattern id="polka_dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
              <circle fill="#bee9e8" cx="50" cy="50" r="25"> </circle>
         </pattern>
-            
+        <filter id="f1" x="0" y="0" width="200%" height="200%">
+      <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+      <feColorMatrix result = "matrixOut" in = "offOut" type = "matrix" values = "0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0"/>
+      <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="10" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    	</filter>
+    
   </defs>
 
  <rect x="0" y="0" width="100%" height="100%" fill="url(#polka_dots)"></rect>
@@ -51,10 +57,10 @@
              C 75,350 200,350 250,250 
              S 425,150 425,250 
              S 300,350 250,250
-             S 75,150 75,250" stroke-width="5" fill="none" stroke="#000000" id="theMotionPath"/>
+             S 75,150 75,250" stroke-width="5" fill="none" stroke="gray" id="theMotionPath"/>
                       
 <g id="logo">
-<ellipse id="circle" ry="30" rx="43" cx="0" cy="0" fill="blue" />
+<ellipse id="circle" ry="30" rx="43" cx="0" cy="0" fill="blue" filter="url(#f1)" />
 <path class="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z" 
 transform="translate(-88 -63) scale(0.5)" fill="yellow"/>
 <path class="cls-1" d="M144.05,89.35H105.36c17,36.86,0,71.3,0,71.3h39.28C127.67,122.42,144.05,89.35,144.05,89.35Zm-12.22,63.3H117.24s8.15-24.69,0-55.72h14.59S124.37,124.44,131.83,152.65Z" 
