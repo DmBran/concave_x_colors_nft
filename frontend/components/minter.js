@@ -64,17 +64,16 @@ export const Minter = () => {
     if (colorsOwned > 0){
       return (
         <div>
-          <p className={"text-red-600 font-bold"}>{address} owns {colorsOwned} Colors NFT on {network}</p>
-          <div className={"content-center flex"}>
+          <div className={"content-center flex mb-10"}>
             <button onClick={triggerMint} className={"bg-blue-500 mx-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
               Mint a Colors NFT!
             </button>
 
             
           </div>
-          <div>
-            <p>Your Colors:</p>
-            <div className={"flex colors"}>
+          <div className={"mb-10"}>
+            <p className={"text-center mb-3 font-bold"}>Your Colors:</p>
+            <div className={"flex colors justify-center content-center"}>
             {svgs && svgs.map(svg => (
               <div className={"mx-5"} dangerouslySetInnerHTML={{ __html: svg }} />
             ))}
@@ -84,7 +83,7 @@ export const Minter = () => {
       );
     } else {
       return (
-        <div>
+        <div className={"mb-10"}>
           <p className={"text-red-600 font-bold"}>You must own a Colors NFT to Mint!</p>
           <button onClick={triggerMint} className={"bg-blue-500 mx-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
             Mint a Colors NFT!

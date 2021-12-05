@@ -30,12 +30,8 @@ export default function Home() {
               A different kind of NFT
           </herotext2>
 
-          <main className={styles.main}>
-              {/*<h1 className={styles.title}>*/}
-              {/*  Welcome to <br /><a>Concave NFT Minting</a>*/}
-              {/*</h1>*/}
-
-              {/*<Minter />*/}
+          <main className={'pb-4 pt-10 mx-auto mt-10 flex flex-1 center-items'}>
+              <Minter />
           </main>
 
         <Footer />
