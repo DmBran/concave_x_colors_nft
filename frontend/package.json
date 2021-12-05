@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && next export"
+    "deploy": "next build && next export && touch out/.nojekyll"
   },
   "dependencies": {
     "ethers": "^5.5.2",
