@@ -4,10 +4,10 @@ pragma solidity ^0.8.0;
 
 
 import '@openzeppelin/contracts/access/Ownable.sol';
-import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
+import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import 'base64-sol/base64.sol';
 
-contract TheConcaveNFT is ERC721Enumerable, Ownable {
+contract TheConcaveNFT is ERC721URIStorage, Ownable {
 
   uint256 public tokenCounter;
 
@@ -19,7 +19,9 @@ contract TheConcaveNFT is ERC721Enumerable, Ownable {
 
   function mintNFT() public {
     _safeMint(msg.sender, tokenCounter);
-     tokenCounter = tokenCounter + 1;
+    string memory imageData = generateSVGImage(tokenCounter);
+    _setTokenURI(tokenCounter, formatTokenURI(imageData));
+    tokenCounter = tokenCounter + 1;
   }
 
   function generateSVGImage(uint256 tokenId) internal pure returns (string memory) {
@@ -40,9 +42,8 @@ contract TheConcaveNFT is ERC721Enumerable, Ownable {
       );
   }
 
-  function tokenURI(uint256 tokenId) public view virtual override(ERC721) returns (string memory) {
-    string memory svgData = generateSVGImage(tokenId);
-    string memory image = Base64.encode(bytes(svgData));
+  function formatTokenURI(string memory imageData) public pure returns (string memory) {
+    string memory image = Base64.encode(bytes(imageData));
 
     return string(
         abi.encodePacked(

@@ -7,7 +7,7 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)
 
 const contract = require("../artifacts/contracts/TheConcaveNFT.sol/TheConcaveNFT.json")
-const contractAddress = "0xd7402d3bbf891A3c75F1FB41d1949752b04dAD85"
+const contractAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
 async function mintNFT(n) {
