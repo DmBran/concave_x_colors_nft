@@ -106,13 +106,6 @@
     ethers "~4.0.4"
     lodash "^4.17.11"
 
-"@aamasri/dom-utils@^1.0.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@aamasri/dom-utils/-/dom-utils-1.1.4.tgz#6fdbf3ddbec814f970735ec358bb81b806ee20db"
-  integrity sha512-46nRP09QRKGM31w+jwajGswDPcgYn1D7116zOMBjSmpC/1QxWfghKg3B8N3fQXF29KAO7YgWBZR6epN8fUNKbQ==
-  dependencies:
-    jquery ">=1.7.0 <4.0.0"
-
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
@@ -1074,11 +1067,6 @@ ajv@^8.0.1:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
-
-animejs@^3.2.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/animejs/-/animejs-3.2.1.tgz#de9fe2e792f44a777a7fdf6ae160e26604b0cdda"
-  integrity sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==
 
 anser@1.4.9:
   version "1.4.9"
@@ -4609,6 +4597,11 @@ globby@^12.0.0:
     merge2 "^1.4.1"
     slash "^4.0.0"
 
+goober@^2.0.35:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.1.0.tgz#12e1550ca07e9ebcf70396c30ccc0eb8b2438698"
+  integrity sha512-UdKKZ1boKFaJWlQYlHlp/1jpnrZIkfYWM0zuyQTY7tF9Cs+uHDlQk1kB5vexmZssw4R8iLMjmVUd0wKcaweGfQ==
+
 got@9.6.0:
   version "9.6.0"
   resolved "https://registry.yarnpkg.com/got/-/got-9.6.0.tgz#edf45e7d67f99545705de1f7bbeeeb121765ed85"
@@ -4650,15 +4643,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.8"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
-
-growl-js@^1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/growl-js/-/growl-js-1.0.13.tgz#d995148c5b87a73b06a3e8715077026dc60479ad"
-  integrity sha512-BRkF/E3G4QUqIs6n3PN4uCjp8ir78WM5yf514liremE0E7aOlsQBxr09s7mDt+J0SELuifEZEW3lJMMMs1q4Dw==
-  dependencies:
-    "@aamasri/dom-utils" "^1.0.4"
-    animejs "^3.2.0"
-    jquery ">=1.7.0 <4.0.0"
 
 har-schema@^2.0.0:
   version "2.0.0"
@@ -5379,11 +5363,6 @@ jest-worker@27.0.0-next.5:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
-
-"jquery@>=1.7.0 <4.0.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
-  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
 
 js-sha3@0.5.7, js-sha3@^0.5.7:
   version "0.5.7"
@@ -7270,6 +7249,13 @@ react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-hot-toast@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.1.1.tgz#56409ab406b534e9e58274cf98d80355ba0fdda0"
+  integrity sha512-Odrp4wue0fHh0pOfZt5H+9nWCMtqs3wdlFSzZPp7qsxfzmbE26QmGWIh6hG43CukiPeOjA8WQhBJU8JwtWvWbQ==
+  dependencies:
+    goober "^2.0.35"
 
 react-is@17.0.2:
   version "17.0.2"
