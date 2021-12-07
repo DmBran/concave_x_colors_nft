@@ -82,7 +82,7 @@
 
 		<path id="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z" 
     transform="translate(-95,0) scale(2)"  stroke="black"  fill-opacity="0.9">
-    <animate id = "beat1" attributeName="fill" values="#AAAAAA;white" begin="0.5s;beat6.end" dur="1s" />
+    <animate id = "beat1" attributeName="fill" values="222222;555555" begin="0.5s;beat6.end" dur="1s" />
 
     </path>
     <path id ="cls-1"
