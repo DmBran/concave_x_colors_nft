@@ -13,7 +13,7 @@
 ## SVG Patterns
 
 Radial Gradiant overlaps
-![](radial_gradiant_1.svg)
+![](radial_gradient_1.svg)
 
 Gradient 10:
 
