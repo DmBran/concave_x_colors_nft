@@ -23,12 +23,12 @@ export const Navbar = () => {
         <div className='container mx-auto flex flex-wrap p-4 flex-col md:flex-row items-center md:mb-4'>
           <Link href='/'>
             <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
-              href="" target="_blank"><span className="mr-3 text-xl">CONCAVE</span>
+              href="" target="_blank"><span className="mr-3 text-xl">SYNC</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
                   className="w-10 h-10 text-white p-2 bg-black rounded-full" viewBox="0 0 24 24">
                 <path d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"></path>
               </svg>
-              <span className="ml-3 text-xl">COLORS.NFT</span>
+              <span className="ml-3 text-xl">COLORS</span>
             </a>
           </Link>
           <button
@@ -67,11 +67,11 @@ export const Navbar = () => {
                   Mint
                 </a>
               </Link>
-              {/*<Link href='/nfts'>
+              <Link href='/nfts'>
                 <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:bg-concave-600'>
                   My NFTs
                 </a>
-              </Link>*/}
+              </Link>
               {context.active && context.account && <Link href='https://github.com/concave-dash/concave_x_colors_nft'>
                 <p className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:bg-concave-600'>
                 {context.account.substring(0,5)+'....'+context.account.substring(11,16)}</p>

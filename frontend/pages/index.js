@@ -3,11 +3,32 @@ import { Navbar } from '../components/navbar'
 import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import Link from 'next/link';
+import Countdown from 'react-countdown';
+import { render } from 'react-dom';
 
 export default function Home() {
   function componentDidMount() {
     document.querySelector("body").classList.add('body')
   }
+
+  // Renderer callback with condition
+  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      return <Link href="/mint"><a>MINT NOW</a></Link>;
+    } else {
+      // Render a countdown
+      return <div className="center-text text-center">
+        <p className="uppercase">Minting starts in</p>
+        <span>
+          {days.toString().padStart(2, '0')}:
+          {hours.toString().padStart(2, '0')}:
+          {minutes.toString().padStart(2, '0')}:
+          {seconds.toString().padStart(2, '0')}
+        </span>
+      </div>
+    }
+  };
 
   return (
     <div className={styles.mainContainer}>
@@ -24,9 +45,10 @@ export default function Home() {
         </div>
 
         <div className={styles.mintHome}>
-          <Link href="/mint">
-            <a className={styles.mintButton}>MINT NOW</a>
-          </Link>
+          
+          <div  className={styles.mintButton}>
+            <Countdown date={Date.now() + 612505000} renderer={renderer} />
+          </div>
         </div>
         <Footer />
       </div>

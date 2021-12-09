@@ -73,7 +73,7 @@
   border-radius: 25px;
   padding: 2rem .5rem;
   width: 70%;
-  margin: 0 auto;
+  margin: 0 auto 30px auto;
 }
 .hero {
   height: 30vh;
@@ -170,6 +170,17 @@ border-image-slice: 1;
   max-width: 100%;
 }
 
+.sync {
+  margin: 0 auto 30px auto;
+}
+.sync svg {
+  margin: 0 auto;
+}
+.toast {
+  border: 0;
+  margin: 0;
+
+}
 .footer {
   width: 100%;
   justify-content: center;

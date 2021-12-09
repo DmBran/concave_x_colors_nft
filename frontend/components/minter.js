@@ -11,6 +11,11 @@ import styles from '../styles/meme.module.css'
 export const Minter = () => {
   const context = useWeb3Context()
 
+  // Mainnet
+  //const network = 1;
+  // Ropsten
+  const network = 3
+
   const MAX_COLORS = 2
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
   //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
@@ -28,16 +33,15 @@ export const Minter = () => {
     await context.setFirstValidConnector(['MetaMask'])
 
     if (context.active) {
-      console.log('why')
       setAddress(context.account)
 
       const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
-      await updateNFTs(web3, contract, context.account)
+      await updateNFTs(contract, context.account)
     }
 
   }, []);
 
-  async function updateNFTs(web3, contract, account){
+  async function updateNFTs(contract, account){
     const svgs = [];
 
     const colorsCount = await contract.methods.balanceOf(account).call()
@@ -63,19 +67,23 @@ export const Minter = () => {
     try {
       const nonce = await context.library.eth.getTransactionCount(address, 'latest');
       const contract = new context.library.eth.Contract(SyncXColors.abi, SPIRALS_CONTRACT);
-
+      
       const tokens = svgs.filter(svg => svg.selected).map(svg =>  parseInt(svg.tokenId))
+      const txCall =  contract.methods.mintSync(tokens)
+      const gas = await context.library.eth.estimateGas({
+        from: address,
+        to: SPIRALS_CONTRACT,
+        data: txCall.encodeABI()
+      })
       console.log(tokens)
       console.log(contract.methods.mintSync(context.library.eth.abi.encodeParameter('uint256[]', tokens)))
       const tx = {
         'from': address,
         'to': SPIRALS_CONTRACT,
         'nonce': nonce,
-        //"value": web3.utils.toWei('.01','ether'),
-        'gas': 500000,
-        'data': contract.methods.mintSync(context.library.eth.abi.encodeParameter('uint256[]', tokens))
+        'data': txCall.encodeABI(),
+        gas
       };
-      console.log(tx)
 
       txToast = toast.loading("Transaction processing")
       const tx2 = await context.library.eth.sendTransaction(tx, address).catch(error => {
@@ -84,7 +92,7 @@ export const Minter = () => {
         })
         setSubmitting(undefined)
       })
-
+      console.log(tx2)
       if (tx2?.code) {
         toast.error("Transaction failed!", {
           id: txToast
@@ -94,10 +102,9 @@ export const Minter = () => {
         toast.success("Transaction successful!", {
           id: txToast
         })
-
-        window.localStorage.setItem('tokenId', tokenId)
-        Router.push('/reveal')
       }
+      setSubmitting(undefined)
+      Router.push('/nfts')
     } catch (ex) {
       console.log(ex)
       setSubmitting(undefined)
@@ -112,7 +119,7 @@ export const Minter = () => {
   function selectColor(svg){
     if (svg.selected) {
       delete svg.selected;
-      setMintColors(svg.tokenId)
+      setMintColors('unselected' + svg.tokenId)
       return;
     }
 
@@ -126,19 +133,34 @@ export const Minter = () => {
     setMintColors(svg.tokenId)
   }
 
+  const handleConnect = async () => {
+    if (window.ethereum) { //check if Metamask is installed
+      await window.ethereum.enable(); //connect Metamask  
+    } 
+  }
+
   async function mintColor(){
-    setSubmitting("colors")
+    //setSubmitting("colors");
     const nonce = await context.library.eth.getTransactionCount(address, 'latest');
     const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
+
+const txCall = contract.methods.mintNextColors(context.library.eth.abi.encodeParameter('uint256',1))
+const gas = await context.library.eth.estimateGas({
+  from: address,
+  to: COLORS_CONTRACT,
+  data: txCall.encodeABI()
+})
+console.log(`Gas: ${gas}`);
+//const gas = await txCall.estimateGas()
+//console.log(gas)
     const tx = {
       'from': address,
       'to': COLORS_CONTRACT,
       'nonce': nonce,
-      //"value": web3.utils.toWei('.01','ether'),
-      'gas': 500000,
-      'data': contract.methods.mintNextColors(context.library.eth.abi.encodeParameter('uint256',1)).encodeABI()
+      'data': txCall.encodeABI(),
+      gas
     };
-
+    console.log(tx)
     const txToast = toast.loading("Transaction processing")
     const tx2 = await context.library.eth.sendTransaction(tx, address).catch(error => {
       console.log(error)
@@ -148,18 +170,27 @@ export const Minter = () => {
       setSubmitting(undefined)
     })
 
+    console.log(tx2)
+
     if (tx2?.transactionHash) {
       toast.success("Transaction successful!", {
         id: txToast
       })
       setSubmitting(undefined)
-      await updateNFTs(web3, contract, address)
+      await updateNFTs(contract, address)
     }
 
     console.log(tx2)
   }
 
   if (context.active){
+    if (context.networkId !== network) {
+      return (
+        <div className={"flex-1 font-bold text-red flex text-center center-content justify-center"}>
+          <p className={'mb-0 align-center'}>Please switch network to Ethereum mainnet</p>
+        </div>
+      )
+    }
     if (context.account) {
       return (
         <div className={styles.modal}>
@@ -203,9 +234,9 @@ export const Minter = () => {
   }
 
   return (
-    <div className={"flex-1 flex mb-10 center-content justify-center"}>
+    <div className={"flex-1 flex center-content justify-center"}>
       <button
-            className='inline-flex bg-green-500 items-center  py-1 px-3 focus:outline-none rounded text-base'>Connect Wallet
+            onClick={handleConnect} className='inline-flex bg-green-500 items-center  py-1 px-3 focus:outline-none rounded text-base'>Connect Wallets
         </button>
     </div>
   )
