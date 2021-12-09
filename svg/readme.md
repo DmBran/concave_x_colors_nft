@@ -12,7 +12,7 @@
 
 ## SVG Patterns
 
-Radial Gradiant overlaps
+Radial Gradiant Circle Overlaps - Ultra rare?
 
 ![](radial_gradient_1.svg)
 
