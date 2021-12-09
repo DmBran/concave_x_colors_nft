@@ -46,3 +46,5 @@ Gradient 02: basic
 
 
 Gradient 01: basic
+
+![](01.svg)
