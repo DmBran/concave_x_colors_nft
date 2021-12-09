@@ -2,19 +2,22 @@ import TheColors from '../../artifacts/contracts/legacy_colors/TheColors.sol/The
 import React, {useState, useEffect} from 'react';
 import { Loader } from './loader';
 import Web3 from 'web3';
+import { useWeb3Context } from 'web3-react';
+
 export const Colors = (props) => {
+  const context = useWeb3Context()
+
 
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
   const [svgs, setSvgs] = useState(null)
   const [web3, setWeb3] = useState(null)
   const [tokenId, setTokenId] = useState(null)
-  const [address, setAddress] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
-    const web3 = new Web3(ethereum)
-    setWeb3(web3)
-    const contract = new web3.eth.Contract(TheColors.abi, COLORS_CONTRACT);
+    context.setFirstValidConnector(['MetaMask', 'Infura'])
+
+    const contract = new context.library.Contract(TheColors.abi, COLORS_CONTRACT);
     await updateNFTs(web3, contract, props.address)
   }, []);
 
@@ -30,9 +33,9 @@ export const Colors = (props) => {
     setColorsOwned(colorsCount)
   
     for (const i = 0; i < colorsCount; ++i) {
-      const tokenId = await contract.methods.tokenOfOwnerByIndex(account, web3.eth.abi.encodeParameter('uint256',i)).call()
-      const svg = await contract.methods.getTokenSVG(web3.eth.abi.encodeParameter('uint256',tokenId)).call()
-      const color = await contract.methods.getHexColor(web3.eth.abi.encodeParameter('uint256',tokenId)).call()
+      const tokenId = await contract.methods.tokenOfOwnerByIndex(account, context.library.abi.encodeParameter('uint256',i)).call()
+      const svg = await contract.methods.getTokenSVG(context.library.abi.encodeParameter('uint256',tokenId)).call()
+      const color = await contract.methods.getHexColor(context.library.abi.encodeParameter('uint256',tokenId)).call()
       svgs.push({
         svg: svg.replace(/"690"/g,"75", 'g'),
         tokenId,

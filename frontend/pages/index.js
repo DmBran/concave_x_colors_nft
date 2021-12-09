@@ -25,7 +25,7 @@ export default function Home() {
 
         <div className={styles.mintHome}>
           <Link href="/mint">
-            <a className={"bg-green-500 text-black mx-5 hover:bg-green-700 font-bold py-2 px-4 rounded"}>SYNC NOW</a>
+            <a className={styles.mintButton}>MINT NOW</a>
           </Link>
         </div>
         <Footer />
