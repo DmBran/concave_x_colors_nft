@@ -22,17 +22,14 @@ export const Navbar = () => {
       <nav className={styles.nav}>
         <div className='container mx-auto flex flex-wrap p-4 flex-col md:flex-row items-center md:mb-4'>
           <Link href='/'>
-            <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
-              href="" target="_blank"><span className="mr-3 text-xl">SYNC</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                  className="w-10 h-10 text-white p-2 bg-black rounded-full" viewBox="0 0 24 24">
-                <path d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"></path>
-              </svg>
-              <span className="ml-3 text-xl">COLORS</span>
-            </a>
+            <p className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+              <span className="mr-2 text-xl">SYNC</span>
+              <span style={{fontSize: '40px', top: '-2px'}} className="relative text-xl">	&infin;</span>
+              <span className="ml-2 text-xl">COLORS</span>
+            </p>
           </Link>
           <button
-            className='hamburger inline-flex p-3 hover:bg-concave-600 rounded lg:hidden ml-auto outline-none'
+            className='hamburger inline-flex p-3 hover:text-indigo-500 rounded lg:hidden ml-auto outline-none'
             onClick={handleClick}
           >
             <svg
@@ -58,24 +55,24 @@ export const Navbar = () => {
           >
             <div className='lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
               <Link href='/'>
-                <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:bg-concave-600'>
+                <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   Home
                 </a>
               </Link>
               <Link href='/mint'>
-                <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:bg-concave-600'>
+                <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   Mint
                 </a>
               </Link>
               <Link href='/nfts'>
-                <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:bg-concave-600'>
+                <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   My NFTs
                 </a>
               </Link>
-              {context.active && context.account && <Link href='https://github.com/concave-dash/concave_x_colors_nft'>
-                <p className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:bg-concave-600'>
+              {context.active && context.account && <a target="_blank" href={`https://etherscan.io/address/${context.account}`}>
+                <p className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                 {context.account.substring(0,5)+'....'+context.account.substring(11,16)}</p>
-              </Link> }
+              </a> }
             </div>
           </div>
         </div>

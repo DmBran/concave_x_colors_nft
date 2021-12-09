@@ -34,7 +34,7 @@ export const Minter = () => {
 
     if (context.active) {
       setAddress(context.account)
-
+      console.log(context.account)
       const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
       await updateNFTs(contract, context.account)
     }
@@ -144,12 +144,12 @@ export const Minter = () => {
     const nonce = await context.library.eth.getTransactionCount(address, 'latest');
     const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
 
-const txCall = contract.methods.mintNextColors(context.library.eth.abi.encodeParameter('uint256',1))
-const gas = await context.library.eth.estimateGas({
-  from: address,
-  to: COLORS_CONTRACT,
-  data: txCall.encodeABI()
-})
+    const txCall = contract.methods.mintNextColors(context.library.eth.abi.encodeParameter('uint256',1))
+    const gas = await context.library.eth.estimateGas({
+      from: address,
+      to: COLORS_CONTRACT,
+      data: txCall.encodeABI()
+    })
 console.log(`Gas: ${gas}`);
 //const gas = await txCall.estimateGas()
 //console.log(gas)
@@ -206,7 +206,7 @@ console.log(`Gas: ${gas}`);
             </div>
           </div>
           { colorsOwned > 0 && <div className={"mb-10"}>
-            <p className={"text-center mb-3 text-xl font-bold"}>Select your Color Primitives</p>
+            <p className={"text-center mb-3 text-xl font-bold"}>Select Your Color Primitives</p>
             <div className={"flex flex-wrap colors justify-center content-center"}>
             {svgs && svgs.map(svg => (
                 <div onClick={() => selectColor(svg)} key={svg.color} className={"border-solid  border-4 color shadow-lg " + (svg.selected ? styles.colorActive : " border-white")} style={{
