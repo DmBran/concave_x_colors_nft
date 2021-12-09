@@ -1,48 +1,39 @@
+import SyncXColors from '../../artifacts/contracts/SyncXColors.sol/Sync.json';
 import TheSpirals from '../../artifacts/contracts/legacy_spirals/TheSpirals.sol/TheSpirals.json';
 import TheColors from '../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json';
 import React, {useState, useEffect} from 'react';
 import { Loader } from './loader';
-import Web3 from 'web3';
 import toast from 'react-hot-toast';
 import Router from 'next/router'
+import { useWeb3Context } from 'web3-react';
+import styles from '../styles/meme.module.css'
 
 export const Minter = () => {
+  const context = useWeb3Context()
 
-  const MAX_COLORS = 4317
+  const MAX_COLORS = 2
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
-  const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
-  const [web3, setWeb3] = useState(null)
-  const [growl, setGrowl] = useState(null)
+  //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
+  const SPIRALS_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
   const [svgs, setSvgs] = useState(null)
-  const [tokenId, setTokenId] = useState(null)
+  const [mintColors, setMintColors] = useState(null)
   const [address, setAddress] = useState(null)
-  const [network, setNetwork] = useState(null)
   const [minted, setMint] = useState(null)
   const [submitting, setSubmitting] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
-    if (!window.ethereum) {
-      console.log("Please install Metamask")
-      return
-    }
-
-    setTokenId(0)
-
-    const accounts = await ethereum.request({ method: "eth_requestAccounts" })
-    setAddress(accounts[0])
-
+    setMintColors(0)
     setSvgs([]);
+    await context.setFirstValidConnector(['MetaMask'])
 
-    const web3 = new Web3(ethereum)
-    setWeb3(web3)
+    if (context.active) {
+      console.log('why')
+      setAddress(context.account)
 
-    const networkName = await web3.eth.net.getNetworkType()
-    if (networkName === "main")   setNetwork("Mainnet")
-    else setNetwork(networkName)
-
-    const contract = new web3.eth.Contract(TheColors.abi, COLORS_CONTRACT);
-    await updateNFTs(web3, contract, accounts[0])
+      const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
+      await updateNFTs(web3, contract, context.account)
+    }
 
   }, []);
 
@@ -53,9 +44,9 @@ export const Minter = () => {
     setColorsOwned(colorsCount)
   
     for (const i = 0; i < colorsCount; ++i) {
-      const tokenId = await contract.methods.tokenOfOwnerByIndex(account, web3.eth.abi.encodeParameter('uint256',i)).call()
-      const svg = await contract.methods.getTokenSVG(web3.eth.abi.encodeParameter('uint256',tokenId)).call()
-      const color = await contract.methods.getHexColor(web3.eth.abi.encodeParameter('uint256',tokenId)).call()
+      const tokenId = await contract.methods.tokenOfOwnerByIndex(account, context.library.eth.abi.encodeParameter('uint256',i)).call()
+      const svg = await contract.methods.getTokenSVG(context.library.eth.abi.encodeParameter('uint256',tokenId)).call()
+      const color = await contract.methods.getHexColor(context.library.eth.abi.encodeParameter('uint256',tokenId)).call()
       svgs.push({
         svg: svg.replace(/"690"/g,"75", 'g'),
         tokenId,
@@ -67,64 +58,89 @@ export const Minter = () => {
   }
 
   async function mintSpiral(){
-    if (!tokenId) {
-      return toast.error("Please select a base NFT!")
-    }
-
     setSubmitting("spirals")
-    const nonce = await web3.eth.getTransactionCount(address, 'latest');
-    const contract = new web3.eth.Contract(TheSpirals.abi, SPIRALS_CONTRACT);
-    const tx = {
-      'from': address,
-      'to': SPIRALS_CONTRACT,
-      'nonce': nonce,
-      //"value": web3.utils.toWei('.01','ether'),
-      'gas': 500000,
-      'data': contract.methods.mintSpiral(web3.eth.abi.encodeParameter('uint256', tokenId)).encodeABI()
-    };
+    let txToast;
+    try {
+      const nonce = await context.library.eth.getTransactionCount(address, 'latest');
+      const contract = new context.library.eth.Contract(SyncXColors.abi, SPIRALS_CONTRACT);
 
-    const txToast = toast.loading("Transaction processing")
-    const tx2 = await web3.eth.sendTransaction(tx, address).catch(error => {
-      toast.error("Transaction failed!", {
-        id: txToast
+      const tokens = svgs.filter(svg => svg.selected).map(svg =>  parseInt(svg.tokenId))
+      console.log(tokens)
+      console.log(contract.methods.mintSync(context.library.eth.abi.encodeParameter('uint256[]', tokens)))
+      const tx = {
+        'from': address,
+        'to': SPIRALS_CONTRACT,
+        'nonce': nonce,
+        //"value": web3.utils.toWei('.01','ether'),
+        'gas': 500000,
+        'data': contract.methods.mintSync(context.library.eth.abi.encodeParameter('uint256[]', tokens))
+      };
+      console.log(tx)
+
+      txToast = toast.loading("Transaction processing")
+      const tx2 = await context.library.eth.sendTransaction(tx, address).catch(error => {
+        toast.error("Transaction failed!", {
+          id: txToast
+        })
+        setSubmitting(undefined)
       })
+
+      if (tx2?.code) {
+        toast.error("Transaction failed!", {
+          id: txToast
+        })
+        setSubmitting(undefined)
+      } else {
+        toast.success("Transaction successful!", {
+          id: txToast
+        })
+
+        window.localStorage.setItem('tokenId', tokenId)
+        Router.push('/reveal')
+      }
+    } catch (ex) {
+      console.log(ex)
       setSubmitting(undefined)
-    })
-
-    if (tx2?.code) {
-      toast.error("Transaction failed!", {
-        id: txToast
-      })
-      setSubmitting(undefined)
-    } else {
-      toast.success("Transaction successful!", {
-        id: txToast
-      })
-
-      window.localStorage.setItem('tokenId', tokenId)
-      Router.push('/reveal')
+      if (txToast){
+        toast.error("Transaction failed!", {
+          id: txToast
+        })
+      }
     }
   }
 
-  function setToken(e, data){
-    setTokenId(parseInt(e.target.getAttribute('data-token')))
+  function selectColor(svg){
+    if (svg.selected) {
+      delete svg.selected;
+      setMintColors(svg.tokenId)
+      return;
+    }
+
+    if (svgs.filter(x => x.selected).length === MAX_COLORS){
+      toast.error("Max number of colors selected!")
+      return;
+    }
+
+    svg.selected = 1;
+
+    setMintColors(svg.tokenId)
   }
 
   async function mintColor(){
     setSubmitting("colors")
-    const nonce = await web3.eth.getTransactionCount(address, 'latest');
-    const contract = new web3.eth.Contract(TheColors.abi, COLORS_CONTRACT);
+    const nonce = await context.library.eth.getTransactionCount(address, 'latest');
+    const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
     const tx = {
       'from': address,
       'to': COLORS_CONTRACT,
       'nonce': nonce,
       //"value": web3.utils.toWei('.01','ether'),
       'gas': 500000,
-      'data': contract.methods.mintNextColors(web3.eth.abi.encodeParameter('uint256',1)).encodeABI()
+      'data': contract.methods.mintNextColors(context.library.eth.abi.encodeParameter('uint256',1)).encodeABI()
     };
 
     const txToast = toast.loading("Transaction processing")
-    const tx2 = await web3.eth.sendTransaction(tx, address).catch(error => {
+    const tx2 = await context.library.eth.sendTransaction(tx, address).catch(error => {
       console.log(error)
       toast.error("Transaction failed!", {
         id: txToast
@@ -143,10 +159,10 @@ export const Minter = () => {
     console.log(tx2)
   }
 
-  if (address) {
-    if (colorsOwned > 0){
+  if (context.active){
+    if (context.account) {
       return (
-        <div className={"flex-1"}>
+        <div className={styles.modal}>
           <div className={"mb-10"}>
             <p className={"text-center mb-3 font-bold"}>Need a Color Primitive?</p>
             <div className={"flex colors justify-center content-center"}>
@@ -158,51 +174,39 @@ export const Minter = () => {
             </button> }
             </div>
           </div>
-          <div className={"mb-10"}>
-            <p className={"text-center mb-3 font-bold"}>Select a Color Primitive:</p>
-            <div className={"flex colors justify-center content-center"}>
-            {svgs && svgs.map(svg => {
-              return (
-                <div onClick={setToken} data-token={svg.tokenId} key={svg.color} className={"color shadow-md" + (svg.tokenId == tokenId ? " border-solid border-4 border-concave-50 active rounded" : "")} style={{
+          { colorsOwned > 0 && <div className={"mb-10"}>
+            <p className={"text-center mb-3 text-xl font-bold"}>Select your Color Primitives</p>
+            <div className={"flex flex-wrap colors justify-center content-center"}>
+            {svgs && svgs.map(svg => (
+                <div onClick={() => selectColor(svg)} key={svg.color} className={"border-solid  border-4 color shadow-lg " + (svg.selected ? styles.colorActive : " border-white")} style={{
                   width: 75,
                   height: 75,
                   background: svg.color,
                   margin: 5
-                }}/>
-            )})}
+                }}></div>
+            ))}
             {!svgs.length && <Loader />}
             </div>
-          </div>
+          </div> }
 
           <div className={"content-center justify-center flex mb-10"}>
             {submitting != 'spirals' && <button onClick={mintSpiral}  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-              Mint a Spiral NFT!
+              MINT!
             </button> }
             {submitting == "spirals" && <button  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
               Minting...
             </button> }
           </div>
-
         </div>
-
-        
       );
-    } else {
-      return (
-        <div className={"flex-1 mb-10"}>
-          <p className={"text-red-600 font-bold"}>You must own a Colors NFT to Mint!</p>
-          <button onClick={mintColor} className={"bg-blue-500 mx-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-            Mint a Colors NFT!
-          </button>
-        </div>
-
-      )
     }
   }
+
   return (
+    <div className={"flex-1 flex mb-10 center-content justify-center"}>
       <button
-          className='inline-flex bg-green-500 items-center mr-5 border-b-4
-               hover:border-8 border-black py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0'>Connect Wallet
-      </button>
+            className='inline-flex bg-green-500 items-center  py-1 px-3 focus:outline-none rounded text-base'>Connect Wallet
+        </button>
+    </div>
   )
 }

@@ -5,22 +5,19 @@ import { MetaHead } from '../components/head'
 import { Minter } from '../components/minter'
 
 export default function Mint() {
-  function componentDidMount() {
-    document.querySelector("body").classList.add('body')
-  }
 
   return (
-    <div className={styles.mainContainer}>
+    <div className={'relative'}><div className={styles.mainContainer}>
       <MetaHead />
       <Navbar />
       <div className={styles.container}>
         <div className={styles.main}>
-          <main className={'pb-4 pt-10 mx-auto mt-10 flex flex-1 center-items'}>
+          <main className={styles.modal}>
               <Minter />
           </main>
         </div>
         <Footer />
       </div>
-    </div>
+    </div></div>
   )
 }
