@@ -1,6 +1,22 @@
 
 Procedurally generated
 
+![](output_3color2.svg)
+![](output_3color3.svg)
+![](output_3color4.svg)
+![](output_3color5.svg)
+![](output_2color2.svg)
+![](output_2color3.svg)
+![](output_2color4.svg)
+![](output_2color5.svg)
+![](output_1color2.svg)
+![](output_1color3.svg)
+![](output_1color4.svg)
+![](output_1color5.svg)
+![](output_0color2.svg)
+![](output_0color3.svg)
+![](output_0color4.svg)
+![](output_0color5.svg)
 ![](output_1.svg)
 ![](output_2.svg)
 ![](output_3.svg)
