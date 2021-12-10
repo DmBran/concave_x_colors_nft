@@ -92,8 +92,8 @@
             <!-- TODO: should be corrcted in color version -->
         		<path id="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z" 
             transform="translate(-95,0) scale(2)"  stroke="black"  fill-opacity="0.9">
-            <animate attributeName="fill" values="black;#02FF02;black" begin="four.begin" dur="2s" />
-						<animate attributeName="fill" values="black;#FF0000;black" begin="two.begin" dur="2s" />
+            <animate attributeName="fill" values="black;#02FF02;black" begin="four.begin" dur="1.5s" />
+						<animate attributeName="fill" values="black;#FF0000;black" begin="two.begin" dur="1.5s" />
 					
 						
             </path>
