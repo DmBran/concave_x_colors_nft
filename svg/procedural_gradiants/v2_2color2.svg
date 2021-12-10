@@ -1,22 +1,36 @@
 <?xml version='1.0' encoding='iso-8859-1'?>
 <svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' >
 <g fill-opacity='0.3'>
-<ellipse fill = '#02FF02' cx='359' cy='2' ry = '295' rx='363'/>
-<rect fill = '#02FF02' x = '86.0' y = '163.0' width='566' height='650'
-                    transform = 'rotate(331)'/>
-<rect fill = '#0000FF' x = '34.5' y = '42.0' width='648' height='748'
-                    transform = 'rotate(234)'/>
-<ellipse fill = '#02FF02' cx='269' cy='7' ry = '273' rx='323'/>
-<rect fill = '#AAAAAA' x = '42.5' y = '34.5' width='540' height='654'
-                    transform = 'rotate(27)'/>
-<ellipse fill = '#AAAAAA' cx='324' cy='57' ry = '336' rx='273'/>
-<rect fill = '#02FF02' x = '182.5' y = '227.0' width='742' height='794'
-                    transform = 'rotate(312)'/>
-<ellipse fill = '#AAAAAA' cx='347' cy='469' ry = '397' rx='364'/>
-<rect fill = '#0000FF' x = '49.0' y = '32.5' width='574' height='762'
-                    transform = 'rotate(277)'/>
-<rect fill = '#AAAAAA' x = '80.5' y = '153.5' width='588' height='574'
-                    transform = 'rotate(136)'/>
+<ellipse fill = '#FF0000' cx='286' cy='100' ry = '253' rx='340'/>
+<ellipse fill = '#02FF02' cx='447' cy='256' ry = '318' rx='309'/>
+<rect fill = '#02FF02' x = '209.0' y = '181.0' width='756' height='744'
+                    transform = 'rotate(39)'/>
+<rect fill = '#02FF02' x = '123.5' y = '106.0' width='604' height='606'
+                    transform = 'rotate(289)'/>
+<ellipse fill = '#FF0000' cx='486' cy='245' ry = '312' rx='372'/>
+<ellipse fill = '#FF0000' cx='364' cy='254' ry = '364' rx='340'/>
+<rect fill = '#7777777' x = '129.0' y = '132.5' width='640' height='620'
+                    transform = 'rotate(291)'/>
+<ellipse fill = '#7777777' cx='91' cy='473' ry = '274' rx='311'/>
+<ellipse fill = '#7777777' cx='404' cy='429' ry = '304' rx='271'/>
+<ellipse fill = '#02FF02' cx='256' cy='83' ry = '293' rx='261'/>
+<ellipse fill = '#02FF02' cx='181' cy='132' ry = '378' rx='373'/>
+<rect fill = '#FF0000' x = '82.0' y = '73.5' width='722' height='748'
+                    transform = 'rotate(278)'/>
+<ellipse fill = '#7777777' cx='323' cy='405' ry = '366' rx='274'/>
+<rect fill = '#7777777' x = '7.0' y = '118.0' width='692' height='626'
+                    transform = 'rotate(54)'/>
+<ellipse fill = '#FF0000' cx='98' cy='388' ry = '328' rx='266'/>
+<rect fill = '#FF0000' x = '114.5' y = '59.0' width='780' height='742'
+                    transform = 'rotate(352)'/>
+<ellipse fill = '#7777777' cx='329' cy='266' ry = '343' rx='355'/>
+<rect fill = '#7777777' x = '22.5' y = '88.5' width='724' height='512'
+                    transform = 'rotate(335)'/>
+<rect fill = '#FF0000' x = '152.0' y = '125.5' width='602' height='528'
+                    transform = 'rotate(154)'/>
+<ellipse fill = '#FF0000' cx='91' cy='92' ry = '312' rx='359'/>
+<rect fill = '#FF0000' x = '190.0' y = '6.5' width='776' height='718'
+                    transform = 'rotate(29)'/>
 </g>
 
 
@@ -30,7 +44,7 @@
         	         transform="translate(173 173) scale(0.3)" fill="none">
         		
         	<!-- Cycle between COLOR nft's 1-3-5-->
-        	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#02FF02;#AAAAAA;#02FF02" dur="4s" fill="freeze" />
+        	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#02FF02;#FF0000;#02FF02" dur="4s" fill="freeze" />
 
         	<!-- dash effect-->
 
@@ -48,7 +62,7 @@
         	</path>
 
         	<!-- Infinity foreground image -->
-        	<path id="infinity_2" pathLengh = "1000" stroke-dasharray="1000" stroke-dashoffset="1000" stroke="#AAAAAA" stroke-width="70" 
+        	<path id="infinity_2" pathLengh = "1000" stroke-dasharray="1000" stroke-dashoffset="1000" stroke="#FF0000" stroke-width="70" 
         			d="	 M 75,250 
         	         C 75,350 200,350 250,250 
         	         S 425,150 425,250 
@@ -56,7 +70,7 @@
         	         S 75,150 75,250"
         	          transform="translate(173 173) scale(0.3)" fill="none">
         	<!-- Cycle between COLOR nft's 2-4-6-->
-        	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#AAAAAA;#0000FF;#AAAAAA" dur="4s" fill="freeze" />
+        	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#FF0000;#7777777;#FF0000" dur="4s" fill="freeze" />
         	<animate id = "pulse_5" begin="start.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
         	<animate id = "pulse_6" begin="two.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
         	<animate id = "pulse_7" begin="three.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
@@ -71,14 +85,15 @@
         	</path>
         	
         </g>
-
+        <text x="10" y="30" fill="white" >SYNC X COLORS</text>
 
         <g id="borders">
 
             <!-- TODO: should be corrcted in color version -->
         		<path id="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z" 
             transform="translate(-95,0) scale(2)"  stroke="black"  fill-opacity="0.9">
-            <!--<animate id = "beat1" attributeName="fill" values="222222;555555" begin="0.5s;beat6.end" dur="1s" />-->
+            <animate attributeName="fill" values="black;#FF0000;black" begin="four.begin" dur="1.5s" />
+			<animate attributeName="fill" values="black;#02FF02;black" begin="two.begin" dur="1.5s" />
 
             </path>
             <path id ="cls-1"

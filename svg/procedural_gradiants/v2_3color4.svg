@@ -1,27 +1,38 @@
 <?xml version='1.0' encoding='iso-8859-1'?>
 <svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' >
 <g fill-opacity='0.3'>
-<rect fill = '#0000FF' x = '190.0' y = '232.0' width='522' height='748'
-                    transform = 'rotate(45)'/>
-<rect fill = '#FF0000' x = '164.5' y = '15.5' width='666' height='530'
-                    transform = 'rotate(4)'/>
-<rect fill = '#0000FF' x = '43.5' y = '163.5' width='616' height='506'
-                    transform = 'rotate(85)'/>
-<ellipse fill = '#02FF02' cx='383' cy='268' ry = '337' rx='260'/>
-<ellipse fill = '#02FF02' cx='373' cy='301' ry = '355' rx='364'/>
-<rect fill = '#0000FF' x = '95.5' y = '65.5' width='676' height='660'
-                    transform = 'rotate(299)'/>
-<ellipse fill = '#02FF02' cx='257' cy='296' ry = '250' rx='322'/>
-<rect fill = '#FF0000' x = '112.5' y = '97.5' width='566' height='586'
-                    transform = 'rotate(257)'/>
-<ellipse fill = '#FF0000' cx='312' cy='17' ry = '395' rx='324'/>
-<rect fill = '#02FF02' x = '230.0' y = '200.5' width='586' height='644'
-                    transform = 'rotate(46)'/>
-<rect fill = '#FF0000' x = '129.5' y = '129.5' width='528' height='652'
-                    transform = 'rotate(97)'/>
-<ellipse fill = '#FF0000' cx='44' cy='88' ry = '275' rx='338'/>
-<rect fill = '#FF0000' x = '156.5' y = '151.0' width='676' height='658'
-                    transform = 'rotate(141)'/>
+<ellipse fill = '#FF0000' cx='176' cy='478' ry = '257' rx='302'/>
+<ellipse fill = '#0000FF' cx='344' cy='420' ry = '338' rx='369'/>
+<ellipse fill = '#02FF02' cx='420' cy='121' ry = '379' rx='303'/>
+<ellipse fill = '#0000FF' cx='394' cy='318' ry = '363' rx='310'/>
+<ellipse fill = '#02FF02' cx='372' cy='255' ry = '395' rx='279'/>
+<ellipse fill = '#FF0000' cx='474' cy='17' ry = '361' rx='309'/>
+<rect fill = '#02FF02' x = '119.0' y = '206.0' width='640' height='738'
+                    transform = 'rotate(336)'/>
+<rect fill = '#FF0000' x = '61.5' y = '151.0' width='514' height='776'
+                    transform = 'rotate(10)'/>
+<rect fill = '#FF0000' x = '84.5' y = '87.5' width='644' height='668'
+                    transform = 'rotate(53)'/>
+<ellipse fill = '#0000FF' cx='181' cy='281' ry = '392' rx='307'/>
+<rect fill = '#FF0000' x = '214.0' y = '3.0' width='590' height='606'
+                    transform = 'rotate(253)'/>
+<rect fill = '#02FF02' x = '241.0' y = '35.5' width='636' height='772'
+                    transform = 'rotate(244)'/>
+<ellipse fill = '#02FF02' cx='345' cy='349' ry = '386' rx='322'/>
+<rect fill = '#0000FF' x = '208.0' y = '92.0' width='674' height='520'
+                    transform = 'rotate(68)'/>
+<ellipse fill = '#0000FF' cx='199' cy='449' ry = '260' rx='373'/>
+<ellipse fill = '#FF0000' cx='465' cy='7' ry = '307' rx='300'/>
+<ellipse fill = '#FF0000' cx='422' cy='385' ry = '264' rx='301'/>
+<ellipse fill = '#0000FF' cx='469' cy='161' ry = '387' rx='273'/>
+<ellipse fill = '#0000FF' cx='15' cy='365' ry = '385' rx='258'/>
+<ellipse fill = '#FF0000' cx='459' cy='176' ry = '310' rx='388'/>
+<rect fill = '#0000FF' x = '194.0' y = '114.0' width='796' height='656'
+                    transform = 'rotate(174)'/>
+<ellipse fill = '#FF0000' cx='498' cy='14' ry = '276' rx='388'/>
+<rect fill = '#02FF02' x = '214.5' y = '249.0' width='740' height='598'
+                    transform = 'rotate(267)'/>
+<ellipse fill = '#02FF02' cx='140' cy='113' ry = '327' rx='347'/>
 </g>
 
 
@@ -76,14 +87,15 @@
         	</path>
         	
         </g>
-
+        <text x="10" y="30" fill="white" >SYNC X COLORS</text>
 
         <g id="borders">
 
             <!-- TODO: should be corrcted in color version -->
         		<path id="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z" 
             transform="translate(-95,0) scale(2)"  stroke="black"  fill-opacity="0.9">
-            <!--<animate id = "beat1" attributeName="fill" values="222222;555555" begin="0.5s;beat6.end" dur="1s" />-->
+            <animate attributeName="fill" values="black;#FF0000;black" begin="four.begin" dur="1.5s" />
+			<animate attributeName="fill" values="black;#02FF02;black" begin="two.begin" dur="1.5s" />
 
             </path>
             <path id ="cls-1"

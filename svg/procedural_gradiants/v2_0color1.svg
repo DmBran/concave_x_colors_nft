@@ -1,29 +1,56 @@
 <?xml version='1.0' encoding='iso-8859-1'?>
 <svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' >
 <g fill-opacity='0.3'>
-<rect fill = '#AAAAAA' x = '237.0' y = '85.5' width='600' height='582'
-                    transform = 'rotate(242)'/>
-<ellipse fill = '#777777' cx='234' cy='245' ry = '374' rx='278'/>
-<rect fill = '#222222' x = '33.0' y = '30.0' width='730' height='646'
+<rect fill = '#222222' x = '203.0' y = '88.5' width='800' height='748'
+                    transform = 'rotate(348)'/>
+<rect fill = '#222222' x = '89.0' y = '146.0' width='550' height='638'
+                    transform = 'rotate(102)'/>
+<rect fill = '#777777' x = '155.5' y = '205.5' width='618' height='672'
+                    transform = 'rotate(168)'/>
+<ellipse fill = '#222222' cx='106' cy='142' ry = '257' rx='281'/>
+<rect fill = '#AAAAAA' x = '188.5' y = '34.0' width='704' height='616'
+                    transform = 'rotate(218)'/>
+<rect fill = '#222222' x = '157.0' y = '59.5' width='664' height='774'
+                    transform = 'rotate(56)'/>
+<rect fill = '#222222' x = '223.5' y = '120.5' width='684' height='638'
+                    transform = 'rotate(208)'/>
+<rect fill = '#AAAAAA' x = '244.0' y = '0.5' width='632' height='768'
+                    transform = 'rotate(180)'/>
+<rect fill = '#AAAAAA' x = '22.0' y = '224.5' width='722' height='734'
+                    transform = 'rotate(216)'/>
+<rect fill = '#222222' x = '9.5' y = '85.5' width='688' height='658'
+                    transform = 'rotate(343)'/>
+<rect fill = '#222222' x = '37.0' y = '229.5' width='712' height='734'
+                    transform = 'rotate(115)'/>
+<rect fill = '#222222' x = '219.0' y = '160.0' width='618' height='654'
+                    transform = 'rotate(334)'/>
+<rect fill = '#222222' x = '117.0' y = '65.0' width='706' height='506'
+                    transform = 'rotate(285)'/>
+<rect fill = '#222222' x = '104.5' y = '205.0' width='756' height='520'
+                    transform = 'rotate(324)'/>
+<ellipse fill = '#222222' cx='160' cy='75' ry = '378' rx='399'/>
+<rect fill = '#222222' x = '191.0' y = '106.0' width='708' height='688'
+                    transform = 'rotate(276)'/>
+<rect fill = '#777777' x = '236.5' y = '219.5' width='614' height='642'
+                    transform = 'rotate(60)'/>
+<rect fill = '#222222' x = '2.0' y = '240.5' width='742' height='790'
                     transform = 'rotate(260)'/>
-<rect fill = '#222222' x = '88.0' y = '98.5' width='538' height='544'
-                    transform = 'rotate(91)'/>
-<ellipse fill = '#AAAAAA' cx='498' cy='411' ry = '318' rx='351'/>
-<rect fill = '#222222' x = '100.5' y = '206.5' width='644' height='636'
-                    transform = 'rotate(156)'/>
-<rect fill = '#222222' x = '0.5' y = '203.0' width='748' height='676'
-                    transform = 'rotate(118)'/>
-<ellipse fill = '#777777' cx='417' cy='43' ry = '250' rx='339'/>
-<ellipse fill = '#AAAAAA' cx='494' cy='276' ry = '292' rx='376'/>
-<rect fill = '#AAAAAA' x = '79.5' y = '243.5' width='620' height='728'
-                    transform = 'rotate(75)'/>
-<rect fill = '#777777' x = '114.5' y = '216.5' width='552' height='718'
-                    transform = 'rotate(329)'/>
-<rect fill = '#222222' x = '133.0' y = '192.0' width='756' height='560'
-                    transform = 'rotate(312)'/>
-<ellipse fill = '#AAAAAA' cx='309' cy='300' ry = '297' rx='282'/>
-<rect fill = '#777777' x = '56.0' y = '215.0' width='502' height='666'
-                    transform = 'rotate(236)'/>
+<rect fill = '#222222' x = '37.0' y = '144.0' width='720' height='772'
+                    transform = 'rotate(40)'/>
+<rect fill = '#777777' x = '67.0' y = '43.0' width='608' height='670'
+                    transform = 'rotate(77)'/>
+<rect fill = '#777777' x = '166.5' y = '246.0' width='600' height='678'
+                    transform = 'rotate(284)'/>
+<rect fill = '#222222' x = '27.0' y = '153.0' width='786' height='568'
+                    transform = 'rotate(88)'/>
+<rect fill = '#AAAAAA' x = '102.0' y = '214.5' width='692' height='520'
+                    transform = 'rotate(66)'/>
+<rect fill = '#AAAAAA' x = '35.5' y = '167.5' width='682' height='640'
+                    transform = 'rotate(46)'/>
+<rect fill = '#777777' x = '207.5' y = '111.5' width='634' height='690'
+                    transform = 'rotate(201)'/>
+<rect fill = '#222222' x = '198.5' y = '86.0' width='536' height='654'
+                    transform = 'rotate(305)'/>
 </g>
 
 
@@ -78,14 +105,15 @@
         	</path>
         	
         </g>
-
+        <text x="10" y="30" fill="white" >SYNC X COLORS</text>
 
         <g id="borders">
 
             <!-- TODO: should be corrcted in color version -->
         		<path id="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z" 
             transform="translate(-95,0) scale(2)"  stroke="black"  fill-opacity="0.9">
-            <!--<animate id = "beat1" attributeName="fill" values="222222;555555" begin="0.5s;beat6.end" dur="1s" />-->
+            <animate attributeName="fill" values="black;#AAAAAA;black" begin="four.begin" dur="1.5s" />
+			<animate attributeName="fill" values="black;#777777;black" begin="two.begin" dur="1.5s" />
 
             </path>
             <path id ="cls-1"
