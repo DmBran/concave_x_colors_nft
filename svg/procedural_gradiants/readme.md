@@ -3,6 +3,8 @@ Procedurally generated
 
 Colorwheel concept
 
+![](3.svg)
+
 ![](v2_1color6.svg)
 ![](v2_3color2.svg)
 ![](v2_3color3.svg)
