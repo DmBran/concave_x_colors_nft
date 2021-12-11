@@ -59,9 +59,11 @@ export default function NFTs() {
               <p className={'font-bold text-center text-xl mb-10'}>Your Owned Syncs</p>
               <div className={"colors justify-center content-center"}>
               {svgs && svgs.map(svg => (
-                  <Link key={svg.tokenId} href={`/mint?tokenID=${svg.tokenId}`}>
-                    <div className={styles.sync} dangerouslySetInnerHTML={{ __html: svg.svg }}></div>
-                  </Link>
+                  <div key={svg.tokenId} >
+                    <Link href={`/mint?tokenID=${svg.tokenId}`}>
+                      <div className={styles.sync} dangerouslySetInnerHTML={{ __html: svg.svg }}></div>
+                    </Link>
+                  </div>
               ))}
               {!svgs.length && <Loader />}
               </div>
