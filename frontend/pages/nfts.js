@@ -13,7 +13,6 @@ export default function NFTs() {
 
   const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
   const [svgs, setSvgs] = useState(null)
-  const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
     setSvgs([]);
@@ -29,8 +28,8 @@ export default function NFTs() {
     const svgs = [];
 
     const colorsCount = await contract.methods.balanceOf(account).call()
-    setColorsOwned(colorsCount)
-  
+    console.log(`${context.account} owns ${colorsCount} SYNCs`)
+
     for (const i = 0; i < colorsCount; ++i) {
       const tokenId = await contract.methods.tokenOfOwnerByIndex(account, context.library.eth.abi.encodeParameter('uint256',i)).call()
       const svg = await contract.methods.getTokenSVG(context.library.eth.abi.encodeParameter('uint256',tokenId)).call()
@@ -55,19 +54,21 @@ export default function NFTs() {
                 <p className={'font-bold'}>Please Connect via MetaMask</p>
               </div>
             }
-            { context.active && <div className={"mb-10"}>
-              <p className={'font-bold text-center text-xl mb-10'}>Your Owned Syncs</p>
-              <div className={"colors justify-center content-center"}>
-              {svgs && svgs.map(svg => (
-                  <div key={svg.tokenId} >
-                    <Link href={`/mint?tokenID=${svg.tokenId}`}>
-                      <div className={styles.sync} dangerouslySetInnerHTML={{ __html: svg.svg }}></div>
-                    </Link>
-                  </div>
-              ))}
-              {!svgs.length && <Loader />}
-              </div>
-            </div> }
+            { context.active && 
+              <div className={"mb-10"}>
+                <p className={'font-bold text-center text-xl mb-10'}>Your Owned Syncs</p>
+                <div className={"colors justify-center content-center"}>
+                {svgs && svgs.map(svg => (
+                    <div key={svg.tokenId} >
+                      <Link href={`/mint?tokenID=${svg.tokenId}`}>
+                        <div className={styles.sync} dangerouslySetInnerHTML={{ __html: svg.svg }}></div>
+                      </Link>
+                    </div>
+                ))}
+                {(!svgs || !svgs.length) && <Loader />}
+                </div>
+              </div> 
+            }
           </div></div>
           <Footer />
         </div>
