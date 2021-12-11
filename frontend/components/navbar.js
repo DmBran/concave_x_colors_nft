@@ -13,23 +13,23 @@ export const Navbar = () => {
     setActive(!active);
   };
 
-  useEffect(async () => {
+  const activateMM = async () => {
     await context.setFirstValidConnector(['MetaMask'])
-  })
+  };
 
   return (
     <div>
       <nav className={styles.nav}>
-        <div className='container mx-auto flex flex-wrap p-4 flex-col md:flex-row items-center md:mb-4'>
+        <div className='container mx-auto flex flex-wrap p-4 md:mb-4'>
           <Link href='/'>
-            <p className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <p className="flex title-font font-medium items-center text-gray-900 md:mb-0">
               <span className="mr-2 text-xl">SYNC</span>
               <span style={{fontSize: '40px', top: '-2px'}} className="relative text-xl">	&infin;</span>
               <span className="ml-2 text-xl">COLORS</span>
             </p>
           </Link>
           <button
-            className='hamburger inline-flex p-3 hover:text-indigo-500 rounded lg:hidden ml-auto outline-none'
+            className='hamburger align-right inline-flex p-3 hover:text-indigo-500 rounded lg:hidden ml-auto outline-none'
             onClick={handleClick}
           >
             <svg
@@ -59,7 +59,7 @@ export const Navbar = () => {
                   Home
                 </a>
               </Link>
-              <Link href='/mint'>
+              {/*<Link href='/mint'>
                 <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   Mint
                 </a>
@@ -68,11 +68,14 @@ export const Navbar = () => {
                 <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   My NFTs
                 </a>
-              </Link>
+              </Link> */}
               {context.active && context.account && <a target="_blank" href={`https://etherscan.io/address/${context.account}`}>
                 <p className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                 {context.account.substring(0,5)+'....'+context.account.substring(11,16)}</p>
               </a> }
+              {!context.active && <button type="button" className={'uppercase inline-flex ring-1 ring-indigo-500 items-center  py-1 px-3 focus:outline-none rounded text-base'} onClick={activateMM}>
+                <p className={'font-bold'}>Connect Wallet</p>
+              </button>}
             </div>
           </div>
         </div>

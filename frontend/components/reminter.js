@@ -1,13 +1,15 @@
 import SyncXColors from '../../artifacts/contracts/SyncXColors.sol/Sync.json';
+import TheSpirals from '../../artifacts/contracts/legacy_spirals/TheSpirals.sol/TheSpirals.json';
 import TheColors from '../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json';
 import React, {useState, useEffect} from 'react';
 import { Loader } from './loader';
 import toast from 'react-hot-toast';
-import Router from 'next/router'
+import Router, {useRouter} from 'next/router'
 import { useWeb3Context } from 'web3-react';
 import styles from '../styles/meme.module.css'
 
-export const Minter = () => {
+export const Reminter = (props) => {
+  console.log(props)
   const context = useWeb3Context()
 
   // Mainnet
@@ -18,19 +20,23 @@ export const Minter = () => {
   const MAX_COLORS = 2
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
   //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
-  const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
+  const SPIRALS_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
   const [svgs, setSvgs] = useState(null)
+  const [sync, setSync] = useState(null)
   const [mintColors, setMintColors] = useState(null)
   const [address, setAddress] = useState(null)
   const [submitting, setSubmitting] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
-    setMintColors(0)
+    setMintColors(0);
     setSvgs([]);
 
     if (context.active) {
       setAddress(context.account)
+      const syncContract = new context.library.eth.Contract(SyncXColors.abi, SPIRALS_CONTRACT);
+      console.log('fetching')
+      await fetchSync(syncContract, props.tokenID)
 
       const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
       await updateNFTs(contract, context.account)
@@ -57,23 +63,28 @@ export const Minter = () => {
     setSvgs(svgs)
   }
 
-  async function mintSpiral(){
+  async function fetchSync(contract, tokenID) {
+    const svgElement = await contract.methods.getTokenSVG(context.library.eth.abi.encodeParameter('uint256', tokenID)).call()
+    setSync(svgElement)
+  }
+
+  async function remintSync(){
     setSubmitting("spirals")
     let txToast;
     try {
       const nonce = await context.library.eth.getTransactionCount(address, 'latest');
-      const contract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
-
+      const contract = new context.library.eth.Contract(SyncXColors.abi, SPIRALS_CONTRACT);
+      
       const tokens = svgs.filter(svg => svg.selected).map(svg =>  parseInt(svg.tokenId))
-      const txCall =  contract.methods.mintSync(tokens)
+      const txCall =  contract.methods.updateColors(props.tokenID, tokens)
       const gas = await context.library.eth.estimateGas({
         from: address,
-        to: SYNC_CONTRACT,
+        to: SPIRALS_CONTRACT,
         data: txCall.encodeABI()
       })
       const tx = {
         'from': address,
-        'to': SYNC_CONTRACT,
+        'to': SPIRALS_CONTRACT,
         'nonce': nonce,
         'data': txCall.encodeABI(),
         gas
@@ -96,9 +107,10 @@ export const Minter = () => {
         toast.success("Transaction successful!", {
           id: txToast
         })
-        return Router.push('/nfts');
+        return Router.push(`/reveal?tokenID=${props.tokenID}`);
       }
-
+      
+      
     } catch (ex) {
       console.log(ex)
       setSubmitting(undefined)
@@ -138,8 +150,9 @@ export const Minter = () => {
       to: COLORS_CONTRACT,
       data: txCall.encodeABI()
     })
-    console.log(`Gas: ${gas}`)
-
+console.log(`Gas: ${gas}`)
+//const gas = await txCall.estimateGas()
+//console.log(gas)
     const tx = {
       'from': address,
       'to': COLORS_CONTRACT,
@@ -147,7 +160,7 @@ export const Minter = () => {
       'data': txCall.encodeABI(),
       gas
     };
-
+    console.log(tx)
     const txToast = toast.loading("Transaction processing")
     const tx2 = await context.library.eth.sendTransaction(tx, address).catch(error => {
       console.log(error)
@@ -166,6 +179,8 @@ export const Minter = () => {
       setSubmitting(undefined)
       await updateNFTs(contract, address)
     }
+
+    console.log(tx2)
   }
 
   if (context.active){
@@ -180,17 +195,13 @@ export const Minter = () => {
       return (
         <div className={styles.modal}>
           <div className={"mb-10"}>
-            <p className={"text-center mb-3 font-bold"}>Need a Color Primitive?</p>
+            <p className={"text-center mb-3 text-xl font-bold"}>Sync X Color</p>
             <div className={"flex colors justify-center content-center"}>
-            {submitting != 'colors' && <button onClick={mintColor} className={"bg-blue-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-                Mint a Colors NFT!
-              </button>}
-              {submitting == "colors" && <button className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-              Minting...
-            </button> }
+              {!sync && <Loader />}
+              {sync && <div className={styles.sync} dangerouslySetInnerHTML={{ __html: sync }}></div> }
             </div>
           </div>
-          { colorsOwned > 0 && <div className={"mb-10"}>
+          <div className={"mb-10"}>
             <p className={"text-center mb-3 text-xl font-bold"}>Select Your Color Primitives</p>
             <div className={"flex flex-wrap colors justify-center content-center"}>
             {svgs && svgs.map(svg => (
@@ -201,16 +212,16 @@ export const Minter = () => {
                   margin: 5
                 }}></div>
             ))}
-            {!svgs.length && <Loader />}
+            {(!svgs || !svgs.length) && <Loader />}
             </div>
-          </div> }
+          </div>
 
           <div className={"content-center justify-center flex mb-10"}>
-            {submitting != 'spirals' && <button onClick={mintSpiral}  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-              MINT!
+            {submitting != 'spirals' && <button onClick={remintSync}  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
+              REMINT!
             </button> }
             {submitting == "spirals" && <button  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-              Minting...
+              Reminting...
             </button> }
           </div>
         </div>

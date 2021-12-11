@@ -10,9 +10,7 @@ const MetaMask = new InjectedConnector()
 
 const connectors = { MetaMask }
 
-function MyApp({ Component, pageProps }) {
-
-
+function SyncXColors({ Component, pageProps }) {
   return (
     <Web3Provider
       connectors={connectors}
@@ -46,4 +44,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default SyncXColors

@@ -1,46 +1,32 @@
-import TheSpirals from '../../artifacts/contracts/legacy_spirals/TheSpirals.sol/TheSpirals.json';
-import TheColors from '../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json';
+import SyncXColors from '../../artifacts/contracts/SyncXColors.sol/Sync.json';
 import styles from '../styles/meme.module.css'
 import { Navbar } from '../components/navbar'
 import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import { Loader } from '../components/loader'
-import React, {useState, useEffect} from 'react';
-import Web3 from 'web3';
+import { useWeb3Context } from 'web3-react';
+import React, {useState, useEffect, useContext} from 'react';
+import Router, {useRouter} from 'next/router'
 
 export default function Reveal() {
-  const MAX_COLORS = 4317
-  const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
-  const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
-  const [web3, setWeb3] = useState(null)
-  const [minted, setMint] = useState(null)
-  const [address, setAddress] = useState(null)
-  const [network, setNetwork] = useState(null)
+  const { query } = useRouter();
+  const context = useWeb3Context()
+
+  const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
+  const [minted, setMinted] = useState(null)
+
   useEffect(async () => {
-    if (!window.ethereum) {
-      console.log("Please install Metamask")
-      return
+    if (context.active) {
+      const contract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
+      const mint = await fetchSync(query.tokenID, contract)
     }
-
-    const accounts = await ethereum.request({ method: "eth_requestAccounts" })
-    setAddress(accounts[0])
-
-    const web3 = new Web3(ethereum)
-    setWeb3(web3)
-
-    const networkName = await web3.eth.net.getNetworkType()
-    if (networkName === "main")   setNetwork("Mainnet")
-    else setNetwork(networkName)
-
-    const contract = new web3.eth.Contract(TheSpirals.abi, SPIRALS_CONTRACT);
-    await fetchMint(window.localStorage.getItem('tokenId'), web3, contract)
 
   }, []);
 
-  async function fetchMint(tokenId, web3, contract) {
-    const svgElement = await contract.methods.getTokenSVG(web3.eth.abi.encodeParameter('uint256',tokenId)).call()
-    //await contract.methods.getBase64TokenSVG(web3.eth.abi.encodeParameter('uint256',tokenId)).call()
-    setMint(svgElement)
+  async function fetchSync(tokenId, contract) {
+    const svgElement = await contract.methods.getTokenSVG(context.library.eth.abi.encodeParameter('uint256',tokenId)).call()
+    setMinted(svgElement)
+    return svgElement
   }
 
   return (
@@ -49,11 +35,22 @@ export default function Reveal() {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.main}>
-          {minted && <main className={'pb-4 pt-10 mx-auto mt-10 center-items'}>
-              <p class="text-center font-bold mb-10 color-green">AHHHH I SYNCED!</p>
-              <div dangerouslySetInnerHTML={{ __html: minted }}></div>
-          </main>}
-          {!minted && <Loader/>}
+          <main className={styles.modal}>
+            { context.active &&
+              <div>
+                <p className={"text-center text-xl font-bold"}>Your Sync X Color</p>
+                {minted && <main className={'pb-4 mx-auto flex justify-center mt-10 center-items'}>
+                    <div dangerouslySetInnerHTML={{ __html: minted }}></div>
+                </main>}
+                {!minted && <Loader/>}
+              </div>
+            }
+            { !context.active && 
+              <div className={"flex-1 flex center-content justify-center"}>
+                <p className={'font-bold'}>Please Connect via MetaMask</p>
+              </div>
+            }
+          </main>
         </div>
         <Footer />
       </div>

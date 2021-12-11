@@ -172,6 +172,7 @@ border-image-slice: 1;
 
 .sync {
   margin: 0 auto 30px auto;
+  cursor: pointer;
 }
 .sync svg {
   margin: 0 auto;

@@ -7,7 +7,6 @@ import { useWeb3Context } from 'web3-react';
 export const Colors = (props) => {
   const context = useWeb3Context()
 
-
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
   const [svgs, setSvgs] = useState(null)
   const [web3, setWeb3] = useState(null)
@@ -63,10 +62,9 @@ export const Colors = (props) => {
         )
     } else {
         return (
-        <div className={"flex colors justify-center content-center"}>
-            <p className={"text-red-600 font-bold"}> No TheColors NFT Owned</p>
-        </div>
-
+            <div className={"flex colors justify-center content-center"}>
+                <p className={"text-red-600 font-bold"}> No TheColors NFT Owned</p>
+            </div>
         )
     }
 }
