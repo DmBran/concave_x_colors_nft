@@ -56,15 +56,8 @@ export default function NFTs() {
 
   return (
     <div className={styles.mainContainer}>
-      <MetaHead />
-      <Navbar />
       <div className={styles.container}>
         <div className={styles.modal}>
-          {/* {minted && <main className={'pb-4 pt-10 mx-auto mt-10 center-items'}>
-              <p class="text-center font-bold mb-10 color-green">AHHHH I SYNCED!</p>
-              <div dangerouslySetInnerHTML={{ __html: minted }}></div>
-          </main>}
-          {!minted && <Loader/>} */}
           { colorsOwned > 0 && <div className={"mb-10"}>
             <p className={'font-bold text-center text-xl mb-10'}>Your Owned Syncs</p>
             <div className={"colors justify-center content-center"}>

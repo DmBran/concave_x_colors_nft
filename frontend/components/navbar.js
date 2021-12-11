@@ -2,20 +2,22 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from '../styles/meme.module.css'
-import { useWeb3Context } from 'web3-react';
-
-export const Navbar = () => {
-  const context = useWeb3Context()
-
+import { useWeb3React } from '@web3-react/core'
+export const Navbar = (props) => {
+  const context = useWeb3React()
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
     setActive(!active);
   };
 
-  useEffect(async () => {
-    await context.setFirstValidConnector(['MetaMask'])
-  })
+  const handleConnect = async () => {
+    const { chainId, account, activate, active } = useWeb3React()
+
+    const onClick = () => {
+      activate(injectedConnector)
+    }
+  }
 
   return (
     <div>
@@ -24,7 +26,7 @@ export const Navbar = () => {
           <Link href='/'>
             <p className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
               <span className="mr-2 text-xl">SYNC</span>
-              <span style={{fontSize: '40px', top: '-2px'}} className="relative text-xl">	&infin;</span>
+              <span style={{fontSize: '40px', top: '-2px'}} className="relative text-xl">&infin;</span>
               <span className="ml-2 text-xl">COLORS</span>
             </p>
           </Link>
@@ -59,7 +61,7 @@ export const Navbar = () => {
                   Home
                 </a>
               </Link>
-              <Link href='/mint'>
+              {/*<Link href='/mint'>
                 <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   Mint
                 </a>
@@ -68,11 +70,8 @@ export const Navbar = () => {
                 <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   My NFTs
                 </a>
-              </Link>
-              {context.active && context.account && <a target="_blank" href={`https://etherscan.io/address/${context.account}`}>
-                <p className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
-                {context.account.substring(0,5)+'....'+context.account.substring(11,16)}</p>
-              </a> }
+              </Link>*/}
+              {props.wallet()}
             </div>
           </div>
         </div>

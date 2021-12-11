@@ -6,7 +6,8 @@ import Link from 'next/link';
 import Countdown from 'react-countdown';
 import { render } from 'react-dom';
 
-export default function Home() {
+export default function Home(props) {
+
   function componentDidMount() {
     document.querySelector("body").classList.add('body')
   }
@@ -32,8 +33,7 @@ export default function Home() {
 
   return (
     <div className={styles.mainContainer}>
-      <MetaHead />
-      <Navbar />
+      
       <div className={styles.container}>
         <div className={styles.hero}></div>
         <div className={styles.herotext}>

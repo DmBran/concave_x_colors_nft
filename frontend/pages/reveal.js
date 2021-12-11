@@ -45,8 +45,6 @@ export default function Reveal() {
 
   return (
     <div className={styles.mainContainer}>
-      <MetaHead />
-      <Navbar />
       <div className={styles.container}>
         <div className={styles.main}>
           {minted && <main className={'pb-4 pt-10 mx-auto mt-10 center-items'}>

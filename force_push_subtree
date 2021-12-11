@@ -1,0 +1,1 @@
+git push origin `git subtree split --prefix frontend/out main`:gh-pages-new --force
