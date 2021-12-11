@@ -35,14 +35,14 @@ export const Reminter = (props) => {
     if (context.active) {
       setAddress(context.account)
       const syncContract = new context.library.eth.Contract(SyncXColors.abi, SPIRALS_CONTRACT);
-      console.log('fetching')
+
       await fetchSync(syncContract, props.tokenID)
 
       const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
       await updateNFTs(contract, context.account)
     }
 
-  }, []);
+  }, [context]);
 
   async function updateNFTs(contract, account){
     const svgs = [];

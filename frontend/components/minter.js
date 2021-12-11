@@ -30,13 +30,14 @@ export const Minter = () => {
     setSvgs([]);
 
     if (context.active) {
+
       setAddress(context.account)
 
       const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
       await updateNFTs(contract, context.account)
     }
 
-  }, []);
+  }, [context]);
 
   async function updateNFTs(contract, account){
     const svgs = [];

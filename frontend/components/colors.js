@@ -14,11 +14,10 @@ export const Colors = (props) => {
   const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
-    context.setFirstValidConnector(['MetaMask', 'Infura'])
 
     const contract = new context.library.Contract(TheColors.abi, COLORS_CONTRACT);
     await updateNFTs(web3, contract, props.address)
-  }, []);
+  }, [context]);
 
   function setToken(e, data){
     setTokenId(parseInt(e.target.getAttribute('data-token')))
