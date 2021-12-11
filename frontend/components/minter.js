@@ -7,7 +7,7 @@ import Router from 'next/router'
 import { useWeb3Context } from 'web3-react';
 import styles from '../styles/meme.module.css'
 
-export const Minter = () => {
+export const Minter = (props) => {
   const context = useWeb3Context()
 
   // Mainnet
@@ -20,7 +20,9 @@ export const Minter = () => {
   //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
   const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
   const [svgs, setSvgs] = useState(null)
+  const [sync, setSync] = useState(null)
   const [mintColors, setMintColors] = useState(null)
+  const [tokenID, setTokenID] = useState(null)
   const [address, setAddress] = useState(null)
   const [submitting, setSubmitting] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
@@ -28,6 +30,13 @@ export const Minter = () => {
   useEffect(async () => {
     setMintColors(0)
     setSvgs([]);
+
+    if (props.tokenID) {
+      setTokenID(props.tokenID)
+      const syncContract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
+      const svg = await fetchSync(syncContract, props.tokenID)
+      setSync(svg)
+    }
 
     if (context.active) {
 
@@ -114,6 +123,70 @@ export const Minter = () => {
     }
   }
 
+
+  async function fetchSync(contract, tokenID) {
+    const svgElement = await contract.methods.getTokenSVG(context.library.eth.abi.encodeParameter('uint256', tokenID)).call()
+    return svgElement;
+  }
+
+  async function remintSync(){
+    setSubmitting("sync")
+    let txToast;
+    try {
+      const nonce = await context.library.eth.getTransactionCount(address, 'latest');
+      const contract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
+      
+      const tokens = svgs.filter(svg => svg.selected).map(svg =>  parseInt(svg.tokenId))
+      const txCall =  contract.methods.updateColors(props.tokenID, tokens)
+
+      const [ from, to, data ] = [ address, SYNC_CONTRACT, txCall.encodeABI() ]
+
+      const gas = await context.library.eth.estimateGas({
+        from,
+        data,
+        to
+      })
+
+      const tx = {
+        nonce,
+        from,
+        data,
+        gas,
+        to
+      };
+
+      txToast = toast.loading("Transaction processing")
+      const tx2 = await context.library.eth.sendTransaction(tx, address).catch(error => {
+        toast.error("Transaction failed!", {
+          id: txToast
+        })
+        setSubmitting(undefined)
+      })
+      console.log(tx2)
+      if (!tx2?.transactionHash) {
+        toast.error("Transaction failed!", {
+          id: txToast
+        })
+        setSubmitting(undefined)
+      } else {
+        toast.success("Transaction successful!", {
+          id: txToast
+        })
+        return Router.push(`/reveal?tokenID=${props.tokenID}`);
+      }
+      
+      
+    } catch (ex) {
+      console.log(ex)
+      setSubmitting(undefined)
+      if (txToast){
+        toast.error("Transaction failed!", {
+          id: txToast
+        })
+      }
+    }
+  }
+
   function selectColor(svg){
     if (svg.selected) {
       delete svg.selected;
@@ -136,19 +209,20 @@ export const Minter = () => {
     const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
 
     const txCall = contract.methods.mintNextColors(context.library.eth.abi.encodeParameter('uint256',1))
+    const [ from, to, data ] = [ address, SYNC_CONTRACT, txCall.encodeABI() ]
+
     const gas = await context.library.eth.estimateGas({
-      from: address,
-      to: COLORS_CONTRACT,
-      data: txCall.encodeABI()
+      from,
+      data,
+      to
     })
-    console.log(`Gas: ${gas}`)
 
     const tx = {
-      'from': address,
-      'to': COLORS_CONTRACT,
-      'nonce': nonce,
-      'data': txCall.encodeABI(),
-      gas
+      nonce,
+      from,
+      data,
+      gas,
+      to
     };
 
     const txToast = toast.loading("Transaction processing")
@@ -168,6 +242,24 @@ export const Minter = () => {
       })
       setSubmitting(undefined)
       await updateColorList(contract, address)
+    }
+  }
+
+  async function beginMint() {
+    if (tokenID) {
+      return await remintSync()
+    } else {
+      return await mintSync()
+    }
+  }
+
+  function getMintText(loading) {
+    if (loading)  return "Processing"
+  
+    if (tokenID) {
+      return "Color ∞ Sync!"
+    } else {
+      return "MINT!"
     }
   }
 
@@ -209,12 +301,21 @@ export const Minter = () => {
             </div>
           </div> }
 
+          { tokenID && <div className={"mt-10 mb-10"}>
+            <p className={"text-center mt-3 mb-3 text-xl font-bold"}>Sync X Color</p>
+            <div className={"flex colors justify-center content-center"}>
+              {!sync && <Loader />}
+              {sync && <div className={styles.sync} dangerouslySetInnerHTML={{ __html: sync }}></div> }
+            </div>
+          </div>
+          }
+
           <div className={"content-center justify-center flex mb-10"}>
-            {submitting != 'syncs' && <button onClick={mintSync}  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
-              MINT!
+            {submitting != 'syncs' && <button onClick={beginMint}  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
+              {getMintText()}
             </button> }
             {submitting == "syncs" && <button  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
-              Minting...
+              {getMintText('loading')}
             </button> }
           </div>
         </div>
