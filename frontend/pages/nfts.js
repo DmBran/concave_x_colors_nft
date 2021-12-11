@@ -23,7 +23,7 @@ export default function NFTs() {
       await updateNFTs(contract, context.account)
     }
 
-  }, [])
+  }, [context])
 
   async function updateNFTs(contract, account){
     const svgs = [];
