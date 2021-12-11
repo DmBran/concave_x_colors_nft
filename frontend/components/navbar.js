@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from '../styles/meme.module.css'
 import { useWeb3Context } from 'web3-react';
-
-export const Navbar = () => {
+import Router, {useRouter} from 'next/router'
+export const Navbar = (props) => {
+  const { query } = useRouter();
+console.log(query)
   const context = useWeb3Context()
 
   const [active, setActive] = useState(false);
@@ -59,16 +61,16 @@ export const Navbar = () => {
                   Home
                 </a>
               </Link>
-              {/*<Link href='/mint'>
+              {1 && <Link href='/mint'>
                 <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   Mint
                 </a>
-              </Link>
-              <Link href='/nfts'>
+              </Link> }
+              {1 &&  <Link href='/nfts'>
                 <a className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                   My NFTs
                 </a>
-              </Link> */}
+              </Link> }
               {context.active && context.account && <a target="_blank" href={`https://etherscan.io/address/${context.account}`}>
                 <p className='text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500'>
                 {context.account.substring(0,5)+'....'+context.account.substring(11,16)}</p>

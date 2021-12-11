@@ -4,13 +4,8 @@ import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import Link from 'next/link';
 import Countdown from 'react-countdown';
-import { render } from 'react-dom';
 
 export default function Home() {
-  function componentDidMount() {
-    document.querySelector("body").classList.add('body')
-  }
-
   // Renderer callback with condition
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -37,17 +32,16 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.hero}></div>
         <div className={styles.herotext}>
-            100% on the Blockchain
+          100% on the Blockchain
         </div>
 
         <div className={styles.herotext2}>
-            A different kind of NFT
+          A different kind of NFT
         </div>
 
         <div className={styles.mintHome}>
-          
-          <div  className={styles.mintButton}>
-            <Countdown date={Date.now() + 612505000} renderer={renderer} />
+          <div className={styles.mintButton}>
+            <Countdown date={new Date('2021-12-22 00:00:00')} renderer={renderer} />
           </div>
         </div>
         <Footer />

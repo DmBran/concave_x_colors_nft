@@ -15,7 +15,7 @@ export const Minter = () => {
   // Ropstens
   const network = 3
 
-  const MAX_COLORS = 2
+  const MAX_COLORS = 3
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
   //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
   const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
@@ -34,20 +34,19 @@ export const Minter = () => {
       setAddress(context.account)
 
       const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
-      await updateNFTs(contract, context.account)
+      await updateColorList(contract, context.account)
     }
 
   }, [context]);
 
-  async function updateNFTs(contract, account){
+  async function updateColorList(contract, account){
     const svgs = [];
 
     const colorsCount = await contract.methods.balanceOf(account).call()
     setColorsOwned(colorsCount)
-  
+
     for (const i = 0; i < colorsCount; ++i) {
       const tokenId = await contract.methods.tokenOfOwnerByIndex(account, context.library.eth.abi.encodeParameter('uint256',i)).call()
-      //const svg = await contract.methods.getTokenSVG(context.library.eth.abi.encodeParameter('uint256',tokenId)).call()
       const color = await contract.methods.getHexColor(context.library.eth.abi.encodeParameter('uint256',tokenId)).call()
       svgs.push({
         tokenId,
@@ -58,8 +57,8 @@ export const Minter = () => {
     setSvgs(svgs)
   }
 
-  async function mintSpiral(){
-    setSubmitting("spirals")
+  async function mintSync(){
+    setSubmitting("syncs")
     let txToast;
     try {
       const nonce = await context.library.eth.getTransactionCount(address, 'latest');
@@ -67,17 +66,21 @@ export const Minter = () => {
 
       const tokens = svgs.filter(svg => svg.selected).map(svg =>  parseInt(svg.tokenId))
       const txCall =  contract.methods.mintSync(tokens)
+
+      const [ from, to, data ] = [ address, SYNC_CONTRACT, txCall.encodeABI() ]
+
       const gas = await context.library.eth.estimateGas({
-        from: address,
-        to: SYNC_CONTRACT,
-        data: txCall.encodeABI()
+        from,
+        data,
+        to
       })
+
       const tx = {
-        'from': address,
-        'to': SYNC_CONTRACT,
-        'nonce': nonce,
-        'data': txCall.encodeABI(),
-        gas
+        nonce,
+        from,
+        data,
+        gas,
+        to
       };
 
       txToast = toast.loading("Transaction processing")
@@ -114,7 +117,7 @@ export const Minter = () => {
   function selectColor(svg){
     if (svg.selected) {
       delete svg.selected;
-      setMintColors('unselected' + svg.tokenId)
+      setMintColors('unselect-' + svg.tokenId)
       return;
     }
 
@@ -129,7 +132,6 @@ export const Minter = () => {
   }
 
   async function mintColor(){
-    //setSubmitting("colors");
     const nonce = await context.library.eth.getTransactionCount(address, 'latest');
     const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
 
@@ -165,7 +167,7 @@ export const Minter = () => {
         id: txToast
       })
       setSubmitting(undefined)
-      await updateNFTs(contract, address)
+      await updateColorList(contract, address)
     }
   }
 
@@ -180,7 +182,7 @@ export const Minter = () => {
     if (context.account) {
       return (
         <div className={styles.modal}>
-          <div className={"mb-10"}>
+          <div className={"mb-10 hidden"}>
             <p className={"text-center mb-3 font-bold"}>Need a Color Primitive?</p>
             <div className={"flex colors justify-center content-center"}>
             {submitting != 'colors' && <button onClick={mintColor} className={"bg-blue-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
@@ -192,7 +194,8 @@ export const Minter = () => {
             </div>
           </div>
           { colorsOwned > 0 && <div className={"mb-10"}>
-            <p className={"text-center mb-3 text-xl font-bold"}>Select Your Color Primitives</p>
+            <p className={"text-center mb-1 text-xl font-bold"}>Select Your Color Primitives</p>
+            <p className={'text-center mb-3 font-late-500 text-xs'}>(up to three)</p>
             <div className={"flex flex-wrap colors justify-center content-center"}>
             {svgs && svgs.map(svg => (
                 <div onClick={() => selectColor(svg)} key={svg.color} className={"border-solid  border-4 color shadow-lg " + (svg.selected ? styles.colorActive : " border-white")} style={{
@@ -207,10 +210,10 @@ export const Minter = () => {
           </div> }
 
           <div className={"content-center justify-center flex mb-10"}>
-            {submitting != 'spirals' && <button onClick={mintSpiral}  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
+            {submitting != 'syncs' && <button onClick={mintSync}  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
               MINT!
             </button> }
-            {submitting == "spirals" && <button  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
+            {submitting == "syncs" && <button  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
               Minting...
             </button> }
           </div>

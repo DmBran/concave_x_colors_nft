@@ -5,8 +5,8 @@ import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import { Loader } from '../components/loader'
 import { useWeb3Context } from 'web3-react';
-import React, {useState, useEffect, useContext} from 'react';
-import Router, {useRouter} from 'next/router'
+import React, {useState, useEffect} from 'react';
+import {useRouter} from 'next/router'
 
 export default function Reveal() {
   const { query } = useRouter();
@@ -18,7 +18,7 @@ export default function Reveal() {
   useEffect(async () => {
     if (context.active) {
       const contract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
-      const mint = await fetchSync(query.tokenID, contract)
+      await fetchSync(query.tokenID, contract)
     }
 
   }, []);
@@ -45,7 +45,7 @@ export default function Reveal() {
                 {!minted && <Loader/>}
               </div>
             }
-            { !context.active && 
+            { !context.active &&
               <div className={"flex-1 flex center-content justify-center"}>
                 <p className={'font-bold'}>Please Connect via MetaMask</p>
               </div>

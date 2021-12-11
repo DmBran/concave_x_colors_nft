@@ -1,5 +1,4 @@
 import SyncXColors from '../../artifacts/contracts/SyncXColors.sol/Sync.json';
-import TheSpirals from '../../artifacts/contracts/legacy_spirals/TheSpirals.sol/TheSpirals.json';
 import TheColors from '../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json';
 import React, {useState, useEffect} from 'react';
 import { Loader } from './loader';
@@ -9,7 +8,6 @@ import { useWeb3Context } from 'web3-react';
 import styles from '../styles/meme.module.css'
 
 export const Reminter = (props) => {
-  console.log(props)
   const context = useWeb3Context()
 
   // Mainnet
@@ -19,8 +17,7 @@ export const Reminter = (props) => {
 
   const MAX_COLORS = 2
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
-  //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
-  const SPIRALS_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
+  const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
   const [svgs, setSvgs] = useState(null)
   const [sync, setSync] = useState(null)
   const [mintColors, setMintColors] = useState(null)
@@ -34,17 +31,17 @@ export const Reminter = (props) => {
 
     if (context.active) {
       setAddress(context.account)
-      const syncContract = new context.library.eth.Contract(SyncXColors.abi, SPIRALS_CONTRACT);
+      const syncContract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
 
       await fetchSync(syncContract, props.tokenID)
 
       const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
-      await updateNFTs(contract, context.account)
+      await updateColorList(contract, context.account)
     }
 
   }, [context]);
 
-  async function updateNFTs(contract, account){
+  async function updateColorList(contract, account){
     const svgs = [];
 
     const colorsCount = await contract.methods.balanceOf(account).call()
@@ -69,7 +66,7 @@ export const Reminter = (props) => {
   }
 
   async function remintSync(){
-    setSubmitting("spirals")
+    setSubmitting("sync")
     let txToast;
     try {
       const nonce = await context.library.eth.getTransactionCount(address, 'latest');
@@ -77,17 +74,21 @@ export const Reminter = (props) => {
       
       const tokens = svgs.filter(svg => svg.selected).map(svg =>  parseInt(svg.tokenId))
       const txCall =  contract.methods.updateColors(props.tokenID, tokens)
+
+      const [ from, to, data ] = [ address, SYNC_CONTRACT, txCall.encodeABI() ]
+
       const gas = await context.library.eth.estimateGas({
-        from: address,
-        to: SPIRALS_CONTRACT,
-        data: txCall.encodeABI()
+        from,
+        data,
+        to
       })
+
       const tx = {
-        'from': address,
-        'to': SPIRALS_CONTRACT,
-        'nonce': nonce,
-        'data': txCall.encodeABI(),
-        gas
+        nonce,
+        from,
+        data,
+        gas,
+        to
       };
 
       txToast = toast.loading("Transaction processing")
@@ -139,50 +140,6 @@ export const Reminter = (props) => {
     setMintColors(svg.tokenId)
   }
 
-  async function mintColor(){
-    //setSubmitting("colors");
-    const nonce = await context.library.eth.getTransactionCount(address, 'latest');
-    const contract = new context.library.eth.Contract(TheColors.abi, COLORS_CONTRACT);
-
-    const txCall = contract.methods.mintNextColors(context.library.eth.abi.encodeParameter('uint256',1))
-    const gas = await context.library.eth.estimateGas({
-      from: address,
-      to: COLORS_CONTRACT,
-      data: txCall.encodeABI()
-    })
-console.log(`Gas: ${gas}`)
-//const gas = await txCall.estimateGas()
-//console.log(gas)
-    const tx = {
-      'from': address,
-      'to': COLORS_CONTRACT,
-      'nonce': nonce,
-      'data': txCall.encodeABI(),
-      gas
-    };
-    console.log(tx)
-    const txToast = toast.loading("Transaction processing")
-    const tx2 = await context.library.eth.sendTransaction(tx, address).catch(error => {
-      console.log(error)
-      toast.error("Transaction failed!", {
-        id: txToast
-      })
-      setSubmitting(undefined)
-    })
-
-    console.log(tx2)
-
-    if (tx2?.transactionHash) {
-      toast.success("Transaction successful!", {
-        id: txToast
-      })
-      setSubmitting(undefined)
-      await updateNFTs(contract, address)
-    }
-
-    console.log(tx2)
-  }
-
   if (context.active){
     if (context.networkId !== network) {
       return (
@@ -194,13 +151,6 @@ console.log(`Gas: ${gas}`)
     if (context.account) {
       return (
         <div className={styles.modal}>
-          <div className={"mb-10"}>
-            <p className={"text-center mb-3 text-xl font-bold"}>Sync X Color</p>
-            <div className={"flex colors justify-center content-center"}>
-              {!sync && <Loader />}
-              {sync && <div className={styles.sync} dangerouslySetInnerHTML={{ __html: sync }}></div> }
-            </div>
-          </div>
           <div className={"mb-10"}>
             <p className={"text-center mb-3 text-xl font-bold"}>Select Your Color Primitives</p>
             <div className={"flex flex-wrap colors justify-center content-center"}>
@@ -214,14 +164,21 @@ console.log(`Gas: ${gas}`)
             ))}
             {(!svgs || !svgs.length) && <Loader />}
             </div>
+            <div className={"mt-10 mb-10"}>
+              <p className={"text-center mt-3 mb-3 text-xl font-bold"}>Sync X Color</p>
+              <div className={"flex colors justify-center content-center"}>
+                {!sync && <Loader />}
+                {sync && <div className={styles.sync} dangerouslySetInnerHTML={{ __html: sync }}></div> }
+              </div>
+            </div>
           </div>
 
           <div className={"content-center justify-center flex mb-10"}>
-            {submitting != 'spirals' && <button onClick={remintSync}  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-              REMINT!
+            {submitting != 'sync' && <button onClick={remintSync}  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
+              Color ∞ Sync!
             </button> }
-            {submitting == "spirals" && <button  className={"bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"}>
-              Reminting...
+            {submitting == "sync" && <button  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
+              Syncing...
             </button> }
           </div>
         </div>

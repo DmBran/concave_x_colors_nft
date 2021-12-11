@@ -1,24 +1,25 @@
 .mainContainer {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   padding: 0;
 }
 
 .hamburger {
-  display: none
+  display: none;
 }
 .body {
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   max-width: 2100px;
   margin: 0 auto;
 }
 
 .mintHome {
   display: flex;
-    flex: 1;
-    justify-content: center;
-    margin: 25px 0 200px 0;
+  flex: 1;
+  justify-content: center;
+  margin: 25px 0 200px 0;
 }
 /*added by heyjan for the hero styling*/
 
@@ -26,18 +27,24 @@
   background: white;
 }
 .mainContainer {
-  background: repeating-linear-gradient(-45deg, 
-  #ff9aa2, #ff9aa2 75px,
-  #ffb7b2 0, #ffb7b2 150px,
-  #ffdac1 0, #ffdac1 225px,
-  #e2f0cb 0, #e2f0cb 300px,
-  #b5ead7 0, #b5ead7 375px,
-  #c7ceea 0, #c7ceea 450px
+  background: repeating-linear-gradient(
+    -45deg,
+    #ff9aa2,
+    #ff9aa2 75px,
+    #ffb7b2 0,
+    #ffb7b2 150px,
+    #ffdac1 0,
+    #ffdac1 225px,
+    #e2f0cb 0,
+    #e2f0cb 300px,
+    #b5ead7 0,
+    #b5ead7 375px,
+    #c7ceea 0,
+    #c7ceea 450px
   );
 
   background-size: 200% 200%;
   animation: diagonal alternate 30s infinite;
-  
 }
 
 .rainbow-container {
@@ -54,34 +61,42 @@
   height: 50%;
   background: white;
   border-radius: 4px;
-  
-  background-image: repeating-linear-gradient(to right,
-  #c4e17f 0px, #c4e17f 50px,
-  #f7fdca 50px, #f7fdca 100px,
-  #fad071 100px, #fad071 150px,
-  #f0766b 150px, #f0766b 200px,
-  #db9dbe 200px, #db9dbe 250px,
-  #c49cdf 250px, #c49cdf 300px,
-  #6599e2 300px, #6599e2 350px,
-  #61c2e4 350px, #61c2e4 400px);
+
+  background-image: repeating-linear-gradient(
+    to right,
+    #c4e17f 0px,
+    #c4e17f 50px,
+    #f7fdca 50px,
+    #f7fdca 100px,
+    #fad071 100px,
+    #fad071 150px,
+    #f0766b 150px,
+    #f0766b 200px,
+    #db9dbe 200px,
+    #db9dbe 250px,
+    #c49cdf 250px,
+    #c49cdf 300px,
+    #6599e2 300px,
+    #6599e2 350px,
+    #61c2e4 350px,
+    #61c2e4 400px
+  );
   background-size: 100% 10px;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
 }
 
 .modal {
   background-color: #fff;
   border-radius: 25px;
-  padding: 2rem .5rem;
+  padding: 2rem 0.5rem;
   width: 70%;
   margin: 0 auto 30px auto;
 }
 .hero {
   height: 30vh;
-
   display: block;
   min-height: 60vh;
   background-size: 200% 200%;
-  
 }
 .discord {
   width: 33px;
@@ -103,24 +118,30 @@
 }
 .colorActive {
   border: 5px solid transparent;
-  border-image: linear-gradient(to bottom right,
-  #ff9aa2 0,
-#ffb7b2 20%,
-#ffdac1 40%,
-#e2f0cb 65%,
-#b5ead7 80%,
-#c7ceea  100%);
-border-image-slice: 1;
+  border-image: linear-gradient(
+    to bottom right,
+    #ff9aa2 0,
+    #ffb7b2 20%,
+    #ffdac1 40%,
+    #e2f0cb 65%,
+    #b5ead7 80%,
+    #c7ceea 100%
+  );
+  border-image-slice: 1;
 }
 @keyframes diagonal {
-  0% {background-position: 0% 10%}
-  100% {background-position: 100% 50%}
+  0% {
+    background-position: 0% 10%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 .herotext {
   position: absolute;
   top: 300px;
-  right: 200px ;
+  right: 200px;
   background: white;
   text-align: center;
   font-weight: 300;
@@ -135,7 +156,7 @@ border-image-slice: 1;
 .herotext2 {
   position: absolute;
   top: 100px;
-  right: 800px ;
+  right: 800px;
   background: white;
   text-align: center;
   font-weight: 300;
@@ -146,9 +167,6 @@ border-image-slice: 1;
   margin: 100px auto 0;
   /*box-shadow: 0 0 10px 10px rgba(0,0,0,0.125);*/
 }
-
-
-
 
 .main {
   min-height: 83vh;
@@ -180,14 +198,12 @@ border-image-slice: 1;
 .toast {
   border: 0;
   margin: 0;
-
 }
 .footer {
   width: 100%;
   justify-content: center;
   flex-grow: 1;
   padding-bottom: 2rem;
-
 }
 
 .title a {
@@ -291,11 +307,17 @@ border-image-slice: 1;
 }
 
 .inner {
-  border: 1px; border-style: solid; border-radius: 0.25rem; border-color: #eee;
-  margin-bottom: 1rem; padding: 1.5rem;  width:500px; padding:2rem;
-  box-shadow: 0 1px 1px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: 0 1px 1px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 0 1px 1px 0px rgba(0,0,0,0.75);
+  border: 1px;
+  border-style: solid;
+  border-radius: 0.25rem;
+  border-color: #eee;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  width: 500px;
+  padding: 2rem;
+  box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.75);
   padding: 20px;
   margin: 20px;
 }
@@ -344,9 +366,9 @@ border-image-slice: 1;
   font-size: 32px;
 }
 
-@media(max-width: 575px){
-  .votes {  
-      font-size: 21px;
+@media (max-width: 575px) {
+  .votes {
+    font-size: 21px;
   }
 }
 
@@ -357,7 +379,6 @@ border-image-slice: 1;
   color: green;
   text-decoration: none;
 }
-
 
 .votes .down {
   align-self: flex-end;
@@ -374,7 +395,7 @@ border-image-slice: 1;
   color: white;
 }
 .concave-hover {
-  color: #093160
+  color: #093160;
 }
 
 .chat-notification {
@@ -384,7 +405,8 @@ border-image-slice: 1;
   padding: 1.5rem;
   border-radius: 0.5rem;
   background-color: #fff;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 .chat-notification-logo-wrapper {
   flex-shrink: 0;
