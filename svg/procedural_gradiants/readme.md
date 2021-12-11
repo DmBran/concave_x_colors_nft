@@ -4,6 +4,7 @@ Procedurally generated
 Colorwheel concept
 
 ![](3.svg)
+![](3 - Flex.svg)
 
 ![](v2_1color6.svg)
 ![](v2_3color2.svg)
