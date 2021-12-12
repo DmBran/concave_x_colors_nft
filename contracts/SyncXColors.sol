@@ -29,7 +29,7 @@ contract Sync is ERC721Enumerable, Ownable {
 	
     string public PROVENANCE_HASH = "";
 
-    address constant public THE_COLORS = address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+    address constant public THE_COLORS = address(0x5FbDB2315678afecb367f032d93F642f64180aa3);
 	
 	mapping(uint256 => uint256) private _tokenIdColors;
 	

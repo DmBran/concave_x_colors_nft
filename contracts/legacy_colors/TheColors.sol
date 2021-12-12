@@ -18,6 +18,8 @@ contract TheColors is ERC721Enumerable, Ownable {
     using Strings for uint256;
     using Strings for uint32;
 
+    event MintColor(uint256 mintId);
+
     string public PROVENANCE_HASH = "";
 
     /*address constant public THE_COLORS_LEGACY = address(0xc22f6c6f04c24Fac546A43Eb2E2eB10b1D2953DA);*/
@@ -157,6 +159,7 @@ contract TheColors is ERC721Enumerable, Ownable {
                 /*tokenOwner = INFTOwner(THE_COLORS_LEGACY).ownerOf(mintIndex);*/
                 
                 _safeMint(msg.sender, mintIndex);
+                emit MintColor(mintIndex);
                 generateRandomHexColor(mintIndex);
             }
         }
@@ -269,6 +272,7 @@ contract TheColors is ERC721Enumerable, Ownable {
     }
 
     function _rng() internal view returns(uint256) {
+      return 11;
         return uint256(keccak256(abi.encodePacked(block.timestamp + block.difficulty))) +
                 uint256(keccak256(abi.encodePacked(block.coinbase))) / block.number + block.gaslimit;
     }
