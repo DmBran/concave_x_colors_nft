@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' >
+<defs>
+<radialGradient id='a' cx='378' cy='372' r='218' gradientUnits='userSpaceOnUse'>
+    <stop  offset='0' stop-color='222222'/>
+    <stop  offset='1' stop-color='#0000FF'/>
+</radialGradient>
+<linearGradient id='c' x1='131' y1='261' x2='369' y2='152' gradientUnits='userSpaceOnUse'>
+    <stop  offset='0' stop-color='#02FF02' stop-opacity='0.2'/>
+    <stop  offset='1' stop-color='222222' stop-opacity='0.4'/>
+</linearGradient>
+<linearGradient id='b' x1='288' y1='326' x2='319' y2='160' gradientUnits='userSpaceOnUse'>
+    <stop  offset='0' stop-color='#02FF02' stop-opacity='0.2'/>
+    <stop  offset='1' stop-color='222222' stop-opacity='0.4'/>
+</linearGradient>
+</defs>
+<rect fill='#0000FF' width='500' height='500'/>
+<g fill-opacity='0.3'>
+<rect fill = 'url(#c)' x = '224.5' y = '92.0' width='598' height='600'
+                    transform = 'rotate(229)'/>
+<ellipse fill = 'url(#c)' cx='87' cy='245' ry = '380' rx='376'/>
+<ellipse fill = 'url(#b)' cx='174' cy='311' ry = '295' rx='302'/>
+<ellipse fill = 'url(#c)' cx='399' cy='108' ry = '291' rx='394'/>
+<rect fill = 'url(#c)' x = '219.0' y = '89.5' width='726' height='552'
+                    transform = 'rotate(192)'/>
+<ellipse fill = 'url(#c)' cx='58' cy='44' ry = '314' rx='358'/>
+<ellipse fill = 'url(#c)' cx='425' cy='227' ry = '363' rx='331'/>
+<ellipse fill = 'url(#b)' cx='320' cy='113' ry = '302' rx='272'/>
+<ellipse fill = 'url(#c)' cx='165' cy='331' ry = '339' rx='309'/>
+<rect fill = 'url(#b)' x = '199.5' y = '80.5' width='528' height='534'
+                    transform = 'rotate(58)'/>
+<rect fill = 'url(#b)' x = '215.5' y = '39.0' width='756' height='582'
+                    transform = 'rotate(319)'/>
+<ellipse fill = 'url(#b)' cx='223' cy='309' ry = '385' rx='373'/>
+<ellipse fill = 'url(#c)' cx='80' cy='383' ry = '394' rx='310'/>
+<ellipse fill = 'url(#c)' cx='484' cy='104' ry = '392' rx='268'/>
+<rect fill = 'url(#b)' x = '143.0' y = '187.0' width='520' height='616'
+                    transform = 'rotate(338)'/>
+<ellipse fill = 'url(#b)' cx='483' cy='319' ry = '336' rx='331'/>
+<rect fill = 'url(#c)' x = '239.5' y = '5.0' width='740' height='686'
+                    transform = 'rotate(240)'/>
+<rect fill = 'url(#b)' x = '55.5' y = '131.0' width='556' height='510'
+                    transform = 'rotate(116)'/>
+<ellipse fill = 'url(#c)' cx='377' cy='500' ry = '321' rx='332'/>
+<ellipse fill = 'url(#c)' cx='246' cy='466' ry = '274' rx='319'/>
+<ellipse fill = 'url(#c)' cx='468' cy='55' ry = '358' rx='355'/>
+<rect fill = 'url(#c)' x = '85.5' y = '22.5' width='664' height='562'
+                    transform = 'rotate(331)'/>
+<rect fill = 'url(#b)' x = '119.0' y = '2.5' width='682' height='596'
+                    transform = 'rotate(130)'/>
+</g>
+</svg>

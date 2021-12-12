@@ -32,21 +32,26 @@ const config: HardhatUserConfig = {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
   solidity: {
-    compilers: [
-      {
-        version: '0.8.9',
+		version: "0.8.4",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 1000,
       },
-    ],
+    },
   },
   namedAccounts: {
     deployer: 0,
   },
   networks: {
-    localhost: {
-      url: `http://localhost:8545`,
-      // accounts: [
-      // defaultPrivateKey,
-      // ]
+		hardhat: {
+			chainId: 1337,
+		},
+		ropsten: {
+			//gas: 2100000,
+			//gasPrice: 8000000000,
+			url: process.env.API_URL,
+			accounts: [`0x${process.env.PRIVATE_KEY}`]
     },
     mumbai: {
       chainId: 80001,

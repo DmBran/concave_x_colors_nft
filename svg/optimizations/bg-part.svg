@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' viewbox='0 0 500 500'>
+<g fill-opacity='0.3'>
+<circle fill = '#FF1111' cx='37' cy='19' r = '254'/>
+<circle fill = '#11FF33' cx='33' cy='273' r = '318'/>
+<circle fill = '#11FF33' cx='485' cy='243' r = '310'/>
+<rect fill = '#11FF33' x = '210.0' y = '105.0' width='708' height='512'
+                    transform = 'rotate(155)'/>
+<rect fill = '#1111FF' x = '202.0' y = '229.0' width='562' height='590'
+                    transform = 'rotate(250)'/>
+<rect fill = '#FF1111' x = '144.0' y = '72.0' width='642' height='780'
+                    transform = 'rotate(42)'/>
+<circle fill = '#FF1111' cx='371' cy='442' r = '360'/>
+<circle fill = '#11FF33' cx='359' cy='180' r = '399'/>
+<circle fill = '#1111FF' cx='51' cy='26' r = '256'/>
+<circle fill = '#1111FF' cx='129' cy='65' r = '266'/>
+<rect fill = '#FF1111' x = '129.0' y = '192.5' width='582' height='692'
+                    transform = 'rotate(305)'/>
+<circle fill = '#1111FF' cx='487' cy='244' r = '392'/>
+</g>
+</svg>

@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' >
+<g fill-opacity='0.3'>
+<ellipse fill = '#FF0000' cx='45' cy='390' ry = '317' rx='279'/>
+<ellipse fill = '#FF0000' cx='438' cy='96' ry = '277' rx='394'/>
+<rect fill = '#FF0000' x = '109.5' y = '187.0' width='710' height='782'
+                    transform = 'rotate(281)'/>
+<ellipse fill = '#0000FF' cx='454' cy='371' ry = '323' rx='263'/>
+<ellipse fill = '#0000FF' cx='167' cy='397' ry = '317' rx='310'/>
+<ellipse fill = '#0000FF' cx='353' cy='361' ry = '382' rx='324'/>
+<rect fill = '#02FF02' x = '49.0' y = '188.5' width='684' height='502'
+                    transform = 'rotate(124)'/>
+<ellipse fill = '#FF0000' cx='300' cy='268' ry = '336' rx='346'/>
+<ellipse fill = '#FF0000' cx='307' cy='342' ry = '297' rx='271'/>
+<ellipse fill = '#02FF02' cx='78' cy='97' ry = '394' rx='386'/>
+<ellipse fill = '#FF0000' cx='220' cy='184' ry = '290' rx='272'/>
+<rect fill = '#02FF02' x = '238.5' y = '190.0' width='606' height='772'
+                    transform = 'rotate(109)'/>
+<rect fill = '#02FF02' x = '48.0' y = '62.0' width='716' height='730'
+                    transform = 'rotate(229)'/>
+<ellipse fill = '#0000FF' cx='359' cy='157' ry = '325' rx='292'/>
+<rect fill = '#FF0000' x = '59.5' y = '227.0' width='742' height='790'
+                    transform = 'rotate(170)'/>
+<ellipse fill = '#FF0000' cx='400' cy='360' ry = '369' rx='251'/>
+<ellipse fill = '#FF0000' cx='218' cy='21' ry = '306' rx='380'/>
+<rect fill = '#02FF02' x = '40.0' y = '202.5' width='520' height='754'
+                    transform = 'rotate(97)'/>
+<ellipse fill = '#FF0000' cx='178' cy='498' ry = '264' rx='369'/>
+<ellipse fill = '#02FF02' cx='185' cy='47' ry = '329' rx='370'/>
+<rect fill = '#FF0000' x = '187.5' y = '49.5' width='548' height='712'
+                    transform = 'rotate(203)'/>
+<rect fill = '#FF0000' x = '207.0' y = '46.5' width='522' height='764'
+                    transform = 'rotate(75)'/>
+<rect fill = '#0000FF' x = '8.0' y = '204.5' width='748' height='504'
+                    transform = 'rotate(340)'/>
+<ellipse fill = '#02FF02' cx='209' cy='158' ry = '315' rx='254'/>
+</g>
+
+
+        <g id="infinity_1">
+        	<path id="infinity" pathLengh = "1000" stroke-dasharray="0" stroke-dashoffset="0" stroke-width="70" 
+        			d="	 M 75,250 
+        	         C 75,350 200,350 250,250 
+        	         S 425,150 425,250 
+        	         S 300,350 250,250
+        	         S 75,150 75,250"
+        	         transform="translate(173 173) scale(0.3)" fill="none">
+        		
+        	<!-- Cycle between COLOR nft's 1-3-5-->
+        	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#02FF02;#FF0000;#02FF02" dur="4s" fill="freeze" />
+
+        	<!-- dash effect-->
+
+        	<animate id = "array_1" begin="start.end" attributeType="XML" attributeName="stroke-dasharray" to="100" dur="0.5s" fill="freeze" />
+        	<animate id = "array_2" begin="array_1.end" attributeType="XML" attributeName="stroke-dasharray" to="0" dur="0.5s" fill="freeze" />
+
+        	<animate id = "array_3" begin="three.end" attributeType="XML" attributeName="stroke-dasharray" to="100" dur="0.5s" fill="freeze" />
+        	<animate id = "array_4" begin="array_3.end" attributeType="XML" attributeName="stroke-dasharray" to="0" dur="0.5s" fill="freeze" />
+
+        	<animate id = "pulse_1" begin="start.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+        	<animate id = "pulse_2" begin="two.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+        	<animate id = "pulse_3" begin="three.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+        	<animate id = "pulse_4" begin="four.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+
+        	</path>
+
+        	<!-- Infinity foreground image -->
+        	<path id="infinity_2" pathLengh = "1000" stroke-dasharray="1000" stroke-dashoffset="1000" stroke="#FF0000" stroke-width="70" 
+        			d="	 M 75,250 
+        	         C 75,350 200,350 250,250 
+        	         S 425,150 425,250 
+        	         S 300,350 250,250
+        	         S 75,150 75,250"
+        	          transform="translate(173 173) scale(0.3)" fill="none">
+        	<!-- Cycle between COLOR nft's 2-4-6-->
+        	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#FF0000;#0000FF;#FF0000" dur="4s" fill="freeze" />
+        	<animate id = "pulse_5" begin="start.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+        	<animate id = "pulse_6" begin="two.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+        	<animate id = "pulse_7" begin="three.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+        	<animate id = "pulse_8" begin="four.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+        	<!-- Animate transitions between color sets 1 and color sets 2-->
+        	<animate id="start" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;end.end" to= "0" dur="1s" fill="freeze" />
+        	<animate id="two" attributeType="XML" attributeName="stroke-dashoffset" begin="start.end" to="-1000" dur="1s" fill="freeze" />
+        	<animate id="three" attributeType="XML" attributeName="stroke-dashoffset" begin="two.end" to="-2000" dur="1s" fill="freeze" />
+        	<animate id="four" attributeType="XML" attributeName="stroke-dashoffset" begin="three.end" to="-3000" dur="1s" fill="freeze" />
+        	<animate id="end" attributeType="XML" attributeName="stroke-dashoffset" begin="four.end" to="1000" dur="0.001s" fill="freeze" />
+
+        	</path>
+        	
+        </g>
+        <text x="10" y="30" fill="white" >SYNC X COLORS</text>
+
+        <g id="borders">
+
+            <!-- TODO: should be corrcted in color version -->
+        		<path id="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z" 
+            transform="translate(-95,0) scale(2)"  stroke="black"  fill-opacity="0.9">
+            <animate attributeName="fill" values="black;#FF0000;black" begin="four.begin" dur="1.5s" />
+			<animate attributeName="fill" values="black;#02FF02;black" begin="two.begin" dur="1.5s" />
+
+            </path>
+            <path id ="cls-1"
+               d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+               transform="translate(-85,15) scale(1.6,1.6)"  stroke-opacity="0.7" fill-opacity="0.7">
+            <set attributeName="fill" to="transparent" fill="freeze" />
+            <animate id = "beat2" attributeName="fill" values="transparent;white;transparent" begin="four.begin;two.begin" dur="1s" />
+            <animate id = "beat2stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin;two.begin" dur="1s" />
+            <animate id = "beat2black" attributeName="fill" values="transparent;black;transparent" begin="four.begin;two.begin" dur="1s" />
+            <animate id = "beat2blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="four.begin;two.begin" dur="1s" />
+            </path>
+
+        	<path id ="cls-1"
+               d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+               transform="translate(-88,60) scale(1.3,1.3)"  stroke-opacity="0.35" fill-opacity="0.35">
+            <set attributeName="fill" to="transparent" fill="freeze" />
+            <animate id = "beat3" attributeName="fill" values="transparent;white;transparent" begin="four.begin + 0.2s;two.begin + 0.2s" dur="1s" />
+            <animate id = "beat3stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin + 0.2s;two.begin + 0.2s" dur="1s" />
+            <animate id = "beat3black" attributeName="fill" values="transparent;black;transparent" begin="four.begin + 0.2s;two.begin + 0.2s" dur="1s" />
+            <animate id = "beat3blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="four.begin + 0.2s;two.begin + 0.2s" dur="1s" />
+            </path>
+            
+            <path id ="cls-1"
+               d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+               transform="translate(-82,104) scale(1,1)"  stroke-opacity="0.05" fill-opacity="0.05">
+            <set attributeName="fill" to="transparent" fill="freeze" />
+            <animate id = "beat4" attributeName="fill" values="transparent;white;transparent" begin="four.begin + 0.4s;two.begin + 0.4s" dur="1s" />
+            <animate id = "beat4stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin + 0.4s;two.begin + 0.4s" dur="1s" />
+            <animate id = "beat4black" attributeName="fill" values="transparent;black;transparent" begin="four.begin + 0.4s;two.begin + 0.4s" dur="1s" />
+            <animate id = "beat4blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="four.begin + 0.4s;two.begin + 0.4s" dur="1s" />
+            </path>
+            
+            <path id ="cls-1"
+               d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+               transform="translate(-70,148) scale(0.7,0.7)"  stroke-opacity="0.02" fill-opacity="0.02">
+            <set attributeName="fill" to="transparent" fill="freeze" />
+            <animate id = "beat5" attributeName="fill" values="transparent;white;transparent" begin="four.begin + 0.6s;two.begin + 0.6s" dur="1s" />
+            <animate id = "beat5stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin + 0.6s;two.begin + 0.6s" dur="1s" />
+            <animate id = "beat5black" attributeName="fill" values="transparent;black;transparent" begin="four.begin + 0.6s;two.begin + 0.6s" dur="1s" />
+            <animate id = "beat5blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="four.begin + 0.6s;two.begin + 0.6s" dur="1s" />
+            </path>
+            
+            <!--  out of border
+            <path id ="cls-1"
+               d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+               transform="translate(-40,205) scale(0.3,0.3)"  fill-opacity="0.01">
+            <set attributeName="fill" to="transparent" fill="freeze" />
+            <animate id = "beat6" attributeName="fill" values="transparent;white;transparent" begin="four.begin" dur="1s" />
+            <animate id = "beat6stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin" dur="1s" />
+            <animate id = "beat6black" attributeName="fill" values="transparent;black;transparent" begin="two.begin" dur="1s" />
+            <animate id = "beat6blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="two.begin" dur="1s" />
+            </path>
+            -->
+            
+        </g>
+
+        <use href="#borders" x="-500" y="-500" transform="rotate(180)"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 500 500">
+
+<filter id="filter">
+
+      <feMorphology operator="erode" radius="0" in="SourceGraphic" result="erode" />
+      <feMorphology operator="erode" radius="2" in="SourceGraphic" result="erode1" />
+      <feMorphology operator="erode" radius="3" in="SourceGraphic" result="erode2" />
+      <feMorphology operator="erode" radius="4" in="SourceGraphic" result="erode3" />
+      <feMorphology operator="erode" radius="6" in="SourceGraphic" result="erode4" />
+       <feComposite in="erode" in2="erode1" operator="out" result="main"/>
+      <feComposite in="erode1" in2="erode2" operator="out" result="stroke1"/>
+      <feComposite in="erode2" in2="erode3" operator="out" result="stroke2"/>
+      <feComposite in="erode3" in2="erode4" operator="out" result="stroke3"/>
+      <feGaussianBlur in="stroke1" stdDeviation="0 10" result="stroke1-blur" />
+      <feBlend in="stroke1-blur" mode="screen" result="stroke1-blur-blend"></feBlend>
+      <feGaussianBlur in="stroke2" stdDeviation="0 10"  />
+      <feOffset dx="0" dy="10" result="stroke2-blur"/>
+      <feBlend in="stroke2-blur" mode="screen" result="stroke2-blur-blend"></feBlend>
+      <feGaussianBlur in="stroke3" stdDeviation="0 25"  />
+      <feOffset dx="0" dy="20" result="stroke3-blur"/>
+      <feBlend in="stroke3-blur" mode="screen" result="stroke3-blur-blend"></feBlend>
+
+      <feFlood result="floodFill" flood-color="rgba(0,0,0,0.7)" flood-opacity="1"/>
+      <feComposite in="floodFill" in2="erode2" operator="in" result="black"/>
+      <feBlend in="black" mode="screen" result="letterInside"></feBlend>
+      <feMerge>
+        <feMergeNode in="stroke1-blur-blend"></feMergeNode>
+        <feMergeNode in="stroke2-blur-blend"></feMergeNode>
+      <feMergeNode in="stroke3-blur-blend"></feMergeNode>
+        <feMergeNode in="main"></feMergeNode>
+        <feMergeNode in="letterInside"></feMergeNode>
+      </feMerge>
+
+    </filter>
+
+	<text x="0" y="50%" stroke-width="10" fill="#3d56ce" stroke="#8999e5"  style="font-size: 6em; filter: url(#filter)">Sync x Colors</text>
+</svg>

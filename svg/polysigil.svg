@@ -1,0 +1,135 @@
+<svg id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" >
+
+<defs>
+    <linearGradient id="Gradient">
+      <stop id="stop1" offset="0" stop-color="red" stop-opacity="1" />
+      <stop id="stop2" offset="50%" stop-color="blue" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+
+<g stroke-width="1" stroke-linejoin="bevel"><path d="M482 286L480 236L375 294Z" fill="#081a28" stroke="#081a28"></path><path d="M375 294L386 364L482 286Z" fill="#15384f" stroke="#15384f"></path><path d="M480 236L372 169L375 294Z" fill="#205a7a" stroke="#205a7a"></path><path d="M372 169L305 224L375 294Z" fill="#15384f" stroke="#15384f"></path><path d="M375 294L273 321L386 364Z" fill="#19435d" stroke="#19435d"></path><path d="M305 224L273 321L375 294Z" fill="#297ea6" stroke="#297ea6"></path><path d="M624 268L608 231L482 286Z" fill="#081a28" stroke="#081a28"></path><path d="M482 286L608 231L480 236Z" fill="#00101c" stroke="#00101c"></path><path d="M525 93L362 80L372 169Z" fill="#297ea6" stroke="#297ea6"></path><path d="M391 486L494 439L386 364Z" fill="#277297" stroke="#277297"></path><path d="M386 364L494 439L482 286Z" fill="#1d4e6b" stroke="#1d4e6b"></path><path d="M362 80L318 109L372 169Z" fill="#112e42" stroke="#112e42"></path><path d="M372 169L318 109L305 224Z" fill="#112e42" stroke="#112e42"></path><path d="M305 224L236 221L273 321Z" fill="#15384f" stroke="#15384f"></path><path d="M525 93L372 169L480 236Z" fill="#205a7a" stroke="#205a7a"></path><path d="M318 109L236 221L305 224Z" fill="#112e42" stroke="#112e42"></path><path d="M578 108L525 93L480 236Z" fill="#246688" stroke="#246688"></path><path d="M593 422L624 268L482 286Z" fill="#246688" stroke="#246688"></path><path d="M279 490L288 424L183 421Z" fill="#112e42" stroke="#112e42"></path><path d="M273 321L288 424L386 364Z" fill="#297ea6" stroke="#297ea6"></path><path d="M608 231L578 108L480 236Z" fill="#112e42" stroke="#112e42"></path><path d="M674 166L578 108L608 231Z" fill="#081a28" stroke="#081a28"></path><path d="M288 424L391 486L386 364Z" fill="#00101c" stroke="#00101c"></path><path d="M516 511L593 422L494 439Z" fill="#205a7a" stroke="#205a7a"></path><path d="M494 439L593 422L482 286Z" fill="#297ea6" stroke="#297ea6"></path><path d="M593 422L673 275L624 268Z" fill="#277297" stroke="#277297"></path><path d="M624 268L673 275L608 231Z" fill="#297ea6" stroke="#297ea6"></path><path d="M391 486L516 511L494 439Z" fill="#081a28" stroke="#081a28"></path><path d="M487 0L362 80L525 93Z" fill="#277297" stroke="#277297"></path><path d="M487 0L394 0L362 80Z" fill="#277297" stroke="#277297"></path><path d="M362 80L316 0L318 109Z" fill="#0c2435" stroke="#0c2435"></path><path d="M318 109L211 99L236 221Z" fill="#19435d" stroke="#19435d"></path><path d="M673 275L674 166L608 231Z" fill="#1d4e6b" stroke="#1d4e6b"></path><path d="M608 0L487 0L525 93Z" fill="#15384f" stroke="#15384f"></path><path d="M608 0L525 93L578 108Z" fill="#112e42" stroke="#112e42"></path><path d="M288 424L279 490L391 486Z" fill="#0c2435" stroke="#0c2435"></path><path d="M391 486L422 600L516 511Z" fill="#15384f" stroke="#15384f"></path><path d="M183 421L288 424L273 321Z" fill="#19435d" stroke="#19435d"></path><path d="M316 0L211 99L318 109Z" fill="#277297" stroke="#277297"></path><path d="M236 221L161 326L273 321Z" fill="#205a7a" stroke="#205a7a"></path><path d="M119 286L161 326L236 221Z" fill="#0c2435" stroke="#0c2435"></path><path d="M394 0L316 0L362 80Z" fill="#277297" stroke="#277297"></path><path d="M161 326L183 421L273 321Z" fill="#205a7a" stroke="#205a7a"></path><path d="M60 173L119 286L236 221Z" fill="#00101c" stroke="#00101c"></path><path d="M161 326L132 411L183 421Z" fill="#297ea6" stroke="#297ea6"></path><path d="M516 511L591 531L593 422Z" fill="#277297" stroke="#277297"></path><path d="M593 422L730 401L673 275Z" fill="#277297" stroke="#277297"></path><path d="M503 600L591 531L516 511Z" fill="#297ea6" stroke="#297ea6"></path><path d="M675 0L608 0L578 108Z" fill="#00101c" stroke="#00101c"></path><path d="M119 286L132 411L161 326Z" fill="#19435d" stroke="#19435d"></path><path d="M183 421L167 503L279 490Z" fill="#246688" stroke="#246688"></path><path d="M664 530L730 401L593 422Z" fill="#246688" stroke="#246688"></path><path d="M784 177L722 107L674 166Z" fill="#277297" stroke="#277297"></path><path d="M784 177L674 166L673 275Z" fill="#00101c" stroke="#00101c"></path><path d="M674 166L722 107L578 108Z" fill="#00101c" stroke="#00101c"></path><path d="M263 600L391 486L279 490Z" fill="#0c2435" stroke="#0c2435"></path><path d="M263 600L422 600L391 486Z" fill="#081a28" stroke="#081a28"></path><path d="M191 0L128 95L211 99Z" fill="#15384f" stroke="#15384f"></path><path d="M211 99L128 95L236 221Z" fill="#297ea6" stroke="#297ea6"></path><path d="M422 600L503 600L516 511Z" fill="#112e42" stroke="#112e42"></path><path d="M316 0L191 0L211 99Z" fill="#297ea6" stroke="#297ea6"></path><path d="M106 479L167 503L183 421Z" fill="#0c2435" stroke="#0c2435"></path><path d="M591 531L664 530L593 422Z" fill="#19435d" stroke="#19435d"><text x="65" y="55" class="Rrrrr">Grumpy!</text></path><path d="M615 600L664 530L591 531Z" fill="#19435d" stroke="#19435d"></path><path d="M722 107L675 0L578 108Z" fill="#15384f" stroke="#15384f"></path><path d="M821 326L784 177L673 275Z" fill="#081a28" stroke="#081a28"></path><path d="M722 107L822 0L675 0Z" fill="#205a7a" stroke="#205a7a"></path><path d="M231 600L263 600L279 490Z" fill="#112e42" stroke="#112e42"></path><path d="M0 174L60 173L0 104Z" fill="#277297" stroke="#277297"></path><path d="M128 95L60 173L236 221Z" fill="#19435d" stroke="#19435d"></path><path d="M0 407L106 479L132 411Z" fill="#297ea6" stroke="#297ea6"></path><path d="M664 530L773 430L730 401Z" fill="#0c2435" stroke="#0c2435"></path><path d="M730 401L821 326L673 275Z" fill="#277297" stroke="#277297"></path><path d="M503 600L615 600L591 531Z" fill="#0c2435" stroke="#0c2435"></path><path d="M775 600L828 461L773 430Z" fill="#0c2435" stroke="#0c2435"></path><path d="M0 407L132 411L119 286Z" fill="#112e42" stroke="#112e42"></path><path d="M132 411L106 479L183 421Z" fill="#00101c" stroke="#00101c"></path><path d="M167 503L231 600L279 490Z" fill="#1d4e6b" stroke="#1d4e6b"></path><path d="M109 600L231 600L167 503Z" fill="#112e42" stroke="#112e42"></path><path d="M773 430L821 326L730 401Z" fill="#19435d" stroke="#19435d"></path><path d="M191 0L123 0L128 95Z" fill="#112e42" stroke="#112e42"></path><path d="M615 600L664 600L664 530Z" fill="#297ea6" stroke="#297ea6"></path><path d="M900 186L822 114L784 177Z" fill="#15384f" stroke="#15384f"></path><path d="M784 177L822 114L722 107Z" fill="#277297" stroke="#277297"></path><path d="M60 173L0 302L119 286Z" fill="#19435d" stroke="#19435d"></path><path d="M0 174L0 302L60 173Z" fill="#15384f" stroke="#15384f"></path><path d="M0 104L60 173L128 95Z" fill="#205a7a" stroke="#205a7a"></path><path d="M775 600L773 430L664 530Z" fill="#1d4e6b" stroke="#1d4e6b"></path><path d="M773 430L828 461L821 326Z" fill="#297ea6" stroke="#297ea6"></path><path d="M821 326L900 298L784 177Z" fill="#297ea6" stroke="#297ea6"></path><path d="M0 302L0 407L119 286Z" fill="#112e42" stroke="#112e42"></path><path d="M106 479L109 600L167 503Z" fill="#19435d" stroke="#19435d"></path><path d="M0 0L0 104L128 95Z" fill="#1d4e6b" stroke="#1d4e6b"></path><path d="M0 497L109 600L106 479Z" fill="#081a28" stroke="#081a28"></path><path d="M900 402L900 298L821 326Z" fill="#297ea6" stroke="#297ea6"></path><path d="M900 0L822 0L822 114Z" fill="#00101c" stroke="#00101c"></path><path d="M822 114L822 0L722 107Z" fill="#112e42" stroke="#112e42"></path><path d="M900 298L900 186L784 177Z" fill="#00101c" stroke="#00101c"></path><path d="M664 600L775 600L664 530Z" fill="#1d4e6b" stroke="#1d4e6b"></path><path d="M828 461L900 402L821 326Z" fill="#112e42" stroke="#112e42"></path><path d="M0 407L0 497L106 479Z" fill="#297ea6" stroke="#297ea6"></path><path d="M900 186L900 129L822 114Z" fill="#297ea6" stroke="#297ea6"></path><path d="M900 539L900 402L828 461Z" fill="#205a7a" stroke="#205a7a"></path><path d="M123 0L0 0L128 95Z" fill="#112e42" stroke="#112e42"></path><path d="M900 129L900 0L822 114Z" fill="#112e42" stroke="#112e42"></path><path d="M0 497L0 600L109 600Z" fill="#277297" stroke="#277297"></path><path d="M775 600L900 539L828 461Z" fill="#19435d" stroke="#19435d"></path><path d="M775 600L900 600L900 539Z" fill="#00101c" stroke="#00101c"></path></g>
+<style>
+.glyph {font-size: 55px; color: black; font-weight: bold; }
+</style>
+	<text transform="scale(2)" x="36" y="33" class="glyph">∞</text>
+  <text transform="scale(2)" x="10" y="242" fill="silver" class="glyph">∞</text>
+  <text transform="scale(1.8)" x="210" y="232" rotate="55deg" fill="white" class="glyph">∞</text>
+  <text transform="scale(1.8)" x="210" y="3" rotate="90deg" fill="#050030" class="glyph">∞</text>
+<g id="infinity_1">
+	<path id="infinity" pathLengh = "1000" stroke-dasharray="0" stroke-dashoffset="0" stroke-width="70"
+			d="	 M 75,250
+	         C 75,350 200,350 250,250
+	         S 425,150 425,250
+	         S 300,350 250,250
+	         S 75,150 75,250"
+	         transform="translate(173 173) scale(0.3)" fill="none">
+
+	<!-- Cycle between COLOR nft's 1-3-5-->
+	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#FFFFFF;#222222;#FFFFFF" dur="4s" fill="freeze" />
+
+	<!-- dash effect-->
+
+	<animate id = "array_1" begin="start.end" attributeType="XML" attributeName="stroke-dasharray" to="100" dur="0.5s" fill="freeze" />
+	<animate id = "array_2" begin="array_1.end" attributeType="XML" attributeName="stroke-dasharray" to="0" dur="0.5s" fill="freeze" />
+
+	<animate id = "array_3" begin="three.end" attributeType="XML" attributeName="stroke-dasharray" to="100" dur="0.5s" fill="freeze" />
+	<animate id = "array_4" begin="array_3.end" attributeType="XML" attributeName="stroke-dasharray" to="0" dur="0.5s" fill="freeze" />
+
+	<animate id = "pulse_1" begin="start.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+	<animate id = "pulse_2" begin="two.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+	<animate id = "pulse_3" begin="three.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+	<animate id = "pulse_4" begin="four.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+
+	</path>
+
+	<!-- Infinity foreground image -->
+	<path id="infinity_2" pathLengh = "1000" stroke-dasharray="1000" stroke-dashoffset="1000" stroke="#222222" stroke-width="70"
+			d="	 M 75,250
+	         C 75,350 200,350 250,250
+	         S 425,150 425,250
+	         S 300,350 250,250
+	         S 75,150 75,250"
+	          transform="translate(173 173) scale(0.3)" fill="none">
+	<!-- Cycle between COLOR nft's 2-4-6-->
+	<animate begin="start.end" attributeType="XML" attributeName="stroke"  values="#222222;#FFFFFF;#222222" dur="4s" fill="freeze" />
+	<animate id = "pulse_5" begin="start.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+	<animate id = "pulse_6" begin="two.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+	<animate id = "pulse_7" begin="three.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+	<animate id = "pulse_8" begin="four.begin" attributeType="XML" attributeName="stroke-width" values="32;70;32" dur="1s" fill="freeze" />
+	<!-- Animate transitions between color sets 1 and color sets 2-->
+	<animate id="start" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;end.end" to= "0" dur="1s" fill="freeze" />
+	<animate id="two" attributeType="XML" attributeName="stroke-dashoffset" begin="start.end" to="-1000" dur="1s" fill="freeze" />
+	<animate id="three" attributeType="XML" attributeName="stroke-dashoffset" begin="two.end" to="-2000" dur="1s" fill="freeze" />
+	<animate id="four" attributeType="XML" attributeName="stroke-dashoffset" begin="three.end" to="-3000" dur="1s" fill="freeze" />
+	<animate id="end" attributeType="XML" attributeName="stroke-dashoffset" begin="four.end" to="1000" dur="0.001s" fill="freeze" />
+
+	</path>
+
+</g>
+
+
+<g id="borders">
+
+    <!-- TODO: should be corrcted in color version -->
+		<path id="cls-1" d="M144.4,89.31H113.1c-16.88,32.57,0,71.38,0,71.38h31.3C113.45,125.69,144.4,89.31,144.4,89.31Zm-13.17,63.76H119.58s-12.47-17.38,0-55.68h11.65S110.43,122.57,131.23,153.07Z"
+    transform="translate(-95,0) scale(2)"  stroke="black"  fill-opacity="0.9">
+    <animate id = "beat1" attributeName="fill" values="222222;555555" begin="0.5s;beat6.end" dur="1s" />
+
+    </path>
+    <path id ="cls-1"
+       d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+       transform="translate(-85,15) scale(1.6,1.6)"  stroke-opacity="0.7" fill-opacity="0.7">
+    <set attributeName="fill" to="transparent" fill="freeze" />
+    <animate id = "beat2" attributeName="fill" values="transparent;white;transparent" begin="four.begin" dur="1s" />
+    <animate id = "beat2stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin" dur="1s" />
+    <animate id = "beat2black" attributeName="fill" values="transparent;black;transparent" begin="two.begin" dur="1s" />
+    <animate id = "beat2blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="two.begin" dur="1s" />
+    </path>
+
+	<path id ="cls-1"
+       d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+       transform="translate(-88,60) scale(1.3,1.3)"  stroke-opacity="0.35" fill-opacity="0.35">
+    <set attributeName="fill" to="transparent" fill="freeze" />
+    <animate id = "beat3" attributeName="fill" values="transparent;white;transparent" begin="four.begin + 0.2s" dur="1s" />
+    <animate id = "beat3stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin + 0.2s" dur="1s" />
+    <animate id = "beat3black" attributeName="fill" values="transparent;black;transparent" begin="two.begin + 0.2s" dur="1s" />
+    <animate id = "beat3blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="two.begin + 0.2s" dur="1s" />
+    </path>
+
+    <path id ="cls-1"
+       d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+       transform="translate(-82,104) scale(1,1)"  stroke-opacity="0.05" fill-opacity="0.05">
+    <set attributeName="fill" to="transparent" fill="freeze" />
+    <animate id = "beat4" attributeName="fill" values="transparent;white;transparent" begin="four.begin + 0.4s" dur="1s" />
+    <animate id = "beat4stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin + 0.4s" dur="1s" />
+    <animate id = "beat4black" attributeName="fill" values="transparent;black;transparent" begin="two.begin + 0.4s" dur="1s" />
+    <animate id = "beat4blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="two.begin + 0.4s" dur="1s" />
+    </path>
+
+    <path id ="cls-1"
+       d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+       transform="translate(-70,148) scale(0.7,0.7)"  stroke-opacity="0.02" fill-opacity="0.02">
+    <set attributeName="fill" to="transparent" fill="freeze" />
+    <animate id = "beat5" attributeName="fill" values="transparent;white;transparent" begin="four.begin + 0.6s" dur="1s" />
+    <animate id = "beat5stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin + 0.6s" dur="1s" />
+    <animate id = "beat5black" attributeName="fill" values="transparent;black;transparent" begin="two.begin + 0.6s" dur="1s" />
+    <animate id = "beat5blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="two.begin + 0.6s" dur="1s" />
+    </path>
+
+    <!--  out of border
+    <path id ="cls-1"
+       d="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 0.0305 -56.2648 z"
+       transform="translate(-40,205) scale(0.3,0.3)"  fill-opacity="0.01">
+    <set attributeName="fill" to="transparent" fill="freeze" />
+    <animate id = "beat6" attributeName="fill" values="transparent;white;transparent" begin="four.begin" dur="1s" />
+    <animate id = "beat6stroke" attributeName="stroke" values="transparent;white;transparent" begin="four.begin" dur="1s" />
+    <animate id = "beat6black" attributeName="fill" values="transparent;black;transparent" begin="two.begin" dur="1s" />
+    <animate id = "beat6blackstroke" attributeName="stroke" values="transparent;black;transparent" begin="two.begin" dur="1s" />
+    </path>
+    -->
+
+</g>
+
+<use href="#borders" x="-500" y="-500" transform="rotate(180)"/>
+
+</svg>
