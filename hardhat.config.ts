@@ -11,6 +11,7 @@ import { removeConsoleLog } from 'hardhat-preprocessor'
 import 'hardhat-tracer'
 import { HardhatUserConfig } from 'hardhat/types'
 import 'solidity-coverage'
+import 'hardhat-contract-sizer'
 
 const defaultPrivateKey =
   '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80' // hardhat 0
