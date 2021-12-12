@@ -4,7 +4,7 @@ node_modules/
 .vscode
 .vercel
 .env
-.swp
+*.swp
 
 #Hardhat files
 cache

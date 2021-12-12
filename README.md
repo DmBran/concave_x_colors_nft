@@ -2,10 +2,16 @@
 
 We need to generate the custom concave nft based on THE COLOR primitive. So you should have the THE COLOR primitive in the wallet to generate concave nft. The primitive will change the concave nft color.
 
-### Requirements
+### Migration
+
+Node >= 16.0 is required. Use nvm on linux to update.
+
+Default branch changed to `master`. To migrate
 
 ```
-node >= 16.0
+git branch -D master
+git fetch origin master
+git checkout master
 npm install
 ```
 
