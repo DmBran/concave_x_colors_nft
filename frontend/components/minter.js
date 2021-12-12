@@ -14,31 +14,40 @@ export const Minter = (props) => {
   //const network = 1;
   // Ropstens
   const network = 3
-
+  const MAX_MINT_COUNT = 5
+  const MAX_SUPPLY = 2122
   const MAX_COLORS = 3
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
   //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
   const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
   const [svgs, setSvgs] = useState(null)
   const [sync, setSync] = useState(null)
+  const [amountMinted, setAmountMinted] = useState(null)
   const [mintColors, setMintColors] = useState(null)
+  const [mintCount, setMintCount] = useState(null)
   const [tokenID, setTokenID] = useState(null)
   const [address, setAddress] = useState(null)
   const [submitting, setSubmitting] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
+    if (!mintCount) setMintCount(1)
+
     setMintColors(0)
     setSvgs([]);
 
-    if (props.tokenID) {
-      setTokenID(props.tokenID)
-      const syncContract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
-      const svg = await fetchSync(syncContract, props.tokenID)
-      setSync(svg)
-    }
-
     if (context.active) {
+
+      const syncContract = new context.library.eth.Contract(SyncXColors.abi, SYNC_CONTRACT);
+      const minted = 0;
+      //const minted = await contract.methods.currentSupply(context.library.eth.abi.encodeParameter('uint256', tokenID)).call()
+      setAmountMinted(minted)
+
+      if (props.tokenID) {
+        setTokenID(props.tokenID)
+        const svg = await fetchSync(syncContract, props.tokenID)
+        setSync(svg)
+      }
 
       setAddress(context.account)
 
@@ -174,8 +183,7 @@ export const Minter = (props) => {
         })
         return Router.push(`/reveal?tokenID=${props.tokenID}`);
       }
-      
-      
+
     } catch (ex) {
       console.log(ex)
       setSubmitting(undefined)
@@ -253,6 +261,36 @@ export const Minter = (props) => {
     }
   }
 
+  function preventChange(event) {
+    return event.preventDefault();
+  }
+
+  function mintCountSet(event) {
+    const value =- event.target.value;
+
+    if (!value) return
+    if (value === MAX_MINT_COUNT) return
+    if (value < 1) return
+
+    setMintCount(value)
+  }
+
+  function mintCountIncrement(dir) {
+    let count = mintCount
+    if (!count || isNaN(count)) count = 1;
+
+    if (dir === "decrement") {
+      count -= 1
+    } else {
+      count += 1;
+    }
+
+    if (count < 1) return
+    if (count === MAX_MINT_COUNT) return
+
+    setMintCount(count)
+  }
+
   function getMintText(loading) {
     if (loading)  return "Processing"
   
@@ -309,8 +347,22 @@ export const Minter = (props) => {
             </div>
           </div>
           }
-
+          {!tokenID && <div className={"flex mb-10 content-center justify-center"}>
+            <div className={"flex content-center justify-center custom-number-input ring-1 ring-slate-500 rounded-lg h-10 w-32"}>
+              <div className={"flex flex-row h-10 w-full rounded-lg relative bg-transparent"}>
+                <button onClick={() => mintCountIncrement('decrement')} data-action="decrement" className={" border-r border-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"}>
+                  <span className={"m-auto text-2xl font-thin"}>−</span>
+                </button>
+                <input min="1" readonly="true" max={MAX_MINT_COUNT} type="text" className={"outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"} name="custom-input-number" value={mintCount} />
+              <button onClick={() => mintCountIncrement('increment')} data-action="increment" className={"border-l border-l-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"}>
+                <span className={"m-auto text-2xl font-thin"}>+</span>
+              </button>
+              </div>
+            </div>
+          </div>
+          }
           <div className={"content-center justify-center flex mb-10"}>
+
             {submitting != 'syncs' && <button onClick={beginMint}  className={"bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"}>
               {getMintText()}
             </button> }
@@ -318,6 +370,10 @@ export const Minter = (props) => {
               {getMintText('loading')}
             </button> }
           </div>
+
+          { !tokenID && <div className={"text-center justify-center"}>
+            <p className={'font-bold'}>{ amountMinted } / { MAX_SUPPLY }</p>
+          </div> }
         </div>
       );
     }
