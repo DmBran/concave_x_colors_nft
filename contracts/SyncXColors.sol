@@ -199,7 +199,6 @@ contract Sync is ERC721Enumerable, Ownable {
    * Mint SYNCxCOLOR NFT
    */
   function mintSync(uint256[] calldata tokenIdColors, uint256 mintAmount) public payable {
-    uint256[] memory mintIndexes = new uint256[](mintAmount);
     uint256 mintIndex = totalSupply();
 
     if (msg.sender != owner()) {
@@ -222,7 +221,7 @@ contract Sync is ERC721Enumerable, Ownable {
       );
     }
 
-    for (uint256 i = 0; i < mintIndexes.length; i++) {
+    for (uint256 i = 0; i < mintAmount; i++) {
         _safeMint(msg.sender, mintIndex + i);
         updateColorMapping(mintIndex + i, tokenIdColors);
     }
