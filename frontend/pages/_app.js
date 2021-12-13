@@ -1,9 +1,8 @@
-import 'tailwindcss/tailwind.css'
-import toast, { Toaster } from 'react-hot-toast';
 import React from 'react'
+import { Toaster } from 'react-hot-toast'
+import 'tailwindcss/tailwind.css'
 import Web3 from 'web3'
-import Web3Provider from 'web3-react'
-import { Connectors } from 'web3-react'
+import Web3Provider, { Connectors } from 'web3-react'
 const { InjectedConnector } = Connectors
 
 const MetaMask = new InjectedConnector()
@@ -18,7 +17,7 @@ function SyncXColors({ Component, pageProps }) {
       web3Api={Web3}
     >
       <Component {...pageProps} />
-      <Toaster 
+      <Toaster
         position="top-right"
         toastOptions={{
           style: {
@@ -26,7 +25,7 @@ function SyncXColors({ Component, pageProps }) {
             padding: '16px',
             color: 'white',
             background: 'rgb(110, 170, 250)',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
           },
           success: {
             style: {
@@ -37,7 +36,7 @@ function SyncXColors({ Component, pageProps }) {
             style: {
               background: 'red',
             },
-          }
+          },
         }}
       />
     </Web3Provider>
