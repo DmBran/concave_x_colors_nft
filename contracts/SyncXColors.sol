@@ -356,7 +356,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     return
       string(
         abi.encodePacked(
-          '"external_url":"https://thecolors.art",',
+          '"external_url":"https://syncxcolors.xyz",',
           unicode'"description":"The SYNCxColors are generated and stored entirely on-chain, and may be linked with up to 3 THE COLORS primitives for epic effect.',
           '\\nToken id: #',
           tokenId.toString(),
