@@ -25,6 +25,8 @@ contract Sync is ERC721Enumerable, Ownable {
     uint8 stepDuration;
   }
 
+  uint256 public mintPrice = 0.033 ether;
+  uint256 public maxMintAmount = 5;
   uint256 public constant MAX_SYNCS = 2122;
 
   string public PROVENANCE_HASH = '';
@@ -196,9 +198,18 @@ contract Sync is ERC721Enumerable, Ownable {
   /**
    * Mint SYNCxCOLOR NFT
    */
-  function mintSync(uint256[] calldata tokenIdColors) public {
+  function mintSync(uint256[] calldata tokenIdColors, uint256 mintAmount) public payable {
+    uint256[] memory mintIndexes = new uint256[](mintAmount);
     uint256 mintIndex = totalSupply();
-    require(totalSupply() < MAX_SYNCS, 'Mint would exceed max supply.');
+
+    if (msg.sender != owner()) {
+        require(msg.value >= mintPrice * mintAmount);
+    }
+
+    require(mintAmount > 0);
+    require(mintAmount <= maxMintAmount);
+    require(mintIndex + mintAmount <= MAX_SYNCS);
+
     require(
       tokenIdColors.length < 4,
       "Supplied 'THE COLORS' tokenIds must be between 0 and 3."
@@ -211,8 +222,10 @@ contract Sync is ERC721Enumerable, Ownable {
       );
     }
 
-    _safeMint(msg.sender, mintIndex);
-    updateColorMapping(mintIndex, tokenIdColors);
+    for (uint256 i = 0; i < mintIndexes.length; i++) {
+        _safeMint(msg.sender, mintIndex + i);
+        updateColorMapping(mintIndex + i, tokenIdColors);
+    }
   }
 
   /**
@@ -260,7 +273,7 @@ contract Sync is ERC721Enumerable, Ownable {
     return
       string(
         abi.encodePacked(
-          '"external_url":"https://thecolors.art",',
+          '"external_url":"https://syncxcolors.xyz",',
           unicode'"description":"The SYNCxColors are generated and stored entirely on-chain, and may be linked with up to 3 THE COLORS primitives for epic effect.',
           '\\nToken id: #',
           tokenId.toString(),
