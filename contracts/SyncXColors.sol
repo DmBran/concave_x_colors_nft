@@ -262,7 +262,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         "Supplied 'THE COLORS' tokenId not owned by msg.sender."
       );
     }
-
+  }
     /**
     * Mint multiple SYNCxCOLOR NFTs
     */
