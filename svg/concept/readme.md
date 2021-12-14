@@ -16,3 +16,8 @@ Darker w/o Colors:
 ![](gold_concept_dark_nocolors2.svg)
 
 ![](gold_concept_dark_nocolors.svg)
+
+![](gold_concept_color_fill.svg)
+
+![](gold_concept_colors_shimmer.svg)
+
