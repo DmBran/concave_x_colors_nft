@@ -21,3 +21,4 @@ Darker w/o Colors:
 
 ![](gold_dark_colors_shimmer.svg)
 
+![](gold_dark_color_drift.svg)
