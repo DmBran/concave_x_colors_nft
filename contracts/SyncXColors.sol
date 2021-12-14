@@ -29,15 +29,12 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
   address public constant THE_COLORS =
     address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
-  string public PROVENANCE_HASH = '';
   uint256 public maxMintAmount = 10; // Max amount of mints per transaction
 
   // Declare Private
   bool internal _isPublicMintActive;
-
   mapping(uint256 => uint256) private _seed;
   mapping(uint256 => uint16[]) private _colorTokenIds;
-  bool internal locked;
 
   struct SyncTraitsStruct {
     uint8[] shape_color;
@@ -226,43 +223,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     payable(msg.sender).transfer(balance);
   }
 
-  /*
-   * Set provenance once it's calculated
-   */
-  function setProvenanceHash(string memory provenanceHash) external onlyOwner {
-    PROVENANCE_HASH = provenanceHash;
-  }
-
-  /**
-   * Mint multiple SYNCxCOLOR NFTs
-   */
-  function mintMany(uint256 _mintAmount, uint16[] calldata colorTokenIds)
-    external
-    payable
-    nonReentrant
-    whenNotPaused
-  {
-    // Requires
-    uint256 _mintIndex = totalSupply();
-    require(_mintAmount <= maxMintAmount, 'Max mint 10 per tx');
-    require(_mintAmount > 0, 'Mint should be > 0');
-    require(_mintIndex + _mintAmount <= maxTokenId, 'Exceeds supply');
-    require(
-      colorTokenIds.length <= 3,
-      "# Supplied 'THE COLORS' tokenIds must be <=3"
-    );
-    require(msg.value >= (mintPrice * _mintAmount), 'Insufficient funds');
-
-    // Validate colorTokenIds
-    address colors_address = THE_COLORS;
-    for (uint256 i = 0; i < colorTokenIds.length; i++) {
-      require(
-        msg.sender ==
-          INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),
-        "Supplied 'THE COLORS' tokenId not owned by msg.sender."
-      );
-    }
-  }
+ 
     /**
     * Mint multiple SYNCxCOLOR NFTs
     */
@@ -289,17 +250,31 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
             _mintOnce(i);
         }
     }
+    /**
+    * Mint one SYNCxCOLOR NFT
+    */
+    function mint(uint16[] calldata colorTokenIds) nonReentrant external returns (bool){
+		// Requires
+        uint256 mintIndex = totalSupply();
+		require (mintIndex < maxTokenId, "Mint would exceed max supply."); 
+		require(colorTokenIds.length <= 3, "Supplied 'THE COLORS' tokenIds must be <=3");
+        require (msg.value >= mintPrice, "Insufficient funds");
+		
+        // Validate colorTokenIds
+        address colors_address = THE_COLORS; //Avoid accessing on-chain storage more than once here
+		for (uint i = 0; i < colorTokenIds.length; i++) {
+			require (msg.sender == INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),"Supplied 'THE COLORS' tokenId not owned by msg.sender.") ;
+		}
+		
+        //Update states
+		_colorTokenIds[mintIndex] = colorTokenIds;
+        _seed[mintIndex] = _rng(mintIndex);
 
-    // Update state
-    _colorTokenIds[_mintIndex] = colorTokenIds;
-    _seed[_mintIndex] = _rng(_mintIndex);
+        //Mint
+        _mintOnce(mintIndex);
 
-    // Mint
-    _mintOnce(_mintIndex);
-
-    return true;
-  }
-
+        return true;
+    }
   /**
    * Mints once
    */
@@ -401,21 +376,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         uint256(colorTokenIds[i])
       );
     }
-	
-    /**
-    * Returns hex strings representing colorTokenIDs as an array
-    */
-	function getHexStrings(uint16[] memory colorTokenIds) private view returns (string[] memory){
-		string[] memory hexColors = new string[](3);
-		hexColors[0] = "#222222"; // Defaults (grayscale)
-		hexColors[1] = "#777777";
-		hexColors[2] = "#AAAAAA";
-		for (uint i=0; i<3; i++){
-			hexColors[i] = TheColors(THE_COLORS).getHexColor(uint256(colorTokenIds[i]));	
-		}
-		return hexColors;
-	}
-	
+  }
     /**
     * Generates the SVG
     */
