@@ -3,4 +3,4 @@ Concept
 
 Gold
 
-![](gold concept.svg)
+![](gold_concept.svg)
