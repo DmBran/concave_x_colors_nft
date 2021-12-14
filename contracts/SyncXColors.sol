@@ -7,7 +7,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Strings.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
-import "@openzeppelin/contracts/security/Pausable.sol";
+import '@openzeppelin/contracts/security/Pausable.sol';
 import 'base64-sol/base64.sol';
 import './legacy_colors/TheColors.sol';
 import './legacy_colors/INFTOwner.sol';
@@ -17,170 +17,250 @@ import './legacy_colors/INFTOwner.sol';
  * @dev Extends ERC721 Non-Fungible Token Standard basic implementation
  */
 contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
-    using Strings for uint256;
-    using Strings for uint32;
-    using Strings for uint8;
+  using Strings for uint256;
+  using Strings for uint32;
+  using Strings for uint8;
 
-	uint256 public immutable maxTokenId; //2122
+  uint256 public immutable maxTokenId; //2122
 
-    // Declare Public
-    uint256 public mintPrice = 0.04 ether; // Price per mint
-    address public constant TREASURY = address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
-    address constant public THE_COLORS = address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
-    uint256 public maxMintAmount = 10; // Max amount of mints per transaction
+  // Declare Public
+  uint256 public mintPrice = 0.04 ether; // Price per mint
+  address public constant TREASURY =
+    address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
+  address public constant THE_COLORS =
+    address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+  string public PROVENANCE_HASH = '';
+  uint256 public maxMintAmount = 10; // Max amount of mints per transaction
 
-    // Declare Private
-    bool internal _isPublicMintActive;	
-	
-	mapping(uint256 => uint256) private _seed;
-    mapping(uint256 => uint16[]) private _colorTokenIds;
-    bool internal locked;
+  // Declare Private
+  bool internal _isPublicMintActive;
 
-    struct SyncTraitsStruct {
-        uint8[] shape_color;
-        uint8[] shape_type;
-        uint16[] shape_x;
-        uint16[] shape_y;
-        uint16[] shape_sizey;
-        uint16[] shape_sizex;
-        uint16[] shape_r;
-        uint16 rarity_index;
-    }
+  mapping(uint256 => uint256) private _seed;
+  mapping(uint256 => uint16[]) private _colorTokenIds;
+  bool internal locked;
 
-    // Constructor
-    constructor(uint256 _maxTokenId) ERC721("Sync x Colors", "SYNC Beta") ReentrancyGuard() Pausable() public{
-        maxTokenId = _maxTokenId;      
-        _pause();
-    }
-   
-    function tokenURI(uint256 tokenId) public view virtual override(ERC721) returns (string memory) {
-        require (_exists(tokenId), "ERC721: operator query for nonexistent token");
-        
-        uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
-        SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
+  struct SyncTraitsStruct {
+    uint8[] shape_color;
+    uint8[] shape_type;
+    uint16[] shape_x;
+    uint16[] shape_y;
+    uint16[] shape_sizey;
+    uint16[] shape_sizex;
+    uint16[] shape_r;
+    uint16 rarity_index;
+  }
 
-        string memory svgData = generateSVGImage(tokenId, colorTokenIds, syncTraits);
-        string memory image = Base64.encode(bytes(svgData));
-		
-		
-        return string(
-            abi.encodePacked(
-                'data:application/json;base64,',
-                Base64.encode(
-                    bytes(
-                        abi.encodePacked(
-                            '{',
-                            '"image":"',
-                            'data:image/svg+xml;base64,',
-                            image,
-                            '",',
-                            generateNameDescription(tokenId),
-                            generateAttributes(tokenId, colorTokenIds, syncTraits),
-                            '}'
-                        )
-                    )
-                )
-            )
-        );
-    }
+  // Constructor
+  constructor(uint256 _maxTokenId)
+    public
+    ERC721('Sync x Colors', 'SYNC Beta')
+    ReentrancyGuard()
+    Pausable()
+  {
+    maxTokenId = _maxTokenId;
+    _pause();
+  }
 
-    function getTokenMetadata(uint256 tokenId) external view returns (string memory) {
-		require (_exists(tokenId), "ERC721: operator query for nonexistent token");
-		uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
-        SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
-        string memory image = Base64.encode(bytes(generateSVGImage(tokenId, colorTokenIds, syncTraits)));
+  function tokenURI(uint256 tokenId)
+    public
+    view
+    virtual
+    override(ERC721)
+    returns (string memory)
+  {
+    require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
 
-        return string(
-            abi.encodePacked(
-                'data:application/json',
+    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+    SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
+
+    string memory svgData = generateSVGImage(
+      tokenId,
+      colorTokenIds,
+      syncTraits
+    );
+    string memory image = Base64.encode(bytes(svgData));
+
+    return
+      string(
+        abi.encodePacked(
+          'data:application/json;base64,',
+          Base64.encode(
+            bytes(
+              abi.encodePacked(
                 '{',
                 '"image":"',
                 'data:image/svg+xml;base64,',
                 image,
                 '",',
-                generateNameDescription(tokenId),',',
+                generateNameDescription(tokenId),
                 generateAttributes(tokenId, colorTokenIds, syncTraits),
                 '}'
+              )
             )
-        );
+          )
+        )
+      );
+  }
+
+  function getTokenMetadata(uint256 tokenId)
+    external
+    view
+    returns (string memory)
+  {
+    require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
+    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+    SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
+    string memory image = Base64.encode(
+      bytes(generateSVGImage(tokenId, colorTokenIds, syncTraits))
+    );
+
+    return
+      string(
+        abi.encodePacked(
+          'data:application/json',
+          '{',
+          '"image":"',
+          'data:image/svg+xml;base64,',
+          image,
+          '",',
+          generateNameDescription(tokenId),
+          ',',
+          generateAttributes(tokenId, colorTokenIds, syncTraits),
+          '}'
+        )
+      );
+  }
+
+  function getColorDescriptor(uint16[] memory colorTokenIds)
+    private
+    view
+    returns (string memory)
+  {
+    string memory colorDescriptor;
+    for (uint256 i = 0; i < 3; i++) {
+      if (colorTokenIds[i] == 0) {
+        break;
+      }
+      colorDescriptor = string(
+        abi.encodePacked(
+          colorDescriptor,
+          TheColors(THE_COLORS).getHexColor(uint256(colorTokenIds[i])),
+          ','
+        )
+      );
     }
-	
-	function getColorDescriptor(uint16[] memory colorTokenIds) private view returns (string memory) {
-		string memory colorDescriptor;
-        for (uint i=0; i<3; i++){
-			if (colorTokenIds[i] == 0) {break;}
-			colorDescriptor = string(abi.encodePacked(colorDescriptor, TheColors(THE_COLORS).getHexColor(uint256(colorTokenIds[i])),','));
-        }
-        return colorDescriptor;
-	}
-	
-    function getTokenSVG(uint256 tokenId) external view returns (string memory) {
-		require (_exists(tokenId), "ERC721: operator query for nonexistent token");
-        uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
-        SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
+    return colorDescriptor;
+  }
 
-        return generateSVGImage(tokenId,colorTokenIds, syncTraits);
+  function getTokenSVG(uint256 tokenId) external view returns (string memory) {
+    require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
+    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+    SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
+
+    return generateSVGImage(tokenId, colorTokenIds, syncTraits);
+  }
+
+  function getBase64TokenSVG(uint256 tokenId)
+    external
+    view
+    returns (string memory)
+  {
+    require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
+    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+    SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
+    string memory image = Base64.encode(
+      bytes(generateSVGImage(tokenId, colorTokenIds, syncTraits))
+    );
+    return string(abi.encodePacked('data:application/json;base64', image));
+  }
+
+  function getColorsOwnedByUser(address user)
+    external
+    view
+    returns (uint256[] memory tokenIds)
+  {
+    uint256[] memory tokenIds = new uint256[](4317);
+
+    uint256 index = 0;
+    for (uint256 i = 0; i < 4317; i++) {
+      address tokenOwner = INFTOwner(THE_COLORS).ownerOf(i);
+
+      if (user == tokenOwner) {
+        tokenIds[index] = i;
+        index += 1;
+      }
     }
 
-    function getBase64TokenSVG(uint256 tokenId) external view returns (string memory) {
-		require (_exists(tokenId), "ERC721: operator query for nonexistent token");
-        uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
-        SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
-        string memory image = Base64.encode(bytes(generateSVGImage(tokenId,colorTokenIds,syncTraits)));
-        return string(
-            abi.encodePacked(
-                'data:application/json;base64',
-                image
-            )
-        );
-    }
-    
-    function getColorsOwnedByUser(address user) external view returns (uint256[] memory tokenIds) {
-        uint256[] memory tokenIds = new uint256[](4317);
-
-        uint index = 0;
-        for (uint i = 0; i < 4317; i++) {
-            address tokenOwner = INFTOwner(THE_COLORS).ownerOf(i);
-
-            if (user == tokenOwner) {
-                tokenIds[index] = i;
-                index += 1;
-            }
-        }
-
-        uint left = 4317 - index;
-        for (uint i = 0; i < left; i++) {
-            tokenIds[index] = 9999;
-            index += 1;
-        }
-
-        return tokenIds;
-    }
-    
-    function unpause() public onlyOwner {
-        _unpause();
-    }
-    
-    function pause() public onlyOwner {
-        _pause();
+    uint256 left = 4317 - index;
+    for (uint256 i = 0; i < left; i++) {
+      tokenIds[index] = 9999;
+      index += 1;
     }
 
-    function withdraw() nonReentrant external payable onlyOwner {
-        uint256 balance = address(this).balance;
-        uint256 for_treasury = balance * 33 / 100;  //33% 1 way
-        uint256 for_r1 = (balance * 67) / (5*100);  //67% 5 ways
-        uint256 for_r2 = (balance * 67) / (5*100);
-        uint256 for_r3 = (balance * 67) / (5*100);
-        uint256 for_r4 = (balance * 67) / (5*100);
-        uint256 for_r5 = (balance * 67) / (5*100);
-        payable(TREASURY).transfer(for_treasury);
-        //payable(0x).transfer(for_r1);
-        //payable(0x).transfer(for_r2);
-        //payable(0x).transfer(for_r3);
-        //payable(0x).transfer(for_r4);
-        //payable(0x).transfer(for_r5);
-        balance = address(this).balance;
-        payable(msg.sender).transfer(balance);
+    return tokenIds;
+  }
+
+  function unpause() public onlyOwner {
+    _unpause();
+  }
+
+  function pause() public onlyOwner {
+    _pause();
+  }
+
+  function withdraw() external payable nonReentrant onlyOwner {
+    uint256 balance = address(this).balance;
+    uint256 for_treasury = (balance * 33) / 100; //33% 1 way
+    uint256 for_r1 = (balance * 67) / (5 * 100); //67% 5 ways
+    uint256 for_r2 = (balance * 67) / (5 * 100);
+    uint256 for_r3 = (balance * 67) / (5 * 100);
+    uint256 for_r4 = (balance * 67) / (5 * 100);
+    uint256 for_r5 = (balance * 67) / (5 * 100);
+    payable(TREASURY).transfer(for_treasury);
+    //payable(0x).transfer(for_r1);
+    //payable(0x).transfer(for_r2);
+    //payable(0x).transfer(for_r3);
+    //payable(0x).transfer(for_r4);
+    //payable(0x).transfer(for_r5);
+    balance = address(this).balance;
+    payable(msg.sender).transfer(balance);
+  }
+
+  /*
+   * Set provenance once it's calculated
+   */
+  function setProvenanceHash(string memory provenanceHash) external onlyOwner {
+    PROVENANCE_HASH = provenanceHash;
+  }
+
+  /**
+   * Mint multiple SYNCxCOLOR NFTs
+   */
+  function mintMany(uint256 _mintAmount, uint16[] calldata colorTokenIds)
+    external
+    payable
+    nonReentrant
+    whenNotPaused
+  {
+    // Requires
+    uint256 _mintIndex = totalSupply();
+    require(_mintAmount <= maxMintAmount, 'Max mint 10 per tx');
+    require(_mintAmount > 0, 'Mint should be > 0');
+    require(_mintIndex + _mintAmount <= maxTokenId, 'Exceeds supply');
+    require(
+      colorTokenIds.length <= 3,
+      "# Supplied 'THE COLORS' tokenIds must be <=3"
+    );
+    require(msg.value >= (mintPrice * _mintAmount), 'Insufficient funds');
+
+    // Validate colorTokenIds
+    address colors_address = THE_COLORS;
+    for (uint256 i = 0; i < colorTokenIds.length; i++) {
+      require(
+        msg.sender ==
+          INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),
+        "Supplied 'THE COLORS' tokenId not owned by msg.sender."
+      );
     }
 
     /**
@@ -210,96 +290,119 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         }
     }
 
-    /**
-    * Mint single SYNCxCOLOR NFT
-    */
-    function mint(uint16[] calldata colorTokenIds) nonReentrant whenNotPaused external payable returns (bool){
-		// Requires
-        uint256 _mintIndex = totalSupply();
-        
-		require (_mintIndex < maxTokenId, "Mint would exceed max supply."); 
-		require(colorTokenIds.length <= 3, "# Supplied 'THE COLORS' tokenIds must be <=3");
-		require (msg.value > mintPrice, "Insufficient funds");
-        
-        // Validate colorTokenIds
-        address colors_address = THE_COLORS;
-		for (uint i = 0; i < colorTokenIds.length; i++) {
-			require (msg.sender == INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),"Supplied 'THE COLORS' tokenId not owned by msg.sender.") ;
-		}
+    // Update state
+    _colorTokenIds[_mintIndex] = colorTokenIds;
+    _seed[_mintIndex] = _rng(_mintIndex);
 
-		// Update state
-		_colorTokenIds[_mintIndex] = colorTokenIds;
-        _seed[_mintIndex] = _rng(_mintIndex);
+    // Mint
+    _mintOnce(_mintIndex);
 
-        // Mint
-        _mintOnce(_mintIndex);
+    return true;
+  }
 
-        return true;
+  /**
+   * Mints once
+   */
+  function _mintOnce(uint256 mintIndex) internal {
+    _safeMint(msg.sender, mintIndex);
+  }
+
+  /**
+   * Store mapping between tokenId and applied tokenIdColors
+   */
+  function updateColors(uint256 tokenId, uint16[] memory colorTokenIds)
+    external
+    nonReentrant
+  {
+    require(
+      msg.sender == ownerOf(tokenId),
+      'Only the NFT holder can update its colors'
+    );
+    require(
+      colorTokenIds.length <= 3,
+      "Supplied 'THE COLORS' tokenIds must be between 0 and 3."
+    );
+
+    for (uint256 i = 0; i < colorTokenIds.length; i++) {
+      require(
+        msg.sender == INFTOwner(THE_COLORS).ownerOf(uint256(colorTokenIds[i])),
+        "Supplied 'THE COLORS' tokenId is not owned by msg.sender."
+      );
     }
 
-    /**
-    * Mints once
-    */
-    function _mintOnce(uint256 mintIndex) internal {
-        _safeMint(msg.sender, mintIndex);
+    _colorTokenIds[tokenId] = colorTokenIds;
+  }
+
+  /**
+   * Return NFT description
+   */
+  function generateNameDescription(uint256 tokenId)
+    internal
+    pure
+    returns (string memory)
+  {
+    return
+      string(
+        abi.encodePacked(
+          '"external_url":"https://syncxcolors.xyz",',
+          unicode'"description":"The SYNCxColors are generated and stored entirely on-chain, and may be linked with up to 3 THE COLORS primitives for epic effect.',
+          '\\nToken id: #',
+          tokenId.toString(),
+          '"'
+        )
+      );
+  }
+
+  /**
+   * Generate attributes json
+   */
+  function generateAttributes(
+    uint256 tokenId,
+    uint16[] memory colorTokenIds,
+    SyncTraitsStruct memory syncTraits
+  ) internal view returns (string memory) {
+    string memory rarity;
+    if (syncTraits.rarity_index >= 990) {
+      rarity = 'Gold';
+    } else if (syncTraits.rarity_index >= 950) {
+      rarity = 'Silver';
+    } else if (syncTraits.rarity_index >= 850) {
+      rarity = 'Drift';
+    } else {
+      rarity = 'Common';
     }
 
-	/**
-    * Store mapping between tokenId and applied tokenIdColors
-    */
-	function updateColors(uint256 tokenId, uint16[] memory colorTokenIds) nonReentrant external{ 
-		require(msg.sender == ownerOf(tokenId),"Only the NFT holder can update its colors");
-		require(colorTokenIds.length <= 3, "Supplied 'THE COLORS' tokenIds must be between 0 and 3.");
-		
-		for (uint i = 0; i < colorTokenIds.length; i++) {
-			require (msg.sender == INFTOwner(THE_COLORS).ownerOf(uint256(colorTokenIds[i])),"Supplied 'THE COLORS' tokenId is not owned by msg.sender.") ;
-		}
+    bytes memory buffer = abi.encodePacked(
+      '"attributes":[',
+      '{"trait_type":"Rarity","value":"',
+      'tbd',
+      '"},',
+      '{"trait_type":"Colors","value":"',
+      getColorDescriptor(colorTokenIds),
+      '"},',
+      '{"trait_type":"Rarity","value":"',
+      rarity,
+      '"}]'
+    );
+    return string(abi.encodePacked(buffer));
+  }
 
-		_colorTokenIds[tokenId] = colorTokenIds;
-
-	}
-    /**
-    * Return NFT description
-    */
-    function generateNameDescription(uint256 tokenId) internal pure returns (string memory) {
-        return string(
-            abi.encodePacked(
-                '"external_url":"https://thecolors.art",',
-                unicode'"description":"The SYNCxColors are generated and stored entirely on-chain, and may be linked with up to 3 THE COLORS primitives for epic effect.',
-                '\\nToken id: #',
-                tokenId.toString(),
-                '"'
-            )
-        );
-    }
-	
-
-    /**
-    * Generate attributes json
-    */
-    function generateAttributes(uint256 tokenId, uint16[] memory colorTokenIds, SyncTraitsStruct memory syncTraits) internal view returns (string memory) {
-		string memory rarity;
-        if (syncTraits.rarity_index >= 990){rarity = 'Gold'; }
-        else if (syncTraits.rarity_index >= 970){rarity = 'Silver'; }
-        else {rarity = 'Common'; }
-
-        bytes memory buffer = abi.encodePacked(
-                '"attributes":[',
-                '{"trait_type":"Rarity","value":"',
-                'tbd',
-                '"},',
-                '{"trait_type":"Colors","value":"',
-                getColorDescriptor(colorTokenIds),
-                '"},',
-                '{"trait_type":"Rarity","value":"',
-                rarity,
-                '"}]'
-        );
-		return string(
-            abi.encodePacked(
-                buffer
-            )
-        );
+  /**
+   * Returns hex strings representing colorTokenIDs as an array
+   */
+  function getHexStrings(uint16[] memory colorTokenIds)
+    internal
+    view
+    returns (string[] memory)
+  {
+    string[] memory hexColors = new string[](3);
+    hexColors[0] = '#222222'; // Defaults (grayscale)
+    hexColors[1] = '#777777';
+    hexColors[2] = '#AAAAAA';
+    for (uint256 i = 0; i < 3; i++) {
+      hexColors[i] = TheColors(THE_COLORS).getHexColor(
+        uint256(colorTokenIds[i])
+      );
     }
 	
     /**
@@ -330,7 +433,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
             inColors[i] = hexColors[i];
             dColors[i] = 'white';
         }
-        if (syncTraits.rarity_index > 990){bgColors[0] = '#CD7F32';//Gold
+        if (syncTraits.rarity_index >= 990){bgColors[0] = '#CD7F32';//Gold
                                            bgColors[1] = '#E5E4E2';//Platinum
                                            bgColors[2] = '#725d18';//Darker Gold
                                            inColors[0] = 'black';
@@ -338,14 +441,14 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
                                            inColors[2] = '#E5E4E2';
 
         }
-        else if (syncTraits.rarity_index > 950){bgColors[1] = '#c0c0c0';//Silver
+        else if (syncTraits.rarity_index >= 950){bgColors[1] = '#c0c0c0';//Silver
                                                 bgColors[2] = '#e5e4e2';//Platinum
                                                 bgColors[0] = '#c0c0c0';
                                                 inColors[0] = 'white';
                                                 inColors[1] = '#C0C0C0';//silver
                                                 inColors[2] = '#CD7F32';
         }
-        else if (syncTraits.rarity_index<=100){ //Tokyo Drift
+        else if (syncTraits.rarity_index>=850){ //Tokyo Drift
             dColors[0] = hexColors[0];
             dColors[1] = hexColors[1];
             dColors[2] = hexColors[2];

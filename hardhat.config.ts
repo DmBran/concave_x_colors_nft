@@ -4,6 +4,7 @@ import '@nomiclabs/hardhat-waffle'
 import '@typechain/hardhat'
 import 'dotenv/config'
 import { parseUnits } from 'ethers/lib/utils'
+import 'hardhat-contract-sizer'
 import 'hardhat-deploy'
 import 'hardhat-deploy-ethers'
 import 'hardhat-gas-reporter'
@@ -11,7 +12,6 @@ import { removeConsoleLog } from 'hardhat-preprocessor'
 import 'hardhat-tracer'
 import { HardhatUserConfig } from 'hardhat/types'
 import 'solidity-coverage'
-import 'hardhat-contract-sizer'
 
 const defaultPrivateKey =
   '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80' // hardhat 0
@@ -33,7 +33,7 @@ const config: HardhatUserConfig = {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
   solidity: {
-		version: "0.8.4",
+    version: '0.8.4',
     settings: {
       optimizer: {
         enabled: true,
@@ -45,14 +45,14 @@ const config: HardhatUserConfig = {
     deployer: 0,
   },
   networks: {
-		hardhat: {
-			chainId: 1337,
-		},
-		ropsten: {
-			//gas: 2100000,
-			//gasPrice: 8000000000,
-			url: process.env.API_URL,
-			accounts: [`0x${process.env.PRIVATE_KEY}`]
+    hardhat: {
+      chainId: 1337,
+    },
+    ropsten: {
+      //gas: 2100000,
+      //gasPrice: 8000000000,
+      url: process.env.API_URL,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
     },
     mumbai: {
       chainId: 80001,

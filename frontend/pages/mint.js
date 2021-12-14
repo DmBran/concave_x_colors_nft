@@ -1,12 +1,12 @@
-import styles from '../styles/meme.module.css'
-import { Navbar } from '../components/navbar'
+import { useRouter } from 'next/router'
 import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import { Minter } from '../components/minter'
-import { useRouter } from 'next/router'
+import { Navbar } from '../components/navbar'
+import styles from '../styles/meme.module.css'
 
 export default function Mint() {
-  const { query } = useRouter();
+  const { query } = useRouter()
 
   return (
     <div className={'relative'}>

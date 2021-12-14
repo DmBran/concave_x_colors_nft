@@ -5,10 +5,10 @@
          <animate begin="s.end;s.end+2s;s.end+4s" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="1s" fill="freeze"/>
          <animate begin="s.begin;s.begin+1s;s.begin+2s;s.begin+3s;s.begin+4s;s.begin+5s;s.begin+6s" attributeType="XML" attributeName="stroke-width" values="10;20;10" dur="1s" fill="freeze"/>
       </path>
-      <path stroke-dasharray="1000" stroke-dashoffset="1000" stroke="#F11" d="M195.5 248c0 30 37.5 30 52.5 0s52.5-30 52.5 0-37.5 30-52.5 0-52.5-30-52.5 0">
+      <path stroke-dasharray="300" stroke-dashoffset="300" stroke="#F11" d="M195.5 248c0 30 37.5 30 52.5 0s52.5-30 52.5 0-37.5 30-52.5 0-52.5-30-52.5 0">
          <animate begin="s.end" attributeType="XML" attributeName="stroke" values="#FF1111;#1111FF;#FF1111" dur="4s" fill="freeze"/>
          <animate begin="s.begin;s.begin+1s;s.begin+2s;s.begin+3s;s.begin+4s;s.begin+5s;s.begin+6s" attributeType="XML" attributeName="stroke-width" values="10;20;10" dur="1s" fill="freeze"/>
-         <animate id="s" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;s.end" to="-1000" dur="6s" fill="reset"/>
+         <animate id="s" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;s.end" to="-1800" dur="6s" fill="reset"/>
       </path>
    </g>
 </svg>
