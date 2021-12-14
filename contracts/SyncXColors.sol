@@ -375,13 +375,10 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     bytes memory buffer = abi.encodePacked(
       '"attributes":[',
       '{"trait_type":"Rarity","value":"',
-      'tbd',
+      rarity,
       '"},',
       '{"trait_type":"Colors","value":"',
       getColorDescriptor(colorTokenIds),
-      '"},',
-      '{"trait_type":"Rarity","value":"',
-      rarity,
       '"}]'
     );
     return string(abi.encodePacked(buffer));
@@ -428,7 +425,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         string[] memory bgColors = new string[](3);
         string[] memory inColors = new string[](3);
         string[] memory dColors = new string[](3);
-        for (uint i=0; i <= 3; i++) {
+        for (uint i=0; i < 3; i++) {
             bgColors[i] = hexColors[i]; //copy values
             inColors[i] = hexColors[i];
             dColors[i] = 'white';
