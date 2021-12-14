@@ -7,6 +7,10 @@ Shimmer with a touch of gold for effect:
 
 ![](silver_shimmer_goldtouch.svg)
 
+Shimmer black infinity
+
+![](silver_shimmer_black.svg)
+
 Gold
 
 Light:
