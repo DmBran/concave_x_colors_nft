@@ -253,7 +253,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     /**
     * Mint one SYNCxCOLOR NFT
     */
-    function mint(uint16[] calldata colorTokenIds) nonReentrant external returns (bool){
+    function mint(uint16[] calldata colorTokenIds) nonReentrant external payable whenNotPaused returns (bool){
 		// Requires
         uint256 mintIndex = totalSupply();
 		require (mintIndex < maxTokenId, "Mint would exceed max supply."); 
