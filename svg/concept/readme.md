@@ -15,10 +15,14 @@ Darker w/o Colors:
 
 ![](gold_concept_dark_nocolors2.svg)
 
-![](gold_concept_dark_nocolors.svg)
+Fill:
 
 ![](gold_concept_color_fill.svg)
 
+Shimmer:
+
 ![](gold_dark_colors_shimmer.svg)
+
+Drift:
 
 ![](gold_dark_color_drift.svg)
