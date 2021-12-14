@@ -1,6 +1,12 @@
 
 Concept
 
+Silver
+
+Shimmer with a touch of gold for effect:
+
+![](silver_shimmer_goldtouch.svg)
+
 Gold
 
 Light:
