@@ -13,4 +13,6 @@ Darker:
 
 Darker w/o Colors:
 
+![](gold_concept_dark_nocolors2.svg)
+
 ![](gold_concept_dark_nocolors.svg)
