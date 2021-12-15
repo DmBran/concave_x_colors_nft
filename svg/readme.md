@@ -5,7 +5,7 @@
 - &nbsp;&nbsp;0,1%
 - &nbsp;&nbsp;0,4%
 - &nbsp;&nbsp;2,5%
-- &nbsp;&nbsp;6% 
+- &nbsp;&nbsp;6%
 - &nbsp;&nbsp;13%
 - &nbsp;&nbsp;26%
 - &nbsp;&nbsp;52%
@@ -20,15 +20,13 @@ Gradient 10:
 
 ![](10.svg)
 
-Gradient 10 Grayscale:  Ultra rare
+Gradient 10 Grayscale: Ultra rare
 
 ![](10-gray.svg)
-
 
 Gradient 09: Rare
 
 ![](09.svg)
-
 
 Gradient 09 Grayscale: Rare
 
@@ -42,11 +40,9 @@ Gradient 05: basic
 
 ![](05.svg)
 
-
 Gradient 02: basic
 
 ![](02-gray.svg)
-
 
 Gradient 01: basic
 

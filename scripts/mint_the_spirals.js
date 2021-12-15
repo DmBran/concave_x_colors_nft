@@ -1,19 +1,18 @@
-require("dotenv").config()
+require('dotenv').config()
 const API_URL = process.env.API_URL
 const PUBLIC_KEY = process.env.PUBLIC_KEY
 const PRIVATE_KEY = process.env.PRIVATE_KEY
 
-const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
+const { createAlchemyWeb3 } = require('@alch/alchemy-web3')
 const web3 = createAlchemyWeb3(API_URL)
 
-const contract = require("../artifacts/contracts/legacy_spirals_ropsten/TheSpirals.sol/TheSpirals.json")
-const contractAddress = "0x2c18BCab190A39b82126CB421593706067A57395"
+const contract = require('../artifacts/contracts/legacy_spirals_ropsten/TheSpirals.sol/TheSpirals.json')
+const contractAddress = '0x2c18BCab190A39b82126CB421593706067A57395'
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
 async function mintNFT(tokenId) {
-  const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, "latest") //get latest nonce
+  const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest') //get latest nonce
 
- 
   //the transaction
   const tx = {
     from: PUBLIC_KEY,
@@ -31,13 +30,13 @@ async function mintNFT(tokenId) {
         function (err, hash) {
           if (!err) {
             console.log(
-              "The hash of your transaction is: ",
+              'The hash of your transaction is: ',
               hash,
               "\nCheck Alchemy's Mempool to view the status of your transaction!"
             )
           } else {
             console.log(
-              "Something went wrong when submitting your transaction:",
+              'Something went wrong when submitting your transaction:',
               err
             )
           }
@@ -45,13 +44,9 @@ async function mintNFT(tokenId) {
       )
     })
     .catch((err) => {
-      console.log("Promise failed:", err)
+      console.log('Promise failed:', err)
     })
 }
 
 // Hardcoded for now -- must input the tokenId corresponding to COLORS
-mintNFT(
-  web3.eth.abi.encodeParameter("uint256", "1")
-)
-
-
+mintNFT(web3.eth.abi.encodeParameter('uint256', '1'))

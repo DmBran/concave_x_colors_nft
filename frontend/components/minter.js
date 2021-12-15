@@ -442,7 +442,9 @@ export const Minter = (props) => {
 
   return (
     <div className={'flex-1 flex center-content justify-center'}>
-      <p className={'font-bold title-font uppercase text-4xl'}>Please Connect via MetaMask</p>
+      <p className={'font-bold title-font uppercase text-4xl'}>
+        Please Connect via MetaMask
+      </p>
     </div>
   )
 }

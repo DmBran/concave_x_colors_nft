@@ -65,19 +65,20 @@ Constructor arguments must be set into `./arguments.js`
 ```bash
 npm run verify:mumbai DEPLOYED_CONTRACT_ADDRESS
 ```
+
 ### Frontend React
 
 See instructions in frontend folder. Update next.config.js adn comment out base path and asset prefix.
 
 ### Todo
 
- - [x] Upload THE COLOR contract
- - [x] Make a web site to mint THE COLOR primitive
- - [ ] Make a fancy landing page
- - [x] Create basic concave related SVG
- - [ ] Create fancy svg with animation
- - [x] Create basic contract that will generate svg
- - [ ] Create nft contract that will generate concave nft based on the primitive in the wallet
- - [ ] Upload to rinkeby
- - [ ] View on OpenSea
- - [ ] Upload to ETH and mint on original THE COLOR primitive
+- [x] Upload THE COLOR contract
+- [x] Make a web site to mint THE COLOR primitive
+- [ ] Make a fancy landing page
+- [x] Create basic concave related SVG
+- [ ] Create fancy svg with animation
+- [x] Create basic contract that will generate svg
+- [ ] Create nft contract that will generate concave nft based on the primitive in the wallet
+- [ ] Upload to rinkeby
+- [ ] View on OpenSea
+- [ ] Upload to ETH and mint on original THE COLOR primitive
