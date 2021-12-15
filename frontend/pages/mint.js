@@ -15,7 +15,11 @@ export default function Mint() {
         <Navbar />
         <div className={styles.container}>
           <div className={styles.main}>
-            <main className={styles.modal}>
+            <main
+              className={
+                'container mx-auto flex px-5 py-24 md:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8'
+              }
+            >
               <Minter tokenID={query.tokenID} />
             </main>
           </div>

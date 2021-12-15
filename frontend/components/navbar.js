@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useWeb3Context } from 'web3-react'
-import styles from '../styles/meme.module.css'
 export const Navbar = (props) => {
   const { query } = useRouter()
   console.log(query)
@@ -21,10 +20,10 @@ export const Navbar = (props) => {
 
   return (
     <div>
-      <nav className={styles.nav}>
+      <nav className="bg-gray-300 bg-opacity-50">
         <div className="container mx-auto flex flex-wrap p-4 md:mb-4">
           <Link href="/">
-            <p className="flex title-font font-medium items-center text-gray-900 md:mb-0">
+            <p className="flex title-font font-bold items-center text-gray-900 md:mb-0">
               <span className="mr-2 text-xl">SYNC</span>
               <span
                 style={{ fontSize: '40px', top: '-2px' }}
@@ -36,6 +35,8 @@ export const Navbar = (props) => {
               <span className="ml-2 text-xl">COLORS</span>
             </p>
           </Link>
+
+          {/*Mobile Button goes here*/}
           <button
             className="hamburger align-right inline-flex p-3 hover:text-indigo-500 rounded lg:hidden ml-auto outline-none"
             onClick={handleClick}
@@ -75,7 +76,7 @@ export const Navbar = (props) => {
                 </Link>
               )}
               {1 && (
-                <Link href="/nfts">
+                <Link href="/display">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>

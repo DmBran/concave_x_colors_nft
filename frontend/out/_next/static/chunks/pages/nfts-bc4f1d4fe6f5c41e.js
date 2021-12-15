@@ -1,1 +1,219 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[353],{92464:function(e,n,t){(window.__NEXT_P=window.__NEXT_P||[]).push(["/nfts",function(){return t(44542)}])},44542:function(e,n,t){"use strict";t.r(n),t.d(n,{default:function(){return j}});var r=t(28520),c=t.n(r),s=t(85893),a=t(8271),i=t(40108),o=t.n(i),u=t(61127),l=t(6151),d=t(55480),f=t(7868),x=t(67294),h=t(21092),v=t(41664);function m(e,n,t,r,c,s,a){try{var i=e[s](a),o=i.value}catch(u){return void t(u)}i.done?n(o):Promise.resolve(o).then(r,c)}function p(e){return function(){var n=this,t=arguments;return new Promise((function(r,c){var s=e.apply(n,t);function a(e){m(s,r,c,a,i,"next",e)}function i(e){m(s,r,c,a,i,"throw",e)}a(void 0)}))}}function j(){var e=(0,h.useWeb3Context)(),n=(0,x.useState)(null),t=n[0],r=n[1];function i(e,n){return m.apply(this,arguments)}function m(){return(m=p(c().mark((function n(t,s){var a,i,o,u,l;return c().wrap((function(n){for(;;)switch(n.prev=n.next){case 0:return a=[],n.next=3,t.methods.balanceOf(s).call();case 3:i=n.sent,console.log("".concat(e.account," owns ").concat(i," SYNCs")),o=0;case 6:if(!(o<i)){n.next=18;break}return n.next=9,t.methods.tokenOfOwnerByIndex(s,e.library.eth.abi.encodeParameter("uint256",o)).call();case 9:return u=n.sent,n.next=12,t.methods.getTokenSVG(e.library.eth.abi.encodeParameter("uint256",u)).call();case 12:l=n.sent,a.push({tokenId:u,svg:l}),console.log(l);case 15:++o,n.next=6;break;case 18:r(a);case 19:case"end":return n.stop()}}),n)})))).apply(this,arguments)}return(0,x.useEffect)(p(c().mark((function n(){var t;return c().wrap((function(n){for(;;)switch(n.prev=n.next){case 0:if(r([]),!e.active){n.next=5;break}return t=new e.library.eth.Contract(a.Mt,"0x2ED6550746891875A7e39d3747d1a4FFe5433289"),n.next=5,i(t,e.account);case 5:case"end":return n.stop()}}),n)}))),[e]),(0,s.jsxs)("div",{className:o().mainContainer,children:[(0,s.jsx)(d.w,{}),(0,s.jsx)(u.w,{}),(0,s.jsxs)("div",{className:o().container,children:[(0,s.jsx)("div",{className:o().main,children:(0,s.jsxs)("div",{className:o().modal,children:[!e.active&&(0,s.jsx)("div",{className:"flex-1 flex center-content justify-center",children:(0,s.jsx)("p",{className:"font-bold",children:"Please Connect via MetaMask"})}),e.active&&(0,s.jsxs)("div",{className:"mb-10",children:[(0,s.jsx)("p",{className:"font-bold text-center text-xl mb-10",children:"Your Owned Syncs"}),(0,s.jsxs)("div",{className:"colors justify-center content-center",children:[t&&t.map((function(e){return(0,s.jsx)("div",{children:(0,s.jsx)(v.default,{href:"/mint?tokenID=".concat(e.tokenId),children:(0,s.jsx)("div",{className:o().sync,dangerouslySetInnerHTML:{__html:e.svg}})})},e.tokenId)})),(!t||!t.length)&&(0,s.jsx)(f.a,{})]})]})]})}),(0,s.jsx)(l.$,{})]})]})}}},function(e){e.O(0,[47,39,774,888,179],(function(){return n=92464,e(e.s=n);var n}));var n=e.O();_N_E=n}]);
+;(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+  [353],
+  {
+    92464: function (e, n, t) {
+      ;(window.__NEXT_P = window.__NEXT_P || []).push([
+        '/nfts',
+        function () {
+          return t(44542)
+        },
+      ])
+    },
+    44542: function (e, n, t) {
+      'use strict'
+      t.r(n),
+        t.d(n, {
+          default: function () {
+            return j
+          },
+        })
+      var r = t(28520),
+        c = t.n(r),
+        s = t(85893),
+        a = t(8271),
+        i = t(40108),
+        o = t.n(i),
+        u = t(61127),
+        l = t(6151),
+        d = t(55480),
+        f = t(7868),
+        x = t(67294),
+        h = t(21092),
+        v = t(41664)
+      function m(e, n, t, r, c, s, a) {
+        try {
+          var i = e[s](a),
+            o = i.value
+        } catch (u) {
+          return void t(u)
+        }
+        i.done ? n(o) : Promise.resolve(o).then(r, c)
+      }
+      function p(e) {
+        return function () {
+          var n = this,
+            t = arguments
+          return new Promise(function (r, c) {
+            var s = e.apply(n, t)
+            function a(e) {
+              m(s, r, c, a, i, 'next', e)
+            }
+            function i(e) {
+              m(s, r, c, a, i, 'throw', e)
+            }
+            a(void 0)
+          })
+        }
+      }
+      function j() {
+        var e = (0, h.useWeb3Context)(),
+          n = (0, x.useState)(null),
+          t = n[0],
+          r = n[1]
+        function i(e, n) {
+          return m.apply(this, arguments)
+        }
+        function m() {
+          return (m = p(
+            c().mark(function n(t, s) {
+              var a, i, o, u, l
+              return c().wrap(function (n) {
+                for (;;)
+                  switch ((n.prev = n.next)) {
+                    case 0:
+                      return (
+                        (a = []), (n.next = 3), t.methods.balanceOf(s).call()
+                      )
+                    case 3:
+                      ;(i = n.sent),
+                        console.log(
+                          ''.concat(e.account, ' owns ').concat(i, ' SYNCs')
+                        ),
+                        (o = 0)
+                    case 6:
+                      if (!(o < i)) {
+                        n.next = 18
+                        break
+                      }
+                      return (
+                        (n.next = 9),
+                        t.methods
+                          .tokenOfOwnerByIndex(
+                            s,
+                            e.library.eth.abi.encodeParameter('uint256', o)
+                          )
+                          .call()
+                      )
+                    case 9:
+                      return (
+                        (u = n.sent),
+                        (n.next = 12),
+                        t.methods
+                          .getTokenSVG(
+                            e.library.eth.abi.encodeParameter('uint256', u)
+                          )
+                          .call()
+                      )
+                    case 12:
+                      ;(l = n.sent),
+                        a.push({ tokenId: u, svg: l }),
+                        console.log(l)
+                    case 15:
+                      ++o, (n.next = 6)
+                      break
+                    case 18:
+                      r(a)
+                    case 19:
+                    case 'end':
+                      return n.stop()
+                  }
+              }, n)
+            })
+          )).apply(this, arguments)
+        }
+        return (
+          (0, x.useEffect)(
+            p(
+              c().mark(function n() {
+                var t
+                return c().wrap(function (n) {
+                  for (;;)
+                    switch ((n.prev = n.next)) {
+                      case 0:
+                        if ((r([]), !e.active)) {
+                          n.next = 5
+                          break
+                        }
+                        return (
+                          (t = new e.library.eth.Contract(
+                            a.Mt,
+                            '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
+                          )),
+                          (n.next = 5),
+                          i(t, e.account)
+                        )
+                      case 5:
+                      case 'end':
+                        return n.stop()
+                    }
+                }, n)
+              })
+            ),
+            [e]
+          ),
+          (0, s.jsxs)('div', {
+            className: o().mainContainer,
+            children: [
+              (0, s.jsx)(d.w, {}),
+              (0, s.jsx)(u.w, {}),
+              (0, s.jsxs)('div', {
+                className: o().container,
+                children: [
+                  (0, s.jsx)('div', {
+                    className: o().main,
+                    children: (0, s.jsxs)('div', {
+                      className: o().modal,
+                      children: [
+                        !e.active &&
+                          (0, s.jsx)('div', {
+                            className:
+                              'flex-1 flex center-content justify-center',
+                            children: (0, s.jsx)('p', {
+                              className: 'font-bold',
+                              children: 'Please Connect via MetaMask',
+                            }),
+                          }),
+                        e.active &&
+                          (0, s.jsxs)('div', {
+                            className: 'mb-10',
+                            children: [
+                              (0, s.jsx)('p', {
+                                className:
+                                  'font-bold text-center text-xl mb-10',
+                                children: 'Your Owned Syncs',
+                              }),
+                              (0, s.jsxs)('div', {
+                                className:
+                                  'colors justify-center content-center',
+                                children: [
+                                  t &&
+                                    t.map(function (e) {
+                                      return (0,
+                                      s.jsx)('div', { children: (0, s.jsx)(v.default, { href: '/mint?tokenID='.concat(e.tokenId), children: (0, s.jsx)('div', { className: o().sync, dangerouslySetInnerHTML: { __html: e.svg } }) }) }, e.tokenId)
+                                    }),
+                                  (!t || !t.length) && (0, s.jsx)(f.a, {}),
+                                ],
+                              }),
+                            ],
+                          }),
+                      ],
+                    }),
+                  }),
+                  (0, s.jsx)(l.$, {}),
+                ],
+              }),
+            ],
+          })
+        )
+      }
+    },
+  },
+  function (e) {
+    e.O(0, [47, 39, 774, 888, 179], function () {
+      return (n = 92464), e((e.s = n))
+      var n
+    })
+    var n = e.O()
+    _N_E = n
+  },
+])
