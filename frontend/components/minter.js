@@ -65,7 +65,9 @@ export const Minter = (props) => {
     const svgs = []
 
     const colorsCount = await contract.methods.balanceOf(account).call()
-    setColorsOwned(colorsCount)
+    if (!colorsCount) return;
+
+    setColorsOwned(parseInt(colorsCount))
 
     for (const i = 0; i < colorsCount; ++i) {
       const tokenId = await contract.methods
@@ -248,20 +250,6 @@ export const Minter = (props) => {
     }
   }
 
-  function preventChange(event) {
-    return event.preventDefault()
-  }
-
-  function mintCountSet(event) {
-    const value = -event.target.value
-
-    if (!value) return
-    if (value === MAX_MINT_COUNT) return
-    if (value < 1) return
-
-    setMintCount(value)
-  }
-
   function mintCountIncrement(dir) {
     let count = mintCount
     if (!count || isNaN(count)) count = 1
@@ -344,7 +332,21 @@ export const Minter = (props) => {
               </div>
             </div>
           )}
-
+          {colorsOwned === 0 && (
+            <div className={'mb-10'}>
+              <p
+                className={
+                  'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-0 mt-0 uppercase'
+                }
+              >
+                Mint Your Color X Sync NFT
+              </p>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                grayscale default. chances for colored rares
+                <br style={{display: 'block'}}></br>
+              </p>
+            </div>
+          )}
           {tokenID && (
             <div className={'mt-10 mb-10'}>
               <p className={'text-center mt-3 mb-3 text-xl font-bold'}>
@@ -384,14 +386,16 @@ export const Minter = (props) => {
                   </button>
                   <input
                     min="1"
-                    readOnly
                     max={MAX_MINT_COUNT}
                     type="text"
                     className={
                       'outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
                     }
                     name="custom-input-number"
-                    value={mintCount}
+                    onChange={e => {
+                      setMintCount(Math.min(e.target.value ?? 1, MAX_MINT_COUNT));
+                    }}
+                    value={mintCount ?? 1}
                   />
                   <button
                     onClick={() => mintCountIncrement('increment')}
@@ -431,7 +435,7 @@ export const Minter = (props) => {
           {!tokenID && (
             <div className={'text-center justify-center'}>
               <p className={'uppercase text-2xl font-bold'}>
-                {amountMinted} / {MAX_SUPPLY}
+                {amountMinted?.toLocaleString()} / {MAX_SUPPLY.toLocaleString()}
               </p>
             </div>
           )}

@@ -17,9 +17,9 @@ export default function Display() {
   const [svgs, setSvgs] = useState(null)
   const [reveal, setReveal] = useState(null)
   const [multi, setMulti] = useState(null)
+  const [loaded, setLoaded] = useState(null)
 
   useEffect(async () => {
-    setSvgs([])
 
     const filter = []
     if (query.tokenID || query.mintCount) setReveal(true)
@@ -39,6 +39,8 @@ export default function Display() {
         query.tokenID,
         query.mintCount
       )
+
+      setLoaded(true)
     }
   }, [context])
 
@@ -79,6 +81,8 @@ export default function Display() {
 
     setSvgs(svgs)
   }
+
+
 
   return (
     <div className={styles.mainContainer}>
@@ -147,7 +151,11 @@ export default function Display() {
                         </Link>
                       </div>
                     ))}
-                  {(!svgs || !svgs.length) && <Loader />}
+                  {!loaded && <Loader />}
+                  {loaded && !svgs?.length && <div className={'font-bold title-font uppercase text-2xl'}>
+                    No owned Color X Sync NFTs
+                  </div>
+                  }
                 </div>
               </div>
             )}
