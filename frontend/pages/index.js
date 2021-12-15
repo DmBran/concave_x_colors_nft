@@ -57,21 +57,32 @@ export default function Home() {
                 SYNC X COLORS
               </h1>
               <p className="mb-8 leading-relaxed text-xl font-bold">
-                Is a Collaboration between Concave Finance Community Members and
-                The.Colors.NFT Project.<p>&nbsp;</p>Our NFT collection is 100%
-                stored and generated on chain and created in a single
-                transaction.
-                <br className="lg:inline-block" />
-                Own a <b>Sync X Colors NFT</b> to be qualified for the Concave
-                Finance whitelist & token airdrop.
+                Sync X Colors is the ultimate collaboration between Concave
+                Finance Community Members and TheColors.NFT Project.
+              </p>
+              <p className="mb-8 leading-relaxed text-xl font-bold">
+                Own a <b>Sync X Colors NFT</b> to qualify for the ever elusive
+                Concave Finance token whitelist and a retroactive airdrop.
+                WAGMI!
+              </p>
+              <p className="mb-8 leading-relaxed text-xl font-bold">
+                Our NFT collection is 100% generated and stored on chain!
               </p>
               <div className="flex justify-center py-2">
-                <button className="ml-4 inline-flex border-gray-800 border-4 text-gray-700 bg-green-200 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
-                  Mint a NFT
-                </button>
-                <button className="ml-4 inline-flex border-gray-800 border-4 hidden md:inline-block text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
-                  Read more
-                </button>
+                <Link href="/mint">
+                  <button className="ml-4 inline-flex border-gray-800 border-4 text-gray-700 bg-green-200 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
+                    Mint an NFT
+                  </button>
+                </Link>
+                <a
+                  href="https://medium.com/@syncxcolors"
+                  target="_blank"
+                  className="ml-5 inline-flex md:inline-block"
+                >
+                  <button className="ml-4 inline-flex border-gray-800 border-4 hidden md:inline-block text-gray-700 bg-gray-200 border-0 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
+                    Learn More
+                  </button>
+                </a>
               </div>
               <div className="justify-center items-center align-bottom mt-4">
                 <a
@@ -245,7 +256,7 @@ export default function Home() {
                       picky
                     </h2>
                     <a href="https://twitter.com/pickypxl" target="_blank">
-                      <p className="text-gray-700">@colin_gbc</p>
+                      <p className="text-gray-700">@pickypxl</p>
                     </a>
                   </div>
                 </div>

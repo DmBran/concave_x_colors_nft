@@ -76,7 +76,7 @@ export const Navbar = (props) => {
                 </Link>
               )}
               {1 && (
-                <Link href="/nfts">
+                <Link href="/display">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>

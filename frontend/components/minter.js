@@ -15,7 +15,7 @@ export const Minter = (props) => {
   // Ropstens
   const network = 3
   const MAX_MINT_COUNT = 5
-  const MAX_SUPPLY = 2122
+  const MAX_SUPPLY = 3333
   const MAX_COLORS = 3
   const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
   //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
@@ -92,10 +92,6 @@ export const Minter = (props) => {
     setSubmitting('syncs')
     let txToast
     try {
-      const nonce = await context.library.eth.getTransactionCount(
-        address,
-        'latest'
-      )
       const contract = new context.library.eth.Contract(
         SyncXColors.abi,
         SYNC_CONTRACT
@@ -104,18 +100,20 @@ export const Minter = (props) => {
       const tokens = svgs
         .filter((svg) => svg.selected)
         .map((svg) => parseInt(svg.tokenId))
-      const txCall = contract.methods.mintSync(tokens)
+      const txCall = contract.methods.mintMany(tokens, mintCount)
 
       const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
 
-      const gas = await context.library.eth.estimateGas({
+      const gasEstimate = await context.library.eth.estimateGas({
         from,
         data,
         to,
       })
 
+      // The BUFFOOOOOR
+      const gas = gasEstimate * 1.1
+
       const tx = {
-        nonce,
         from,
         data,
         gas,
@@ -141,7 +139,7 @@ export const Minter = (props) => {
         toast.success('Transaction successful!', {
           id: txToast,
         })
-        return Router.push('/nfts')
+        return Router.push(`/display?mintCount=${mintCount}`)
       }
     } catch (ex) {
       console.log(ex)
@@ -165,10 +163,6 @@ export const Minter = (props) => {
     setSubmitting('sync')
     let txToast
     try {
-      const nonce = await context.library.eth.getTransactionCount(
-        address,
-        'latest'
-      )
       const contract = new context.library.eth.Contract(
         SyncXColors.abi,
         SYNC_CONTRACT
@@ -181,14 +175,16 @@ export const Minter = (props) => {
 
       const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
 
-      const gas = await context.library.eth.estimateGas({
+      const gasEstimate = await context.library.eth.estimateGas({
         from,
         data,
         to,
       })
 
+      // The BUFFOOOOOR
+      const gas = gasEstimate * 1.1
+
       const tx = {
-        nonce,
         from,
         data,
         gas,
@@ -214,7 +210,7 @@ export const Minter = (props) => {
         toast.success('Transaction successful!', {
           id: txToast,
         })
-        return Router.push(`/reveal?tokenID=${props.tokenID}`)
+        return Router.push(`/display?tokenID=${props.tokenID}`)
       }
     } catch (ex) {
       console.log(ex)
@@ -242,57 +238,6 @@ export const Minter = (props) => {
     svg.selected = 1
 
     setMintColors(svg.tokenId)
-  }
-
-  async function mintColor() {
-    const nonce = await context.library.eth.getTransactionCount(
-      address,
-      'latest'
-    )
-    const contract = new context.library.eth.Contract(
-      TheColors.abi,
-      COLORS_CONTRACT
-    )
-
-    const txCall = contract.methods.mintNextColors(
-      context.library.eth.abi.encodeParameter('uint256', 1)
-    )
-    const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
-
-    const gas = await context.library.eth.estimateGas({
-      from,
-      data,
-      to,
-    })
-
-    const tx = {
-      nonce,
-      from,
-      data,
-      gas,
-      to,
-    }
-
-    const txToast = toast.loading('Transaction processing')
-    const tx2 = await context.library.eth
-      .sendTransaction(tx, address)
-      .catch((error) => {
-        console.log(error)
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-        setSubmitting(undefined)
-      })
-
-    console.log(tx2)
-
-    if (tx2?.transactionHash) {
-      toast.success('Transaction successful!', {
-        id: txToast,
-      })
-      setSubmitting(undefined)
-      await updateColorList(contract, address)
-    }
   }
 
   async function beginMint() {
@@ -360,35 +305,13 @@ export const Minter = (props) => {
     if (context.account) {
       return (
         <div className={styles.modal}>
-          <div className={'mb-10 hidden'}>
-            <p className={'text-center mb-3 font-bold'}>
-              Need a Color Primitive?
-            </p>
-            <div className={'flex colors justify-center content-center'}>
-              {submitting != 'colors' && (
-                <button
-                  onClick={mintColor}
-                  className={
-                    'bg-blue-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                  }
-                >
-                  Mint a Colors NFT!
-                </button>
-              )}
-              {submitting == 'colors' && (
-                <button
-                  className={
-                    'bg-green-500 mx-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                  }
-                >
-                  Minting...
-                </button>
-              )}
-            </div>
-          </div>
           {colorsOwned > 0 && (
             <div className={'mb-10'}>
-              <p className={'text-center mb-1 text-xl font-bold'}>
+              <p
+                className={
+                  'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-0 mt-0 uppercase'
+                }
+              >
                 Select Your Color Primitives
               </p>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
@@ -405,13 +328,14 @@ export const Minter = (props) => {
                       onClick={() => selectColor(svg)}
                       key={svg.color}
                       className={
-                        'border-solid  border-4 color shadow-lg ' +
+                        'border-solid border-gray-800  border-4 color shadow-lg ' +
                         (svg.selected ? styles.colorActive : ' border-white')
                       }
                       style={{
                         width: 75,
                         height: 75,
                         background: svg.color,
+                        cursor: 'pointer',
                         margin: 5,
                       }}
                     ></div>
@@ -441,7 +365,7 @@ export const Minter = (props) => {
             <div className={'flex mb-10 content-center justify-center'}>
               <div
                 className={
-                  'flex content-center justify-center custom-number-input ring-1 ring-slate-500 rounded-lg h-10 w-32'
+                  'flex content-center justify-center custom-number-input rounded-lg h-10 w-32'
                 }
               >
                 <div
@@ -453,14 +377,14 @@ export const Minter = (props) => {
                     onClick={() => mintCountIncrement('decrement')}
                     data-action="decrement"
                     className={
-                      ' border-r border-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none'
+                      'bg-white border-r border-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none'
                     }
                   >
                     <span className={'m-auto text-2xl font-thin'}>−</span>
                   </button>
                   <input
                     min="1"
-                    readonly="true"
+                    readOnly
                     max={MAX_MINT_COUNT}
                     type="text"
                     className={
@@ -473,7 +397,7 @@ export const Minter = (props) => {
                     onClick={() => mintCountIncrement('increment')}
                     data-action="increment"
                     className={
-                      'border-l border-l-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer'
+                      'bg-white border-l border-l-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer'
                     }
                   >
                     <span className={'m-auto text-2xl font-thin'}>+</span>
@@ -506,7 +430,7 @@ export const Minter = (props) => {
 
           {!tokenID && (
             <div className={'text-center justify-center'}>
-              <p className={'font-bold'}>
+              <p className={'uppercase text-2xl font-bold'}>
                 {amountMinted} / {MAX_SUPPLY}
               </p>
             </div>
@@ -518,7 +442,7 @@ export const Minter = (props) => {
 
   return (
     <div className={'flex-1 flex center-content justify-center'}>
-      <p className={'font-bold'}>Please Connect via MetaMask</p>
+      <p className={'font-bold title-font uppercase text-4xl'}>Please Connect via MetaMask</p>
     </div>
   )
 }
