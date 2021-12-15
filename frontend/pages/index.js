@@ -1,7 +1,7 @@
 import styles from '../styles/meme.module.css'
-import { Navbar } from '../../../final/frontend/components/navbar'
+import { Navbar } from '../components/navbar'
 import { Footer } from '../components/footer'
-import { MetaHead } from '../../../final/frontend/components/head'
+import { MetaHead } from '../components/head'
 import Link from 'next/link';
 import Countdown from 'react-countdown';
 import Image from 'next/image'
