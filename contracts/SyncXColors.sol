@@ -21,20 +21,23 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   using Strings for uint32;
   using Strings for uint8;
 
-  uint256 public immutable maxTokenId; //2122
+  uint256 public constant maxTokenId = 3333;
 
   // Declare Public
-  uint256 public mintPrice = 0.04 ether; // Price per mint
-  address public constant TREASURY =
+  uint256 private mintPrice = 0.04 ether; // Price per mint
+  uint256 private resyncPrice = 0.005 ether; // Price per color resync
+  uint256 private maxMintAmount = 10; // Max amount of mints per transaction
+  address private constant TREASURY =
     address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
   address public constant THE_COLORS =
-    address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
-  uint256 public maxMintAmount = 10; // Max amount of mints per transaction
+    address(0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512); //0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+
 
   // Declare Private
   bool internal _isPublicMintActive;
-  mapping(uint256 => uint256) private _seed;
   mapping(uint256 => uint16[]) private _colorTokenIds;
+  mapping(uint256 => uint256) private _seed;
+  
 
   struct SyncTraitsStruct {
     uint8[] shape_color;
@@ -48,15 +51,11 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   }
 
   // Constructor
-  constructor(uint256 _maxTokenId)
-    public
+  constructor()
     ERC721('Sync x Colors', 'SYNC Beta')
     ReentrancyGuard()
     Pausable()
-  {
-    maxTokenId = _maxTokenId;
-    _pause();
-  }
+  {}
 
   function tokenURI(uint256 tokenId)
     public
@@ -134,7 +133,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     returns (string memory)
   {
     string memory colorDescriptor;
-    for (uint256 i = 0; i < 3; i++) {
+    for (uint256 i; i < 3; i++) {
       if (colorTokenIds[i] == 0) {
         break;
       }
@@ -171,41 +170,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     return string(abi.encodePacked('data:application/json;base64', image));
   }
 
-  function getColorsOwnedByUser(address user)
-    external
-    view
-    returns (uint256[] memory tokenIds)
-  {
-    uint256[] memory tokenIds = new uint256[](4317);
-
-    uint256 index = 0;
-    for (uint256 i = 0; i < 4317; i++) {
-      address tokenOwner = INFTOwner(THE_COLORS).ownerOf(i);
-
-      if (user == tokenOwner) {
-        tokenIds[index] = i;
-        index += 1;
-      }
-    }
-
-    uint256 left = 4317 - index;
-    for (uint256 i = 0; i < left; i++) {
-      tokenIds[index] = 9999;
-      index += 1;
-    }
-
-    return tokenIds;
-  }
-
-  function unpause() public onlyOwner {
-    _unpause();
-  }
-
-  function pause() public onlyOwner {
-    _pause();
-  }
-
-  function withdraw() external payable nonReentrant onlyOwner {
+  function withdraw() nonReentrant external payable onlyOwner {
     uint256 balance = address(this).balance;
     uint256 for_treasury = (balance * 33) / 100; //33% 1 way
     uint256 for_r1 = (balance * 67) / (5 * 100); //67% 5 ways
@@ -227,9 +192,9 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     /**
     * Mint multiple SYNCxCOLOR NFTs
     */
-    function mintMany(uint256 _mintAmount, uint16[] calldata colorTokenIds) nonReentrant external payable whenNotPaused {
+    function mintMany(uint256 _mintAmount, uint16[] calldata colorTokenIds) nonReentrant external payable whenNotPaused{
         // Requires
-        uint256 _mintIndex = totalSupply();
+        uint16 _mintIndex = uint16(totalSupply());
         require(_mintAmount <= maxMintAmount,"Max mint 10 per tx");
         require(_mintAmount > 0,"Mint should be > 0");
         require(_mintIndex + _mintAmount <= maxTokenId, "Exceeds supply");
@@ -238,7 +203,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         
         // Validate colorTokenIds
         address colors_address = THE_COLORS;
-        for (uint i = 0; i < colorTokenIds.length; i++) {
+        for (uint16 i; i < colorTokenIds.length; i++) {
 			require (msg.sender == INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),"Supplied 'THE COLORS' tokenId not owned by msg.sender.") ;
 		}
 
@@ -253,7 +218,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     /**
     * Mint one SYNCxCOLOR NFT
     */
-    function mint(uint16[] calldata colorTokenIds) nonReentrant external payable whenNotPaused returns (bool){
+    function mint(uint16[] calldata colorTokenIds) nonReentrant external payable whenNotPaused{
 		// Requires
         uint256 mintIndex = totalSupply();
 		require (mintIndex < maxTokenId, "Mint would exceed max supply."); 
@@ -262,7 +227,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
 		
         // Validate colorTokenIds
         address colors_address = THE_COLORS; //Avoid accessing on-chain storage more than once here
-		for (uint i = 0; i < colorTokenIds.length; i++) {
+		for (uint16 i; i < colorTokenIds.length; i++) {
 			require (msg.sender == INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),"Supplied 'THE COLORS' tokenId not owned by msg.sender.") ;
 		}
 		
@@ -273,7 +238,6 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         //Mint
         _mintOnce(mintIndex);
 
-        return true;
     }
   /**
    * Mints once
@@ -287,7 +251,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
    */
   function updateColors(uint256 tokenId, uint16[] memory colorTokenIds)
     external
-    nonReentrant
+    payable
   {
     require(
       msg.sender == ownerOf(tokenId),
@@ -297,10 +261,12 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
       colorTokenIds.length <= 3,
       "Supplied 'THE COLORS' tokenIds must be between 0 and 3."
     );
-
+    require (msg.value >= resyncPrice, "Insufficient funds");
+    // Validate colorTokenIds
+    address colors_address = THE_COLORS;
     for (uint256 i = 0; i < colorTokenIds.length; i++) {
       require(
-        msg.sender == INFTOwner(THE_COLORS).ownerOf(uint256(colorTokenIds[i])),
+        msg.sender == INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),
         "Supplied 'THE COLORS' tokenId is not owned by msg.sender."
       );
     }
@@ -386,7 +352,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         string[] memory bgColors = new string[](3);
         string[] memory inColors = new string[](3);
         string[] memory dColors = new string[](3);
-        for (uint i=0; i < 3; i++) {
+        for (uint i; i < 3; i++) {
             bgColors[i] = hexColors[i]; //copy values
             inColors[i] = hexColors[i];
             dColors[i] = 'white';
@@ -433,7 +399,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         bytes memory svgBG;
         bytes memory newShape;
 
-        for (uint i =0; i<16; i++){
+        for (uint i; i<16; i++){
             if (syncTraits.shape_type[i] == 1){
                 newShape = abi.encodePacked('<circle fill=',bgColors[syncTraits.shape_color[i]],
                                             'cx=',syncTraits.shape_x[i],
@@ -547,7 +513,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
         SyncTraitsStruct memory syncTraits;
         uint256 seed = _seed[tokenId];
         syncTraits.rarity_index = uint16(1 + (seed & 0x3FF0000000000000000000000000000) % 1000);
-        for (uint i = 0; i<16; i++){    //Generate properties for 16 random shapes to form the background (squares/circles)
+        for (uint i; i<16; i++){    //Generate properties for 16 random shapes to form the background (squares/circles)
             syncTraits.shape_x[i] = uint16(1 + (seed & 0x1FF) % 500);
             syncTraits.shape_y[i] = uint16(1 + (seed & 0x1FF0000) % 500);
             syncTraits.shape_sizex[i] = uint16(250 + (seed & 0x1FF00000000) % 151);
