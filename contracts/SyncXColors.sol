@@ -509,9 +509,8 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
   ) private pure returns (bytes memory) {
     bytes memory logo = abi.encodePacked(
       '<g id="b">',
-      '<path d="M144.4 89.31h-31.3c-16.88 32.57 0 71.38 0 71.38h31.3c-30.95-35 0-71.38 0-71.38Zm-13.17 ',
-      '63.76h-11.65s-12.47-17.38 0-55.68h11.65s-20.8 25.18 0 55.68Z" transform="matrix(2 0 0 2 -95 0)" stroke="black" fill-opacity="0.9" ',
-      'stroke-width=".7" stroke-dasharray="20" stroke-dashoffset="10">',
+      '<path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" stroke="black" fill-opacity="0.9" ',
+      'stroke-width=".7">',
       '<animate id="p" begin="s.begin+2s" attributeName="fill" values="black;',
       hexColors[0],
       ';black" dur="2s"/>',
@@ -526,6 +525,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
     if (syncTraits.rarity_index >= 300) {//Shimmer
       logo = abi.encodePacked(
         logo,
+        '<set attributeName="stroke-dasharray" to="20"/>',
         '<animate begin="s.begin;s.end" attributeType="XML" attributeName="stroke-dashoffset" from="0" to="280" dur="6s" fill="freeze" />',
         '<animate begin="s.begin;s.end" attributeType="XML" attributeName="stroke" values="',
         hexColors[0],
@@ -550,9 +550,8 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
     returns (bytes memory)
   {
     bytes memory borders1 = abi.encodePacked(
-      '</path><text x="10" y="493" fill="',dColors[0],'" >',label,'</text>',
-      '<path d="M107.3179 117.5457c-13.3985 25.8524 0 56.658 0 56.658 h 6.873c-0.1535-0.4067-9.7724-26.1184 .0305-56.2648z" ',
-      'transform="translate(-85,15) scale(1.6,1.6)" stroke-opacity=".7" fill-opacity=".7" fill="transparent">'
+      '</path><text x="10" y="25" fill="',dColors[0],'" >',label,'</text>',
+      '<path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity=".7" fill-opacity=".7" fill="transparent">'
       '<animate id="w" attributeName="fill" values="transparent;',
       dColors[0],
       ';transparent" begin="p.begin+.4s;q.begin+.4s;r.begin+.4s" dur="1s"/>',
@@ -562,8 +561,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
 
     bytes memory borders2 = abi.encodePacked(
       '<path ',
-      'd="M 107.3179 117.5457c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 .0305 -56.2648 z" ',
-      'transform="translate(-88,60) scale(1.3,1.3)" stroke-opacity=".35" fill-opacity=".5" fill="transparent">',
+      'd="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity=".35" fill-opacity=".5" fill="transparent">',
       '<animate attributeName="fill" values="transparent;',
       dColors[1],
       ';transparent" begin="w.begin+.2s" dur="1s"/>',
@@ -573,8 +571,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
 
     bytes memory borders3 = abi.encodePacked(
       '<path ',
-      'd="M107.3179 117.5457 c-13.3985 25.8524 0 56.658 0 56.658 h6.873 c-0.1535-0.4067-9.7724-26.1184 .0305-56.2648z" ',
-      'transform="translate(-82,104) scale(1,1)" stroke-opacity=".05" fill-opacity="0.3" fill="transparent">',
+      'd="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity=".05" fill-opacity="0.3" fill="transparent">',
       '<animate attributeName="fill" values="transparent;',
       dColors[2],
       ';transparent" begin="w.begin+.4s" dur="1s"/>',
