@@ -14,7 +14,7 @@
          <animate attributeName="stroke" values="transparent;#FF1111;transparent" begin="a.begin+0.2s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#11FF33;transparent" begin="k.begin+0.2s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#11FF33;transparent" begin="k.begin+0.2s" dur="1s"/>
-         <animate begin="a.begin;p.begin;k.begin" attributeType="XML" attributeName="stroke-dasharray+0.2s" values="0;100;0" dur="1s" fill="freeze"/>
+         <animate begin="a.begin+0.2s;p.begin+0.2s;k.begin+0.2s" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="1s" fill="freeze"/>
       </path>
       <path d="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity=".35" fill-opacity=".35" fill="transparent">
          <animate attributeName="fill" values="transparent;#1111FF;transparent" begin="p.begin+0.4s" dur="1s"/>
@@ -23,7 +23,7 @@
          <animate attributeName="stroke" values="transparent;#FF1111;transparent" begin="a.begin+0.4s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#11FF33;transparent" begin="k.begin+0.4s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#11FF33;transparent" begin="k.begin+0.4s" dur="1s"/>
-         <animate begin="a.begin+0.2s;p.begin+0.2s;k.begin+0.2s" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="1s" fill="freeze"/>
+         <animate begin="a.begin+0.4s;p.begin+0.4s;k.begin+0.4s" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="1s" fill="freeze"/>
       </path>
       <path d="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity=".05" fill-opacity=".05" fill="transparent">
          <animate attributeName="fill" values="transparent;#1111FF;transparent" begin="p.begin+0.6s" dur="1s"/>
