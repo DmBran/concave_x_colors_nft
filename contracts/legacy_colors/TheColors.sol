@@ -305,9 +305,6 @@ contract TheColors is ERC721Enumerable, Ownable {
 
   function _rng() internal view returns (uint256) {
     return
-      uint256(keccak256(abi.encodePacked(block.timestamp + block.difficulty))) +
-      uint256(keccak256(abi.encodePacked(block.coinbase))) /
-      block.number +
-      block.gaslimit;
+      uint256(keccak256(abi.encodePacked(block.timestamp + block.difficulty)));
   }
 }

@@ -16,24 +16,24 @@ import './legacy_colors/INFTOwner.sol';
  * @title Sync x Colors contract
  * @dev Extends ERC721 Non-Fungible Token Standard basic implementation
  */
-contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
+contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
   using Strings for uint256;
-  using Strings for uint32;
+  using Strings for uint16;
   using Strings for uint8;
 
-  uint256 public constant maxTokenId = 3333;
+  uint256 public constant MAX_TOKENS = 3333;
 
   // Declare Public
-  uint256 private mintPrice = 0.04 ether; // Price per mint
-  uint256 private resyncPrice = 0.005 ether; // Price per color resync
-  uint256 private maxMintAmount = 10; // Max amount of mints per transaction
+  uint256 private constant mintPrice = 0.04 ether; // Price per mint
+  uint256 private constant resyncPrice = 0.005 ether; // Price per color resync
+  uint256 private constant maxMintAmount = 10; // Max amount of mints per transaction
   address private constant TREASURY =
     address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
   address public constant THE_COLORS =
-    address(0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512); //0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+    address(0x5FbDB2315678afecb367f032d93F642f64180aa3); //0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
 
   // Declare Private
-  bool internal _isPublicMintActive;
+  //bool internal _isPublicMintActive;
   mapping(uint256 => uint16[]) private _colorTokenIds;
   mapping(uint256 => uint256) private _seed;
 
@@ -49,11 +49,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   }
 
   // Constructor
-  constructor()
-    ERC721('Sync x Colors', 'SYNC Beta')
-    ReentrancyGuard()
-    Pausable()
-  {}
+  constructor() ERC721('Sync x Colors', 'SYNC Beta') ReentrancyGuard() {}
 
   function tokenURI(uint256 tokenId)
     public
@@ -64,14 +60,9 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   {
     require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
 
-    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
 
-    string memory svgData = generateSVGImage(
-      tokenId,
-      colorTokenIds,
-      syncTraits
-    );
+    string memory svgData = generateSVGImage(tokenId, syncTraits);
     string memory image = Base64.encode(bytes(svgData));
 
     return
@@ -87,7 +78,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
                 image,
                 '",',
                 generateNameDescription(tokenId),
-                generateAttributes(tokenId, colorTokenIds, syncTraits),
+                generateAttributes(tokenId, syncTraits),
                 '}'
               )
             )
@@ -102,10 +93,10 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     returns (string memory)
   {
     require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
-    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
     string memory image = Base64.encode(
-      bytes(generateSVGImage(tokenId, colorTokenIds, syncTraits))
+      bytes(generateSVGImage(tokenId, syncTraits))
     );
 
     return
@@ -119,39 +110,18 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
           '",',
           generateNameDescription(tokenId),
           ',',
-          generateAttributes(tokenId, colorTokenIds, syncTraits),
+          generateAttributes(tokenId, syncTraits),
           '}'
         )
       );
   }
 
-  function getColorDescriptor(uint16[] memory colorTokenIds)
-    private
-    view
-    returns (string memory)
-  {
-    string memory colorDescriptor;
-    for (uint256 i; i < 3; i++) {
-      if (colorTokenIds[i] == 0) {
-        break;
-      }
-      colorDescriptor = string(
-        abi.encodePacked(
-          colorDescriptor,
-          TheColors(THE_COLORS).getHexColor(uint256(colorTokenIds[i])),
-          ','
-        )
-      );
-    }
-    return colorDescriptor;
-  }
-
   function getTokenSVG(uint256 tokenId) external view returns (string memory) {
     require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
-    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
 
-    return generateSVGImage(tokenId, colorTokenIds, syncTraits);
+    return generateSVGImage(tokenId, syncTraits);
   }
 
   function getBase64TokenSVG(uint256 tokenId)
@@ -160,10 +130,10 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     returns (string memory)
   {
     require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
-    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
     string memory image = Base64.encode(
-      bytes(generateSVGImage(tokenId, colorTokenIds, syncTraits))
+      bytes(generateSVGImage(tokenId, syncTraits))
     );
     return string(abi.encodePacked('data:application/json;base64', image));
   }
@@ -193,28 +163,17 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     external
     payable
     nonReentrant
-    whenNotPaused
   {
     // Requires
     uint16 _mintIndex = uint16(totalSupply());
     require(_mintAmount <= maxMintAmount, 'Max mint 10 per tx');
     require(_mintAmount > 0, 'Mint should be > 0');
-    require(_mintIndex + _mintAmount <= maxTokenId, 'Exceeds supply');
-    require(
-      colorTokenIds.length <= 3,
-      "# Supplied 'THE COLORS' tokenIds must be <=3"
-    );
+    require(_mintIndex + _mintAmount <= MAX_TOKENS, 'Exceeds supply');
+    require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
     require(msg.value >= (mintPrice * _mintAmount), 'Insufficient funds');
 
     // Validate colorTokenIds
-    address colors_address = THE_COLORS;
-    for (uint16 i; i < colorTokenIds.length; i++) {
-      require(
-        msg.sender ==
-          INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),
-        "Supplied 'THE COLORS' tokenId not owned by msg.sender."
-      );
-    }
+    require(checkHolder(colorTokenIds) == true, 'COLORS not owned by sender.');
 
     for (uint256 i = _mintIndex; i < (_mintIndex + _mintAmount); i++) {
       // Update state
@@ -228,30 +187,15 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   /**
    * Mint one SYNCxCOLOR NFT
    */
-  function mint(uint16[] calldata colorTokenIds)
-    external
-    payable
-    nonReentrant
-    whenNotPaused
-  {
+  function mint(uint16[] calldata colorTokenIds) external payable nonReentrant {
     // Requires
     uint256 mintIndex = totalSupply();
-    require(mintIndex < maxTokenId, 'Mint would exceed max supply.');
-    require(
-      colorTokenIds.length <= 3,
-      "Supplied 'THE COLORS' tokenIds must be <=3"
-    );
+    require(mintIndex < MAX_TOKENS, 'Exceeds supply');
+    require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
     require(msg.value >= mintPrice, 'Insufficient funds');
 
     // Validate colorTokenIds
-    address colors_address = THE_COLORS; //Avoid accessing on-chain storage more than once here
-    for (uint16 i; i < colorTokenIds.length; i++) {
-      require(
-        msg.sender ==
-          INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),
-        "Supplied 'THE COLORS' tokenId not owned by msg.sender."
-      );
-    }
+    require(checkHolder(colorTokenIds) == true, 'COLORS not owned by sender.');
 
     //Update states
     _colorTokenIds[mintIndex] = colorTokenIds;
@@ -271,30 +215,37 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   /**
    * Store mapping between tokenId and applied tokenIdColors
    */
-  function updateColors(uint256 tokenId, uint16[] memory colorTokenIds)
+  function updateColors(uint256 tokenId, uint16[] calldata colorTokenIds)
     external
     payable
   {
-    require(
-      msg.sender == ownerOf(tokenId),
-      'Only the NFT holder can update its colors'
-    );
-    require(
-      colorTokenIds.length <= 3,
-      "Supplied 'THE COLORS' tokenIds must be between 0 and 3."
-    );
+    require(msg.sender == ownerOf(tokenId), 'Only NFT holder can updateColors');
+    require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
     require(msg.value >= resyncPrice, 'Insufficient funds');
     // Validate colorTokenIds
-    address colors_address = THE_COLORS;
-    for (uint256 i = 0; i < colorTokenIds.length; i++) {
-      require(
-        msg.sender ==
-          INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i])),
-        "Supplied 'THE COLORS' tokenId is not owned by msg.sender."
-      );
-    }
+    require(checkHolder(colorTokenIds) == true, 'COLORS not owned by sender.');
 
     _colorTokenIds[tokenId] = colorTokenIds;
+  }
+
+  /**
+   * Verify that sender holds supplied colorTokenIds
+   */
+  function checkHolder(uint16[] calldata colorTokenIds)
+    private
+    view
+    returns (bool)
+  {
+    address colors_address = THE_COLORS;
+    for (uint256 i = 0; i < colorTokenIds.length; i++) {
+      if (
+        msg.sender !=
+        INFTOwner(colors_address).ownerOf(uint256(colorTokenIds[i]))
+      ) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -317,23 +268,43 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
       );
   }
 
+  function getColorDescriptor(uint256 tokenId)
+    private
+    view
+    returns (string memory)
+  {
+    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+    uint256 length = _colorTokenIds[tokenId].length;
+    string memory colorDescriptor;
+    for (uint256 i = 0; i < length; i++) {
+      if (colorTokenIds[i] == 0) {
+        break;
+      }
+      colorDescriptor = string(
+        abi.encodePacked(
+          colorDescriptor,
+          TheColors(THE_COLORS).getHexColor(uint256(colorTokenIds[i])),
+          ','
+        )
+      );
+    }
+    return colorDescriptor;
+  }
+
   /**
    * Generate attributes json
    */
   function generateAttributes(
     uint256 tokenId,
-    uint16[] memory colorTokenIds,
     SyncTraitsStruct memory syncTraits
   ) internal view returns (string memory) {
-    string memory rarity;
+    string memory rarity = 'Common';
     if (syncTraits.rarity_index >= 990) {
       rarity = 'Gold';
     } else if (syncTraits.rarity_index >= 950) {
       rarity = 'Silver';
     } else if (syncTraits.rarity_index >= 850) {
       rarity = 'Drift';
-    } else {
-      rarity = 'Common';
     }
 
     bytes memory buffer = abi.encodePacked(
@@ -342,7 +313,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
       rarity,
       '"},',
       '{"trait_type":"Colors","value":"',
-      getColorDescriptor(colorTokenIds),
+      getColorDescriptor(tokenId),
       '"}]'
     );
     return string(abi.encodePacked(buffer));
@@ -351,35 +322,38 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   /**
    * Returns hex strings representing colorTokenIDs as an array
    */
-  function getHexStrings(uint16[] memory colorTokenIds)
+  function getColorsHexStrings(uint256 tokenId)
     internal
     view
     returns (string[] memory)
   {
+    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+    uint256 length = _colorTokenIds[tokenId].length;
     string[] memory hexColors = new string[](3);
     hexColors[0] = '#222222'; // Defaults (grayscale)
     hexColors[1] = '#777777';
     hexColors[2] = '#AAAAAA';
-    for (uint256 i = 0; i < 3; i++) {
+    for (uint256 i = 0; i < length; i++) {
       hexColors[i] = TheColors(THE_COLORS).getHexColor(
         uint256(colorTokenIds[i])
       );
     }
+    return hexColors;
   }
 
   /**
    * Generates the SVG
    */
-  function generateSVGImage(
-    uint256 tokenId,
-    uint16[] memory colorTokenIds,
-    SyncTraitsStruct memory syncTraits
-  ) private view returns (string memory) {
-    string[] memory hexColors = getHexStrings(colorTokenIds);
+  function generateSVGImage(uint256 tokenId, SyncTraitsStruct memory syncTraits)
+    private
+    view
+    returns (string memory)
+  {
+    string[] memory hexColors = getColorsHexStrings(tokenId);
     string[] memory bgColors = new string[](3);
     string[] memory inColors = new string[](3);
     string[] memory dColors = new string[](3);
-    for (uint256 i; i < 3; i++) {
+    for (uint256 i = 0; i < 3; i++) {
       bgColors[i] = hexColors[i]; //copy values
       inColors[i] = hexColors[i];
       dColors[i] = 'white';
@@ -392,9 +366,9 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
       inColors[1] = '#C0C0C0'; //silver
       inColors[2] = '#E5E4E2';
     } else if (syncTraits.rarity_index >= 950) {
-      bgColors[1] = '#c0c0c0'; //Silver
-      bgColors[2] = '#e5e4e2'; //Platinum
-      bgColors[0] = '#c0c0c0';
+      bgColors[0] = '#c0c0c0'; //Silver
+      bgColors[1] = '#e5e4e2'; //Platinum
+      bgColors[2] = '#c0c0c0';
       inColors[0] = 'white';
       inColors[1] = '#C0C0C0'; //silver
       inColors[2] = '#CD7F32';
@@ -409,7 +383,16 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     bytes memory svgInfinity = generateSVGInfinity(inColors);
     bytes memory svgLogo = generateSVGLogo(bgColors, syncTraits);
     bytes memory svgDrift = generateSVGDrift(dColors);
-    return string(abi.encodePacked(svgBG, svgInfinity, svgLogo, svgDrift));
+    return
+      string(
+        abi.encodePacked(
+          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewbox="0 0 500 500" style="background-color:#111111">',
+          svgBG,
+          svgInfinity,
+          svgLogo,
+          svgDrift
+        )
+      );
   }
 
   /**
@@ -419,42 +402,42 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     string[] memory bgColors,
     SyncTraitsStruct memory syncTraits
   ) private pure returns (bytes memory) {
-    bytes memory svgBG;
+    bytes memory svgBG = '<g fill-opacity="0.3">';
     bytes memory newShape;
 
-    for (uint256 i; i < 16; i++) {
-      if (syncTraits.shape_type[i] == 1) {
+    for (uint256 i = 0; i < 15; i++) {
+      if (syncTraits.shape_type[i] == 0) {
         newShape = abi.encodePacked(
-          '<circle fill=',
+          '<circle fill="',
           bgColors[syncTraits.shape_color[i]],
-          'cx=',
-          syncTraits.shape_x[i],
-          'cy=',
-          syncTraits.shape_y[i],
-          'r=',
-          syncTraits.shape_sizex[i],
-          '/>'
+          '" cx="',
+          syncTraits.shape_x[i].toString(),
+          '" cy="',
+          syncTraits.shape_y[i].toString(),
+          '" r="',
+          syncTraits.shape_sizex[i].toString(),
+          '"/>'
         );
-      } else if (syncTraits.shape_type[i] == 2) {
+      } else if (syncTraits.shape_type[i] == 1) {
         newShape = abi.encodePacked(
-          '<rect fill=',
+          '<rect fill="',
           bgColors[syncTraits.shape_color[i]],
-          'x=',
-          syncTraits.shape_x[i] / 2,
-          'y=',
-          syncTraits.shape_y[i] / 2,
-          'width=',
-          syncTraits.shape_sizex[i] * 2,
-          'height=',
-          syncTraits.shape_sizey[i] * 2,
-          'transform="rotate(',
-          syncTraits.shape_r[i],
+          '" x="',
+          (syncTraits.shape_x[i] / 2).toString(),
+          '" y="',
+          (syncTraits.shape_y[i] / 2).toString(),
+          '" width="',
+          (syncTraits.shape_sizex[i] * 2).toString(),
+          '" height="',
+          (syncTraits.shape_sizey[i] * 2).toString(),
+          '" transform="rotate(',
+          syncTraits.shape_r[i].toString(),
           ')"/>'
         );
       }
       svgBG = abi.encodePacked(svgBG, newShape);
     }
-    return svgBG;
+    return abi.encodePacked(svgBG, '</g>');
   }
 
   /**
@@ -466,7 +449,6 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     returns (bytes memory)
   {
     bytes memory infinity1 = abi.encodePacked(
-      '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewbox="0 0 500 500">',
       '<g id="infinity_1"><path id="infinity" stroke-dasharray="0" stroke-dashoffset="0" stroke-width="16" ',
       'd="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">',
       '<animate begin="s.begin" attributeType="XML" attributeName="stroke"  values="',
@@ -480,11 +462,11 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     bytes memory infinity2 = abi.encodePacked(
       '<animate begin="s.begin" attributeType="XML" attributeName="stroke-dasharray" values="0;50;0" dur="6s" fill="freeze"/>',
       '<animate begin="a.begin" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>',
-      '</path><path id="infinity_2" stroke-dasharray="300" stroke-dashoffset="300" stroke="#FF1111" stroke-width="16" ',
+      '</path><path id="infinity_2" stroke-dasharray="300" stroke-dashoffset="300" stroke="#FFFFFF" stroke-width="16" ',
       'd="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">'
     );
     bytes memory infinity3 = abi.encodePacked(
-      '<animate begin="s.end" attributeType="XML" attributeName="stroke" values="',
+      '<animate begin="s.begin" attributeType="XML" attributeName="stroke" values="',
       inColors[2],
       ';',
       inColors[0],
@@ -506,10 +488,10 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     SyncTraitsStruct memory syncTraits
   ) private pure returns (bytes memory) {
     bytes memory logo = abi.encodePacked(
-      '<g id="borders">',
+      '<g id="b">',
       '<path d="M144.4 89.31h-31.3c-16.88 32.57 0 71.38 0 71.38h31.3c-30.95-35 0-71.38 0-71.38Zm-13.17 ',
       '63.76h-11.65s-12.47-17.38 0-55.68h11.65s-20.8 25.18 0 55.68Z" transform="matrix(2 0 0 2 -95 0)" stroke="black" fill-opacity="0.9" ',
-      'stroke-width=".7" stroke-dasharray="20" stroke-dashoffset="10"',
+      'stroke-width=".7" stroke-dasharray="20" stroke-dashoffset="10">',
       '<animate id="p" begin="s.begin+2s" attributeName="fill" values="black;',
       hexColors[0],
       ';black" dur="2s"/>',
@@ -549,18 +531,18 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
     returns (bytes memory)
   {
     bytes memory borders1 = abi.encodePacked(
-      '</path><path d="M107.3179 117.5457c 13.3985 25.8524 0 56.658 0 56.658 h 6.873c-0.1535-0.4067-9.7724-26.1184 .0305-56.2648z" ',
+      '</path><path d="M107.3179 117.5457c-13.3985 25.8524 0 56.658 0 56.658 h 6.873c-0.1535-0.4067-9.7724-26.1184 .0305-56.2648z" ',
       'transform="translate(-85,15) scale(1.6,1.6)" stroke-opacity=".7" fill-opacity=".7" fill="transparent">'
       '<animate id="w" attributeName="fill" values="transparent;',
       dColors[0],
-      ';transparent" begin="p.begin+.4s";q.begin+.4s;r.begin+.4s" dur="1s"/>',
+      ';transparent" begin="p.begin+.4s;q.begin+.4s;r.begin+.4s" dur="1s"/>',
       '<animate begin="w.begin" attributeName="stroke" values="transparent;black;transparent" dur="1s"/>',
       '</path>'
     );
 
     bytes memory borders2 = abi.encodePacked(
       '<path ',
-      'd="M 107.3179 117.5457 c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 .0305 -56.2648 z" ',
+      'd="M 107.3179 117.5457c -13.3985 25.8524 0 56.658 0 56.658 h 6.873 c -0.1535 -0.4067 -9.7724 -26.1184 .0305 -56.2648 z" ',
       'transform="translate(-88,60) scale(1.3,1.3)" stroke-opacity=".35" fill-opacity=".5" fill="transparent">',
       '<animate attributeName="fill" values="transparent;',
       dColors[1],
@@ -577,7 +559,7 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
       dColors[2],
       ';transparent" begin="w.begin+.4s" dur="1s"/>',
       '<animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+.4s" dur="1s"/>',
-      '</path>'
+      '</path></g><use href="#b" x="-500" y="-500" transform="rotate(180)"/></svg>'
     );
 
     return abi.encodePacked(borders1, borders2, borders3);
@@ -593,23 +575,36 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
   {
     SyncTraitsStruct memory syncTraits;
     uint256 seed = _seed[tokenId];
+
+    syncTraits.shape_x = new uint16[](15);
+    syncTraits.shape_y = new uint16[](15);
+    syncTraits.shape_sizex = new uint16[](15);
+    syncTraits.shape_sizey = new uint16[](15);
+    syncTraits.shape_r = new uint16[](15);
+    syncTraits.shape_type = new uint8[](15);
+    syncTraits.shape_color = new uint8[](15);
+
     syncTraits.rarity_index = uint16(
       1 + ((seed & 0x3FF0000000000000000000000000000) % 1000)
     );
-    for (uint256 i; i < 16; i++) {
-      //Generate properties for 16 random shapes to form the background (squares/circles)
-      syncTraits.shape_x[i] = uint16(1 + ((seed & 0x1FF) % 500));
-      syncTraits.shape_y[i] = uint16(1 + ((seed & 0x1FF0000) % 500));
-      syncTraits.shape_sizex[i] = uint16(250 + ((seed & 0x1FF00000000) % 151));
+    for (uint256 i = 0; i < 15; i++) {
+      //Generate properties for 15 random shapes to form the background (squares/circles)
+      syncTraits.shape_x[i] = uint16(1 + ((seed & 0x3FF) % 500));
+      syncTraits.shape_y[i] = uint16(1 + (((seed & 0x3FF0000) / 2**4) % 500));
+      syncTraits.shape_sizex[i] = uint16(
+        250 + (((seed & 0x1FF00000000) / 2**5) % 151)
+      );
       syncTraits.shape_sizey[i] = uint16(
-        250 + ((seed & 0x1FF000000000000) % 151)
+        250 + (((seed & 0x1FF000000000000) >> 48) % 151)
       );
       syncTraits.shape_r[i] = uint16(
-        1 + ((seed & 0x1FF0000000000000000) % 360)
+        1 + (((seed & 0x1FF0000000000000000) / 2**6) % 360)
       );
-      syncTraits.shape_type[i] = uint8((seed & 0x1FF00000000000000000000) % 2);
+      syncTraits.shape_type[i] = uint8(
+        ((seed & 0x1FF00000000000000000000) >> 80) % 2
+      );
       syncTraits.shape_color[i] = uint8(
-        (seed & 0x1FF000000000000000000000000) % 3
+        ((seed & 0x1FF000000000000000000000000) >> 96) % 3
       );
       seed = seed >> 2;
     }
@@ -628,17 +623,10 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard, Pausable {
           abi.encodePacked(
             _tokenId.toString(),
             block.timestamp,
-            block.difficulty
+            block.difficulty,
+            seed
           )
         )
       ) + uint256(_tokenId * seed);
-  }
-
-  function unpause() external onlyOwner {
-    _unpause();
-  }
-
-  function pause() external onlyOwner {
-    _pause();
   }
 }

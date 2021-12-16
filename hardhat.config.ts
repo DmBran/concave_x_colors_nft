@@ -47,6 +47,7 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: 1337,
+      gas: 'auto',
     },
     ropsten: {
       //gas: 2100000,

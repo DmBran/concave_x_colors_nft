@@ -1,30 +1,32 @@
 require('dotenv').config()
 
 // The colors contract is 0x1caa1167ff1bd298d71a2e9b19aa5595c1fbc341
-const contractAddress = '0x1caa1167ff1bd298d71a2e9b19aa5595c1fbc341'
+const contractAddress = '0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0'
 
-const API_URL = process.env.API_URL
-const PUBLIC_KEY = process.env.PUBLIC_KEY
-const PRIVATE_KEY = process.env.PRIVATE_KEY
+//const API_URL = process.env.API_URL
+//const PUBLIC_KEY = process.env.PUBLIC_KEY
+//const PRIVATE_KEY = process.env.PRIVATE_KEY
 
-const { createAlchemyWeb3 } = require('@alch/alchemy-web3')
-const web3 = createAlchemyWeb3(API_URL)
+//const { createAlchemyWeb3 } = require('@alch/alchemy-web3')
+//const web3 = createAlchemyWeb3(API_URL)
 
-const contract = require('../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json')
+//const contract = require('../artifacts/contracts/SyncXColors.sol/Sync.json')
 // console.log(JSON.stringify(contract.abi))
+const Box = await ethers.getContractFactory('Sync')
+const box = await Box.attach(address)
 
-const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
-mintNFT(1)
+//const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
+mintNFT()
 
-async function mintNFT(numberOfTokens) {
+async function mintNFT() {
   const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest') //get latest nonce
   //the transaction
   const tx = {
-    from: PUBLIC_KEY,
-    to: contractAddress,
-    nonce: nonce,
+    //from: PUBLIC_KEY,
+    //to: contractAddress,
+    //nonce: nonce,
     gas: 5000000,
-    data: nftContract.methods.mintNextColors(numberOfTokens).encodeABI(),
+    data: box.methods.mint([]).encodeABI(),
   }
   const signPromise = web3.eth.accounts.signTransaction(tx, PRIVATE_KEY)
 
