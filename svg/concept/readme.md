@@ -2,6 +2,9 @@ Concept
 
 Silver
 
+Concept2
+![](Silver_Concept_2.svg)
+
 Shimmer with a touch of gold for effect:
 
 ![](silver_shimmer_goldtouch.svg)
