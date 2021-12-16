@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500">
+       <animate id="s" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;s.end" to= "-5000" dur="6s" fill="reset" />
    <g id="b">
       <path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" stroke="#000" fill-opacity=".9">
          <animate id="p" attributeName="fill" values="black;#1111FF;black" begin="s.begin+2s" dur="1.5s"/>
@@ -7,38 +8,38 @@
          <animate begin="a.begin;p.begin;k.begin" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="2s" fill="freeze"/>
       </path>
       <path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity=".7" fill-opacity=".7" fill="transparent">
-         <animate attributeName="fill" values="transparent;#1111FF;transparent" begin="p.begin" dur="1s"/>
-         <animate attributeName="stroke" values="transparent;#1111FF;transparent" begin="p.begin" dur="1s"/>
-         <animate attributeName="fill" values="transparent;#FF1111;transparent" begin="a.begin" dur="1s"/>
-         <animate attributeName="stroke" values="transparent;#FF1111;transparent" begin="a.begin" dur="1s"/>
-         <animate attributeName="fill" values="transparent;#11FF33;transparent" begin="k.begin" dur="1s"/>
-         <animate attributeName="stroke" values="transparent;#11FF33;transparent" begin="k.begin" dur="1s"/>
-         <animate begin="a.begin;p.begin;k.begin" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="1s" fill="freeze"/>
-      </path>
-      <path d="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity=".35" fill-opacity=".35" fill="transparent">
          <animate attributeName="fill" values="transparent;#1111FF;transparent" begin="p.begin+0.2s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#1111FF;transparent" begin="p.begin+0.2s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#FF1111;transparent" begin="a.begin+0.2s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#FF1111;transparent" begin="a.begin+0.2s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#11FF33;transparent" begin="k.begin+0.2s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#11FF33;transparent" begin="k.begin+0.2s" dur="1s"/>
-         <animate begin="a.begin+0.2s;p.begin+0.2s;k.begin+0.2s" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="1s" fill="freeze"/>
+         <animate begin="a.begin;p.begin;k.begin" attributeType="XML" attributeName="stroke-dasharray+0.2s" values="0;100;0" dur="1s" fill="freeze"/>
       </path>
-      <path d="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity=".05" fill-opacity=".05" fill="transparent">
+      <path d="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity=".35" fill-opacity=".35" fill="transparent">
          <animate attributeName="fill" values="transparent;#1111FF;transparent" begin="p.begin+0.4s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#1111FF;transparent" begin="p.begin+0.4s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#FF1111;transparent" begin="a.begin+0.4s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#FF1111;transparent" begin="a.begin+0.4s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#11FF33;transparent" begin="k.begin+0.4s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#11FF33;transparent" begin="k.begin+0.4s" dur="1s"/>
+         <animate begin="a.begin+0.2s;p.begin+0.2s;k.begin+0.2s" attributeType="XML" attributeName="stroke-dasharray" values="0;100;0" dur="1s" fill="freeze"/>
       </path>
-      <path d="M20 229c-9 18 0 40 0 40h5c0 0-7-18 0-40z" stroke-opacity=".02" fill-opacity=".02" fill="transparent">
+      <path d="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity=".05" fill-opacity=".05" fill="transparent">
          <animate attributeName="fill" values="transparent;#1111FF;transparent" begin="p.begin+0.6s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#1111FF;transparent" begin="p.begin+0.6s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#FF1111;transparent" begin="a.begin+0.6s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#FF1111;transparent" begin="a.begin+0.6s" dur="1s"/>
          <animate attributeName="fill" values="transparent;#11FF33;transparent" begin="k.begin+0.6s" dur="1s"/>
          <animate attributeName="stroke" values="transparent;#11FF33;transparent" begin="k.begin+0.6s" dur="1s"/>
+      </path>
+      <path d="M20 229c-9 18 0 40 0 40h5c0 0-7-18 0-40z" stroke-opacity=".02" fill-opacity=".02" fill="transparent">
+         <animate attributeName="fill" values="transparent;#1111FF;transparent" begin="p.begin+0.8s" dur="1s"/>
+         <animate attributeName="stroke" values="transparent;#1111FF;transparent" begin="p.begin+0.8s" dur="1s"/>
+         <animate attributeName="fill" values="transparent;#FF1111;transparent" begin="a.begin+0.8s" dur="1s"/>
+         <animate attributeName="stroke" values="transparent;#FF1111;transparent" begin="a.begin+0.8s" dur="1s"/>
+         <animate attributeName="fill" values="transparent;#11FF33;transparent" begin="k.begin+0.8s" dur="1s"/>
+         <animate attributeName="stroke" values="transparent;#11FF33;transparent" begin="k.begin+0.8s" dur="1s"/>
       </path>
    </g>
    <use href="#b" x="-500" y="-500" transform="rotate(180)"/>
