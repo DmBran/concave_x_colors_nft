@@ -5,6 +5,8 @@ Silver
 Concept2
 ![](Silver_Concept_2.svg)
 
+![](Silver_Concept_2_GoldStroke.svg)
+
 Shimmer with a touch of gold for effect:
 
 ![](silver_shimmer_goldtouch.svg)
