@@ -353,27 +353,47 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
     string[] memory bgColors = new string[](3);
     string[] memory inColors = new string[](3);
     string[] memory dColors = new string[](3);
+    string memory label;
     for (uint256 i = 0; i < 3; i++) {
       bgColors[i] = hexColors[i]; //copy values
       inColors[i] = hexColors[i];
       dColors[i] = 'white';
-    }
-    if (syncTraits.rarity_index >= 990) {
+    } // temporarily set really common for testing purposes
+    if (syncTraits.rarity_index >= 700) { //Concave
+      label='CONCAVE';
+      bgColors[0] = '#214F70'; //Light Blue
+      bgColors[1] = '#2E2E3F'; //Dark Blue
+      bgColors[2] = '#2E2E3F'; //Dark Blue
+      inColors[0] = '#FAF7C0'; //Off-yellow
+      inColors[1] = '#214F70'; //Light Blue
+      inColors[2] = '#FAF7C0'; //Off-yellow
+      dColors[0] = '#FAF7C0'; //Off-yellow
+      dColors[1] = '#FAF7C0'; //Off-yellow
+      dColors[2] = '#FAF7C0'; //Off-yellow
+      hexColors[0] = '#FAF7C0'; //Off-yellow
+      hexColors[1] = '#FAF7C0'; //Off-yellow
+      hexColors[2] = '#FAF7C0'; //Off-yellow
+    } else if (syncTraits.rarity_index >= 400) { //GOOOLLLLLD
+      label='GOLD';
       bgColors[0] = '#CD7F32'; //Gold
       bgColors[1] = '#E5E4E2'; //Platinum
       bgColors[2] = '#725d18'; //Darker Gold
       inColors[0] = 'black';
       inColors[1] = '#C0C0C0'; //silver
       inColors[2] = '#E5E4E2';
-    } else if (syncTraits.rarity_index >= 950) {
+      hexColors = bgColors;
+    } else if (syncTraits.rarity_index >= 300) { //Silver
+      label='SILVER';
+      dColors[0] = 'black'; //Label color
       bgColors[0] = '#c0c0c0'; //Silver
       bgColors[1] = '#e5e4e2'; //Platinum
       bgColors[2] = '#c0c0c0';
       inColors[0] = 'white';
       inColors[1] = '#C0C0C0'; //silver
       inColors[2] = '#CD7F32';
-    } else if (syncTraits.rarity_index >= 850) {
-      //Tokyo Drift
+      hexColors = bgColors;
+    } else if (syncTraits.rarity_index >= 100) { //Drift
+      label='TOKYO DRIFT';
       dColors[0] = hexColors[0];
       dColors[1] = hexColors[1];
       dColors[2] = hexColors[2];
@@ -381,8 +401,8 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
 
     bytes memory svgBG = generateSVGBG(bgColors, syncTraits);
     bytes memory svgInfinity = generateSVGInfinity(inColors);
-    bytes memory svgLogo = generateSVGLogo(bgColors, syncTraits);
-    bytes memory svgDrift = generateSVGDrift(dColors);
+    bytes memory svgLogo = generateSVGLogo(hexColors, syncTraits);
+    bytes memory svgDrift = generateSVGDrift(dColors,label);
     return
       string(
         abi.encodePacked(
@@ -503,10 +523,10 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
       ';black" dur="2s" />'
     );
 
-    if (syncTraits.rarity_index >= 950) {
+    if (syncTraits.rarity_index >= 300) {//Shimmer
       logo = abi.encodePacked(
         logo,
-        '<animate begin="p.begin;q.begin;r.begin" attributeType="XML" attributeName="stroke-dashoffset" from="0" to="230" dur="1s" fill="freeze" />',
+        '<animate begin="s.begin;s.end" attributeType="XML" attributeName="stroke-dashoffset" from="0" to="280" dur="6s" fill="freeze" />',
         '<animate begin="s.begin;s.end" attributeType="XML" attributeName="stroke" values="',
         hexColors[0],
         ';',
@@ -518,20 +538,20 @@ contract Sync is ERC721Enumerable, Ownable, ReentrancyGuard {
         '" dur="6s" fill="freeze" />'
       );
     }
-
     return logo;
   }
 
   /**
    * Generates the drift
    */
-  function generateSVGDrift(string[] memory dColors)
+  function generateSVGDrift(string[] memory dColors, string memory label)
     private
     pure
     returns (bytes memory)
   {
     bytes memory borders1 = abi.encodePacked(
-      '</path><path d="M107.3179 117.5457c-13.3985 25.8524 0 56.658 0 56.658 h 6.873c-0.1535-0.4067-9.7724-26.1184 .0305-56.2648z" ',
+      '</path><text x="10" y="493" fill="',dColors[0],'" >',label,'</text>',
+      '<path d="M107.3179 117.5457c-13.3985 25.8524 0 56.658 0 56.658 h 6.873c-0.1535-0.4067-9.7724-26.1184 .0305-56.2648z" ',
       'transform="translate(-85,15) scale(1.6,1.6)" stroke-opacity=".7" fill-opacity=".7" fill="transparent">'
       '<animate id="w" attributeName="fill" values="transparent;',
       dColors[0],

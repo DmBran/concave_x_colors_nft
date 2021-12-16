@@ -51,7 +51,7 @@ async function main() {
   //console.log(svg1.toString())
   // const value2 = await thisSyncContract.tokenURI(0)
   //console.log(value2.toString())
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 30; i++) {
     const transaction3 = await thisSyncContract.mint([0, 1, 2], {
       value: ethers.utils.parseEther('0.04'),
     })
@@ -69,7 +69,7 @@ main()
 
 function output_svg(name, contents) {
   const fs = require('fs')
-  fs.writeFile('svg/test/' + name + '.svg', contents, (err) => {
+  fs.writeFile('svg/test/2_' + name + '.svg', contents, (err) => {
     // In case of a error throw err.
     if (err) console.log(err)
   })
