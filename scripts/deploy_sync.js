@@ -2,10 +2,10 @@
 async function main() {
   // We get the contract to deploy
   const Box = await ethers.getContractFactory('Sync')
-  console.log('Deploying Box...')
+  console.log('Deploying Sync...')
   const box = await Box.deploy()
   await box.deployed()
-  console.log('Box deployed to:', box.address)
+  console.log('Sync contract deployed to:', box.address)
 }
 
 main()
