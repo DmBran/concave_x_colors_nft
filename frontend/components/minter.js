@@ -65,7 +65,7 @@ export const Minter = (props) => {
     const svgs = []
 
     const colorsCount = await contract.methods.balanceOf(account).call()
-    if (!colorsCount) return;
+    if (!colorsCount) return
 
     setColorsOwned(parseInt(colorsCount))
 
@@ -343,7 +343,7 @@ export const Minter = (props) => {
               </p>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
                 grayscale default. chances for colored rares
-                <br style={{display: 'block'}}></br>
+                <br style={{ display: 'block' }}></br>
               </p>
             </div>
           )}
@@ -392,8 +392,10 @@ export const Minter = (props) => {
                       'outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
                     }
                     name="custom-input-number"
-                    onChange={e => {
-                      setMintCount(Math.min(e.target.value ?? 1, MAX_MINT_COUNT));
+                    onChange={(e) => {
+                      setMintCount(
+                        Math.min(e.target.value ?? 1, MAX_MINT_COUNT)
+                      )
                     }}
                     value={mintCount ?? 1}
                   />

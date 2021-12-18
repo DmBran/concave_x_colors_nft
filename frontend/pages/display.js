@@ -20,7 +20,6 @@ export default function Display() {
   const [loaded, setLoaded] = useState(null)
 
   useEffect(async () => {
-
     const filter = []
     if (query.tokenID || query.mintCount) setReveal(true)
 
@@ -81,8 +80,6 @@ export default function Display() {
 
     setSvgs(svgs)
   }
-
-
 
   return (
     <div className={styles.mainContainer}>
@@ -152,10 +149,11 @@ export default function Display() {
                       </div>
                     ))}
                   {!loaded && <Loader />}
-                  {loaded && !svgs?.length && <div className={'font-bold title-font uppercase text-2xl'}>
-                    No owned Color X Sync NFTs
-                  </div>
-                  }
+                  {loaded && !svgs?.length && (
+                    <div className={'font-bold title-font uppercase text-2xl'}>
+                      No owned Color X Sync NFTs
+                    </div>
+                  )}
                 </div>
               </div>
             )}
