@@ -363,8 +363,8 @@ export default function Home() {
                 LISTINGS
               </h1>
             </div>
-            <div class="flex self-center mx-auto  max-w-4xl flex-wrap justify-center content-center">
-              <div class="w-full  lg:w-1/2 mb-10  lg:mb-10 self-center text-center">
+            <div className="flex self-center mx-auto  max-w-4xl flex-wrap justify-center content-center">
+              <div className="w-full  lg:w-1/2 mb-10  lg:mb-10 self-center text-center">
                 <a
                   href="https://nftcalendar.io/event/sync-x-colors-nft-collection-a-concave-finance-project/"
                   target="_blank"
@@ -380,7 +380,7 @@ export default function Home() {
                   />
                 </a>
               </div>
-              <div class="w-full  sm:my-4 mb-10 lg:w-1/2 mb-4 self-center text-center">
+              <div className="w-full  sm:my-4 mb-10 lg:w-1/2 mb-4 self-center text-center">
                 <a
                   href={`https://opensea.com/asset/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
                   target="_blank"
@@ -391,7 +391,7 @@ export default function Home() {
                   <img width="100" src="/static/opensea.svg" />
                 </a>
               </div>
-              <div class="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
+              <div className="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
                 <a
                   href="https://www.earlycoins.io/coin-details/61bf34fb5c05686df9f02bf9"
                   target="_blank"
@@ -405,7 +405,7 @@ export default function Home() {
                   />
                 </a>
               </div>
-              <div class="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
+              <div className="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
                 <a
                   href="https://nftprojectlist.com/projects/"
                   target="_blank"
