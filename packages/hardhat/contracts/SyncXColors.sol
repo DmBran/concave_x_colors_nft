@@ -169,7 +169,6 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     //payable(0x).transfer(for_r3);
     //payable(0x).transfer(for_r4);
     //payable(0x).transfer(for_r5);
-    balance = address(this).balance;
     (bool sent,) = payable(TREASURY).call{value:for_treasury}("");
   }
 
