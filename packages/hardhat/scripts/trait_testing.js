@@ -24,7 +24,9 @@ async function main() {
   // Mint 10x colors for use by SyncXColors
   const transaction1 = await thisColorsContract.mintNextColors(10)
 
-
+	const transaction3 = await thisSyncContract.mintMany(5,[0, 1, 2], {
+      value: ethers.utils.parseEther('0.2'),
+    })
   // Mint 30 SyncXColors, outputs to SVG/Test/<tokenId>.SVG
   for (let i = 0; i < 30; i++) {
     const transaction3 = await thisSyncContract.mint([0, 1, 2], {
@@ -44,7 +46,7 @@ main()
 
 function output_svg(name, contents) {
   const fs = require('fs')
-  fs.writeFile('../../svg/test/2_' + name + '.svg', contents, (err) => {
+  fs.writeFile('../../svg/test/rarity_testing_' + name + '.svg', contents, (err) => {
     // In case of a error throw err.
     if (err) console.log(err)
   })
