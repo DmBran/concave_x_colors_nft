@@ -14,16 +14,15 @@ export default function Display() {
   const { query } = useRouter()
   const context = useWeb3Context()
   const NETWORK = Number(process.env.NEXT_PUBLIC_NETWORK)
-  const SYNC_CONTRACT = process.env.NEXT_PUBLIC_COLORS_CONTRACT
+  const SYNC_CONTRACT = process.env.NEXT_PUBLIC_SYNC_CONTRACT
   const [isOpen, setIsOpen] = useState(false)
   const [modalSvg, setModalSvg] = useState(null)
   const [svgs, setSvgs] = useState(null)
   const [reveal, setReveal] = useState(null)
   const [multi, setMulti] = useState(null)
   const [loaded, setLoaded] = useState(null)
-  console.log(isOpen)
+
   useEffect(async () => {
-    // setIsOpen(false)
     const filter = []
     if (query.tokenID || query.mintCount) setReveal(true)
 
@@ -41,7 +40,7 @@ export default function Display() {
         context.account,
         query.tokenID,
         query.mintCount
-      )
+      ).catch()
 
       setLoaded(true)
     }
@@ -56,7 +55,11 @@ export default function Display() {
           context.library.eth.abi.encodeParameter('uint256', tokenID)
         )
         .call()
-      svgs.push({ svg: svgElement, tokenId: tokenID })
+      const meta = await contract.methods
+        .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenID))
+        .call()
+      console.log(meta)
+      svgs.push({ svg: svgElement, tokenId: tokenID, meta })
       setSvgs(svgs)
       return
     }
@@ -75,11 +78,21 @@ export default function Display() {
           context.library.eth.abi.encodeParameter('uint256', tokenId)
         )
         .call()
-      const svg = svg2.replace('<svg', '<svg viewbox="0 0 500 500"')
-      svgs.push({
-        tokenId,
-        svg,
-      })
+      // const meta64 = await contract.methods
+      //   .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenId))
+      //   .call()
+      try {
+        //console.log(atob(meta64.replace("data:application/json;base64,","")))
+        //const meta = JSON.parse(atob(meta64.replace("data:application/json;base64,","")))
+        const svg = svg2.replace('<svg', '<svg viewbox="0 0 500 500"')
+        svgs.push({
+          tokenId,
+          //meta,
+          svg,
+        })
+      } catch {
+        console.error(`Failure to parse metadata for token ${tokenId}`)
+      }
     }
 
     setSvgs(svgs)

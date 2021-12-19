@@ -4,8 +4,11 @@ import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import { Navbar } from '../components/navbar'
 import styles from '../styles/meme.module.css'
+import NoSSR from 'react-no-ssr'
 
 export default function Home() {
+  const LAUNCH_DATE = process.env.NEXT_PUBLIC_LAUNCH_DATE
+
   // Renderer callback with condition
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -40,10 +43,9 @@ export default function Home() {
         <div className="text-gray-900 body-font pb-32">
           <div className={styles.mintHome}>
             <div className={styles.mintButton}>
-              <Countdown
-                date={new Date('2021-12-24 12:00:00')}
-                renderer={renderer}
-              />
+              <NoSSR>
+                <Countdown date={LAUNCH_DATE} renderer={renderer} />
+              </NoSSR>
             </div>
           </div>
           <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8">
@@ -88,7 +90,7 @@ export default function Home() {
                   <img
                     className="object-cover object-center rounded items-center"
                     alt="Medium Icon"
-                    src="data:img/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yNCAyNGgtMjR2LTI0aDI0djI0em0tNC4wMy01LjY0OXYtLjI2OWwtMS4yNDctMS4yMjRjLS4xMS0uMDg0LS4xNjUtLjIyMi0uMTQyLS4zNTl2LTguOTk4Yy0uMDIzLS4xMzcuMDMyLS4yNzUuMTQyLS4zNTlsMS4yNzctMS4yMjR2LS4yNjloLTQuNDIybC0zLjE1MiA3Ljg2My0zLjU4Ni03Ljg2M2gtNC42Mzh2LjI2OWwxLjQ5NCAxLjc5OWMuMTQ2LjEzMy4yMjEuMzI3LjIwMS41MjN2Ny4wNzJjLjA0NC4yNTUtLjAzNy41MTYtLjIxNi43MDJsLTEuNjgxIDIuMDM4di4yNjloNC43NjZ2LS4yNjlsLTEuNjgxLTIuMDM4Yy0uMTgxLS4xODYtLjI2Ni0uNDQ1LS4yMzItLjcwMnYtNi4xMTZsNC4xODMgOS4xMjVoLjQ4NmwzLjU5My05LjEyNXY3LjI3M2MwIC4xOTQgMCAuMjMyLS4xMjcuMzU5bC0xLjI5MiAxLjI1NHYuMjY5aDYuMjc0eiIvPjwvc3ZnPg=="
+                    src="/static/medium-letter.svg"
                     width="42"
                     height="36"
                   />
@@ -101,7 +103,7 @@ export default function Home() {
                   <img
                     className="object-cover object-center rounded"
                     alt="Discord Icon"
-                    src="data:img/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xOS41NCAwYzEuMzU2IDAgMi40NiAxLjEwNCAyLjQ2IDIuNDcydjIxLjUyOGwtMi41OC0yLjI4LTEuNDUyLTEuMzQ0LTEuNTM2LTEuNDI4LjYzNiAyLjIyaC0xMy42MDhjLTEuMzU2IDAtMi40Ni0xLjEwNC0yLjQ2LTIuNDcydi0xNi4yMjRjMC0xLjM2OCAxLjEwNC0yLjQ3MiAyLjQ2LTIuNDcyaDE2LjA4em0tNC42MzIgMTUuNjcyYzIuNjUyLS4wODQgMy42NzItMS44MjQgMy42NzItMS44MjQgMC0zLjg2NC0xLjcyOC02Ljk5Ni0xLjcyOC02Ljk5Ni0xLjcyOC0xLjI5Ni0zLjM3Mi0xLjI2LTMuMzcyLTEuMjZsLS4xNjguMTkyYzIuMDQuNjI0IDIuOTg4IDEuNTI0IDIuOTg4IDEuNTI0LTEuMjQ4LS42ODQtMi40NzItMS4wMi0zLjYxMi0xLjE1Mi0uODY0LS4wOTYtMS42OTItLjA3Mi0yLjQyNC4wMjRsLS4yMDQuMDI0Yy0uNDIuMDM2LTEuNDQuMTkyLTIuNzI0Ljc1Ni0uNDQ0LjIwNC0uNzA4LjM0OC0uNzA4LjM0OHMuOTk2LS45NDggMy4xNTYtMS41NzJsLS4xMi0uMTQ0cy0xLjY0NC0uMDM2LTMuMzcyIDEuMjZjMCAwLTEuNzI4IDMuMTMyLTEuNzI4IDYuOTk2IDAgMCAxLjAwOCAxLjc0IDMuNjYgMS44MjQgMCAwIC40NDQtLjU0LjgwNC0uOTk2LTEuNTI0LS40NTYtMi4xLTEuNDE2LTIuMS0xLjQxNmwuMzM2LjIwNC4wNDguMDM2LjA0Ny4wMjcuMDE0LjAwNi4wNDcuMDI3Yy4zLjE2OC42LjMuODc2LjQwOC40OTIuMTkyIDEuMDguMzg0IDEuNzY0LjUxNi45LjE2OCAxLjk1Ni4yMjggMy4xMDguMDEyLjU2NC0uMDk2IDEuMTQtLjI2NCAxLjc0LS41MTYuNDItLjE1Ni44ODgtLjM4NCAxLjM4LS43MDggMCAwLS42Ljk4NC0yLjE3MiAxLjQyOC4zNi40NTYuNzkyLjk3Mi43OTIuOTcyem0tNS41OC01LjYwNGMtLjY4NCAwLTEuMjI0LjYtMS4yMjQgMS4zMzIgMCAuNzMyLjU1MiAxLjMzMiAxLjIyNCAxLjMzMi42ODQgMCAxLjIyNC0uNiAxLjIyNC0xLjMzMi4wMTItLjczMi0uNTQtMS4zMzItMS4yMjQtMS4zMzJ6bTQuMzggMGMtLjY4NCAwLTEuMjI0LjYtMS4yMjQgMS4zMzIgMCAuNzMyLjU1MiAxLjMzMiAxLjIyNCAxLjMzMi42ODQgMCAxLjIyNC0uNiAxLjIyNC0xLjMzMiAwLS43MzItLjU0LTEuMzMyLTEuMjI0LTEuMzMyeiIvPjwvc3ZnPg=="
+                    src="/static/discord.svg"
                     width="42"
                     height="36"
                   />
@@ -114,7 +116,7 @@ export default function Home() {
                   <img
                     className="object-cover object-center rounded"
                     alt="Twitter Icon"
-                    src="data:img/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGhlaWdodD0iMTAwJSIgc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoyOyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgd2lkdGg9IjEwMCUiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2VyaWY9Imh0dHA6Ly93d3cuc2VyaWYuY29tLyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik00NDkuNDQ2LDBjMzQuNTI1LDAgNjIuNTU0LDI4LjAzIDYyLjU1NCw2Mi41NTRsMCwzODYuODkyYzAsMzQuNTI0IC0yOC4wMyw2Mi41NTQgLTYyLjU1NCw2Mi41NTRsLTM4Ni44OTIsMGMtMzQuNTI0LDAgLTYyLjU1NCwtMjguMDMgLTYyLjU1NCwtNjIuNTU0bDAsLTM4Ni44OTJjMCwtMzQuNTI0IDI4LjAyOSwtNjIuNTU0IDYyLjU1NCwtNjIuNTU0bDM4Ni44OTIsMFptLTI1My45MjcsNDI0LjU0NGMxMzUuOTM5LDAgMjEwLjI2OCwtMTEyLjY0MyAyMTAuMjY4LC0yMTAuMjY4YzAsLTMuMjE4IDAsLTYuNDM3IC0wLjE1MywtOS41MDJjMTQuNDA2LC0xMC40MjEgMjYuOTczLC0yMy40NDggMzYuOTM1LC0zOC4zMTRjLTEzLjE4LDUuODI0IC0yNy40MzMsOS44MDkgLTQyLjQ1MiwxMS42NDhjMTUuMzI2LC05LjE5NiAyNi45NzMsLTIzLjYwMiAzMi40OSwtNDAuOTJjLTE0LjI1Miw4LjQyOSAtMzAuMDM4LDE0LjU2IC00Ni44OTYsMTcuOTMxYy0xMy40ODcsLTE0LjQwNiAtMzIuNjQ0LC0yMy4yOTUgLTUzLjk0NiwtMjMuMjk1Yy00MC43NjcsMCAtNzMuODcsMzMuMTA0IC03My44Nyw3My44N2MwLDUuODI0IDAuNjEzLDExLjQ5NCAxLjk5MiwxNi44NThjLTYxLjQ1NiwtMy4wNjUgLTExNS44NjIsLTMyLjQ5IC0xNTIuMzM3LC03Ny4yNDFjLTYuMjg0LDEwLjg4MSAtOS45NjIsMjMuNjAxIC05Ljk2MiwzNy4wODhjMCwyNS41OTQgMTMuMDI3LDQ4LjI3NiAzMi45NSw2MS40NTZjLTEyLjEwNywtMC4zMDcgLTIzLjQ0OCwtMy42NzggLTMzLjQxLC05LjE5NmwwLDAuOTJjMCwzNS44NjIgMjUuNDQxLDY1LjU5NCA1OS4zMTEsNzIuNDljLTYuMTMsMS42ODYgLTEyLjcyLDIuNjA2IC0xOS40NjQsMi42MDZjLTQuNzUxLDAgLTkuMzQ4LC0wLjQ2IC0xMy45NDYsLTEuMzhjOS4zNDksMjkuNDI2IDM2LjYyOCw1MC43MjggNjguOTY1LDUxLjM0MWMtMjUuMjg3LDE5Ljc3MSAtNTcuMTY0LDMxLjU3MSAtOTEuOCwzMS41NzFjLTUuOTc3LDAgLTExLjgwMSwtMC4zMDYgLTE3LjYyNSwtMS4wNzNjMzIuMzM3LDIxLjE1IDcxLjI2NCwzMy40MSAxMTIuOTUsMzMuNDFaIi8+PC9zdmc+"
+                    src="/static/twitter.svg"
                     width="42"
                     height="36"
                   />
@@ -361,63 +363,61 @@ export default function Home() {
                 LISTINGS
               </h1>
             </div>
-            <div className={'flex justify-center'}>
-              <div
-                className={
-                  'flex w-1/2 flex-wrap content-center items-center justify-center'
-                }
-              >
-                <div className={'flex align-top align'}>
-                  <a
-                    href="https://nftcalendar.io/event/sync-x-colors-nft-collection-a-concave-finance-project/"
-                    target="_blank"
-                    className={
-                      'mx-12 relative top-5 align-top title-font text-md font-black mb-4 uppercase'
-                    }
-                  >
-                    <img
-                      className="ml-3 inline object-cover object-center rounded"
-                      alt="NFT Calendar"
-                      src="/static/nftcalendar-logo.svg"
-                      width="100"
-                    />
-                  </a>
-                  <a
-                    href={`https://opensea.com/asset/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
-                    target="_blank"
-                    className={
-                      'mx-12 self-start align-top title-font text-md font-black mb-4 uppercase'
-                    }
-                  >
-                    <img width="100" src="/static/opensea.svg" />
-                  </a>
-                </div>
-                <div className={' mt-20 flex align-top align'}>
-                  <div className={'mx-12 self-center '}>
-                    <a
-                      href="https://www.earlycoins.io/coin-details/61bf34fb5c05686df9f02bf9"
-                      target="_blank"
-                      className={'title-font text-md font-black uppercase'}
-                    >
-                      <img
-                        width="250"
-                        src="https://www.earlycoins.io/images/header-logo.png"
-                      />
-                    </a>
-                  </div>
-                  <div className={'mx-12 relative  self-center'}>
-                    <a
-                      href="https://nftprojectlist.com/projects/"
-                      target="_blank"
-                      className={'title-font text-md font-black uppercase'}
-                    >
-                      <img
-                        width="300"
-                        src="https://nftprojectlist.com/wp-content/uploads/2021/08/logo-transparent-300x51.png"
-                      />
-                    </a>
-                  </div>
-                </div>
+            <div class="flex self-center mx-auto  max-w-4xl flex-wrap justify-center content-center">
+              <div class="w-full  lg:w-1/2 mb-10  lg:mb-10 self-center text-center">
+                <a
+                  href="https://nftcalendar.io/event/sync-x-colors-nft-collection-a-concave-finance-project/"
+                  target="_blank"
+                  className={
+                    'inline-block relative top-5 align-top title-font text-md font-black mb-4 uppercase'
+                  }
+                >
+                  <img
+                    className="ml-3 inline object-cover object-center rounded"
+                    alt="NFT Calendar"
+                    src="/static/nftcalendar-logo.svg"
+                    width="100"
+                  />
+                </a>
+              </div>
+              <div class="w-full  sm:my-4 mb-10 lg:w-1/2 mb-4 self-center text-center">
+                <a
+                  href={`https://opensea.com/asset/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
+                  target="_blank"
+                  className={
+                    ' inline-block self-start align-top title-font text-md font-black mb-4 uppercase'
+                  }
+                >
+                  <img width="100" src="/static/opensea.svg" />
+                </a>
+              </div>
+              <div class="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
+                <a
+                  href="https://www.earlycoins.io/coin-details/61bf34fb5c05686df9f02bf9"
+                  target="_blank"
+                  className={
+                    'inline-block title-font text-md font-black uppercase'
+                  }
+                >
+                  <img
+                    width="250"
+                    src="https://www.earlycoins.io/images/header-logo.png"
+                  />
+                </a>
+              </div>
+              <div class="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
+                <a
+                  href="https://nftprojectlist.com/projects/"
+                  target="_blank"
+                  className={
+                    'inline-block title-font text-md font-black uppercase'
+                  }
+                >
+                  <img
+                    width="300"
+                    src="https://nftprojectlist.com/wp-content/uploads/2021/08/logo-transparent-300x51.png"
+                  />
+                </a>
               </div>
             </div>
           </div>

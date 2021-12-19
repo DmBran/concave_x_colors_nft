@@ -41,8 +41,8 @@ export const Minter = (props) => {
         SyncXColors.abi,
         SYNC_CONTRACT
       )
-      const minted = 0
-      //const minted = await contract.methods.currentSupply(context.library.eth.abi.encodeParameter('uint256', tokenID)).call()
+      //const minted = 0
+      const minted = await syncContract.methods.totalSupply().call()
       setAmountMinted(minted)
 
       if (props.tokenID) {
@@ -104,22 +104,23 @@ export const Minter = (props) => {
       const tokens = svgs
         .filter((svg) => svg.selected)
         .map((svg) => parseInt(svg.tokenId))
-
-      const txCall = contract.methods.mintMany(mintCount, tokens)
+      console.log([mintCount, tokens])
+      const txCall = contract.methods.mint(tokens)
+      const ethAmount = context.library.utils.toWei(MINT_COST, 'ether')
+      const value = mintCount * ethAmount
 
       const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
       console.log('why')
-      const gasEstimate = await context.library.eth.estimateGas({
-        from,
-        data,
-        to,
-      })
-      console.log('wh2y')
+      // const gasEstimate = await context.library.eth.estimateGas({
+      //   value,
+      //   from,
+      //   data,
+      //   to,
+      // })
+      // console.log('wh2y')
       // The BUFFOOOOOR
-      const gas = gasEstimate * 1.1
-      // const gas = 500000
-      const ethAmount = context.library.utils.toWei(MINT_COST, 'ether')
-      const value = mintCount * ethAmount
+      //const gas = gasEstimate * 1.1
+      const gas = 500000
 
       const tx = {
         value,

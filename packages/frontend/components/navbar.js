@@ -71,21 +71,21 @@ export const Navbar = () => {
                   FAQ
                 </a>
               </Link>
-              {'' && (
+              {1 && (
                 <Link href="/mint">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
               )}
-              {'' && (
+              {1 && (
                 <Link href="/display">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>
                 </Link>
               )}
-              {'' && context.active && context.account && (
+              {1 && context.active && context.account && (
                 <a
                   target="_blank"
                   href={`https://etherscan.io/address/${context.account}`}
@@ -97,7 +97,7 @@ export const Navbar = () => {
                   </p>
                 </a>
               )}
-              {'' && !context.active && (
+              {1 && !context.active && (
                 <button
                   type="button"
                   className={
