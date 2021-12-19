@@ -1,7 +1,7 @@
 // scripts/deploy.js
 async function main() {
   // We get the contract to deploy
-  const Box = await ethers.getContractFactory('Sync')
+  const Box = await ethers.getContractFactory('SyncXColors')
   console.log('Deploying Sync...')
   const box = await Box.deploy()
   await box.deployed()

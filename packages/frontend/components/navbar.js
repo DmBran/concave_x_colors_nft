@@ -1,11 +1,9 @@
 /*  ./components/Navbar.jsx     */
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useWeb3Context } from 'web3-react'
-export const Navbar = (props) => {
-  const { query } = useRouter()
-  console.log(query)
+
+export const Navbar = () => {
   const context = useWeb3Context()
 
   const [active, setActive] = useState(false)
@@ -23,7 +21,7 @@ export const Navbar = (props) => {
       <nav className="bg-gray-300 bg-opacity-50">
         <div className="container mx-auto flex flex-wrap p-4 md:mb-4">
           <Link href="/">
-            <p className="flex title-font font-bold items-center text-gray-900 md:mb-0">
+            <a className="flex title-font font-bold items-center text-gray-900 md:mb-0">
               <span className="mr-2 text-xl">SYNC</span>
               <span
                 style={{ fontSize: '40px', top: '-2px' }}
@@ -33,7 +31,7 @@ export const Navbar = (props) => {
                 &infin;
               </span>
               <span className="ml-2 text-xl">COLORS</span>
-            </p>
+            </a>
           </Link>
 
           {/*Mobile Button goes here*/}
@@ -68,37 +66,42 @@ export const Navbar = (props) => {
                   Home
                 </a>
               </Link>
-              {1 && (
+              <Link href="/faq">
+                <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
+                  FAQ
+                </a>
+              </Link>
+              {'' && (
                 <Link href="/mint">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
               )}
-              {1 && (
+              {'' && (
                 <Link href="/display">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>
                 </Link>
               )}
-              {context.active && context.account && (
+              {'' && context.active && context.account && (
                 <a
                   target="_blank"
                   href={`https://etherscan.io/address/${context.account}`}
                 >
-                  <p className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
+                  <p className="ring-4 ring-black   ml-6 text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     {context.account.substring(0, 5) +
                       '....' +
                       context.account.substring(11, 16)}
                   </p>
                 </a>
               )}
-              {!context.active && (
+              {'' && !context.active && (
                 <button
                   type="button"
                   className={
-                    'uppercase inline-flex ring-1 ring-indigo-500 items-center  py-1 px-3 focus:outline-none rounded text-base'
+                    'ml-6  uppercase inline-flex ring-4 ring-black items-center  py-1 px-3 focus:outline-none rounded text-base'
                   }
                   onClick={activateMM}
                 >

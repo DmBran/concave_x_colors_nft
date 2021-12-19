@@ -2,24 +2,24 @@ import Router from 'next/router'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useWeb3Context } from 'web3-react'
-import TheColors from '../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json'
-import SyncXColors from '../../artifacts/contracts/SyncXColors.sol/Sync.json'
+import TheColors from '../../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json'
+import SyncXColors from '../../../artifacts/contracts/SyncXColors.sol/Sync.json'
 import styles from '../styles/meme.module.css'
 import { Loader } from './loader'
+import process from 'process'
 
 export const Minter = (props) => {
   const context = useWeb3Context()
 
-  // Mainnet
-  //const network = 1;
-  // Ropstens
-  const network = 3
-  const MAX_MINT_COUNT = 5
-  const MAX_SUPPLY = 3333
-  const MAX_COLORS = 3
-  const COLORS_CONTRACT = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
-  //const SPIRALS_CONTRACT = '0x2c18BCab190A39b82126CB421593706067A57395'
-  const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
+  const NETWORK = Number(process.env.NEXT_PUBLIC_NETWORK)
+  const MAX_MINT_COUNT = Number(process.env.NEXT_PUBLIC_MAX_MINT_COUNT)
+  const MAX_SUPPLY = Number(process.env.NEXT_PUBLIC_MAX_SUPPLY)
+  const MAX_COLORS = Number(process.env.NEXT_PUBLIC_MAX_COLORS)
+  const COLORS_CONTRACT = process.env.NEXT_PUBLIC_COLORS_CONTRACT
+  const SYNC_CONTRACT = process.env.NEXT_PUBLIC_COLORS_CONTRACT
+  const MINT_COST = process.env.NEXT_PUBLIC_MINT_COST
+  const COLOR_COST = process.env.NEXT_PUBLIC_COLOR_COST
+
   const [svgs, setSvgs] = useState(null)
   const [sync, setSync] = useState(null)
   const [amountMinted, setAmountMinted] = useState(null)
@@ -33,10 +33,10 @@ export const Minter = (props) => {
   useEffect(async () => {
     if (!mintCount) setMintCount(1)
 
-    setMintColors(0)
+    if (!mintColors) setMintColors(0)
     setSvgs([])
 
-    if (context.active) {
+    if (context.active && context.networkId === NETWORK) {
       const syncContract = new context.library.eth.Contract(
         SyncXColors.abi,
         SYNC_CONTRACT
@@ -69,7 +69,7 @@ export const Minter = (props) => {
 
     setColorsOwned(parseInt(colorsCount))
 
-    for (const i = 0; i < colorsCount; ++i) {
+    for (let i = 0; i < colorsCount; ++i) {
       const tokenId = await contract.methods
         .tokenOfOwnerByIndex(
           account,
@@ -99,33 +99,40 @@ export const Minter = (props) => {
         SYNC_CONTRACT
       )
 
+      console.log(contract.methods)
+
       const tokens = svgs
         .filter((svg) => svg.selected)
         .map((svg) => parseInt(svg.tokenId))
-      const txCall = contract.methods.mintMany(tokens, mintCount)
+
+      const txCall = contract.methods.mintMany(mintCount, tokens)
 
       const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
-
+      console.log('why')
       const gasEstimate = await context.library.eth.estimateGas({
         from,
         data,
         to,
       })
-
+      console.log('wh2y')
       // The BUFFOOOOOR
       const gas = gasEstimate * 1.1
+      // const gas = 500000
+      const ethAmount = context.library.utils.toWei(MINT_COST, 'ether')
+      const value = mintCount * ethAmount
 
       const tx = {
+        value,
         from,
         data,
         gas,
         to,
       }
-
+      console.log('why3')
       txToast = toast.loading('Transaction processing')
       const tx2 = await context.library.eth
         .sendTransaction(tx, address)
-        .catch((error) => {
+        .catch(() => {
           toast.error('Transaction failed!', {
             id: txToast,
           })
@@ -185,8 +192,11 @@ export const Minter = (props) => {
 
       // The BUFFOOOOOR
       const gas = gasEstimate * 1.1
+      const ethAmount = context.library.toWei(COLOR_COST, 'ether')
+      const value = mintCount * ethAmount
 
       const tx = {
+        value,
         from,
         data,
         gas,
@@ -196,7 +206,7 @@ export const Minter = (props) => {
       txToast = toast.loading('Transaction processing')
       const tx2 = await context.library.eth
         .sendTransaction(tx, address)
-        .catch((error) => {
+        .catch(() => {
           toast.error('Transaction failed!', {
             id: txToast,
           })
@@ -277,14 +287,16 @@ export const Minter = (props) => {
   }
 
   if (context.active) {
-    if (context.networkId !== network) {
+    console.log(NETWORK)
+    console.log(context.networkId)
+    if (context.networkId !== NETWORK) {
       return (
         <div
           className={
             'flex-1 font-bold text-red flex text-center center-content justify-center'
           }
         >
-          <p className={'mb-0 align-center'}>
+          <p className={'font-bold title-font uppercase text-4xl'}>
             Please switch network to Ethereum mainnet
           </p>
         </div>
@@ -349,7 +361,11 @@ export const Minter = (props) => {
           )}
           {tokenID && (
             <div className={'mt-10 mb-10'}>
-              <p className={'text-center mt-3 mb-3 text-xl font-bold'}>
+              <p
+                className={
+                  'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-0 mt-0 uppercase'
+                }
+              >
                 Sync X Color
               </p>
               <div className={'flex colors justify-center content-center'}>

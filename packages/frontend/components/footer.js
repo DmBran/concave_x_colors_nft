@@ -1,8 +1,27 @@
 import styles from '../styles/meme.module.css'
-
+import process from 'process'
+import { useWeb3Context } from 'web3-react'
 export const Footer = () => {
+  const context = useWeb3Context()
+
   return (
     <footer className={styles.footer}>
+      {context.networkId === 1 && (
+        <div className={'flex justify-center  flex-1 flex-grow text-center'}>
+          <p className={'text-center text-sm mt-20 mb-20 font-xs'}>
+            <span className={'block mb-2 font-bold text-xl'}>
+              CONTRACT ADDRESS
+            </span>
+            <a
+              href={`https://etherscan.io/contract/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
+              target="_blank"
+              className={'block mb-10 text-lg'}
+            >
+              {process.env.NEXT_PUBLIC_SYNC_CONTRACT}
+            </a>
+          </p>
+        </div>
+      )}
       <div className={'text-center center-text'}>
         <a
           href="/"
@@ -44,6 +63,7 @@ export const Footer = () => {
           </svg>
         </a>
       </div>
+
       <div className={'flex justify-center  flex-1 flex-grow text-center'}>
         <p className={'text-center text-sm mt-20 font-xs'}>
           <span className={'block'}>DISCLAIMER</span> All purchases are final.
