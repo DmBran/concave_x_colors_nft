@@ -90,6 +90,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
                 image,
                 '",',
                 generateNameDescription(tokenId),
+                ',',
                 generateAttributes(tokenId, syncTraits),
                 '}'
               )
@@ -205,7 +206,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     require(msg.value == (mintPrice * _mintAmount), 'Insufficient funds');
 
     // Validate colorTokenIds
-    require(isHolder(colorTokenIds) == true, 'COLORS not owned by sender.');
+    require(isHolder(colorTokenIds), 'COLORS not owned by sender.');
 
     for (uint256 i = _mintIndex; i < (_mintIndex + _mintAmount); i++) {
       // Update states
@@ -325,8 +326,11 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   ) internal view returns (string memory) {
     bytes memory buffer = abi.encodePacked(
       '"attributes":[',
-      '{"trait_type":"Rarity","value":"',
+      '{"trait_type":"Theme","value":"',
       syncTraits.rarity,
+      '"},',
+      '{"trait_type":"Rarity","value":"',
+      syncTraits.symbol,
       '"},',
       '{"trait_type":"Colors","value":"',
       getColorDescriptor(tokenId),
