@@ -289,7 +289,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
           unicode'"description":"The SYNCxColors are generated and stored entirely on-chain, and may be linked with up to 3 THE COLORS primitives for epic effect.',
           '\\nToken id: #',
           tokenId.toString(),
-          '",'
+          '"'
         )
       );
   }
