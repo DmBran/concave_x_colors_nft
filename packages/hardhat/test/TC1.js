@@ -8,10 +8,11 @@ const THE_COLORS = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 const TREASURY = '0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2';
 const MAX_SUPPLY = 3333;
 
-const _name = 'SyncXColorsNFT';
+const _name = 'Sync x Colors';
 const _symbol = 'SyncXColors';
 const maxMintAmount = 10;
 const price_in_ether = 0.04;
+const resyncPrice = 0.005;
 const price = ethers.utils.parseEther(price_in_ether.toString());
 const revealed = false;
 
@@ -21,7 +22,6 @@ let colorsOwnerSigner;
 /**
  Helper Variables
  */
-let syncXColors;
 let syncXColors;
 let deployer;
 let thirdParty;
@@ -33,12 +33,7 @@ let thirdParty;
 const deploy = async () => {
     [deployer,thirdParty] =  await ethers.getSigners();
     SyncXColors = await ethers.getContractFactory("SyncXColors");
-    syncXColors = await SyncXColors.deploy(
-        _name,
-        _symbol,
-        _initBaseURI,
-        _initNotRevealedUri
-    );
+    syncXColors = await SyncXColors.deploy();
     console.log('>_')
 }
 
@@ -90,9 +85,6 @@ describe("syncXColors: Reads public constants", () => {
     it(`THE_COLORS is "${THE_COLORS}"`, async () => {
         expect(await syncXColors.THE_COLORS()).to.equal(THE_COLORS)
     })
-    it(`TREASURY is "${TREASURY}"`, async () => {
-        expect(await syncXColors.TREASURY()).to.equal(TREASURY)
-    })
     it(`MAX_SUPPLY is "${MAX_SUPPLY}"`, async () => {
         expect(await syncXColors.MAX_SUPPLY()).to.equal(MAX_SUPPLY)
     })
@@ -101,85 +93,31 @@ describe("syncXColors: Reads public constants", () => {
 describe("syncXColors: Reads public variables", () => {
     before(deploy)
     it(`name is "${_name}"`, async () => {
+      console.info(await syncXColors.name());
         expect(await syncXColors.name()).to.equal(_name)
     })
     it(`symbol is "${_symbol}"`, async () => {
         expect(await syncXColors.symbol()).to.equal(_symbol)
     })
-    it(`baseURI is "${_initBaseURI}"`, async () => {
-        expect(await syncXColors.baseURI()).to.equal(_initBaseURI)
-    })
-    //it(`notRevealedUri is "${_initNotRevealedUri}"`, async () => {
-    //    expect(await syncXColors.notRevealedUri()).to.equal(_initNotRevealedUri)
-    //})
     it(`maxMintAmount is "${maxMintAmount}"`, async () => {
         expect(await syncXColors.maxMintAmount()).to.equal(maxMintAmount)
     })
-    it(`price is "${ethers.utils.formatEther(mintPrice)}"`, async () => {
+    it(`price is "${ethers.utils.formatEther(price)}"`, async () => {
         expect(await syncXColors.mintPrice()).to.equal(price)
     })
-    it(`price is "${ethers.utils.formatEther(resyncPrice)}"`, async () => {
-        expect(await syncXColors.resyncPrice()).to.equal(price)
-    })
-    
-    //it(`revealed is "${revealed}"`, async () => {
-    //    expect(await syncXColors.revealed()).to.equal(revealed)
-    //})
-    //it(`isPublicMintActive is "${false}"`, async () => {
-    //    expect(await syncXColors.isPublicMintActive()).to.equal(false)
-    //})
 });
 
 describe("syncXColors: Owner functions", () => {
     beforeEach(deploy)
-    
-    describe("setPublicMintActive()", () => {
-        it(`Third party calling setPublicMintActive() should revert with "Ownable: caller is not the owner"`, async () => {
-            await expect(
-                syncXColors.connect(thirdParty).setPublicMintActive(true)
-            ).to.be.revertedWith('Ownable: caller is not the owner')
-        })
-        it(`Owner calling setPublicMintActive() should pass"`, async () => {
-            await syncXColors.setPublicMintActive(true);
-        })
-        it(`Calling setPublicMintActive() with parameter "true" should make isPublicMintActive return "true"`, async () => {
-            await syncXColors.setPublicMintActive(true);
-            expect(await syncXColors.isPublicMintActive()).to.equal(true);
-        })
-        it(`Owner can call setPublicMintActive multiple times`, async () => {
-            await syncXColors.setPublicMintActive(true);
-            expect(await syncXColors.isPublicMintActive()).to.equal(true);
-            await syncXColors.setPublicMintActive(false);
-            expect(await syncXColors.isPublicMintActive()).to.equal(false);
-            await syncXColors.setPublicMintActive(true);
-            expect(await syncXColors.isPublicMintActive()).to.equal(true);
-        })
-    })
     describe("tokenURI()", () => {
         it(`Calling tokenURI() on nonexistent tokenId should revert with "ERC721Metadata: URI query for nonexistent token"`, async () => {
             await expect(
                 syncXColors.tokenURI(0)
-            ).to.be.revertedWith("ERC721Metadata: URI query for nonexistent token")
-        })
-        it(`Calling tokenURI() on an existing tokenId when not revealed should return "${_initNotRevealedUri}"`, async () => {
-            ;
-            await getColorsMinter()
-            await mint(colorsOwnerSigner,1)
-            expect(
-                await syncXColors.tokenURI(0)
-            ).to.equal(_initNotRevealedUri)
-        })
-        it(`Calling tokenURI() on an existing tokenId 0 after reveal should return "${_initBaseURI}0.json"`, async () => {
-            ;
-            await getColorsMinter()
-            await mint(colorsOwnerSigner,1)
-            await syncXColors.reveal();
-            expect(
-                await syncXColors.tokenURI(0)
-            ).to.equal(`${_initBaseURI}0.json`)
+            ).to.be.revertedWith("ERC721: operator query for nonexistent token")
         })
     })
 
+    /*
     describe("withdraw()", () => {
         it(`after succesfull sellout - contract balance should equal ${ethers.utils.formatEther(ethers.utils.parseEther((price_in_ether*(MAX_SUPPLY-TOTAL_COLORS_QUOTA)).toString()))}`, async () => {
             expect(await syncXColors.totalSupply()).to.equal(200);
@@ -276,6 +214,7 @@ describe("syncXColors: Owner functions", () => {
             ).to.equal(ethers.utils.parseEther((0).toString()))
         }).timeout(0);
     })
+    */
 
     // it(``, async () => {})
 })
@@ -284,6 +223,7 @@ describe("Public Functions", () => {
     beforeEach(deploy)
     describe('mint()', () => {
         
+        /*
         describe("public sale active check",() => {
             it(`mint should fail with "public sale not active" if public sale not active yet`, async () => {
                 await expect(
@@ -328,9 +268,11 @@ describe("Public Functions", () => {
                 expect(await syncXColors.totalSupply()).to.equal(1);
             }).timeout(0)
         })
+       */
     })
     
     describe('mint()', () => {
+      /*
         describe("presale check",() => {
             it(`mintColorsOnce should fail with "presale over" if public sale not active yet`, async () => {
                 await syncXColors.setPublicMintActive(true);
@@ -361,9 +303,11 @@ describe("Public Functions", () => {
                 ).to.be.revertedWith('Only owner can claim.')
             })
         })
+       */
     })
 
     describe('mintMany()', () => {
+      /*
         describe("whenNotPaused",() => {
             it(`mintMany should fail with "Pausable: paused" if minting when paused`, async () => {
                 await expect(
@@ -497,6 +441,7 @@ describe("Public Functions", () => {
                 expect(await syncXColors.totalSupply()).to.equal(5);
             }).timeout(0)
         })
+       */
     })
 
 })
@@ -505,6 +450,7 @@ describe("Public Functions", () => {
 describe("Public View Functions", () => {
     beforeEach(deploy)
     describe("isPublicMintActive",() => {
+      /*
         it("shoud return false when supply < 200 or _isPublicMintActive=false",async () => {
             expect(await syncXColors.isPublicMintActive()).to.equal(false);
         }).timeout(0)
@@ -517,5 +463,6 @@ describe("Public View Functions", () => {
             await syncXColors.setPublicMintActive(true)
             expect(await syncXColors.isPublicMintActive()).to.equal(true);
         }).timeout(0)
+       */
     })
 })

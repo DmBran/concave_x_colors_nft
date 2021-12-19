@@ -3,6 +3,9 @@
   padding: 0;
 }
 
+.the-colors {
+  font-style: italic;
+}
 .hamburger {
   display: none;
 }
@@ -347,7 +350,8 @@
   );
   background-repeat: no-repeat;
   margin: auto;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  min-height: 25vh;
 }
 
 .error {

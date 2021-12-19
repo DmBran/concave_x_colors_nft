@@ -32,6 +32,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   // Declare Private
   address private constant TREASURY =
     address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
+  address private constant TEAM =
+    address(0x263853ef2C3Dd98a986799aB72E3b78334EB88cb);
   bool internal _isPublicMintActive;
   mapping(uint256 => uint16[]) private _colorTokenIds;
   mapping(uint256 => uint256) private _seed; // Trait seed is generated at time of mint and stored on-chain
@@ -98,7 +100,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   }
 
   /**
-   * Returns NFT Metadata JSON
+   * TODO: REMOVE AFTER TESTS. Returns NFT Metadata JSON
    */
   function getTokenMetadata(uint256 tokenId)
     external
@@ -128,7 +130,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   }
 
   /**
-   * Returns SVG
+   * TODO: REMOVE AFTER TESTS. Returns SVG
    */
   function getTokenSVG(uint256 tokenId) external view returns (string memory) {
     require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
@@ -139,7 +141,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   }
 
   /**
-   * Returns Base64 SVG
+   * TODO: REMOVE AFTER TESTS. Returns Base64 SVG
    */
   function getBase64TokenSVG(uint256 tokenId)
     external
@@ -156,7 +158,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   /**
    * Withdraw accrued funds from contract
    */
-  function withdraw() external onlyOwner {
+  function withdraw() internal {
     uint256 balance = address(this).balance;
     uint256 for_treasury = (balance * 33) / 100; //33% 1 way
     uint256 for_r1 = (balance * 67) / (5 * 100); //67% 5 ways
@@ -169,8 +171,23 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     //payable(0x).transfer(for_r3);
     //payable(0x).transfer(for_r4);
     //payable(0x).transfer(for_r5);
-    balance = address(this).balance;
     (bool sent,) = payable(TREASURY).call{value:for_treasury}("");
+    require(sent);
+  }
+
+  /**
+   * Withdraw by owner
+   */
+  function withdrawOwner() external onlyOwner {
+    withdraw();
+  }
+
+  /**
+   * Withdraw by team
+   */
+  function withdrawTeam() external {
+    require(msg.sender == TEAM, "Only team can withdraw");
+    withdraw();
   }
 
   /**
