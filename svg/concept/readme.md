@@ -1,4 +1,15 @@
-Concept
+**Concept**
+
+
+Common versus Stroke Mosaic
+
+Stroke Mosaic:
+
+![](stroke_mosaic.svg)
+
+Common:
+
+![](common.svg)
 
 Silver
 
