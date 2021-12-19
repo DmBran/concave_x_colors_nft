@@ -175,10 +175,16 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     require(sent);
   }
 
+  /**
+   * Withdraw by owner
+   */
   function withdrawOwner() external onlyOwner {
     withdraw();
   }
 
+  /**
+   * Withdraw by team
+   */
   function withdrawTeam() external {
     require(msg.sender == TEAM, "Only team can withdraw");
     withdraw();
