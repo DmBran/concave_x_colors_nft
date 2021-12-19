@@ -5,7 +5,7 @@ Common versus Stroke Mosaic
 
 Stroke Mosaic:
 
-![](stroke mosaic.svg)
+![](stroke_mosaic.svg)
 
 Common:
 
