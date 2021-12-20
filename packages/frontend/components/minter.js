@@ -2,11 +2,13 @@ import Router from 'next/router'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useWeb3Context } from 'web3-react'
-import TheColors from '../../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json'
-import SyncXColors from '../../../artifacts/contracts/SyncXColors.sol/Sync.json'
+import TheColors from '../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json'
+import SyncXColors from '../artifacts/contracts/SyncXColors.sol/SyncXColors.json'
 import styles from '../styles/meme.module.css'
 import { Loader } from './loader'
 import process from 'process'
+import { decodeToken } from '../helpers/decode-token'
+import { sendTx } from '../helpers/send-tx'
 
 export const Minter = (props) => {
   const context = useWeb3Context()
@@ -92,146 +94,67 @@ export const Minter = (props) => {
 
   async function mintSync() {
     setSubmitting('syncs')
-    let txToast
-    try {
-      const contract = new context.library.eth.Contract(
-        SyncXColors.abi,
-        SYNC_CONTRACT
-      )
 
-      const tokens = svgs
-        .filter((svg) => svg.selected)
-        .map((svg) => parseInt(svg.tokenId))
+    const contract = new context.library.eth.Contract(
+      SyncXColors.abi,
+      SYNC_CONTRACT
+    )
 
-      const txCall = contract.methods.mintMany(mintCount, tokens)
-      const ethAmount = context.library.utils.toWei(MINT_COST, 'ether')
-      const value = mintCount * ethAmount
+    const tokens = svgs
+      .filter((svg) => svg.selected)
+      .map((svg) => parseInt(svg.tokenId))
 
-      const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
+    const txCall = contract.methods.mint(mintCount, tokens)
 
-      const gasEstimate = await context.library.eth.estimateGas({
-        value,
-        from,
-        data,
-        to,
-      })
+    const tx = await sendTx(context.library, {
+      data: txCall.encodeABI(),
+      to: SYNC_CONTRACT,
+      cost: MINT_COST,
+      count: mintCount,
+      from: address,
+    })
 
-      // The BUFFOOOOOR
-      const gas = parseInt(gasEstimate * 1.1)
-
-      const tx = {
-        value,
-        from,
-        data,
-        gas,
-        to
-      }
-      console.log(tx)
-      txToast = toast.loading('Transaction processing')
-      const tx2 = await context.library.eth
-        .sendTransaction(tx, address)
-        .catch(() => {
-          toast.error('Transaction failed!', {
-            id: txToast,
-          })
-          setSubmitting(undefined)
-        })
-      console.log(tx2)
-      if (!tx2?.transactionHash) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-        setSubmitting(undefined)
-      } else {
-        toast.success('Transaction successful!', {
-          id: txToast,
-        })
-        return Router.push(`/display?mintCount=${mintCount}`)
-      }
-    } catch (ex) {
-      console.log(ex)
-      setSubmitting(undefined)
-      if (txToast) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-      }
-    }
+    setSubmitting(undefined)
+    if (tx?.transactionHash)
+      return Router.push(`/display?mintCount=${mintCount}`)
+    return
   }
 
   async function fetchSync(contract, tokenID) {
-    const svgElement = await contract.methods
-      .getTokenSVG(context.library.eth.abi.encodeParameter('uint256', tokenID))
+    const tokenURI = await contract.methods
+      .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenID))
       .call()
-    return svgElement
+    const token = decodeToken(tokenURI)
+    return token.svg
   }
 
   async function remintSync() {
     setSubmitting('sync')
-    let txToast
-    try {
-      const contract = new context.library.eth.Contract(
-        SyncXColors.abi,
-        SYNC_CONTRACT
-      )
 
-      const tokens = svgs
-        .filter((svg) => svg.selected)
-        .map((svg) => parseInt(svg.tokenId))
-      const txCall = contract.methods.updateColors(props.tokenID, tokens)
-      const ethAmount = context.library.toWei(COLOR_COST, 'ether')
-      const value = mintCount * ethAmount
+    const contract = new context.library.eth.Contract(
+      SyncXColors.abi,
+      SYNC_CONTRACT
+    )
 
-      const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
+    const tokens = svgs
+      .filter((svg) => svg.selected)
+      .map((svg) => parseInt(svg.tokenId))
 
-      const gasEstimate = await context.library.eth.estimateGas({
-        value,
-        from,
-        data,
-        to,
-      })
+    const txCall = contract.methods.updateColors(props.tokenID, tokens)
 
-      // The BUFFOOOOOR
-      const gas = parseInt(gasEstimate * 1.1)
+    const tx = await sendTx(context.library, {
+      data: txCall.encodeABI(),
+      to: SYNC_CONTRACT,
+      cost: COLOR_COST,
+      from: address,
+      count: 1,
+    })
 
-      const tx = {
-        value,
-        from,
-        data,
-        gas,
-        to,
-      }
+    setSubmitting(undefined)
+    if (tx?.transactionHash)
+      return Router.push(`/display?tokenID=${props.tokenID}`)
 
-      txToast = toast.loading('Transaction processing')
-      const tx2 = await context.library.eth
-        .sendTransaction(tx, address)
-        .catch(() => {
-          toast.error('Transaction failed!', {
-            id: txToast,
-          })
-          setSubmitting(undefined)
-        })
-      console.log(tx2)
-      if (!tx2?.transactionHash) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-        setSubmitting(undefined)
-      } else {
-        toast.success('Transaction successful!', {
-          id: txToast,
-        })
-        return Router.push(`/display?tokenID=${props.tokenID}`)
-      }
-    } catch (ex) {
-      console.log(ex)
-      setSubmitting(undefined)
-      if (txToast) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-      }
-    }
+    return
   }
 
   function selectColor(svg) {
