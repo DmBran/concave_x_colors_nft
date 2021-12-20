@@ -1,123 +1,124 @@
 const { expect } = require('chai')
-const { ethers,waffle } = require('hardhat')
+const { ethers, waffle } = require('hardhat')
 
 /**
  Contract Constants & Variables
  */
-const THE_COLORS = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
-const TREASURY = '0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2';
-const MAX_SUPPLY = 3333;
+const THE_COLORS = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
+const TREASURY = '0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2'
+const MAX_SUPPLY = 3333
 
-const _name = 'Sync x Colors';
-const _symbol = 'SyncXColors';
-const maxMintAmount = 10;
-const price_in_ether = 0.04;
-const resyncPrice = 0.005;
-const price = ethers.utils.parseEther(price_in_ether.toString());
-const revealed = false;
+const _name = 'Sync x Colors'
+const _symbol = 'SyncXColors'
+const maxMintAmount = 10
+const price_in_ether = 0.04
+const resyncPrice = 0.005
+const price = ethers.utils.parseEther(price_in_ether.toString())
+const revealed = false
 
-const colorsOwner = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"
-let colorsOwnerSigner;
+const colorsOwner = '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266'
+let colorsOwnerSigner
 
 /**
  Helper Variables
  */
-let syncXColors;
-let deployer;
-let thirdParty;
-
+let syncXColors
+let deployer
+let thirdParty
 
 /**
  Helper Functions
  */
 const deploy = async () => {
-    [deployer,thirdParty] =  await ethers.getSigners();
-    SyncXColors = await ethers.getContractFactory("SyncXColors");
-    syncXColors = await SyncXColors.deploy();
-    console.log('>_')
+  ;[deployer, thirdParty] = await ethers.getSigners()
+  SyncXColors = await ethers.getContractFactory('SyncXColors')
+  syncXColors = await SyncXColors.deploy()
+  console.log('>_')
 }
 
 const getColorsMinter = async () => {
-    await hre.network.provider.request({
-      method: "hardhat_impersonateAccount",
-      params: [colorsOwner],
-    });
-    await network.provider.send("hardhat_setBalance", [
-      colorsOwner,
-      ethers.utils.parseEther('10.0').toHexString().replace("0x0", "0x"),
-    ]);
-    colorsOwnerSigner = await ethers.provider.getSigner(colorsOwner);
+  await hre.network.provider.request({
+    method: 'hardhat_impersonateAccount',
+    params: [colorsOwner],
+  })
+  await network.provider.send('hardhat_setBalance', [
+    colorsOwner,
+    ethers.utils.parseEther('10.0').toHexString().replace('0x0', '0x'),
+  ])
+  colorsOwnerSigner = await ethers.provider.getSigner(colorsOwner)
 }
 
 const mintThirdParty = async (_mintAmount) => {
-    let quota = _mintAmount;
-    while (quota > 0) {
-        let toMint = quota > 10 ? 10 : quota
-        if (toMint > 1) {
-            await syncXColors.connect(thirdParty).mintMany(toMint,{value:ethers.utils.parseEther((price_in_ether*toMint).toString())})
-        } else {
-            await syncXColors.connect(thirdParty).mint({value:ethers.utils.parseEther((price_in_ether*toMint).toString())})
-        }
-        quota-=toMint;
+  let quota = _mintAmount
+  while (quota > 0) {
+    let toMint = quota > 10 ? 10 : quota
+    if (toMint > 1) {
+      await syncXColors.connect(thirdParty).mintMany(toMint, {
+        value: ethers.utils.parseEther((price_in_ether * toMint).toString()),
+      })
+    } else {
+      await syncXColors.connect(thirdParty).mint({
+        value: ethers.utils.parseEther((price_in_ether * toMint).toString()),
+      })
     }
+    quota -= toMint
+  }
 }
 const getNewColorsMinter = async (address) => {
-    await hre.network.provider.request({
-      method: "hardhat_impersonateAccount",
-      params: [address],
-    });
-    await network.provider.send("hardhat_setBalance", [
-      address,
-      ethers.utils.parseEther('10.0').toHexString().replace("0x0", "0x"),
-    ]);
-    let signer = await ethers.provider.getSigner(address);
-    return signer
+  await hre.network.provider.request({
+    method: 'hardhat_impersonateAccount',
+    params: [address],
+  })
+  await network.provider.send('hardhat_setBalance', [
+    address,
+    ethers.utils.parseEther('10.0').toHexString().replace('0x0', '0x'),
+  ])
+  let signer = await ethers.provider.getSigner(address)
+  return signer
 }
 
 /**
  TESTS
  */
 
+describe('syncXColors: Reads public constants', () => {
+  before(deploy)
+  it(`THE_COLORS is "${THE_COLORS}"`, async () => {
+    expect(await syncXColors.THE_COLORS()).to.equal(THE_COLORS)
+  })
+  it(`MAX_SUPPLY is "${MAX_SUPPLY}"`, async () => {
+    expect(await syncXColors.MAX_SUPPLY()).to.equal(MAX_SUPPLY)
+  })
+})
 
+describe('syncXColors: Reads public variables', () => {
+  before(deploy)
+  it(`name is "${_name}"`, async () => {
+    console.info(await syncXColors.name())
+    expect(await syncXColors.name()).to.equal(_name)
+  })
+  it(`symbol is "${_symbol}"`, async () => {
+    expect(await syncXColors.symbol()).to.equal(_symbol)
+  })
+  it(`maxMintAmount is "${maxMintAmount}"`, async () => {
+    expect(await syncXColors.maxMintAmount()).to.equal(maxMintAmount)
+  })
+  it(`price is "${ethers.utils.formatEther(price)}"`, async () => {
+    expect(await syncXColors.mintPrice()).to.equal(price)
+  })
+})
 
-describe("syncXColors: Reads public constants", () => {
-    before(deploy)
-    it(`THE_COLORS is "${THE_COLORS}"`, async () => {
-        expect(await syncXColors.THE_COLORS()).to.equal(THE_COLORS)
+describe('syncXColors: Owner functions', () => {
+  beforeEach(deploy)
+  describe('tokenURI()', () => {
+    it(`Calling tokenURI() on nonexistent tokenId should revert with "ERC721Metadata: URI query for nonexistent token"`, async () => {
+      await expect(syncXColors.tokenURI(0)).to.be.revertedWith(
+        'ERC721: operator query for nonexistent token'
+      )
     })
-    it(`MAX_SUPPLY is "${MAX_SUPPLY}"`, async () => {
-        expect(await syncXColors.MAX_SUPPLY()).to.equal(MAX_SUPPLY)
-    })
-});
+  })
 
-describe("syncXColors: Reads public variables", () => {
-    before(deploy)
-    it(`name is "${_name}"`, async () => {
-      console.info(await syncXColors.name());
-        expect(await syncXColors.name()).to.equal(_name)
-    })
-    it(`symbol is "${_symbol}"`, async () => {
-        expect(await syncXColors.symbol()).to.equal(_symbol)
-    })
-    it(`maxMintAmount is "${maxMintAmount}"`, async () => {
-        expect(await syncXColors.maxMintAmount()).to.equal(maxMintAmount)
-    })
-    it(`price is "${ethers.utils.formatEther(price)}"`, async () => {
-        expect(await syncXColors.mintPrice()).to.equal(price)
-    })
-});
-
-describe("syncXColors: Owner functions", () => {
-    beforeEach(deploy)
-    describe("tokenURI()", () => {
-        it(`Calling tokenURI() on nonexistent tokenId should revert with "ERC721Metadata: URI query for nonexistent token"`, async () => {
-            await expect(
-                syncXColors.tokenURI(0)
-            ).to.be.revertedWith("ERC721: operator query for nonexistent token")
-        })
-    })
-
-    /*
+  /*
     describe("withdraw()", () => {
         it(`after succesfull sellout - contract balance should equal ${ethers.utils.formatEther(ethers.utils.parseEther((price_in_ether*(MAX_SUPPLY-TOTAL_COLORS_QUOTA)).toString()))}`, async () => {
             expect(await syncXColors.totalSupply()).to.equal(200);
@@ -216,14 +217,13 @@ describe("syncXColors: Owner functions", () => {
     })
     */
 
-    // it(``, async () => {})
+  // it(``, async () => {})
 })
 
-describe("Public Functions", () => {
-    beforeEach(deploy)
-    describe('mint()', () => {
-        
-        /*
+describe('Public Functions', () => {
+  beforeEach(deploy)
+  describe('mint()', () => {
+    /*
         describe("public sale active check",() => {
             it(`mint should fail with "public sale not active" if public sale not active yet`, async () => {
                 await expect(
@@ -269,10 +269,10 @@ describe("Public Functions", () => {
             }).timeout(0)
         })
        */
-    })
-    
-    describe('mint()', () => {
-      /*
+  })
+
+  describe('mint()', () => {
+    /*
         describe("presale check",() => {
             it(`mintColorsOnce should fail with "presale over" if public sale not active yet`, async () => {
                 await syncXColors.setPublicMintActive(true);
@@ -304,10 +304,10 @@ describe("Public Functions", () => {
             })
         })
        */
-    })
+  })
 
-    describe('mintMany()', () => {
-      /*
+  describe('mintMany()', () => {
+    /*
         describe("whenNotPaused",() => {
             it(`mintMany should fail with "Pausable: paused" if minting when paused`, async () => {
                 await expect(
@@ -442,15 +442,13 @@ describe("Public Functions", () => {
             }).timeout(0)
         })
        */
-    })
-
+  })
 })
 
-
-describe("Public View Functions", () => {
-    beforeEach(deploy)
-    describe("isPublicMintActive",() => {
-      /*
+describe('Public View Functions', () => {
+  beforeEach(deploy)
+  describe('isPublicMintActive', () => {
+    /*
         it("shoud return false when supply < 200 or _isPublicMintActive=false",async () => {
             expect(await syncXColors.isPublicMintActive()).to.equal(false);
         }).timeout(0)
@@ -464,5 +462,5 @@ describe("Public View Functions", () => {
             expect(await syncXColors.isPublicMintActive()).to.equal(true);
         }).timeout(0)
        */
-    })
+  })
 })

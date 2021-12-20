@@ -172,7 +172,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     //payable(0x).transfer(for_r3);
     //payable(0x).transfer(for_r4);
     //payable(0x).transfer(for_r5);
-    (bool sent,) = payable(TREASURY).call{value:for_treasury}("");
+    (bool sent, ) = payable(TREASURY).call{value: for_treasury}('');
     require(sent);
   }
 
@@ -187,7 +187,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
    * Withdraw by team
    */
   function withdrawTeam() external {
-    require(msg.sender == TEAM, "Only team can withdraw");
+    require(msg.sender == TEAM, 'Only team can withdraw');
     withdraw();
   }
 
@@ -294,6 +294,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
         )
       );
   }
+
   /**
    * Return colors description as string
    */
@@ -436,9 +437,17 @@ contract SyncXColors is ERC721Enumerable, Ownable {
           ')"'
         );
       }
-      if (syncTraits.rarity_index % 23 == 0 || syncTraits.rarity_index % 21 == 0) { // Silver or Mosaic
+      if (
+        syncTraits.rarity_index % 23 == 0 || syncTraits.rarity_index % 21 == 0
+      ) {
+        // Silver or Mosaic
         // Silver -- add strokes to background elements
-        newShape = abi.encodePacked(newShape, ' stroke="',syncTraits.infColors[2],'"/>');
+        newShape = abi.encodePacked(
+          newShape,
+          ' stroke="',
+          syncTraits.infColors[2],
+          '"/>'
+        );
       } else {
         newShape = abi.encodePacked(newShape, '/>');
       }
@@ -547,7 +556,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint16 rarity_index,
     bytes7 rarity
   ) private pure returns (bytes memory) {
-    if (rarity_index % 19 != 0 ) {
+    if (rarity_index % 19 != 0) {
       // Drift is colored as a single color unless Tokyo Drift trait
       baseColors[0] = driftColors;
       baseColors[1] = driftColors;
@@ -621,9 +630,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     //Diamond: 0xE2 0x97 0x88
     //Star: 0xE2 0x9C 0xAA
 
-    if (syncTraits.rarity_index % 999 == 0) { // 0.1% probability (1 in 1000)
+    if (syncTraits.rarity_index % 999 == 0) {
+      // 0.1% probability (1 in 1000)
       syncTraits.rarity = 'Concave';
-      syncTraits.symbol = "\xE2\xA6\x85\x20\xE2\xA6\x86";   //( )
+      syncTraits.symbol = '\xE2\xA6\x85\x20\xE2\xA6\x86'; //( )
       syncTraits.bgColors[0] = '#214F70'; //Light Blue
       syncTraits.bgColors[1] = '#2E2E3F'; //Dark Blue
       syncTraits.bgColors[2] = '#2E2E3F'; //Dark Blue
@@ -632,10 +642,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[2] = '#FAF7C0'; //Con-yellow
       syncTraits.logoColors = '#FAF7C0'; //Con-yellow
       syncTraits.driftColors = '#FAF7C0';
-
-    } else if (syncTraits.rarity_index % 333 == 0) { // 0.3% probability (3 in 1000)
+    } else if (syncTraits.rarity_index % 333 == 0) {
+      // 0.3% probability (3 in 1000)
       syncTraits.rarity = 'Olympus';
-      syncTraits.symbol = "\xF0\x9D\x9B\x80\x20\x20\x20";   //OMEGA
+      syncTraits.symbol = '\xF0\x9D\x9B\x80\x20\x20\x20'; //OMEGA
       syncTraits.bgColors[0] = '#80A6AF'; // Oly Blue
       syncTraits.bgColors[1] = '#3A424F'; // Dark Blue
       syncTraits.bgColors[2] = '#80A6AF'; // Oly Blue
@@ -643,10 +653,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#3A424F'; // Dark Blue
       syncTraits.infColors[2] = '#FFC768'; // Oly yellow
       syncTraits.logoColors = '#FFC768'; // Oly-yellow
-
-    } else if (syncTraits.rarity_index % 23 == 0) {  // ~4.3% probability ((43) in 1000)
+    } else if (syncTraits.rarity_index % 23 == 0) {
+      // ~4.3% probability ((43) in 1000)
       syncTraits.rarity = 'Silver';
-      syncTraits.symbol = "\xE2\x9C\xA7\x20\x20\x20\x20"; // 1x empty Star: 0xE2 0x9C 0xAA (	0xE2 0x9C 0xA6)	0xE2 0x9C 0xA7
+      syncTraits.symbol = '\xE2\x9C\xA7\x20\x20\x20\x20'; // 1x empty Star: 0xE2 0x9C 0xAA (	0xE2 0x9C 0xA6)	0xE2 0x9C 0xA7
       syncTraits.bgColors[0] = '#c0c0c0'; // Silver
       syncTraits.bgColors[1] = '#e5e4e2'; // Platinum
       syncTraits.bgColors[2] = '#c0c0c0'; // Silver
@@ -654,32 +664,33 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#C0C0C0'; // silver
       syncTraits.infColors[2] = '#CD7F32'; // Gold
       syncTraits.logoColors = 'black';
-      
-      // Silver has 1 in 4 chance of upgrading to gold 
+
+      // Silver has 1 in 4 chance of upgrading to gold
       // (contract memory usage happened to be more efficient this way)
-      if (syncTraits.rarity_index % 111 == 0) {  // `~1.1% probability (10 in 1000)
+      if (syncTraits.rarity_index % 111 == 0) {
+        // `~1.1% probability (10 in 1000)
         syncTraits.rarity = 'Gold'; // Gold
-        syncTraits.symbol = "\xE2\x9C\xA6\x20\x20\x20\x20"; // full Star (	0xE2 0x9C 0xA6)
+        syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // full Star (	0xE2 0x9C 0xA6)
         syncTraits.bgColors[0] = '#CD7F32'; // Gold
         syncTraits.bgColors[2] = '#725d18'; // Darker Gold
         syncTraits.infColors[0] = 'black';
         syncTraits.infColors[2] = '#E5E4E2'; // Platinum
       }
-      
     } else {
       syncTraits.rarity = 'Common'; // Common
-      syncTraits.symbol = "\xE2\x8F\xBA\x20\x20\x20\x20";  // Circle 0xE2 0x8F 0xBA  / \xE2\xAD\x97
+      syncTraits.symbol = '\xE2\x8F\xBA\x20\x20\x20\x20'; // Circle 0xE2 0x8F 0xBA  / \xE2\xAD\x97
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
       syncTraits.infColors = syncTraits.baseColors;
       //syncTraits.logoColors = syncTraits.baseColors;
-      if (syncTraits.rarity_index % 19 == 0) {   // 5% probability ( in 1000)
+      if (syncTraits.rarity_index % 19 == 0) {
+        // 5% probability ( in 1000)
         syncTraits.rarity = 'Drift';
-        syncTraits.symbol = "\xE2\xAF\x81\x20\x20\x20\x20"; // Diamond 0xE2 0xAF 0x81 / \xE2\x97\x88\
-      }
-      else if (syncTraits.rarity_index % 21 == 0) {   // 4.3% probability ((47 - 4) in 1000)
+        syncTraits.symbol = '\xE2\xAF\x81\x20\x20\x20\x20'; // Diamond 0xE2 0xAF 0x81 / \xE2\x97\x88\
+      } else if (syncTraits.rarity_index % 21 == 0) {
+        // 4.3% probability ((47 - 4) in 1000)
         syncTraits.rarity = 'Mosiac';
-        syncTraits.symbol = "\xE2\xAF\x81\x20\x20\x20\x20"; // Diamond 
+        syncTraits.symbol = '\xE2\xAF\x81\x20\x20\x20\x20'; // Diamond
       }
     }
 

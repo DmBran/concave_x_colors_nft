@@ -7,7 +7,7 @@
    const web3 = createAlchemyWeb3(API_URL);
 
    const contract = require("../artifacts/contracts/SyncXColors.sol/SyncXColors.json");
-   const contractAddress = "0x81c587EB0fE773404c42c1d2666b5f557C470eED";
+   const contractAddress = "0xe1D7E9d010777D7208f91DCE968761a5843c4ECd";
    const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
 
    async function mintNFT() {
