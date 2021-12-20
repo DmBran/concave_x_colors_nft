@@ -28,6 +28,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   uint256 public constant mintPrice = 0.04 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
+  uint256 public constant TotalReservedAmount = 15; // Amount reserved for promotions (giveaways, team)
+  uint256 public MintedReserves = 0; // Total Promotional Reserves Minted
 
   // Declare Private
   address private constant TREASURY =
@@ -192,9 +194,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   }
 
   /**
-   * Mint multiple SYNCxCOLOR NFTs
+   * Mint 1 or multiple NFTs
    */
-  function mintMany(uint256 _mintAmount, uint16[] calldata colorTokenIds)
+  function mint(uint256 _mintAmount, uint16[] calldata colorTokenIds)
     external
     payable
   {
@@ -203,10 +205,19 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     require(_mintAmount <= maxMintAmount, 'Max mint 10 per tx');
     require(_mintIndex + _mintAmount - 1 <= MAX_SUPPLY, 'Exceeds supply');
     require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
-    require(msg.value == (mintPrice * _mintAmount), 'Insufficient funds');
 
-    // Validate colorTokenIds
-    require(isHolder(colorTokenIds), 'COLORS not owned by sender.');
+    if (msg.sender == TEAM) {
+      require(
+        MintedReserves + _mintAmount <= TotalReservedAmount,
+        'Not enough reserve tokens'
+      );
+      // Update reserve count
+      MintedReserves += _mintAmount;
+    } else {
+      require(msg.value == (mintPrice * _mintAmount), 'Insufficient funds');
+      // Validate colorTokenIds
+      require(isHolder(colorTokenIds), 'COLORS not owned by sender.');
+    }
 
     for (uint256 i = _mintIndex; i < (_mintIndex + _mintAmount); i++) {
       // Update states
@@ -219,8 +230,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   }
 
   /**
-   * Mint one SYNCxCOLOR NFT
+   * Mint one NFT -- to be removed
    */
+  /*
   function mint(uint16[] calldata colorTokenIds) external payable {
     // Requires
     uint256 _mintIndex = totalSupply();
@@ -238,7 +250,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     //Mint
     _safeMint(msg.sender, _mintIndex);
   }
-
+  */
   /**
    * Store mapping between tokenId and applied tokenIdColors
    */
@@ -437,15 +449,14 @@ contract SyncXColors is ERC721Enumerable, Ownable {
           ')"'
         );
       }
-      if (
-        syncTraits.rarity_index % 23 == 0 || syncTraits.rarity_index % 21 == 0
-      ) {
+      if ((syncTraits.rarity_index % 19 == 0 && syncTraits.rarity_index % 95 != 0) || (syncTraits.rarity_index % 13 == 0))
+      {
         // Silver or Mosaic
-        // Silver -- add strokes to background elements
+        // Add strokes to background elements
         newShape = abi.encodePacked(
           newShape,
           ' stroke="',
-          syncTraits.infColors[2],
+          syncTraits.bgColors[syncTraits.shape_color[i]],
           '"/>'
         );
       } else {
@@ -511,7 +522,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       'stroke="black" fill-opacity="0.9" stroke-width=".7">'
     );
 
-    if (rarity_index % 111 == 0 || rarity_index % 23 == 0) {
+    if (rarity_index % 499 == 0 || rarity_index % 241 == 0 || rarity_index % 19 == 0) {
       //Shimmer
       logo = abi.encodePacked(
         logo,
@@ -556,16 +567,15 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint16 rarity_index,
     bytes7 rarity
   ) private pure returns (bytes memory) {
-    if (rarity_index % 19 != 0) {
+    if (rarity_index % 11 != 0) {
       // Drift is colored as a single color unless Tokyo Drift trait
       baseColors[0] = driftColors;
       baseColors[1] = driftColors;
       baseColors[2] = driftColors;
     }
     bytes memory borders1 = abi.encodePacked(
-      '</path><text x="2" y="50" font-size="4em" fill-opacity="0.3" fill="',
-      baseColors[0],
-      '">',
+      '</path><text x="2" y="40" font-size="3em" fill-opacity="0.3" fill="',
+      'black">',
       rarity,
       '</text>',
       '<path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity=".7" fill-opacity=".7" fill="transparent">'
@@ -620,7 +630,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     // Retrieve seed from storage
     uint256 seed = _seed[tokenId];
     syncTraits.rarity_index = uint16(
-      1 + ((seed & 0x3FF0000000000000000000000000000) % 1000) // range 1 to 2023 % 1000 - ~ slightly bottom heavy but round numbers simple
+      1 + ((seed & 0x3FF0000000000000000000000000000) % 1000) // range 1 to 2047 % 1000 - ~ slightly bottom heavy but round numbers nicer
     );
 
     // Calculate traits
@@ -630,10 +640,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     //Diamond: 0xE2 0x97 0x88
     //Star: 0xE2 0x9C 0xAA
 
-    if (syncTraits.rarity_index % 999 == 0) {
-      // 0.1% probability (1 in 1000)
+    if (syncTraits.rarity_index % 499 == 0) {
+      // 0.2% probability (2 in 1000)
       syncTraits.rarity = 'Concave';
-      syncTraits.symbol = '\xE2\xA6\x85\x20\xE2\xA6\x86'; //( )
+      syncTraits.symbol = '\xE2\x9D\xAA\x20\xE2\x9D\xAB'; //( ) 0xE2 0x9D 0xAA [] 0xE2 0x9D 0xAB  E2\xA6\x85\x20\xE2\xA6\x86 ()
       syncTraits.bgColors[0] = '#214F70'; //Light Blue
       syncTraits.bgColors[1] = '#2E2E3F'; //Dark Blue
       syncTraits.bgColors[2] = '#2E2E3F'; //Dark Blue
@@ -642,8 +652,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[2] = '#FAF7C0'; //Con-yellow
       syncTraits.logoColors = '#FAF7C0'; //Con-yellow
       syncTraits.driftColors = '#FAF7C0';
-    } else if (syncTraits.rarity_index % 333 == 0) {
-      // 0.3% probability (3 in 1000)
+    } else if (
+      syncTraits.rarity_index % 241 == 0
+    ) {
+      // 0.4% probability (4 in 1000)
       syncTraits.rarity = 'Olympus';
       syncTraits.symbol = '\xF0\x9D\x9B\x80\x20\x20\x20'; //OMEGA
       syncTraits.bgColors[0] = '#80A6AF'; // Oly Blue
@@ -653,10 +665,12 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#3A424F'; // Dark Blue
       syncTraits.infColors[2] = '#FFC768'; // Oly yellow
       syncTraits.logoColors = '#FFC768'; // Oly-yellow
-    } else if (syncTraits.rarity_index % 23 == 0) {
-      // ~4.3% probability ((43) in 1000)
+    } else if (
+      syncTraits.rarity_index % 19 == 0
+    ) {
+      // ~4% probability (50-10 in 1000)
       syncTraits.rarity = 'Silver';
-      syncTraits.symbol = '\xE2\x9C\xA7\x20\x20\x20\x20'; // 1x empty Star: 0xE2 0x9C 0xAA (	0xE2 0x9C 0xA6)	0xE2 0x9C 0xA7
+      syncTraits.symbol = '\xE2\x98\x86\x20\x20\x20\x20'; // 1x empty Star: 0xE2 0x98 0x86 Empty Star
       syncTraits.bgColors[0] = '#c0c0c0'; // Silver
       syncTraits.bgColors[1] = '#e5e4e2'; // Platinum
       syncTraits.bgColors[2] = '#c0c0c0'; // Silver
@@ -665,12 +679,12 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[2] = '#CD7F32'; // Gold
       syncTraits.logoColors = 'black';
 
-      // Silver has 1 in 4 chance of upgrading to gold
+      // Silver has 1 in 5 chance of upgrading to gold
       // (contract memory usage happened to be more efficient this way)
-      if (syncTraits.rarity_index % 111 == 0) {
-        // `~1.1% probability (10 in 1000)
+      if (syncTraits.rarity_index % 95 == 0 ) {
+        // `~1% probability (10 in 1000)
         syncTraits.rarity = 'Gold'; // Gold
-        syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // full Star (	0xE2 0x9C 0xA6)
+        syncTraits.symbol = '\xE2\x98\x85\x20\x20\x20\x20'; //0xE2 0x98 0x85 Full star
         syncTraits.bgColors[0] = '#CD7F32'; // Gold
         syncTraits.bgColors[2] = '#725d18'; // Darker Gold
         syncTraits.infColors[0] = 'black';
@@ -678,19 +692,21 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       }
     } else {
       syncTraits.rarity = 'Common'; // Common
-      syncTraits.symbol = '\xE2\x8F\xBA\x20\x20\x20\x20'; // Circle 0xE2 0x8F 0xBA  / \xE2\xAD\x97
+      syncTraits.symbol = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
       syncTraits.infColors = syncTraits.baseColors;
       //syncTraits.logoColors = syncTraits.baseColors;
-      if (syncTraits.rarity_index % 19 == 0) {
-        // 5% probability ( in 1000)
-        syncTraits.rarity = 'Drift';
-        syncTraits.symbol = '\xE2\xAF\x81\x20\x20\x20\x20'; // Diamond 0xE2 0xAF 0x81 / \xE2\x97\x88\
-      } else if (syncTraits.rarity_index % 21 == 0) {
-        // 4.3% probability ((47 - 4) in 1000)
+      if (syncTraits.rarity_index % 13 == 0 ) {
+        // 7.7% probability ((77 in 1000)
         syncTraits.rarity = 'Mosiac';
-        syncTraits.symbol = '\xE2\xAF\x81\x20\x20\x20\x20'; // Diamond
+        syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // Full Diamond
+      } else if (
+        syncTraits.rarity_index % 11 == 0 
+      ) {
+        // 9% probability (91 in 1000)
+        syncTraits.rarity = 'Drift';
+        syncTraits.symbol = '\xE2\x9C\xA7\x20\x20\x20\x20'; //Empty Diamond
       }
     }
 

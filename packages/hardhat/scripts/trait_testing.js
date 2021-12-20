@@ -23,12 +23,9 @@ async function main() {
   // Mint 10x colors for use by SyncXColors
   const transaction1 = await thisColorsContract.mintNextColors(10)
 
-  const transaction3 = await thisSyncContract.mintMany(5, [0, 1, 2], {
-    value: ethers.utils.parseEther('0.2'),
-  })
-  // Mint 30 SyncXColors, outputs to SVG/Test/<tokenId>.SVG
-  for (let i = 0; i < 30; i++) {
-    const transaction3 = await thisSyncContract.mint([0, 1, 2], {
+  // Mint 100 SyncXColors, outputs to SVG/Test/<tokenId>.SVG
+  for (let i = 0; i < 100; i++) {
+    const transaction3 = await thisSyncContract.mint(1, [0, 1, 2], {
       value: ethers.utils.parseEther('0.04'),
     })
     const svg = await thisSyncContract.getTokenSVG(i)
