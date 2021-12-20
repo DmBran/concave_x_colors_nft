@@ -48,27 +48,44 @@ export default function Home() {
               </NoSSR>
             </div>
           </div>
-          <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8">
-            <div className="lg:flex-grow  md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+          <div className="container mx-auto flex px-5 py-24 lg:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8">
+            <div className="sm:w-full md:w-full lg:flex-grow  md:w-1/3 lg:pr-20 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
               <h1 className="title-font text-center sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-2">
                 SYNC X COLORS
               </h1>
               <p className="mb-8 leading-relaxed text-xl font-bold">
-                Sync X Colors is the ultimate collaboration between Concave
-                Finance Community Members and TheColors.NFT Project.
+                This is the ultimate collaboration between Sync X Colors,
+                Concave Finance (
+                <a
+                  style={{ color: '#047c45' }}
+                  className={'underline'}
+                  href="https://twitter.com/ConcaveFi"
+                  target="_blank"
+                >
+                  @ConcaveFi
+                </a>
+                ) and{' '}
+                <a
+                  href="https://opensea.io/collection/the-colors-dot-art"
+                  target="_blank"
+                  className={'underline'}
+                  style={{ color: '#047c45' }}
+                >
+                  TheColors.NFT
+                </a>{' '}
+                Project.
               </p>
               <p className="mb-8 leading-relaxed text-xl font-bold">
-                Own a <b>Sync X Colors NFT</b> to qualify for the ever elusive
-                Concave Finance token whitelist and a retroactive airdrop.
-                WAGMI!
+                Own a <b>Sync X Colors NFT</b> to qualify for the elusive
+                Concave Finance token whitelist and a retroactive airdrop!
               </p>
               <p className="mb-8 leading-relaxed text-xl font-bold">
                 Our NFT collection is 100% generated and stored on chain!
               </p>
               <div className="flex justify-center py-2">
                 <Link href="/">
-                  <button className="ml-4 inline-flex border-gray-800 border-4 text-gray-700 bg-green-200 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
-                    Mint an NFT
+                  <button className=" inline-flex border-gray-800 border-4 text-gray-700 bg-green-200 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
+                    Minting Soon!
                   </button>
                 </Link>
                 <a
@@ -123,14 +140,10 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="lg:max-w-lg m-0 lg:w-full md:w-1/2 w-5/6">
-              <img
-                className="object-cover object-center rounded"
-                alt="hero img"
-                src="/static/500x500.png"
-                width="500"
-                height="500"
-              />
+            <div className="md:mt-10 sm:w-full md:w-full md:w-2/3 w-5/6">
+              <div className={'pr-0 md:pr-6'}>
+                <video src="/static/sync.mp4" type="video/mp4" controls></video>
+              </div>
             </div>
           </div>
         </div>
@@ -263,7 +276,7 @@ export default function Home() {
               <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-3"
                     alt="team icon"
                     src="/static/picky.jpg"
                     width="90"
@@ -282,7 +295,7 @@ export default function Home() {
               <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-1"
                     alt="team icon"
                     src="/static/cryptog.jpg"
                     width="90"
@@ -292,8 +305,16 @@ export default function Home() {
                     <h2 className="text-gray-900 title-font font-bold">
                       cryptographer87
                     </h2>
-                    <a href="https://twitter.com/colin_gbc" target="_blank">
-                      <p className="text-gray-700">@colin_gbc</p>
+                    <a
+                      href="https://twitter.com/cryptographer87"
+                      target="_blank"
+                    >
+                      <p
+                        style={{ 'font-size': '16px' }}
+                        className="text-gray-700"
+                      >
+                        @cryptographer87
+                      </p>
                     </a>
                   </div>
                 </div>

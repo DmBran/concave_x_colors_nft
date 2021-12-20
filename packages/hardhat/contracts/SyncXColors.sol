@@ -449,8 +449,11 @@ contract SyncXColors is ERC721Enumerable, Ownable {
           ')"'
         );
       }
-      if ((syncTraits.rarity_index % 19 == 0 && syncTraits.rarity_index % 95 != 0) || (syncTraits.rarity_index % 13 == 0))
-      {
+      if (
+        (syncTraits.rarity_index % 19 == 0 &&
+          syncTraits.rarity_index % 95 != 0) ||
+        (syncTraits.rarity_index % 13 == 0)
+      ) {
         // Silver or Mosaic
         // Add strokes to background elements
         newShape = abi.encodePacked(
@@ -522,7 +525,11 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       'stroke="black" fill-opacity="0.9" stroke-width=".7">'
     );
 
-    if (rarity_index % 499 == 0 || rarity_index % 241 == 0 || rarity_index % 19 == 0) {
+    if (
+      rarity_index % 499 == 0 ||
+      rarity_index % 241 == 0 ||
+      rarity_index % 19 == 0
+    ) {
       //Shimmer
       logo = abi.encodePacked(
         logo,
@@ -652,9 +659,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[2] = '#FAF7C0'; //Con-yellow
       syncTraits.logoColors = '#FAF7C0'; //Con-yellow
       syncTraits.driftColors = '#FAF7C0';
-    } else if (
-      syncTraits.rarity_index % 241 == 0
-    ) {
+    } else if (syncTraits.rarity_index % 241 == 0) {
       // 0.4% probability (4 in 1000)
       syncTraits.rarity = 'Olympus';
       syncTraits.symbol = '\xF0\x9D\x9B\x80\x20\x20\x20'; //OMEGA
@@ -665,9 +670,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#3A424F'; // Dark Blue
       syncTraits.infColors[2] = '#FFC768'; // Oly yellow
       syncTraits.logoColors = '#FFC768'; // Oly-yellow
-    } else if (
-      syncTraits.rarity_index % 19 == 0
-    ) {
+    } else if (syncTraits.rarity_index % 19 == 0) {
       // ~4% probability (50-10 in 1000)
       syncTraits.rarity = 'Silver';
       syncTraits.symbol = '\xE2\x98\x86\x20\x20\x20\x20'; // 1x empty Star: 0xE2 0x98 0x86 Empty Star
@@ -681,7 +684,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
       // Silver has 1 in 5 chance of upgrading to gold
       // (contract memory usage happened to be more efficient this way)
-      if (syncTraits.rarity_index % 95 == 0 ) {
+      if (syncTraits.rarity_index % 95 == 0) {
         // `~1% probability (10 in 1000)
         syncTraits.rarity = 'Gold'; // Gold
         syncTraits.symbol = '\xE2\x98\x85\x20\x20\x20\x20'; //0xE2 0x98 0x85 Full star
@@ -697,13 +700,11 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.bgColors = syncTraits.baseColors;
       syncTraits.infColors = syncTraits.baseColors;
       //syncTraits.logoColors = syncTraits.baseColors;
-      if (syncTraits.rarity_index % 13 == 0 ) {
+      if (syncTraits.rarity_index % 13 == 0) {
         // 7.7% probability ((77 in 1000)
         syncTraits.rarity = 'Mosiac';
         syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // Full Diamond
-      } else if (
-        syncTraits.rarity_index % 11 == 0 
-      ) {
+      } else if (syncTraits.rarity_index % 11 == 0) {
         // 9% probability (91 in 1000)
         syncTraits.rarity = 'Drift';
         syncTraits.symbol = '\xE2\x9C\xA7\x20\x20\x20\x20'; //Empty Diamond

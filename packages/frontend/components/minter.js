@@ -16,7 +16,7 @@ export const Minter = (props) => {
   const MAX_SUPPLY = Number(process.env.NEXT_PUBLIC_MAX_SUPPLY)
   const MAX_COLORS = Number(process.env.NEXT_PUBLIC_MAX_COLORS)
   const COLORS_CONTRACT = process.env.NEXT_PUBLIC_COLORS_CONTRACT
-  const SYNC_CONTRACT = process.env.NEXT_PUBLIC_COLORS_CONTRACT
+  const SYNC_CONTRACT = process.env.NEXT_PUBLIC_SYNC_CONTRACT
   const MINT_COST = process.env.NEXT_PUBLIC_MINT_COST
   const COLOR_COST = process.env.NEXT_PUBLIC_COLOR_COST
 
@@ -129,7 +129,6 @@ export const Minter = (props) => {
         gas,
         to,
       }
-      console.log('why3')
       txToast = toast.loading('Transaction processing')
       const tx2 = await context.library.eth
         .sendTransaction(tx, address)
@@ -288,8 +287,6 @@ export const Minter = (props) => {
   }
 
   if (context.active) {
-    console.log(NETWORK)
-    console.log(context.networkId)
     if (context.networkId !== NETWORK) {
       return (
         <div

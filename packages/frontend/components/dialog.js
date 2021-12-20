@@ -32,11 +32,8 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
               {svg && svg?.tokenId && (
                 <div className={'flex w-full'}>
                   <div>
-                    <Dialog.Title className="text-xl">
-                      Your Sync NFT
-                    </Dialog.Title>
                     <div
-                      className={'border-gray-800 border-4 m-4'}
+                      className={'border-gray-800 border-4 mr-6'}
                       key={svg.tokenId}
                     >
                       <div
@@ -51,16 +48,58 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                     </div>
                   </div>
                   <div>
-                    <p>Traits:</p>
-                    <p>1</p>
-                    <p>2</p>
+                    <p className={'mb-1 text-lg text-black'}>
+                      <span
+                        className={'font-bold uppercase text-lg title-font'}
+                      >
+                        Token ID:
+                      </span>{' '}
+                      {svg.tokenId}
+                    </p>
+                    <p className={'mb-1 text-lg text-black'}>
+                      <span
+                        className={'font-bold uppercase text-lg title-font'}
+                      >
+                        Colors:
+                      </span>
+                      <span
+                        className={
+                          'inline-block border-2 align-center border-gray-800 ml-3 mr-2 '
+                        }
+                        style={{
+                          width: '15px',
+                          height: '15px',
+                          background: '#621f83',
+                        }}
+                      ></span>
+                      #621f83,
+                      <span
+                        className={
+                          'inline-block border-2 align-center border-gray-800 ml-3 mr-2 '
+                        }
+                        style={{
+                          width: '15px',
+                          height: '15px',
+                          background: '#11dffa',
+                        }}
+                      ></span>
+                      #11dffa
+                    </p>
+                    <p className={'mb-1 text-lg text-black'}>
+                      <span
+                        className={'font-bold uppercase text-lg title-font'}
+                      >
+                        Rarity:
+                      </span>{' '}
+                      Uncommon
+                    </p>
                     <Link href={`/mint?tokenID=${svg.tokenId}`}>
                       <button
                         className={
-                          'bg-blue-700 mx-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+                          'bg-blue-700 mt-10 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
                         }
                       >
-                        Color ∞ Sync!
+                        Re-Color ∞ Sync!
                       </button>
                     </Link>
                   </div>

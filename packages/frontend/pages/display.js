@@ -137,7 +137,11 @@ export default function Display() {
                       Your Owned Syncs
                     </p>
                     <p className={'text-center mb-4 font-late-500 text-sm'}>
-                      Select an NFT to re-SYNC your colors!
+                      Select an NFT to view your traits AND to{' '}
+                      <span className={'font-bold text-md underline'}>
+                        re-SYNC
+                      </span>{' '}
+                      your colors!
                     </p>
                   </div>
                 )}
