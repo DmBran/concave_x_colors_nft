@@ -233,7 +233,14 @@ describe("Public Functions", () => {
         )
         expect(await syncXColors.totalSupply()).to.equal(1);
         let svg = await syncXColors.getTokenSVG(0);
-        let prettySvg = prettier.format(svg, { semi: false, parser: "html" });
+        let base64svg = await syncXColors.tokenURI(0);
+        let buff = new Buffer(base64svg.split(',')[1], 'base64');
+        let buffAscii = buff.toString('utf8');
+        let buffImgData = buffAscii.split(',')[1];
+        let buffImg64 = buffImgData.substring(0, buffImgData.length - 1);
+        let buffImg = new Buffer(buffImg64, 'base64');
+        let buffImgAscii = buffImg.toString('utf8');
+        let prettySvg = prettier.format(buffImgAscii, { semi: false, parser: "html" });
         await fs.writeFile('test/output/test1.svg', prettySvg, (err) => { if (err) console.log(err) });
       })
 
