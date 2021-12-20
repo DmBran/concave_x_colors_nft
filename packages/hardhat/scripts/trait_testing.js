@@ -22,11 +22,32 @@ async function main() {
 
   // Mint 10x colors for use by SyncXColors
   const transaction1 = await thisColorsContract.mintNextColors(10)
-
+  const GAS_PER_MINT = '0.05'
   // Mint 100 SyncXColors, outputs to SVG/Test/<tokenId>.SVG
-  for (let i = 0; i < 100; i++) {
-    const transaction3 = await thisSyncContract.mint(1, [0, 1, 2], {
-      value: ethers.utils.parseEther('0.04'),
+  for (let i = 0; i < 25; i++) {
+    const transaction1 = await thisSyncContract.mint(1, [], {
+      value: ethers.utils.parseEther(GAS_PER_MINT),
+    })
+    const svg = await thisSyncContract.getTokenSVG(i)
+    output_svg(i, svg.toString())
+  }
+  for (let i = 25; i < 50; i++) {
+    const transaction2 = await thisSyncContract.mint(1, [0], {
+      value: ethers.utils.parseEther(GAS_PER_MINT),
+    })
+    const svg = await thisSyncContract.getTokenSVG(i)
+    output_svg(i, svg.toString())
+  }
+  for (let i = 50; i < 75; i++) {
+    const transaction3 = await thisSyncContract.mint(1, [0, 1], {
+      value: ethers.utils.parseEther(GAS_PER_MINT),
+    })
+    const svg = await thisSyncContract.getTokenSVG(i)
+    output_svg(i, svg.toString())
+  }
+  for (let i = 75; i < 100; i++) {
+    const transaction4 = await thisSyncContract.mint(1, [0, 1, 2], {
+      value: ethers.utils.parseEther(GAS_PER_MINT),
     })
     const svg = await thisSyncContract.getTokenSVG(i)
     output_svg(i, svg.toString())

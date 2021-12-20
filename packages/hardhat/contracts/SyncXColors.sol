@@ -20,12 +20,12 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   using Strings for uint16;
   using Strings for uint8;
 
-  uint256 public constant MAX_SUPPLY = 3333;
+  uint256 public constant MAX_SUPPLY = 4317;
 
   // Declare Public
   address public constant THE_COLORS =
     address(0x5FbDB2315678afecb367f032d93F642f64180aa3); //0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
-  uint256 public constant mintPrice = 0.04 ether; // Price per mint
+  uint256 public constant mintPrice = 0.05 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
   uint256 public constant TotalReservedAmount = 15; // Amount reserved for promotions (giveaways, team)
@@ -36,10 +36,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
   address private constant TEAM =
     address(0x263853ef2C3Dd98a986799aB72E3b78334EB88cb);
-  bool internal _isPublicMintActive;
+  //bool internal _isPublicMintActive;
   mapping(uint256 => uint16[]) private _colorTokenIds;
   mapping(uint256 => uint256) private _seed; // Trait seed is generated at time of mint and stored on-chain
-
+  mapping(uint256 => uint8) private _resync_count; //Store count of color resyncs applied by tokenIds
   // Struct for NFT traits
   struct SyncTraitsStruct {
     uint8[] shape_color;
@@ -105,6 +105,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   /**
    * TODO: REMOVE AFTER TESTS. Returns NFT Metadata JSON
    */
+  /*
   function getTokenMetadata(uint256 tokenId)
     external
     view
@@ -131,7 +132,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
         )
       );
   }
-
+  */
   /**
    * TODO: REMOVE AFTER TESTS. Returns SVG
    */
@@ -146,6 +147,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   /**
    * TODO: REMOVE AFTER TESTS. Returns Base64 SVG
    */
+  /*
   function getBase64TokenSVG(uint256 tokenId)
     external
     view
@@ -157,25 +159,21 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     string memory image = Base64.encode(bytes(generateSVGImage(syncTraits)));
     return string(abi.encodePacked('data:application/json;base64', image));
   }
-
+  */
   /**
    * Withdraw accrued funds from contract
    */
   function withdraw() internal {
     uint256 balance = address(this).balance;
-    uint256 for_treasury = (balance * 33) / 100; //33% 1 way
-    uint256 for_r1 = (balance * 67) / (5 * 100); //67% 5 ways
-    uint256 for_r2 = (balance * 67) / (5 * 100);
-    uint256 for_r3 = (balance * 67) / (5 * 100);
-    uint256 for_r4 = (balance * 67) / (5 * 100);
-    uint256 for_r5 = (balance * 67) / (5 * 100);
-    //payable(0x).transfer(for_r1);
-    //payable(0x).transfer(for_r2);
-    //payable(0x).transfer(for_r3);
-    //payable(0x).transfer(for_r4);
-    //payable(0x).transfer(for_r5);
-    (bool sent, ) = payable(TREASURY).call{value: for_treasury}('');
-    require(sent);
+    uint256 for_treasury = (balance * 50) / 100; //33% 1 way
+    uint256 for_team = (balance * 50) / 100; //67% 5 ways
+
+    (bool sent_treasury, ) = payable(TREASURY).call{value: for_treasury}('');
+    (bool sent_team, ) = payable(TEAM).call{value: for_team}('');
+
+    //Verify
+    require(sent_treasury);
+    require(sent_team);
   }
 
   /**
@@ -265,6 +263,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     require(isHolder(colorTokenIds), 'COLORS not owned by sender.');
     // Update state
     _colorTokenIds[tokenId] = colorTokenIds;
+    _resync_count[tokenId] += 1;
   }
 
   /**
@@ -347,7 +346,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       '"},',
       '{"trait_type":"Colors","value":"',
       getColorDescriptor(tokenId),
-      '"}]'
+      '"},',
+      '{"resync_count":',
+      _resync_count[tokenId],
+      '}]'
     );
     return string(abi.encodePacked(buffer));
   }
@@ -459,7 +461,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
         newShape = abi.encodePacked(
           newShape,
           ' stroke="',
-          syncTraits.bgColors[syncTraits.shape_color[i]],
+          syncTraits.infColors[syncTraits.shape_color[i]],
           '"/>'
         );
       } else {
@@ -643,10 +645,6 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     // Calculate traits
     syncTraits.baseColors = getColorsHexStrings(tokenId);
 
-    //Circle: 0xE2 0xAD 0x97
-    //Diamond: 0xE2 0x97 0x88
-    //Star: 0xE2 0x9C 0xAA
-
     if (syncTraits.rarity_index % 499 == 0) {
       // 0.2% probability (2 in 1000)
       syncTraits.rarity = 'Concave';
@@ -682,7 +680,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[2] = '#CD7F32'; // Gold
       syncTraits.logoColors = 'black';
 
-      // Silver has 1 in 5 chance of upgrading to gold
+      // Silver has 1 in 4 chance of upgrading to gold
       // (contract memory usage happened to be more efficient this way)
       if (syncTraits.rarity_index % 95 == 0) {
         // `~1% probability (10 in 1000)
@@ -698,9 +696,17 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.symbol = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
-      syncTraits.infColors = syncTraits.baseColors;
-      if (_colorTokenIds[tokenId].length == 0){
-        syncTraits.infColors[0] = '#FFC768'; // Oly yellow
+      syncTraits.infColors[0] = syncTraits.baseColors[0]; // Must be copy to ensure gifted infinity color role on grayscale is applied correctly
+      syncTraits.infColors[1] = syncTraits.baseColors[1];
+      syncTraits.infColors[2] = syncTraits.baseColors[2];
+      bytes[] memory upgrades = new bytes[](3);
+      upgrades[0] = '#214F70';
+      upgrades[1] = '#FAF7C0';
+      upgrades[2] = '#222222';
+      //upgrades[3] = '#FF0000';
+      //upgrades[4] = '#0000FF';
+      if (_colorTokenIds[tokenId].length == 0) {
+        syncTraits.infColors[0] = upgrades[syncTraits.rarity_index % 3];
       }
       //syncTraits.logoColors = syncTraits.baseColors;
       if (syncTraits.rarity_index % 13 == 0) {
