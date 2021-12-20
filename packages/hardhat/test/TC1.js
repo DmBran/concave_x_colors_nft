@@ -232,7 +232,6 @@ describe("Public Functions", () => {
           '1'
         )
         expect(await syncXColors.totalSupply()).to.equal(1);
-        let svg = await syncXColors.getTokenSVG(0);
         let base64svg = await syncXColors.tokenURI(0);
         let buff = new Buffer(base64svg.split(',')[1], 'base64');
         let buffAscii = buff.toString('utf8');
