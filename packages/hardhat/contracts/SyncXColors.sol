@@ -182,7 +182,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   {
     // Requires
     uint256 _mintIndex = totalSupply();
-    require(_mintAmount <= maxMintAmount, 'Max mint 10 per tx');
+    require(_mintAmount > 0 && _mintAmount <= maxMintAmount, 'Max mint 10 per tx');
     require(_mintIndex + _mintAmount - 1 <= MAX_SUPPLY, 'Exceeds supply');
     require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
 

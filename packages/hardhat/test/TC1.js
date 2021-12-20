@@ -224,14 +224,12 @@ describe("Public Functions", () => {
     beforeEach(deploy)
     describe('mint()', () => {
 
-/*
       it('Should mint grayscale', async () => {
-        await syncXColors.mint([], {value:price});
-        expect(await syncXColors.balanceOf(deployer)).to.be.eq(
+        await syncXColors.mint(1, [], {value:price});
+        expect(await syncXColors.balanceOf(deployer.address)).to.be.eq(
           '1'
         )
       })
-*/
 
     /*
         describe("public sale active check",() => {
