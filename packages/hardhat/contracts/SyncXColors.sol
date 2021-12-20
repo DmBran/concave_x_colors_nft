@@ -304,7 +304,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       _resync_count[tokenId],
       '}]'
     );
-    return string(abi.encodePacked(buffer));
+    return string(buffer);
   }
 
   /**

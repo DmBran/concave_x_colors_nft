@@ -24,13 +24,19 @@ async function main() {
   const transaction1 = await thisColorsContract.mintNextColors(10)
   const GAS_PER_MINT = '0.05'
   // Mint 100 SyncXColors, outputs to SVG/Test/<tokenId>.SVG
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 1; i++) {
     const transaction1 = await thisSyncContract.mint(1, [], {
       value: ethers.utils.parseEther(GAS_PER_MINT),
     })
-    const svg = await thisSyncContract.getTokenSVG(i)
-    output_svg(i, svg.toString())
+    const uri = await thisSyncContract.tokenURI(i)
+    console.log(uri)
+    console.log(base64DecodeUnicode(uri))
+    
+    //const svg = await thisSyncContract.getTokenSVG(i)
+    //output_svg(i, svg.toString())
   }
+  
+  /*
   for (let i = 25; i < 50; i++) {
     const transaction2 = await thisSyncContract.mint(1, [0], {
       value: ethers.utils.parseEther(GAS_PER_MINT),
@@ -52,6 +58,7 @@ async function main() {
     const svg = await thisSyncContract.getTokenSVG(i)
     output_svg(i, svg.toString())
   }
+  * */
 }
 
 main()
@@ -71,4 +78,11 @@ function output_svg(name, contents) {
       if (err) console.log(err)
     }
   )
+}
+function base64DecodeUnicode(str) {
+    let base64ToString = Buffer.from(str, "base64"); //.toString();
+    //console.log(base64ToString);
+    let base64ToStringNew = base64ToString.toString('utf-8');
+	//base64ToString = JSON.parse(base64ToString);
+	return base64ToStringNew;
 }
