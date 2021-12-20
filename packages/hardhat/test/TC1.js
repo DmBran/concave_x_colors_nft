@@ -1,5 +1,7 @@
 const { expect } = require('chai')
 const { ethers, waffle } = require('hardhat')
+const fs = require('fs')
+const prettier = require("prettier");
 
 /**
  Contract Constants & Variables
@@ -11,7 +13,7 @@ const MAX_SUPPLY = 3333
 const _name = 'Sync x Colors'
 const _symbol = 'SyncXColors'
 const maxMintAmount = 10
-const price_in_ether = 0.04
+const price_in_ether = 0.05
 const resyncPrice = 0.005
 const price = ethers.utils.parseEther(price_in_ether.toString())
 const revealed = false
@@ -220,9 +222,27 @@ describe('syncXColors: Owner functions', () => {
   // it(``, async () => {})
 })
 
-describe('Public Functions', () => {
-  beforeEach(deploy)
-  describe('mint()', () => {
+describe("Public Functions", () => {
+    beforeEach(deploy)
+    describe('mint()', () => {
+
+      it('Should mint grayscale', async () => {
+        await syncXColors.mint(1, [], {value:price});
+        expect(await syncXColors.balanceOf(deployer.address)).to.be.eq(
+          '1'
+        )
+        expect(await syncXColors.totalSupply()).to.equal(1);
+        let base64svg = await syncXColors.tokenURI(0);
+        let buff = new Buffer(base64svg.split(',')[1], 'base64');
+        let buffAscii = buff.toString('utf8');
+        let buffImgData = buffAscii.split(',')[1];
+        let buffImg64 = buffImgData.substring(0, buffImgData.length - 1);
+        let buffImg = new Buffer(buffImg64, 'base64');
+        let buffImgAscii = buffImg.toString('utf8');
+        let prettySvg = prettier.format(buffImgAscii, { semi: false, parser: "html" });
+        await fs.writeFile('test/output/test1.svg', prettySvg, (err) => { if (err) console.log(err) });
+      })
+
     /*
         describe("public sale active check",() => {
             it(`mint should fail with "public sale not active" if public sale not active yet`, async () => {
