@@ -1,19 +1,22 @@
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useWeb3Context } from 'web3-react'
-import SyncXColors from '../../artifacts/contracts/SyncXColors.sol/Sync.json'
+import SyncXColors from '../../../artifacts/contracts/SyncXColors.sol/Sync.json'
 import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import { Loader } from '../components/loader'
 import { Navbar } from '../components/navbar'
 import styles from '../styles/meme.module.css'
+import SyncModal from '../components/dialog.js'
+import process from 'process'
 
 export default function Display() {
   const { query } = useRouter()
   const context = useWeb3Context()
-
-  const SYNC_CONTRACT = '0x2ED6550746891875A7e39d3747d1a4FFe5433289'
+  const NETWORK = Number(process.env.NEXT_PUBLIC_NETWORK)
+  const SYNC_CONTRACT = process.env.NEXT_PUBLIC_SYNC_CONTRACT
+  const [isOpen, setIsOpen] = useState(false)
+  const [modalSvg, setModalSvg] = useState(null)
   const [svgs, setSvgs] = useState(null)
   const [reveal, setReveal] = useState(null)
   const [multi, setMulti] = useState(null)
@@ -23,7 +26,7 @@ export default function Display() {
     const filter = []
     if (query.tokenID || query.mintCount) setReveal(true)
 
-    if (context.active) {
+    if (context.active && context.networkId === NETWORK) {
       const contract = new context.library.eth.Contract(
         SyncXColors.abi,
         SYNC_CONTRACT
@@ -37,11 +40,11 @@ export default function Display() {
         context.account,
         query.tokenID,
         query.mintCount
-      )
+      ).catch()
 
       setLoaded(true)
     }
-  }, [context])
+  }, [context, modalSvg])
 
   async function updateSyncs(contract, account, tokenID, mintCount) {
     const svgs = []
@@ -52,14 +55,18 @@ export default function Display() {
           context.library.eth.abi.encodeParameter('uint256', tokenID)
         )
         .call()
-      svgs.push({ svg: svgElement, tokenId: tokenID })
+      const meta = await contract.methods
+        .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenID))
+        .call()
+      console.log(meta)
+      svgs.push({ svg: svgElement, tokenId: tokenID, meta })
       setSvgs(svgs)
       return
     }
 
     const colorsCount = await contract.methods.balanceOf(account).call()
     const start = query.mintCount ? colorsCount - mintCount : 0
-    for (const i = start; i < colorsCount; ++i) {
+    for (let i = start; i < colorsCount; ++i) {
       const tokenId = await contract.methods
         .tokenOfOwnerByIndex(
           account,
@@ -71,11 +78,21 @@ export default function Display() {
           context.library.eth.abi.encodeParameter('uint256', tokenId)
         )
         .call()
-      const svg = svg2.replace('<svg', '<svg viewbox="0 0 500 500"')
-      svgs.push({
-        tokenId,
-        svg,
-      })
+      // const meta64 = await contract.methods
+      //   .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenId))
+      //   .call()
+      try {
+        //console.log(atob(meta64.replace("data:application/json;base64,","")))
+        //const meta = JSON.parse(atob(meta64.replace("data:application/json;base64,","")))
+        const svg = svg2.replace('<svg', '<svg viewbox="0 0 500 500"')
+        svgs.push({
+          tokenId,
+          //meta,
+          svg,
+        })
+      } catch {
+        console.error(`Failure to parse metadata for token ${tokenId}`)
+      }
     }
 
     setSvgs(svgs)
@@ -120,7 +137,11 @@ export default function Display() {
                       Your Owned Syncs
                     </p>
                     <p className={'text-center mb-4 font-late-500 text-sm'}>
-                      Select an NFT to re-SYNC your colors!
+                      Select an NFT to view your traits AND to{' '}
+                      <span className={'font-bold text-md underline'}>
+                        re-SYNC
+                      </span>{' '}
+                      your colors!
                     </p>
                   </div>
                 )}
@@ -135,17 +156,19 @@ export default function Display() {
                         className={'border-gray-800 border-4 m-4'}
                         key={svg.tokenId}
                       >
-                        <Link href={`/mint?tokenID=${svg.tokenId}`}>
-                          <div
-                            className={styles.sync}
-                            style={{
-                              width: 200,
-                              height: 200,
-                              cursor: 'pointer',
-                            }}
-                            dangerouslySetInnerHTML={{ __html: svg.svg }}
-                          ></div>
-                        </Link>
+                        <div
+                          className={styles.sync}
+                          onClick={() => {
+                            setIsOpen(true)
+                            setModalSvg(svg)
+                          }}
+                          style={{
+                            width: 200,
+                            height: 200,
+                            cursor: 'pointer',
+                          }}
+                          dangerouslySetInnerHTML={{ __html: svg.svg }}
+                        ></div>
                       </div>
                     ))}
                   {!loaded && <Loader />}
@@ -161,6 +184,11 @@ export default function Display() {
         </div>
         <Footer />
       </div>
+      <SyncModal
+        svg={modalSvg}
+        isOpen={isOpen ?? false}
+        setIsOpen={setIsOpen}
+      />
     </div>
   )
 }

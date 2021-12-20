@@ -1,9 +1,9 @@
 async function main() {
-  const SyncXColors = await ethers.getContractFactory("SyncXColors")
+  const SyncXColors = await ethers.getContractFactory('SyncXColors')
 
   // Start deployment, returning a promise that resolves to a contract object
   const mySyncXColors = await SyncXColors.deploy()
-  console.log("Contract deployed to address:", mySyncXColors.address)
+  console.log('Contract deployed to address:', mySyncXColors.address)
 }
 
 main()

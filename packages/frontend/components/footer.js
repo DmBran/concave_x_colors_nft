@@ -1,21 +1,51 @@
 import styles from '../styles/meme.module.css'
-
+import process from 'process'
+import { useWeb3Context } from 'web3-react'
 export const Footer = () => {
+  const context = useWeb3Context()
+
   return (
     <footer className={styles.footer}>
-      <div className={'text-center center-text'}>
-        <a
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={'lowercase py-10'}
-        >
-          Made with Love - Concave Finance Discord
-        </a>
+      {context.networkId === 1 && (
+        <div className={'flex justify-center  flex-1 flex-grow text-center'}>
+          <p className={'text-center text-sm mt-20 mb-20 font-xs'}>
+            <span className={'block mb-2 font-bold text-xl'}>
+              CONTRACT ADDRESS
+            </span>
+            <a
+              href={`https://etherscan.io/contract/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
+              target="_blank"
+              className={'block mb-10 text-lg'}
+            >
+              {process.env.NEXT_PUBLIC_SYNC_CONTRACT}
+            </a>
+          </p>
+        </div>
+      )}
+      <div className={'text-center lowercase center-text'}>
+        <p>
+          Made with Love
+          <span className={'text-red inline-block relative top-1 mx-2 '}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="red"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </span>
+        </p>
+        <p>Concave Finance Discord</p>
+        <p>forever open source</p>
       </div>
       <div className={'flex justify-center  flex-1 flex-grow text-center'}>
         <a
-          className={styles.discord}
+          className={`${styles.discord}`}
           target="_blank"
           href="https://discord.gg/nTf5q6MM"
         >
@@ -44,6 +74,7 @@ export const Footer = () => {
           </svg>
         </a>
       </div>
+
       <div className={'flex justify-center  flex-1 flex-grow text-center'}>
         <p className={'text-center text-sm mt-20 font-xs'}>
           <span className={'block'}>DISCLAIMER</span> All purchases are final.
