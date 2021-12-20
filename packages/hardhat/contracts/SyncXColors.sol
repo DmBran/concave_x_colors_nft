@@ -699,6 +699,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
       syncTraits.infColors = syncTraits.baseColors;
+      if (_colorTokenIds[tokenId].length == 0){
+        syncTraits.infColors[0] = '#FFC768'; // Oly yellow
+      }
       //syncTraits.logoColors = syncTraits.baseColors;
       if (syncTraits.rarity_index % 13 == 0) {
         // 7.7% probability ((77 in 1000)
