@@ -25,7 +25,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
   // Declare Public
   address public constant THE_COLORS =
-    address(0x5FbDB2315678afecb367f032d93F642f64180aa3); //0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+    address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
