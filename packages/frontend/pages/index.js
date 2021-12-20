@@ -54,11 +54,18 @@ export default function Home() {
                 SYNC X COLORS
               </h1>
               <p className="mb-8 leading-relaxed text-xl font-bold">
-                Sync X Colors is the ultimate collaboration between Concave
-                Finance Community Members and TheColors.NFT Project.
+                Sync X Colors is the ultimate collaboration between Sync X Colors, 
+               Concave Finance (<a style={{'color': '#047c45'}} className={'underline'} href="https://twitter.com/ConcaveFi" target="_blank" >@ConcaveFi</a>) and <a
+                            href="https://opensea.io/collection/the-colors-dot-art"
+                            target="_blank"
+                            className={'underline'}
+                            style={{'color': '#047c45'}}
+                          >
+                            TheColors.NFT
+                          </a>{' '} Project.
               </p>
               <p className="mb-8 leading-relaxed text-xl font-bold">
-                Own a <b>Sync X Colors NFT</b> to qualify for the ever elusive
+                Own a <b>Sync X Colors NFT</b> to qualify for the elusive
                 Concave Finance token whitelist and a retroactive airdrop.
                 WAGMI!
               </p>
@@ -67,8 +74,8 @@ export default function Home() {
               </p>
               <div className="flex justify-center py-2">
                 <Link href="/">
-                  <button className="ml-4 inline-flex border-gray-800 border-4 text-gray-700 bg-green-200 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
-                    Mint an NFT
+                  <button className=" inline-flex border-gray-800 border-4 text-gray-700 bg-green-200 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
+                    Minting Soon!
                   </button>
                 </Link>
                 <a
@@ -259,7 +266,7 @@ export default function Home() {
               <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
-                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                    className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-3"
                     alt="team icon"
                     src="/static/picky.jpg"
                     width="90"
