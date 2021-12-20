@@ -292,8 +292,8 @@ export default function Home() {
                     <h2 className="text-gray-900 title-font font-bold">
                       cryptographer87
                     </h2>
-                    <a href="https://twitter.com/colin_gbc" target="_blank">
-                      <p className="text-gray-700">@colin_gbc</p>
+                    <a href="https://twitter.com/cryptographer87" target="_blank">
+                      <p className="text-gray-700">@cryptographer87</p>
                     </a>
                   </div>
                 </div>
