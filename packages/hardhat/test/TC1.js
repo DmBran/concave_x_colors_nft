@@ -222,7 +222,16 @@ describe("syncXColors: Owner functions", () => {
 describe("Public Functions", () => {
     beforeEach(deploy)
     describe('mint()', () => {
-        
+
+/*
+      it('Should mint grayscale', async () => {
+        await syncXColors.mint([], {value:price});
+        expect(await syncXColors.balanceOf(deployer)).to.be.eq(
+          '1'
+        )
+      })
+*/
+
         /*
         describe("public sale active check",() => {
             it(`mint should fail with "public sale not active" if public sale not active yet`, async () => {
