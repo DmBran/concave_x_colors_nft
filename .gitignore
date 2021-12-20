@@ -12,3 +12,4 @@ artifacts
 coverage.json
 coverage
 typechain-types
+packages/hardhat/test/output

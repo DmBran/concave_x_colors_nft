@@ -1,5 +1,7 @@
 const { expect } = require('chai')
 const { ethers, waffle } = require('hardhat')
+const fs = require('fs')
+const prettier = require("prettier");
 
 /**
  Contract Constants & Variables
@@ -229,6 +231,10 @@ describe("Public Functions", () => {
         expect(await syncXColors.balanceOf(deployer.address)).to.be.eq(
           '1'
         )
+        expect(await syncXColors.totalSupply()).to.equal(1);
+        let svg = await syncXColors.getTokenSVG(0);
+        let prettySvg = prettier.format(svg, { semi: false, parser: "html" });
+        await fs.writeFile('test/output/test1.svg', prettySvg, (err) => { if (err) console.log(err) });
       })
 
     /*
