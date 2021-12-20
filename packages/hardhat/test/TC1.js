@@ -8,7 +8,7 @@ const prettier = require("prettier");
  */
 const THE_COLORS = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 const TREASURY = '0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2'
-const MAX_SUPPLY = 3333
+const MAX_SUPPLY = 4300
 
 const _name = 'Sync x Colors'
 const _symbol = 'SyncXColors'
@@ -243,6 +243,19 @@ describe("Public Functions", () => {
         await fs.writeFile('test/output/test1.svg', prettySvg, (err) => { if (err) console.log(err) });
       })
 
+      it('Should mint more than 1 limit', async () => {
+        //console.log(ethers.utils.formatEther(await ethers.provider.getBalance(deployer.address)));
+        await syncXColors.mint(10, [], {value:ethers.utils.parseEther((price_in_ether * 10).toString())});
+        expect(await syncXColors.balanceOf(deployer.address)).to.be.eq(
+          '10'
+        )
+      });
+
+      it('Should not mint more than 10 limit', async () => {
+        await expect(syncXColors.mint(11, [], {value:price})).to.be.revertedWith(
+          "Max mint 10 per tx"
+        )
+      });
     /*
         describe("public sale active check",() => {
             it(`mint should fail with "public sale not active" if public sale not active yet`, async () => {
