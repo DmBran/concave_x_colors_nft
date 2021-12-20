@@ -20,7 +20,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   using Strings for uint16;
   using Strings for uint8;
 
-  uint256 public constant MAX_SUPPLY = 3333;
+  uint256 public constant TotalReservedAmount = 17; // Amount reserved for promotions (giveaways, team)
+  uint256 public constant MAX_SUPPLY = 4317 - TotalReservedAmount;
 
   // Declare Public
   address public constant THE_COLORS =
@@ -28,7 +29,6 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
-  uint256 public constant TotalReservedAmount = 15; // Amount reserved for promotions (giveaways, team)
   uint256 public MintedReserves = 0; // Total Promotional Reserves Minted
 
   // Declare Private
@@ -46,7 +46,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     address(0xC7E1cA89Bd4EEb818629A4971BC5306f488000C5);
   address private constant T5 =
     address(0x8Df8646305B62A822E2A50e0CA2bc8b08f8b1d3d);
-  bool internal _isPublicMintActive;
+  //bool internal _isPublicMintActive;
   mapping(uint256 => uint16[]) private _colorTokenIds;
   mapping(uint256 => uint256) private _seed; // Trait seed is generated at time of mint and stored on-chain
 
