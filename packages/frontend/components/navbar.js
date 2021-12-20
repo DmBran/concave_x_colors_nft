@@ -27,7 +27,6 @@ export const Navbar = () => {
                 style={{ fontSize: '40px', top: '-2px' }}
                 className="relative text-xl"
               >
-                {' '}
                 &infin;
               </span>
               <span className="ml-2 text-xl">COLORS</span>
@@ -36,7 +35,7 @@ export const Navbar = () => {
 
           {/*Mobile Button goes here*/}
           <button
-            className="hamburger align-right inline-flex p-3 hover:text-indigo-500 rounded lg:hidden ml-auto outline-none"
+            className="hamburger text-black align-right inline-flex p-3 hover:text-indigo-500 rounded lg:hidden ml-auto outline-none"
             onClick={handleClick}
           >
             <svg
@@ -71,37 +70,36 @@ export const Navbar = () => {
                   FAQ
                 </a>
               </Link>
-              {'' && (
+              {1 && (
                 <Link href="/mint">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
               )}
-              {'' && (
+              {1 && (
                 <Link href="/display">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>
                 </Link>
               )}
-              {'' && context.active && context.account && (
+              {1 && context.active && context.account && (
                 <a
+                  className="mt-2 lg:mt-0 ml-3 lg:ml-6 ring-4 ring-black text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500"
                   target="_blank"
                   href={`https://etherscan.io/address/${context.account}`}
                 >
-                  <p className="ring-4 ring-black   ml-6 text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
-                    {context.account.substring(0, 5) +
-                      '....' +
-                      context.account.substring(11, 16)}
-                  </p>
+                  {context.account.substring(0, 5) +
+                    '....' +
+                    context.account.substring(11, 16)}
                 </a>
               )}
-              {'' && !context.active && (
+              {1 && !context.active && (
                 <button
                   type="button"
                   className={
-                    'ml-6  uppercase inline-flex ring-4 ring-black items-center  py-1 px-3 focus:outline-none rounded text-base'
+                    'mt-2 lg:mt-0 ml-3 lg:ml-6  uppercase inline-flex ring-4 ring-black items-center  py-1 px-3 focus:outline-none rounded text-base'
                   }
                   onClick={activateMM}
                 >

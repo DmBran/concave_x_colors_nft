@@ -129,7 +129,6 @@ export const Minter = (props) => {
         gas,
         to,
       }
-      console.log('why3')
       txToast = toast.loading('Transaction processing')
       const tx2 = await context.library.eth
         .sendTransaction(tx, address)
@@ -288,8 +287,6 @@ export const Minter = (props) => {
   }
 
   if (context.active) {
-    console.log(NETWORK)
-    console.log(context.networkId)
     if (context.networkId !== NETWORK) {
       return (
         <div

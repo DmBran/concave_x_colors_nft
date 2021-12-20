@@ -32,8 +32,14 @@ export default function Display() {
                       <div className="mb-4">
                         <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
                           What are{' '}
-                          <span className={'underline'}>TheColors</span> tokens
-                          for?
+                          <a
+                            href="https://opensea.io/collection/the-colors-dot-art"
+                            target="_blank"
+                            className={'underline'}
+                          >
+                            TheColors
+                          </a>{' '}
+                          tokens for?
                         </p>
 
                         <span>
@@ -46,7 +52,14 @@ export default function Display() {
                       </div>
                       <div className="mb-4">
                         <p className="font-bold text-black text-lg uppercase rounded-md py-2 px-4">
-                          Can <span className={'underline'}>TheColors</span>{' '}
+                          Can{' '}
+                          <a
+                            href="https://opensea.io/collection/the-colors-dot-art"
+                            target="_blank"
+                            className={'underline'}
+                          >
+                            TheColors
+                          </a>{' '}
                           tokens be reused?
                         </p>
 
@@ -60,8 +73,14 @@ export default function Display() {
                       <div className="mb-4">
                         <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
                           What is the maximum number of{' '}
-                          <span className={'underline'}>TheColors</span> tokens
-                          per mint?
+                          <a
+                            href="https://opensea.io/collection/the-colors-dot-art"
+                            target="_blank"
+                            className={'underline'}
+                          >
+                            TheColors
+                          </a>{' '}
+                          tokens per mint?
                         </p>
 
                         <span>You can mint up to 10 Syncs each time.</span>
@@ -71,8 +90,14 @@ export default function Display() {
                       <div className="mb-4">
                         <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
                           Will the same{' '}
-                          <span className={'underline'}>TheColors</span> always
-                          generate the same mint?
+                          <a
+                            href="https://opensea.io/collection/the-colors-dot-art"
+                            target="_blank"
+                            className={'underline'}
+                          >
+                            TheColors
+                          </a>{' '}
+                          always generate the same mint?
                         </p>
 
                         <span className="px-4 py-2">
