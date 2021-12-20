@@ -41,7 +41,7 @@ export const Minter = (props) => {
         SyncXColors.abi,
         SYNC_CONTRACT
       )
-      //const minted = 0
+
       const minted = await syncContract.methods.totalSupply().call()
       setAmountMinted(minted)
 
@@ -99,36 +99,34 @@ export const Minter = (props) => {
         SYNC_CONTRACT
       )
 
-      console.log(contract.methods)
-
       const tokens = svgs
         .filter((svg) => svg.selected)
         .map((svg) => parseInt(svg.tokenId))
-      console.log([mintCount, tokens])
-      const txCall = contract.methods.mint(tokens)
+
+      const txCall = contract.methods.mintMany(mintCount, tokens)
       const ethAmount = context.library.utils.toWei(MINT_COST, 'ether')
       const value = mintCount * ethAmount
 
       const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
-      console.log('why')
-      // const gasEstimate = await context.library.eth.estimateGas({
-      //   value,
-      //   from,
-      //   data,
-      //   to,
-      // })
-      // console.log('wh2y')
+
+      const gasEstimate = await context.library.eth.estimateGas({
+        value,
+        from,
+        data,
+        to,
+      })
+
       // The BUFFOOOOOR
-      //const gas = gasEstimate * 1.1
-      const gas = 500000
+      const gas = parseInt(gasEstimate * 1.1)
 
       const tx = {
         value,
         from,
         data,
         gas,
-        to,
+        to
       }
+      console.log(tx)
       txToast = toast.loading('Transaction processing')
       const tx2 = await context.library.eth
         .sendTransaction(tx, address)
@@ -181,19 +179,20 @@ export const Minter = (props) => {
         .filter((svg) => svg.selected)
         .map((svg) => parseInt(svg.tokenId))
       const txCall = contract.methods.updateColors(props.tokenID, tokens)
+      const ethAmount = context.library.toWei(COLOR_COST, 'ether')
+      const value = mintCount * ethAmount
 
       const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
 
       const gasEstimate = await context.library.eth.estimateGas({
+        value,
         from,
         data,
         to,
       })
 
       // The BUFFOOOOOR
-      const gas = gasEstimate * 1.1
-      const ethAmount = context.library.toWei(COLOR_COST, 'ether')
-      const value = mintCount * ethAmount
+      const gas = parseInt(gasEstimate * 1.1)
 
       const tx = {
         value,
@@ -271,7 +270,7 @@ export const Minter = (props) => {
     }
 
     if (count < 1) return
-    if (count === MAX_MINT_COUNT) return
+    if (count > MAX_MINT_COUNT) return
 
     setMintCount(count)
   }

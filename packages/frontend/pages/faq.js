@@ -37,7 +37,7 @@ export default function Display() {
                             target="_blank"
                             className={'underline'}
                           >
-                            TheColors
+                            The Colors
                           </a>{' '}
                           tokens for?
                         </p>
@@ -58,7 +58,7 @@ export default function Display() {
                             target="_blank"
                             className={'underline'}
                           >
-                            TheColors
+                            The Colors
                           </a>{' '}
                           tokens be reused?
                         </p>
@@ -78,7 +78,7 @@ export default function Display() {
                             target="_blank"
                             className={'underline'}
                           >
-                            TheColors
+                            The Colors
                           </a>{' '}
                           tokens per mint?
                         </p>
@@ -95,7 +95,7 @@ export default function Display() {
                             target="_blank"
                             className={'underline'}
                           >
-                            TheColors
+                            The Colors
                           </a>{' '}
                           always generate the same mint?
                         </p>
