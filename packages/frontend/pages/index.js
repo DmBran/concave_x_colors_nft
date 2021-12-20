@@ -54,20 +54,30 @@ export default function Home() {
                 SYNC X COLORS
               </h1>
               <p className="mb-8 leading-relaxed text-xl font-bold">
-                Sync X Colors is the ultimate collaboration between Sync X Colors, 
-               Concave Finance (<a style={{'color': '#047c45'}} className={'underline'} href="https://twitter.com/ConcaveFi" target="_blank" >@ConcaveFi</a>) and <a
-                            href="https://opensea.io/collection/the-colors-dot-art"
-                            target="_blank"
-                            className={'underline'}
-                            style={{'color': '#047c45'}}
-                          >
-                            TheColors.NFT
-                          </a>{' '} Project.
+                This is the ultimate collaboration between Sync X Colors,
+                Concave Finance (
+                <a
+                  style={{ color: '#047c45' }}
+                  className={'underline'}
+                  href="https://twitter.com/ConcaveFi"
+                  target="_blank"
+                >
+                  @ConcaveFi
+                </a>
+                ) and{' '}
+                <a
+                  href="https://opensea.io/collection/the-colors-dot-art"
+                  target="_blank"
+                  className={'underline'}
+                  style={{ color: '#047c45' }}
+                >
+                  TheColors.NFT
+                </a>{' '}
+                Project.
               </p>
               <p className="mb-8 leading-relaxed text-xl font-bold">
                 Own a <b>Sync X Colors NFT</b> to qualify for the elusive
-                Concave Finance token whitelist and a retroactive airdrop.
-                WAGMI!
+                Concave Finance token whitelist and a retroactive airdrop!
               </p>
               <p className="mb-8 leading-relaxed text-xl font-bold">
                 Our NFT collection is 100% generated and stored on chain!
