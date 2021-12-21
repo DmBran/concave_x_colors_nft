@@ -305,7 +305,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
           '{"trait_type":"Colors","value":"',
           getColorDescriptor(tokenId),
           '"},',
-          '{"trait_type":"Resync_Count","value":',
+          '{"trait_type":"Resync_Count","value":"',
           _resync_count[tokenId].toString(),
           '}]'
         )

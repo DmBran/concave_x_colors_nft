@@ -18,7 +18,7 @@ export const sendTx = async (web3, { cost, to, from, data, count }) => {
     // The BUFFOOOOOR
     const gas = parseInt(gasEstimate * 1.11)
 
-    const tx = {
+    const txData = {
       value,
       from,
       data,
@@ -26,7 +26,7 @@ export const sendTx = async (web3, { cost, to, from, data, count }) => {
       to,
     }
 
-    const tx = await web3.eth.sendTransaction(tx, from)
+    const tx = await web3.eth.sendTransaction(txData, from)
 
     if (!tx?.transactionHash) throw 'Error'
 

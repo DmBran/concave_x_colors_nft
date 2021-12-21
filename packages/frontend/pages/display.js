@@ -26,6 +26,10 @@ export default function Display() {
   useEffect(async () => {
     const filter = []
     if (query.tokenID || query.mintCount) setReveal(true)
+    else {
+      setReveal(false)
+      setLoaded(false)
+    }
 
     if (context.active && context.networkId === NETWORK) {
       const contract = new context.library.eth.Contract(
@@ -51,10 +55,10 @@ export default function Display() {
     const svgs = []
 
     if (tokenID) {
-      const tokenMeta = await contract.methods.tokenURI(tokenId).call()
+      const tokenMeta = await contract.methods.tokenURI(tokenID).call()
       const traits = decodeToken(tokenMeta)
       svgs.push({
-        tokenId,
+        tokenID,
         ...traits,
       })
       setSvgs(svgs)
