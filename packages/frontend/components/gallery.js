@@ -4,7 +4,7 @@ function Gallery() {
   return (
     <>
       <div className={styles.playpause}>
-        <ul className="grid center-text text-center md:grid-cols-6 gap-4">
+        <ul className="grid center-text text-center grid-cols-3 lg:grid-cols-6 gap-4">
           <li className=" center-text text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
