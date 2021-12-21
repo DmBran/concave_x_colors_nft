@@ -34,7 +34,7 @@ export default function Display() {
       )
 
       if (query.tokenID) filter.push(query.tokenID)
-      if (query.mintCount > 1) setMulti(true)
+      else if (query.mintCount != 1) setMulti(true)
 
       await updateSyncs(
         contract,

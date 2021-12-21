@@ -11,14 +11,14 @@ function HeroSlider() {
     if (transR) {
       setTimeout(() => {
         setTransR(false)
-      }, 800)
+      }, 350)
     }
     if (transL) {
       setTimeout(() => {
         setTransL(false)
         setIndex((index + 1) % images.length)
         setIndex1((index1 + 1) % images.length)
-      }, 800)
+      }, 350)
     }
   }, [transL, transR])
 
@@ -58,7 +58,7 @@ function HeroSlider() {
     <>
       <div className="flex h-2/3 mx-auto my-0 space-x-4 items-center ">
         <button
-          className="h-10 w-10 items-center bg-green-200 font-bold text-4xl rounded-full"
+          className="h-10 w-10 ring-2 ring-black items-center bg-green-200 font-bold text-4xl rounded-full"
           onClick={handlePrev}
         >
           {'<'}

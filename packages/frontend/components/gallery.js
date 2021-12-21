@@ -1,263 +1,96 @@
-import Image from "next/image";
-
-function Gallery() {
-
-    return (
-        <>
-            <ul className="grid md:grid-cols-6 gap-4">
-                <li>
-                    <div className='flex bg-green-200 justify-center opacity-75 h-full w-full'>
-                        <h1 className=' flex title-font sm:text-2xl text-xl font-black text-center items-center'>GREYSCALE COMMON <br/>&#9679;</h1>
-                    </div>
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/grey_c2.svg"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <div className='flex bg-green-200 justify-center opacity-75 h-full w-full'>
-                        <h1 className=' flex title-font sm:text-2xl text-xl font-black text-center items-center'>COLOR COMMON <br/>&#9679;</h1>
-                    </div>
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <div className='flex bg-green-200 justify-center opacity-75 h-full w-full'>
-                        <h1 className=' flex title-font sm:text-2xl text-xl font-black text-center items-center'>UNCOMMON <br/> Drift<br/>&#10023; </h1>
-                    </div>
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <div className='flex bg-green-200 justify-center opacity-75 h-full w-full'>
-                        <h1 className=' flex title-font sm:text-2xl text-xl font-black text-center items-center'>UNCOMMON <br/>Drift Mosaic <br/>&#10022; </h1>
-                    </div>
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <div className='flex bg-green-200 justify-center opacity-75 h-full w-full'>
-                        <h1 className=' flex title-font sm:text-2xl text-xl font-black text-center items-center'>RARE <br/>Silver <br/>&#9734; </h1>
-                    </div>
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/rare_silver1.svg"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <div className='flex bg-green-200 justify-center opacity-75 h-full w-full'>
-                        <h1 className=' flex title-font sm:text-2xl text-xl font-black text-center items-center'>ULTRA RARE? <br/>&#9733; </h1>
-                    </div>
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-                <li>
-                    <Image className='w-full bg-gray-100 object-cover object-center flex-shrink-0'
-                           alt='team icon'
-                           src="/static/500x500.png"
-                           width='500'
-                           height='500'
-                    />
-                </li>
-            </ul>
-        </>
-
-    )
-=======
-import Image from 'next/image'
 import styles from '../styles/meme.module.css'
 
 function Gallery() {
   return (
     <>
       <div className={styles.playpause}>
-        <ul className="grid md:grid-cols-6 gap-4">
-          <li>
-            <Image
-              className={styles.playpause}
-              alt="team icon"
-              src="/static/grey_c2.svg"
+        <ul className="grid center-text text-center md:grid-cols-6 gap-4">
+          <li className=" center-text text-center">
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld2JveD0iMCAwIDUwMCA1MDAiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiMxMTExMTEiPjxnIGZpbGwtb3BhY2l0eT0iMC4zIj48Y2lyY2xlIGZpbGw9IiNBQUFBQUEiIGN4PSIyNzMiIGN5PSIyMDEiIHI9IjI3NCIvPjxjaXJjbGUgZmlsbD0iIzIxNEY3MCIgY3g9IjMzNyIgY3k9IjI5IiByPSIyODkiLz48cmVjdCBmaWxsPSIjQUFBQUFBIiB4PSIyMzMiIHk9IjE1NiIgd2lkdGg9IjU3NiIgaGVpZ2h0PSI2MDAiIHRyYW5zZm9ybT0icm90YXRlKDI4OSkiLz48cmVjdCBmaWxsPSIjMjE0RjcwIiB4PSI2NCIgeT0iMTY0IiB3aWR0aD0iNTY0IiBoZWlnaHQ9IjYxMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTc3KSIvPjxyZWN0IGZpbGw9IiMyMTRGNzAiIHg9Ijc5IiB5PSIxNjgiIHdpZHRoPSI1MTYiIGhlaWdodD0iNzU0IiB0cmFuc2Zvcm09InJvdGF0ZSgyMDkpIi8+PHJlY3QgZmlsbD0iI0FBQUFBQSIgeD0iMjYiIHk9IjExOCIgd2lkdGg9IjU2OCIgaGVpZ2h0PSI3MjYiIHRyYW5zZm9ybT0icm90YXRlKDkpIi8+PGNpcmNsZSBmaWxsPSIjQUFBQUFBIiBjeD0iMTM4IiBjeT0iMjY1IiByPSIzNjYiLz48cmVjdCBmaWxsPSIjMjE0RjcwIiB4PSIxNTEiIHk9IjEyMiIgd2lkdGg9IjY1NCIgaGVpZ2h0PSI2NTAiIHRyYW5zZm9ybT0icm90YXRlKDI4MSkiLz48Y2lyY2xlIGZpbGw9IiMyMTRGNzAiIGN4PSIyMDEiIGN5PSI0MzciIHI9IjM3MiIvPjxjaXJjbGUgZmlsbD0iIzIxNEY3MCIgY3g9IjMxOSIgY3k9IjQ2MSIgcj0iMjUzIi8+PHJlY3QgZmlsbD0iI0FBQUFBQSIgeD0iMjM2IiB5PSI5NiIgd2lkdGg9IjU4OCIgaGVpZ2h0PSI1NDgiIHRyYW5zZm9ybT0icm90YXRlKDExMykiLz48Y2lyY2xlIGZpbGw9IiNBQUFBQUEiIGN4PSIyNDQiIGN5PSI3NyIgcj0iMjU3Ii8+PHJlY3QgZmlsbD0iIzIxNEY3MCIgeD0iMTU4IiB5PSI3MiIgd2lkdGg9Ijc5NiIgaGVpZ2h0PSI1MTIiIHRyYW5zZm9ybT0icm90YXRlKDkpIi8+PHJlY3QgZmlsbD0iIzIxNEY3MCIgeD0iNDYiIHk9IjU2IiB3aWR0aD0iNTY2IiBoZWlnaHQ9IjUzMiIgdHJhbnNmb3JtPSJyb3RhdGUoMTcpIi8+PGNpcmNsZSBmaWxsPSIjMjE0RjcwIiBjeD0iMTYwIiBjeT0iMjU3IiByPSIyOTIiLz48L2c+PGc+PHBhdGggc3Ryb2tlLWRhc2hhcnJheT0iMCIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIHN0cm9rZS13aWR0aD0iMTYiIGQ9Ik0xOTUuNSAyNDhjMCAzMCAzNy41IDMwIDUyLjUgMHMgNTIuNS0zMCA1Mi41IDBzLTM3LjUgMzAtNTIuNSAwcy01Mi41LTMwLTUyLjUgMCIgZmlsbD0ibm9uZSI+PGFuaW1hdGUgYmVnaW49InMuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9IiMyMTRGNzA7Izc3Nzc3NzsjMjE0RjcwIiBkdXI9IjRzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaGFycmF5IiB2YWx1ZXM9IjA7NTA7MCIgZHVyPSI2cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgYmVnaW49ImEuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLXdpZHRoIiB2YWx1ZXM9IjE2OzIwOzE2IiBkdXI9IjFzIiBmaWxsPSJmcmVlemUiLz48L3BhdGg+PHBhdGggc3Ryb2tlLWRhc2hhcnJheT0iMzAwIiBzdHJva2UtZGFzaG9mZnNldD0iMzAwIiBzdHJva2Utd2lkdGg9IjE2IiBkPSJNMTk1LjUgMjQ4YzAgMzAgMzcuNSAzMCA1Mi41IDBzIDUyLjUtMzAgNTIuNSAwcy0zNy41IDMwLTUyLjUgMHMtNTIuNS0zMC01Mi41IDAiIGZpbGw9Im5vbmUiPjxhbmltYXRlIGJlZ2luPSJzLmJlZ2luIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZSIgdmFsdWVzPSIjQUFBQUFBOyMyMTRGNzA7I0FBQUFBQSIgZHVyPSI0cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgaWQ9ImEiIGJlZ2luPSJzLmJlZ2luO3MuYmVnaW4rMXM7cy5iZWdpbisycztzLmJlZ2luKzNzO3MuYmVnaW4rNHM7cy5iZWdpbis1cztzLmJlZ2luKzZzIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS13aWR0aCIgdmFsdWVzPSIxNjsyMDsxNiIgZHVyPSIxcyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgaWQ9InMiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hvZmZzZXQiIGJlZ2luPSIwcztzLmVuZCIgdG89ICItMTgwMCIgZHVyPSI2cyIvPjwvcGF0aD48L2c+PGcgaWQ9IjM4N2IiPjxwYXRoIGQ9Ik0xOTQgMTc5SDEzMWMtMzQgNjUgMCAxNDMgMCAxNDNoNjNDMTMyIDI1MSAxOTQgMTc5IDE5NCAxNzlabS0yNiAxMjhIMTQ0cy0yNS0zNSAwLTExMWgyM1MxMjYgMjQ1IDE2OCAzMDdaIiBzdHJva2U9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuOSIgc3Ryb2tlLXdpZHRoPSIuNyI+PGFuaW1hdGUgaWQ9InAiIGJlZ2luPSJzLmJlZ2luIiBhdHRyaWJ1dGVOYW1lPSJmaWxsIiBkdXI9IjZzIiB2YWx1ZXM9ImJsYWNrO2JsYWNrOyMyMTRGNzA7YmxhY2s7YmxhY2s7Izc3Nzc3NztibGFjaztibGFjazsjQUFBQUFBO2JsYWNrIi8+PC9wYXRoPjx0ZXh0IHg9IjIiIHk9IjQwIiBmb250LXNpemU9IjNlbSIgZmlsbC1vcGFjaXR5PSIwLjMiIGZpbGw9ImJsYWNrIj7il48gICAgPC90ZXh0PjxwYXRoIGQ9Ik05MCAyMDNjLTIxIDQxIDAgOTEgMCA5MWgxMWMwIDAtMTYtNDIgMC05MXoiIHN0cm9rZS1vcGFjaXR5PSIuNyIgZmlsbC1vcGFjaXR5PSIuNyIgZmlsbD0idHJhbnNwYXJlbnQiPjxhbmltYXRlIGlkPSJ3IiBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O3doaXRlO3RyYW5zcGFyZW50IiBiZWdpbj0icC5iZWdpbisuNjdzO3AuYmVnaW4rMi42N3M7cC5iZWdpbis0LjY3cyIgZHVyPSIxcyIvPjxhbmltYXRlIGJlZ2luPSJ3LmJlZ2luIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGR1cj0iMXMiLz48L3BhdGg+PHBhdGggZD0iTTYwIDIxMmMtMTcgMzQgMCA3NCAwIDc0aDljMC0xLTEzLTM0IDAtNzR6IiBzdHJva2Utb3BhY2l0eT0iLjUiIGZpbGwtb3BhY2l0eT0iLjUiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O3doaXRlO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuMnMiIGR1cj0iMXMiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy4ycyIgZHVyPSIxcyIvPjwvcGF0aD48cGF0aCBkPSJNMzcgMjIxYy0xMyAyNiAwIDU3IDAgNTdoN2MwIDAtMTAtMjYgMC01N3oiIHN0cm9rZS1vcGFjaXR5PSIuMyIgZmlsbC1vcGFjaXR5PSIwLjMiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O3doaXRlO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuNHMiIGR1cj0iMXMiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy40cyIgZHVyPSIxcyIvPjwvcGF0aD48L2c+PHVzZSBocmVmPSIjMzg3YiIgeD0iLTUwMCIgeT0iLTUwMCIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwKSIvPjwvc3ZnPg=="
               width="500"
               height="500"
             />
+            <p className="center-text text-center title-font font-black text-center items-center">
+              &#9679; COMMON &#9679;
+            </p>
           </li>
-          <li>
-            <div className="flex bg-green-200 justify-center opacity-75 h-full w-full">
-              <h1 className=" flex title-font sm:text-2xl text-xl font-black text-center items-center">
-                GREYSCALE COMMON <br />
-                &#9679;
-              </h1>
-            </div>
+          <li className=" center-text text-center">
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld2JveD0iMCAwIDUwMCA1MDAiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiMxMTExMTEiPjxnIGZpbGwtb3BhY2l0eT0iMC4zIj48Y2lyY2xlIGZpbGw9IiMxMWRmZmEiIGN4PSIzMjQiIGN5PSIxNTciIHI9IjI3MiIvPjxjaXJjbGUgZmlsbD0iI0FBQUFBQSIgY3g9IjgxIiBjeT0iMjE3IiByPSIzOTYiLz48Y2lyY2xlIGZpbGw9IiM4NzJhODQiIGN4PSIzMyIgY3k9IjQwOSIgcj0iMjc3Ii8+PGNpcmNsZSBmaWxsPSIjODcyYTg0IiBjeD0iMTQ2IiBjeT0iNDU3IiByPSIyODQiLz48cmVjdCBmaWxsPSIjQUFBQUFBIiB4PSIyMDkiIHk9IjIwOCIgd2lkdGg9IjczMiIgaGVpZ2h0PSI1NDYiIHRyYW5zZm9ybT0icm90YXRlKDI5NykiLz48cmVjdCBmaWxsPSIjQUFBQUFBIiB4PSI1OCIgeT0iMTE2IiB3aWR0aD0iNTkwIiBoZWlnaHQ9IjYxNiIgdHJhbnNmb3JtPSJyb3RhdGUoMTkzKSIvPjxyZWN0IGZpbGw9IiM4NzJhODQiIHg9IjgzIiB5PSIxODAiIHdpZHRoPSI3MjgiIGhlaWdodD0iNTEyIiB0cmFuc2Zvcm09InJvdGF0ZSgzMykiLz48Y2lyY2xlIGZpbGw9IiNBQUFBQUEiIGN4PSI0MjMiIGN5PSIyOTMiIHI9IjM1NCIvPjxjaXJjbGUgZmlsbD0iIzExZGZmYSIgY3g9IjM2MiIgY3k9IjQwMSIgcj0iMzQxIi8+PGNpcmNsZSBmaWxsPSIjMTFkZmZhIiBjeD0iMzQ3IiBjeT0iMTUzIiByPSIzNjYiLz48Y2lyY2xlIGZpbGw9IiMxMWRmZmEiIGN4PSI5OSIgY3k9IjI0MSIgcj0iMjc5Ii8+PGNpcmNsZSBmaWxsPSIjQUFBQUFBIiBjeD0iMTYyIiBjeT0iMTEzIiByPSIzNjAiLz48Y2lyY2xlIGZpbGw9IiNBQUFBQUEiIGN4PSI0MjIiIGN5PSIyNTciIHI9IjM4NSIvPjxjaXJjbGUgZmlsbD0iI0FBQUFBQSIgY3g9IjExOCIgY3k9IjY1IiByPSIyOTUiLz48cmVjdCBmaWxsPSIjQUFBQUFBIiB4PSIyMDUiIHk9IjM0IiB3aWR0aD0iNzI4IiBoZWlnaHQ9Ijc1NiIgdHJhbnNmb3JtPSJyb3RhdGUoMjAxKSIvPjwvZz48Zz48cGF0aCBzdHJva2UtZGFzaGFycmF5PSIwIiBzdHJva2UtZGFzaG9mZnNldD0iMCIgc3Ryb2tlLXdpZHRoPSIxNiIgZD0iTTE5NS41IDI0OGMwIDMwIDM3LjUgMzAgNTIuNSAwcyA1Mi41LTMwIDUyLjUgMHMtMzcuNSAzMC01Mi41IDBzLTUyLjUtMzAtNTIuNSAwIiBmaWxsPSJub25lIj48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0iIzg3MmE4NDsjMTFkZmZhOyM4NzJhODQiIGR1cj0iNHMiIGZpbGw9ImZyZWV6ZSIvPjxhbmltYXRlIGJlZ2luPSJzLmJlZ2luIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS1kYXNoYXJyYXkiIHZhbHVlcz0iMDs1MDswIiBkdXI9IjZzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBiZWdpbj0iYS5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2Utd2lkdGgiIHZhbHVlcz0iMTY7MjA7MTYiIGR1cj0iMXMiIGZpbGw9ImZyZWV6ZSIvPjwvcGF0aD48cGF0aCBzdHJva2UtZGFzaGFycmF5PSIzMDAiIHN0cm9rZS1kYXNob2Zmc2V0PSIzMDAiIHN0cm9rZS13aWR0aD0iMTYiIGQ9Ik0xOTUuNSAyNDhjMCAzMCAzNy41IDMwIDUyLjUgMHMgNTIuNS0zMCA1Mi41IDBzLTM3LjUgMzAtNTIuNSAwcy01Mi41LTMwLTUyLjUgMCIgZmlsbD0ibm9uZSI+PGFuaW1hdGUgYmVnaW49InMuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9IiNBQUFBQUE7Izg3MmE4NDsjQUFBQUFBIiBkdXI9IjRzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBpZD0iYSIgYmVnaW49InMuYmVnaW47cy5iZWdpbisxcztzLmJlZ2luKzJzO3MuYmVnaW4rM3M7cy5iZWdpbis0cztzLmJlZ2luKzVzO3MuYmVnaW4rNnMiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLXdpZHRoIiB2YWx1ZXM9IjE2OzIwOzE2IiBkdXI9IjFzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBpZD0icyIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaG9mZnNldCIgYmVnaW49IjBzO3MuZW5kIiB0bz0gIi0xODAwIiBkdXI9IjZzIi8+PC9wYXRoPjwvZz48ZyBpZD0iMTY0YiI+PHBhdGggZD0iTTE5NCAxNzlIMTMxYy0zNCA2NSAwIDE0MyAwIDE0M2g2M0MxMzIgMjUxIDE5NCAxNzkgMTk0IDE3OVptLTI2IDEyOEgxNDRzLTI1LTM1IDAtMTExaDIzUzEyNiAyNDUgMTY4IDMwN1oiIHN0cm9rZT0iYmxhY2siIGZpbGwtb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9Ii43Ij48YW5pbWF0ZSBpZD0icCIgYmVnaW49InMuYmVnaW4iIGF0dHJpYnV0ZU5hbWU9ImZpbGwiIGR1cj0iNnMiIHZhbHVlcz0iYmxhY2s7YmxhY2s7Izg3MmE4NDtibGFjaztibGFjazsjMTFkZmZhO2JsYWNrO2JsYWNrOyNBQUFBQUE7YmxhY2siLz48L3BhdGg+PHRleHQgeD0iMiIgeT0iNDAiIGZvbnQtc2l6ZT0iM2VtIiBmaWxsLW9wYWNpdHk9IjAuMyIgZmlsbD0iYmxhY2siPuKcpyAgICA8L3RleHQ+PHBhdGggZD0iTTkwIDIwM2MtMjEgNDEgMCA5MSAwIDkxaDExYzAgMC0xNi00MiAwLTkxeiIgc3Ryb2tlLW9wYWNpdHk9Ii43IiBmaWxsLW9wYWNpdHk9Ii43IiBmaWxsPSJ0cmFuc3BhcmVudCI+PGFuaW1hdGUgaWQ9InciIGF0dHJpYnV0ZU5hbWU9ImZpbGwiIHZhbHVlcz0idHJhbnNwYXJlbnQ7Izg3MmE4NDt0cmFuc3BhcmVudCIgYmVnaW49InAuYmVnaW4rLjY3cztwLmJlZ2luKzIuNjdzO3AuYmVnaW4rNC42N3MiIGR1cj0iMXMiLz48YW5pbWF0ZSBiZWdpbj0idy5iZWdpbiIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBkdXI9IjFzIi8+PC9wYXRoPjxwYXRoIGQ9Ik02MCAyMTJjLTE3IDM0IDAgNzQgMCA3NGg5YzAtMS0xMy0zNCAwLTc0eiIgc3Ryb2tlLW9wYWNpdHk9Ii41IiBmaWxsLW9wYWNpdHk9Ii41IiBmaWxsPSJ0cmFuc3BhcmVudCI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iZmlsbCIgdmFsdWVzPSJ0cmFuc3BhcmVudDsjMTFkZmZhO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuMnMiIGR1cj0iMXMiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy4ycyIgZHVyPSIxcyIvPjwvcGF0aD48cGF0aCBkPSJNMzcgMjIxYy0xMyAyNiAwIDU3IDAgNTdoN2MwIDAtMTAtMjYgMC01N3oiIHN0cm9rZS1vcGFjaXR5PSIuMyIgZmlsbC1vcGFjaXR5PSIwLjMiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50OyNBQUFBQUE7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy40cyIgZHVyPSIxcyIvPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InN0cm9rZSIgdmFsdWVzPSJ0cmFuc3BhcmVudDtibGFjazt0cmFuc3BhcmVudCIgYmVnaW49IncuYmVnaW4rLjRzIiBkdXI9IjFzIi8+PC9wYXRoPjwvZz48dXNlIGhyZWY9IiMxNjRiIiB4PSItNTAwIiB5PSItNTAwIiB0cmFuc2Zvcm09InJvdGF0ZSgxODApIi8+PC9zdmc+"
+              width="500"
+              height="500"
+            />
+            <p className="center-text text-center title-font font-black text-center items-center">
+              &#10023; UNCOMMON &#10023;
+            </p>
           </li>
-          <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+
+          <li className=" center-text text-center">
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld2JveD0iMCAwIDUwMCA1MDAiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiMxMTExMTEiPjxnIGZpbGwtb3BhY2l0eT0iMC4zIj48Y2lyY2xlIGZpbGw9IiMxNTcyODYiIGN4PSIyNjciIGN5PSI0NjUiIHI9IjM4MSIgc3Ryb2tlPSIjMTU3Mjg2Ii8+PHJlY3QgZmlsbD0iIzE1NzI4NiIgeD0iMjMwIiB5PSIxNjAiIHdpZHRoPSI3MTgiIGhlaWdodD0iNTI0IiB0cmFuc2Zvcm09InJvdGF0ZSgyODEpIiBzdHJva2U9IiMxNTcyODYiLz48cmVjdCBmaWxsPSIjMTU3Mjg2IiB4PSI0IiB5PSIxMTYiIHdpZHRoPSI2MjIiIGhlaWdodD0iNjEwIiB0cmFuc2Zvcm09InJvdGF0ZSgyOTcpIiBzdHJva2U9IiMxNTcyODYiLz48cmVjdCBmaWxsPSIjMTU3Mjg2IiB4PSIxMjYiIHk9IjI0NCIgd2lkdGg9IjYzOCIgaGVpZ2h0PSI3NjYiIHRyYW5zZm9ybT0icm90YXRlKDE5MykiIHN0cm9rZT0iIzE1NzI4NiIvPjxyZWN0IGZpbGw9IiMxNTcyODYiIHg9IjE1OSIgeT0iMCIgd2lkdGg9IjUzNiIgaGVpZ2h0PSI2NzAiIHRyYW5zZm9ybT0icm90YXRlKDgxKSIgc3Ryb2tlPSIjMTU3Mjg2Ii8+PHJlY3QgZmlsbD0iIzUzMmZiMyIgeD0iNDAiIHk9IjkwIiB3aWR0aD0iNTIyIiBoZWlnaHQ9IjUyNiIgdHJhbnNmb3JtPSJyb3RhdGUoMjY1KSIgc3Ryb2tlPSIjNTMyZmIzIi8+PHJlY3QgZmlsbD0iIzUzMmZiMyIgeD0iMTYiIHk9IjE3NCIgd2lkdGg9IjY2MCIgaGVpZ2h0PSI2NTYiIHRyYW5zZm9ybT0icm90YXRlKDM1MykiIHN0cm9rZT0iIzUzMmZiMyIvPjxjaXJjbGUgZmlsbD0iIzUzMmZiMyIgY3g9IjM4OSIgY3k9IjMxNyIgcj0iMjY2IiBzdHJva2U9IiM1MzJmYjMiLz48cmVjdCBmaWxsPSIjMTU3Mjg2IiB4PSI1NSIgeT0iMTQyIiB3aWR0aD0iNjcyIiBoZWlnaHQ9IjU3MiIgdHJhbnNmb3JtPSJyb3RhdGUoNDkpIiBzdHJva2U9IiMxNTcyODYiLz48cmVjdCBmaWxsPSIjMTU3Mjg2IiB4PSIyMTAiIHk9IjE4OCIgd2lkdGg9IjY1NCIgaGVpZ2h0PSI3MjgiIHRyYW5zZm9ybT0icm90YXRlKDI4OSkiIHN0cm9rZT0iIzE1NzI4NiIvPjxjaXJjbGUgZmlsbD0iIzE1NzI4NiIgY3g9IjI0MyIgY3k9IjEiIHI9IjM4OSIgc3Ryb2tlPSIjMTU3Mjg2Ii8+PHJlY3QgZmlsbD0iIzE1NzI4NiIgeD0iMjI3IiB5PSI3NiIgd2lkdGg9IjcyMiIgaGVpZ2h0PSI1OTYiIHRyYW5zZm9ybT0icm90YXRlKDIyNSkiIHN0cm9rZT0iIzE1NzI4NiIvPjxjaXJjbGUgZmlsbD0iIzE1NzI4NiIgY3g9IjI1MSIgY3k9IjQ2OSIgcj0iMzU1IiBzdHJva2U9IiMxNTcyODYiLz48cmVjdCBmaWxsPSIjQUFBQUFBIiB4PSIyMjgiIHk9IjQ4IiB3aWR0aD0iNjkyIiBoZWlnaHQ9Ijc4MCIgdHJhbnNmb3JtPSJyb3RhdGUoNzMpIiBzdHJva2U9IiNBQUFBQUEiLz48cmVjdCBmaWxsPSIjQUFBQUFBIiB4PSIxMTkiIHk9IjUyIiB3aWR0aD0iNzQ2IiBoZWlnaHQ9IjU1MiIgdHJhbnNmb3JtPSJyb3RhdGUoNjUpIiBzdHJva2U9IiNBQUFBQUEiLz48L2c+PGc+PHBhdGggc3Ryb2tlLWRhc2hhcnJheT0iMCIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIHN0cm9rZS13aWR0aD0iMTYiIGQ9Ik0xOTUuNSAyNDhjMCAzMCAzNy41IDMwIDUyLjUgMHMgNTIuNS0zMCA1Mi41IDBzLTM3LjUgMzAtNTIuNSAwcy01Mi41LTMwLTUyLjUgMCIgZmlsbD0ibm9uZSI+PGFuaW1hdGUgYmVnaW49InMuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9IiM1MzJmYjM7IzE1NzI4NjsjNTMyZmIzIiBkdXI9IjRzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaGFycmF5IiB2YWx1ZXM9IjA7NTA7MCIgZHVyPSI2cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgYmVnaW49ImEuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLXdpZHRoIiB2YWx1ZXM9IjE2OzIwOzE2IiBkdXI9IjFzIiBmaWxsPSJmcmVlemUiLz48L3BhdGg+PHBhdGggc3Ryb2tlLWRhc2hhcnJheT0iMzAwIiBzdHJva2UtZGFzaG9mZnNldD0iMzAwIiBzdHJva2Utd2lkdGg9IjE2IiBkPSJNMTk1LjUgMjQ4YzAgMzAgMzcuNSAzMCA1Mi41IDBzIDUyLjUtMzAgNTIuNSAwcy0zNy41IDMwLTUyLjUgMHMtNTIuNS0zMC01Mi41IDAiIGZpbGw9Im5vbmUiPjxhbmltYXRlIGJlZ2luPSJzLmJlZ2luIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZSIgdmFsdWVzPSIjQUFBQUFBOyM1MzJmYjM7I0FBQUFBQSIgZHVyPSI0cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgaWQ9ImEiIGJlZ2luPSJzLmJlZ2luO3MuYmVnaW4rMXM7cy5iZWdpbisycztzLmJlZ2luKzNzO3MuYmVnaW4rNHM7cy5iZWdpbis1cztzLmJlZ2luKzZzIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS13aWR0aCIgdmFsdWVzPSIxNjsyMDsxNiIgZHVyPSIxcyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgaWQ9InMiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hvZmZzZXQiIGJlZ2luPSIwcztzLmVuZCIgdG89ICItMTgwMCIgZHVyPSI2cyIvPjwvcGF0aD48L2c+PGcgaWQ9IjM3N2IiPjxwYXRoIGQ9Ik0xOTQgMTc5SDEzMWMtMzQgNjUgMCAxNDMgMCAxNDNoNjNDMTMyIDI1MSAxOTQgMTc5IDE5NCAxNzlabS0yNiAxMjhIMTQ0cy0yNS0zNSAwLTExMWgyM1MxMjYgMjQ1IDE2OCAzMDdaIiBzdHJva2U9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuOSIgc3Ryb2tlLXdpZHRoPSIuNyI+PGFuaW1hdGUgaWQ9InAiIGJlZ2luPSJzLmJlZ2luIiBhdHRyaWJ1dGVOYW1lPSJmaWxsIiBkdXI9IjZzIiB2YWx1ZXM9ImJsYWNrO2JsYWNrOyM1MzJmYjM7YmxhY2s7YmxhY2s7IzE1NzI4NjtibGFjaztibGFjazsjQUFBQUFBO2JsYWNrIi8+PC9wYXRoPjx0ZXh0IHg9IjIiIHk9IjQwIiBmb250LXNpemU9IjNlbSIgZmlsbC1vcGFjaXR5PSIwLjMiIGZpbGw9ImJsYWNrIj7inKYgICAgPC90ZXh0PjxwYXRoIGQ9Ik05MCAyMDNjLTIxIDQxIDAgOTEgMCA5MWgxMWMwIDAtMTYtNDIgMC05MXoiIHN0cm9rZS1vcGFjaXR5PSIuNyIgZmlsbC1vcGFjaXR5PSIuNyIgZmlsbD0idHJhbnNwYXJlbnQiPjxhbmltYXRlIGlkPSJ3IiBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O3doaXRlO3RyYW5zcGFyZW50IiBiZWdpbj0icC5iZWdpbisuNjdzO3AuYmVnaW4rMi42N3M7cC5iZWdpbis0LjY3cyIgZHVyPSIxcyIvPjxhbmltYXRlIGJlZ2luPSJ3LmJlZ2luIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGR1cj0iMXMiLz48L3BhdGg+PHBhdGggZD0iTTYwIDIxMmMtMTcgMzQgMCA3NCAwIDc0aDljMC0xLTEzLTM0IDAtNzR6IiBzdHJva2Utb3BhY2l0eT0iLjUiIGZpbGwtb3BhY2l0eT0iLjUiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O3doaXRlO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuMnMiIGR1cj0iMXMiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy4ycyIgZHVyPSIxcyIvPjwvcGF0aD48cGF0aCBkPSJNMzcgMjIxYy0xMyAyNiAwIDU3IDAgNTdoN2MwIDAtMTAtMjYgMC01N3oiIHN0cm9rZS1vcGFjaXR5PSIuMyIgZmlsbC1vcGFjaXR5PSIwLjMiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O3doaXRlO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuNHMiIGR1cj0iMXMiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy40cyIgZHVyPSIxcyIvPjwvcGF0aD48L2c+PHVzZSBocmVmPSIjMzc3YiIgeD0iLTUwMCIgeT0iLTUwMCIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwKSIvPjwvc3ZnPg=="
+              width="500"
+              height="500"
+            />
+            <p className="center-text text-center title-font font-black text-center items-center">
+              &#10022; RARE &#10022;
+            </p>
+          </li>
+          <li className=" center-text text-center">
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld2JveD0iMCAwIDUwMCA1MDAiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiMxMTExMTEiPjxnIGZpbGwtb3BhY2l0eT0iMC4zIj48Y2lyY2xlIGZpbGw9IiNjMGMwYzAiIGN4PSI0MzAiIGN5PSIzNzMiIHI9IjM2OCIgc3Ryb2tlPSIjQ0Q3RjMyIi8+PGNpcmNsZSBmaWxsPSIjZTVlNGUyIiBjeD0iMzY0IiBjeT0iMjEiIHI9IjI4NSIgc3Ryb2tlPSIjQzBDMEMwIi8+PHJlY3QgZmlsbD0iI2MwYzBjMCIgeD0iMTc5IiB5PSIyMDQiIHdpZHRoPSI2NDAiIGhlaWdodD0iNTE2IiB0cmFuc2Zvcm09InJvdGF0ZSgyMjUpIiBzdHJva2U9IiNDRDdGMzIiLz48Y2lyY2xlIGZpbGw9IiNlNWU0ZTIiIGN4PSIyMTUiIGN5PSIzNTMiIHI9IjMwNyIgc3Ryb2tlPSIjQzBDMEMwIi8+PHJlY3QgZmlsbD0iI2MwYzBjMCIgeD0iMTU1IiB5PSI0NiIgd2lkdGg9IjczNiIgaGVpZ2h0PSI1NzQiIHRyYW5zZm9ybT0icm90YXRlKDQxKSIgc3Ryb2tlPSIjQ0Q3RjMyIi8+PHJlY3QgZmlsbD0iI2U1ZTRlMiIgeD0iNDUiIHk9IjE3NiIgd2lkdGg9IjYwNCIgaGVpZ2h0PSI1MzAiIHRyYW5zZm9ybT0icm90YXRlKDI1KSIgc3Ryb2tlPSIjQzBDMEMwIi8+PHJlY3QgZmlsbD0iI2MwYzBjMCIgeD0iNzQiIHk9IjE0NiIgd2lkdGg9IjYyNCIgaGVpZ2h0PSI2NDIiIHRyYW5zZm9ybT0icm90YXRlKDExMykiIHN0cm9rZT0id2hpdGUiLz48Y2lyY2xlIGZpbGw9IiNjMGMwYzAiIGN4PSIzMDUiIGN5PSI3NyIgcj0iMzA0IiBzdHJva2U9IiNDRDdGMzIiLz48cmVjdCBmaWxsPSIjYzBjMGMwIiB4PSIyMjkiIHk9IjE0OCIgd2lkdGg9Ijc0MiIgaGVpZ2h0PSI1MzYiIHRyYW5zZm9ybT0icm90YXRlKDI1NykiIHN0cm9rZT0iI0NEN0YzMiIvPjxyZWN0IGZpbGw9IiNlNWU0ZTIiIHg9IjE4NSIgeT0iMTg4IiB3aWR0aD0iNjY4IiBoZWlnaHQ9IjY0MiIgdHJhbnNmb3JtPSJyb3RhdGUoMTI5KSIgc3Ryb2tlPSIjQzBDMEMwIi8+PGNpcmNsZSBmaWxsPSIjYzBjMGMwIiBjeD0iMzQ5IiBjeT0iNDI1IiByPSIyNTEiIHN0cm9rZT0iI0NEN0YzMiIvPjxyZWN0IGZpbGw9IiNjMGMwYzAiIHg9IjQ0IiB5PSIxNDIiIHdpZHRoPSI3NzIiIGhlaWdodD0iNTE4IiB0cmFuc2Zvcm09InJvdGF0ZSgzMzcpIiBzdHJva2U9IiNDRDdGMzIiLz48cmVjdCBmaWxsPSIjZTVlNGUyIiB4PSIxMzkiIHk9Ijc0IiB3aWR0aD0iNjk4IiBoZWlnaHQ9IjYwOCIgdHJhbnNmb3JtPSJyb3RhdGUoMzI5KSIgc3Ryb2tlPSIjQzBDMEMwIi8+PHJlY3QgZmlsbD0iI2U1ZTRlMiIgeD0iMTY5IiB5PSI0NiIgd2lkdGg9Ijc2OCIgaGVpZ2h0PSI2MDIiIHRyYW5zZm9ybT0icm90YXRlKDE2MSkiIHN0cm9rZT0iI0MwQzBDMCIvPjxyZWN0IGZpbGw9IiNjMGMwYzAiIHg9IjIzOSIgeT0iMTM4IiB3aWR0aD0iNzgyIiBoZWlnaHQ9IjczNCIgdHJhbnNmb3JtPSJyb3RhdGUoMTc3KSIgc3Ryb2tlPSJ3aGl0ZSIvPjwvZz48Zz48cGF0aCBzdHJva2UtZGFzaGFycmF5PSIwIiBzdHJva2UtZGFzaG9mZnNldD0iMCIgc3Ryb2tlLXdpZHRoPSIxNiIgZD0iTTE5NS41IDI0OGMwIDMwIDM3LjUgMzAgNTIuNSAwcyA1Mi41LTMwIDUyLjUgMHMtMzcuNSAzMC01Mi41IDBzLTUyLjUtMzAtNTIuNSAwIiBmaWxsPSJub25lIj48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0id2hpdGU7I0MwQzBDMDt3aGl0ZSIgZHVyPSI0cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgYmVnaW49InMuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hhcnJheSIgdmFsdWVzPSIwOzUwOzAiIGR1cj0iNnMiIGZpbGw9ImZyZWV6ZSIvPjxhbmltYXRlIGJlZ2luPSJhLmJlZ2luIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS13aWR0aCIgdmFsdWVzPSIxNjsyMDsxNiIgZHVyPSIxcyIgZmlsbD0iZnJlZXplIi8+PC9wYXRoPjxwYXRoIHN0cm9rZS1kYXNoYXJyYXk9IjMwMCIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjMwMCIgc3Ryb2tlLXdpZHRoPSIxNiIgZD0iTTE5NS41IDI0OGMwIDMwIDM3LjUgMzAgNTIuNSAwcyA1Mi41LTMwIDUyLjUgMHMtMzcuNSAzMC01Mi41IDBzLTUyLjUtMzAtNTIuNSAwIiBmaWxsPSJub25lIj48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0iI0NEN0YzMjt3aGl0ZTsjQ0Q3RjMyIiBkdXI9IjRzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBpZD0iYSIgYmVnaW49InMuYmVnaW47cy5iZWdpbisxcztzLmJlZ2luKzJzO3MuYmVnaW4rM3M7cy5iZWdpbis0cztzLmJlZ2luKzVzO3MuYmVnaW4rNnMiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLXdpZHRoIiB2YWx1ZXM9IjE2OzIwOzE2IiBkdXI9IjFzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBpZD0icyIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaG9mZnNldCIgYmVnaW49IjBzO3MuZW5kIiB0bz0gIi0xODAwIiBkdXI9IjZzIi8+PC9wYXRoPjwvZz48ZyBpZD0iOWIiPjxwYXRoIGQ9Ik0xOTQgMTc5SDEzMWMtMzQgNjUgMCAxNDMgMCAxNDNoNjNDMTMyIDI1MSAxOTQgMTc5IDE5NCAxNzlabS0yNiAxMjhIMTQ0cy0yNS0zNSAwLTExMWgyM1MxMjYgMjQ1IDE2OCAzMDdaIiBzdHJva2U9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuOSIgc3Ryb2tlLXdpZHRoPSIuNyI+PHNldCBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaGFycmF5IiB0bz0iMjAiLz48c2V0IGF0dHJpYnV0ZU5hbWU9InN0cm9rZS13aWR0aCIgdG89IjIiLz48c2V0IGF0dHJpYnV0ZU5hbWU9ImZpbGwiIHRvPSJibGFjayIvPjxhbmltYXRlIGJlZ2luPSJzLmJlZ2luO3MuZW5kIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS1kYXNob2Zmc2V0IiBmcm9tPSIwIiB0bz0iMjgwIiBkdXI9IjZzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbjtzLmVuZCIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0iIzIyMjIyMjsjNzc3Nzc3OyNBQUFBQUE7IzIyMjIyMiIgZHVyPSI2cyIgZmlsbD0iZnJlZXplIi8+PC9wYXRoPjx0ZXh0IHg9IjIiIHk9IjQwIiBmb250LXNpemU9IjNlbSIgZmlsbC1vcGFjaXR5PSIwLjMiIGZpbGw9ImJsYWNrIj7imIYgICAgPC90ZXh0PjxwYXRoIGQ9Ik05MCAyMDNjLTIxIDQxIDAgOTEgMCA5MWgxMWMwIDAtMTYtNDIgMC05MXoiIHN0cm9rZS1vcGFjaXR5PSIuNyIgZmlsbC1vcGFjaXR5PSIuNyIgZmlsbD0idHJhbnNwYXJlbnQiPjxhbmltYXRlIGlkPSJ3IiBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBiZWdpbj0icC5iZWdpbisuNjdzO3AuYmVnaW4rMi42N3M7cC5iZWdpbis0LjY3cyIgZHVyPSIxcyIvPjxhbmltYXRlIGJlZ2luPSJ3LmJlZ2luIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGR1cj0iMXMiLz48L3BhdGg+PHBhdGggZD0iTTYwIDIxMmMtMTcgMzQgMCA3NCAwIDc0aDljMC0xLTEzLTM0IDAtNzR6IiBzdHJva2Utb3BhY2l0eT0iLjUiIGZpbGwtb3BhY2l0eT0iLjUiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuMnMiIGR1cj0iMXMiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy4ycyIgZHVyPSIxcyIvPjwvcGF0aD48cGF0aCBkPSJNMzcgMjIxYy0xMyAyNiAwIDU3IDAgNTdoN2MwIDAtMTAtMjYgMC01N3oiIHN0cm9rZS1vcGFjaXR5PSIuMyIgZmlsbC1vcGFjaXR5PSIwLjMiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuNHMiIGR1cj0iMXMiLz48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy40cyIgZHVyPSIxcyIvPjwvcGF0aD48L2c+PHVzZSBocmVmPSIjOWIiIHg9Ii01MDAiIHk9Ii01MDAiIHRyYW5zZm9ybT0icm90YXRlKDE4MCkiLz48L3N2Zz4="
+              width="500"
+              height="500"
+            />
+            <p className="center-text text-center title-font font-black text-center items-center">
+              &#9734; SUPER RARE &#9734;
+            </p>
+          </li>
+          <li className=" center-text text-center">
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld2JveD0iMCAwIDUwMCA1MDAiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiMxMTExMTEiPjxnIGZpbGwtb3BhY2l0eT0iMC4zIj48cmVjdCBmaWxsPSIjNzI1ZDE4IiB4PSIyOSIgeT0iMTM0IiB3aWR0aD0iNzEyIiBoZWlnaHQ9Ijc2MiIgdHJhbnNmb3JtPSJyb3RhdGUoMTkzKSIvPjxjaXJjbGUgZmlsbD0iIzcyNWQxOCIgY3g9IjM5NiIgY3k9IjI5NyIgcj0iMjY2Ii8+PHJlY3QgZmlsbD0iI0NEN0YzMiIgeD0iMTgzIiB5PSIyMzgiIHdpZHRoPSI1MDAiIGhlaWdodD0iNjgyIiB0cmFuc2Zvcm09InJvdGF0ZSgxODUpIi8+PGNpcmNsZSBmaWxsPSIjZTVlNGUyIiBjeD0iNDczIiBjeT0iMzk3IiByPSIzMTUiLz48cmVjdCBmaWxsPSIjNzI1ZDE4IiB4PSI2NSIgeT0iMTUwIiB3aWR0aD0iNzcwIiBoZWlnaHQ9IjUwMCIgdHJhbnNmb3JtPSJyb3RhdGUoODEpIi8+PHJlY3QgZmlsbD0iI2U1ZTRlMiIgeD0iNzkiIHk9IjIwMiIgd2lkdGg9Ijc5NCIgaGVpZ2h0PSI2MzQiIHRyYW5zZm9ybT0icm90YXRlKDgxKSIvPjxyZWN0IGZpbGw9IiM3MjVkMTgiIHg9IjIwIiB5PSIyIiB3aWR0aD0iNzYwIiBoZWlnaHQ9IjU0NiIgdHJhbnNmb3JtPSJyb3RhdGUoMTEzKSIvPjxyZWN0IGZpbGw9IiNlNWU0ZTIiIHg9IjUiIHk9IjIwMiIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI2NDYiIHRyYW5zZm9ybT0icm90YXRlKDM0NSkiLz48cmVjdCBmaWxsPSIjQ0Q3RjMyIiB4PSIxMjkiIHk9IjIxNCIgd2lkdGg9IjY0NiIgaGVpZ2h0PSI2ODYiIHRyYW5zZm9ybT0icm90YXRlKDg5KSIvPjxyZWN0IGZpbGw9IiNlNWU0ZTIiIHg9IjM4IiB5PSIyMTgiIHdpZHRoPSI3NDIiIGhlaWdodD0iNTAwIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjkpIi8+PHJlY3QgZmlsbD0iI0NEN0YzMiIgeD0iNzgiIHk9IjI0NCIgd2lkdGg9IjYzNiIgaGVpZ2h0PSI3MzgiIHRyYW5zZm9ybT0icm90YXRlKDk3KSIvPjxjaXJjbGUgZmlsbD0iI2U1ZTRlMiIgY3g9IjE3NyIgY3k9Ijc3IiByPSIzOTgiLz48cmVjdCBmaWxsPSIjQ0Q3RjMyIiB4PSIyMTMiIHk9Ijk4IiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjcxNiIgdHJhbnNmb3JtPSJyb3RhdGUoMTcpIi8+PHJlY3QgZmlsbD0iIzcyNWQxOCIgeD0iMTg3IiB5PSIyMTIiIHdpZHRoPSI2MzAiIGhlaWdodD0iNjU4IiB0cmFuc2Zvcm09InJvdGF0ZSgzNTMpIi8+PHJlY3QgZmlsbD0iIzcyNWQxOCIgeD0iMjM3IiB5PSI2IiB3aWR0aD0iNzcwIiBoZWlnaHQ9IjUyMiIgdHJhbnNmb3JtPSJyb3RhdGUoMjg5KSIvPjwvZz48Zz48cGF0aCBzdHJva2UtZGFzaGFycmF5PSIwIiBzdHJva2UtZGFzaG9mZnNldD0iMCIgc3Ryb2tlLXdpZHRoPSIxNiIgZD0iTTE5NS41IDI0OGMwIDMwIDM3LjUgMzAgNTIuNSAwcyA1Mi41LTMwIDUyLjUgMHMtMzcuNSAzMC01Mi41IDBzLTUyLjUtMzAtNTIuNSAwIiBmaWxsPSJub25lIj48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0iYmxhY2s7I0MwQzBDMDtibGFjayIgZHVyPSI0cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgYmVnaW49InMuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hhcnJheSIgdmFsdWVzPSIwOzUwOzAiIGR1cj0iNnMiIGZpbGw9ImZyZWV6ZSIvPjxhbmltYXRlIGJlZ2luPSJhLmJlZ2luIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS13aWR0aCIgdmFsdWVzPSIxNjsyMDsxNiIgZHVyPSIxcyIgZmlsbD0iZnJlZXplIi8+PC9wYXRoPjxwYXRoIHN0cm9rZS1kYXNoYXJyYXk9IjMwMCIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjMwMCIgc3Ryb2tlLXdpZHRoPSIxNiIgZD0iTTE5NS41IDI0OGMwIDMwIDM3LjUgMzAgNTIuNSAwcyA1Mi41LTMwIDUyLjUgMHMtMzcuNSAzMC01Mi41IDBzLTUyLjUtMzAtNTIuNSAwIiBmaWxsPSJub25lIj48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0iI0U1RTRFMjtibGFjazsjRTVFNEUyIiBkdXI9IjRzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBpZD0iYSIgYmVnaW49InMuYmVnaW47cy5iZWdpbisxcztzLmJlZ2luKzJzO3MuYmVnaW4rM3M7cy5iZWdpbis0cztzLmJlZ2luKzVzO3MuYmVnaW4rNnMiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLXdpZHRoIiB2YWx1ZXM9IjE2OzIwOzE2IiBkdXI9IjFzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBpZD0icyIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaG9mZnNldCIgYmVnaW49IjBzO3MuZW5kIiB0bz0gIi0xODAwIiBkdXI9IjZzIi8+PC9wYXRoPjwvZz48ZyBpZD0iMzJiIj48cGF0aCBkPSJNMTk0IDE3OUgxMzFjLTM0IDY1IDAgMTQzIDAgMTQzaDYzQzEzMiAyNTEgMTk0IDE3OSAxOTQgMTc5Wm0tMjYgMTI4SDE0NHMtMjUtMzUgMC0xMTFoMjNTMTI2IDI0NSAxNjggMzA3WiIgc3Ryb2tlPSJibGFjayIgZmlsbC1vcGFjaXR5PSIwLjkiIHN0cm9rZS13aWR0aD0iLjciPjxzZXQgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hhcnJheSIgdG89IjIwIi8+PHNldCBhdHRyaWJ1dGVOYW1lPSJzdHJva2Utd2lkdGgiIHRvPSIyIi8+PHNldCBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB0bz0iYmxhY2siLz48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbjtzLmVuZCIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaG9mZnNldCIgZnJvbT0iMCIgdG89IjI4MCIgZHVyPSI2cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgYmVnaW49InMuYmVnaW47cy5lbmQiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9IiM2ZWFhZmE7IzBkNDhhNjsjQUFBQUFBOyM2ZWFhZmEiIGR1cj0iNnMiIGZpbGw9ImZyZWV6ZSIvPjwvcGF0aD48dGV4dCB4PSIyIiB5PSI0MCIgZm9udC1zaXplPSIzZW0iIGZpbGwtb3BhY2l0eT0iMC4zIiBmaWxsPSJibGFjayI+4piFICAgIDwvdGV4dD48cGF0aCBkPSJNOTAgMjAzYy0yMSA0MSAwIDkxIDAgOTFoMTFjMCAwLTE2LTQyIDAtOTF6IiBzdHJva2Utb3BhY2l0eT0iLjciIGZpbGwtb3BhY2l0eT0iLjciIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBpZD0idyIgYXR0cmlidXRlTmFtZT0iZmlsbCIgdmFsdWVzPSJ0cmFuc3BhcmVudDtibGFjazt0cmFuc3BhcmVudCIgYmVnaW49InAuYmVnaW4rLjY3cztwLmJlZ2luKzIuNjdzO3AuYmVnaW4rNC42N3MiIGR1cj0iMXMiLz48YW5pbWF0ZSBiZWdpbj0idy5iZWdpbiIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBkdXI9IjFzIi8+PC9wYXRoPjxwYXRoIGQ9Ik02MCAyMTJjLTE3IDM0IDAgNzQgMCA3NGg5YzAtMS0xMy0zNCAwLTc0eiIgc3Ryb2tlLW9wYWNpdHk9Ii41IiBmaWxsLW9wYWNpdHk9Ii41IiBmaWxsPSJ0cmFuc3BhcmVudCI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iZmlsbCIgdmFsdWVzPSJ0cmFuc3BhcmVudDtibGFjazt0cmFuc3BhcmVudCIgYmVnaW49IncuYmVnaW4rLjJzIiBkdXI9IjFzIi8+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuMnMiIGR1cj0iMXMiLz48L3BhdGg+PHBhdGggZD0iTTM3IDIyMWMtMTMgMjYgMCA1NyAwIDU3aDdjMCAwLTEwLTI2IDAtNTd6IiBzdHJva2Utb3BhY2l0eT0iLjMiIGZpbGwtb3BhY2l0eT0iMC4zIiBmaWxsPSJ0cmFuc3BhcmVudCI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iZmlsbCIgdmFsdWVzPSJ0cmFuc3BhcmVudDtibGFjazt0cmFuc3BhcmVudCIgYmVnaW49IncuYmVnaW4rLjRzIiBkdXI9IjFzIi8+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuNHMiIGR1cj0iMXMiLz48L3BhdGg+PC9nPjx1c2UgaHJlZj0iIzMyYiIgeD0iLTUwMCIgeT0iLTUwMCIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwKSIvPjwvc3ZnPg=="
+              width="500"
+              height="500"
+            />
+            <p className="center-text text-center title-font font-black text-center items-center">
+              &#9733; ULTRA RARE &#9733;
+            </p>
+          </li>
+          <li className=" center-text text-center">
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
+              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld2JveD0iMCAwIDUwMCA1MDAiIHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOiMxMTExMTEiPjxnIGZpbGwtb3BhY2l0eT0iMC4zIj48Y2lyY2xlIGZpbGw9IiM4MEE2QUYiIGN4PSI5OSIgY3k9IjM3MyIgcj0iMjU0Ii8+PGNpcmNsZSBmaWxsPSIjM0E0MjRGIiBjeD0iMTUwIiBjeT0iNzMiIHI9IjMxNiIvPjxjaXJjbGUgZmlsbD0iIzgwQTZBRiIgY3g9IjUwIiBjeT0iMzQ1IiByPSIzNzUiLz48cmVjdCBmaWxsPSIjODBBNkFGIiB4PSI2OSIgeT0iMTk0IiB3aWR0aD0iNTMyIiBoZWlnaHQ9IjUwNiIgdHJhbnNmb3JtPSJyb3RhdGUoMTIxKSIvPjxjaXJjbGUgZmlsbD0iIzNBNDI0RiIgY3g9IjQ3IiBjeT0iMjUiIHI9IjM4NSIvPjxyZWN0IGZpbGw9IiMzQTQyNEYiIHg9IjY4IiB5PSIxNjYiIHdpZHRoPSI2MjIiIGhlaWdodD0iNjAwIiB0cmFuc2Zvcm09InJvdGF0ZSgxMzcpIi8+PGNpcmNsZSBmaWxsPSIjODBBNkFGIiBjeD0iMjkxIiBjeT0iMzEzIiByPSIzNTIiLz48Y2lyY2xlIGZpbGw9IiM4MEE2QUYiIGN4PSIzMjkiIGN5PSIzMyIgcj0iMzUxIi8+PGNpcmNsZSBmaWxsPSIjM0E0MjRGIiBjeD0iODMiIGN5PSI2MSIgcj0iMzYyIi8+PHJlY3QgZmlsbD0iIzgwQTZBRiIgeD0iMTYiIHk9Ijk2IiB3aWR0aD0iNzE4IiBoZWlnaHQ9IjcwMCIgdHJhbnNmb3JtPSJyb3RhdGUoMjAxKSIvPjxyZWN0IGZpbGw9IiM4MEE2QUYiIHg9IjE5NSIgeT0iMTIiIHdpZHRoPSI1MjYiIGhlaWdodD0iNTUwIiB0cmFuc2Zvcm09InJvdGF0ZSgzNTMpIi8+PGNpcmNsZSBmaWxsPSIjODBBNkFGIiBjeD0iMzU0IiBjeT0iMjg1IiByPSIzMDciLz48cmVjdCBmaWxsPSIjODBBNkFGIiB4PSIxNzIiIHk9IjEwMCIgd2lkdGg9IjgwMCIgaGVpZ2h0PSI2NDgiIHRyYW5zZm9ybT0icm90YXRlKDMzNykiLz48cmVjdCBmaWxsPSIjODBBNkFGIiB4PSIxNzEiIHk9IjIiIHdpZHRoPSI1ODgiIGhlaWdodD0iNTY2IiB0cmFuc2Zvcm09InJvdGF0ZSgyMDkpIi8+PHJlY3QgZmlsbD0iIzNBNDI0RiIgeD0iNDkiIHk9IjE3NiIgd2lkdGg9IjY1MiIgaGVpZ2h0PSI1OTIiIHRyYW5zZm9ybT0icm90YXRlKDI4MSkiLz48L2c+PGc+PHBhdGggc3Ryb2tlLWRhc2hhcnJheT0iMCIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIHN0cm9rZS13aWR0aD0iMTYiIGQ9Ik0xOTUuNSAyNDhjMCAzMCAzNy41IDMwIDUyLjUgMHMgNTIuNS0zMCA1Mi41IDBzLTM3LjUgMzAtNTIuNSAwcy01Mi41LTMwLTUyLjUgMCIgZmlsbD0ibm9uZSI+PGFuaW1hdGUgYmVnaW49InMuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9IiNGRkM3Njg7IzNBNDI0RjsjRkZDNzY4IiBkdXI9IjRzIiBmaWxsPSJmcmVlemUiLz48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbiIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaGFycmF5IiB2YWx1ZXM9IjA7NTA7MCIgZHVyPSI2cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgYmVnaW49ImEuYmVnaW4iIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLXdpZHRoIiB2YWx1ZXM9IjE2OzIwOzE2IiBkdXI9IjFzIiBmaWxsPSJmcmVlemUiLz48L3BhdGg+PHBhdGggc3Ryb2tlLWRhc2hhcnJheT0iMzAwIiBzdHJva2UtZGFzaG9mZnNldD0iMzAwIiBzdHJva2Utd2lkdGg9IjE2IiBkPSJNMTk1LjUgMjQ4YzAgMzAgMzcuNSAzMCA1Mi41IDBzIDUyLjUtMzAgNTIuNSAwcy0zNy41IDMwLTUyLjUgMHMtNTIuNS0zMC01Mi41IDAiIGZpbGw9Im5vbmUiPjxhbmltYXRlIGJlZ2luPSJzLmJlZ2luIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZSIgdmFsdWVzPSIjRkZDNzY4OyNGRkM3Njg7I0ZGQzc2OCIgZHVyPSI0cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgaWQ9ImEiIGJlZ2luPSJzLmJlZ2luO3MuYmVnaW4rMXM7cy5iZWdpbisycztzLmJlZ2luKzNzO3MuYmVnaW4rNHM7cy5iZWdpbis1cztzLmJlZ2luKzZzIiBhdHRyaWJ1dGVUeXBlPSJYTUwiIGF0dHJpYnV0ZU5hbWU9InN0cm9rZS13aWR0aCIgdmFsdWVzPSIxNjsyMDsxNiIgZHVyPSIxcyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgaWQ9InMiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLWRhc2hvZmZzZXQiIGJlZ2luPSIwcztzLmVuZCIgdG89ICItMTgwMCIgZHVyPSI2cyIvPjwvcGF0aD48L2c+PGcgaWQ9IjUyYiI+PHBhdGggZD0iTTE5NCAxNzlIMTMxYy0zNCA2NSAwIDE0MyAwIDE0M2g2M0MxMzIgMjUxIDE5NCAxNzkgMTk0IDE3OVptLTI2IDEyOEgxNDRzLTI1LTM1IDAtMTExaDIzUzEyNiAyNDUgMTY4IDMwN1oiIHN0cm9rZT0iYmxhY2siIGZpbGwtb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9Ii43Ij48c2V0IGF0dHJpYnV0ZU5hbWU9InN0cm9rZS1kYXNoYXJyYXkiIHRvPSIyMCIvPjxzZXQgYXR0cmlidXRlTmFtZT0ic3Ryb2tlLXdpZHRoIiB0bz0iMiIvPjxzZXQgYXR0cmlidXRlTmFtZT0iZmlsbCIgdG89IiNGRkM3NjgiLz48YW5pbWF0ZSBiZWdpbj0icy5iZWdpbjtzLmVuZCIgYXR0cmlidXRlVHlwZT0iWE1MIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UtZGFzaG9mZnNldCIgZnJvbT0iMCIgdG89IjI4MCIgZHVyPSI2cyIgZmlsbD0iZnJlZXplIi8+PGFuaW1hdGUgYmVnaW49InMuYmVnaW47cy5lbmQiIGF0dHJpYnV0ZVR5cGU9IlhNTCIgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9IiM2ZWFhZmE7IzBkNDhhNjsjQUFBQUFBOyM2ZWFhZmEiIGR1cj0iNnMiIGZpbGw9ImZyZWV6ZSIvPjwvcGF0aD48dGV4dCB4PSIyIiB5PSI0MCIgZm9udC1zaXplPSIzZW0iIGZpbGwtb3BhY2l0eT0iMC4zIiBmaWxsPSJibGFjayI+8J2bgCAgIDwvdGV4dD48cGF0aCBkPSJNOTAgMjAzYy0yMSA0MSAwIDkxIDAgOTFoMTFjMCAwLTE2LTQyIDAtOTF6IiBzdHJva2Utb3BhY2l0eT0iLjciIGZpbGwtb3BhY2l0eT0iLjciIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBpZD0idyIgYXR0cmlidXRlTmFtZT0iZmlsbCIgdmFsdWVzPSJ0cmFuc3BhcmVudDsjRkZDNzY4O3RyYW5zcGFyZW50IiBiZWdpbj0icC5iZWdpbisuNjdzO3AuYmVnaW4rMi42N3M7cC5iZWdpbis0LjY3cyIgZHVyPSIxcyIvPjxhbmltYXRlIGJlZ2luPSJ3LmJlZ2luIiBhdHRyaWJ1dGVOYW1lPSJzdHJva2UiIHZhbHVlcz0idHJhbnNwYXJlbnQ7YmxhY2s7dHJhbnNwYXJlbnQiIGR1cj0iMXMiLz48L3BhdGg+PHBhdGggZD0iTTYwIDIxMmMtMTcgMzQgMCA3NCAwIDc0aDljMC0xLTEzLTM0IDAtNzR6IiBzdHJva2Utb3BhY2l0eT0iLjUiIGZpbGwtb3BhY2l0eT0iLjUiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJmaWxsIiB2YWx1ZXM9InRyYW5zcGFyZW50OyNGRkM3Njg7dHJhbnNwYXJlbnQiIGJlZ2luPSJ3LmJlZ2luKy4ycyIgZHVyPSIxcyIvPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9InN0cm9rZSIgdmFsdWVzPSJ0cmFuc3BhcmVudDtibGFjazt0cmFuc3BhcmVudCIgYmVnaW49IncuYmVnaW4rLjJzIiBkdXI9IjFzIi8+PC9wYXRoPjxwYXRoIGQ9Ik0zNyAyMjFjLTEzIDI2IDAgNTcgMCA1N2g3YzAgMC0xMC0yNiAwLTU3eiIgc3Ryb2tlLW9wYWNpdHk9Ii4zIiBmaWxsLW9wYWNpdHk9IjAuMyIgZmlsbD0idHJhbnNwYXJlbnQiPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwiIHZhbHVlcz0idHJhbnNwYXJlbnQ7I0ZGQzc2ODt0cmFuc3BhcmVudCIgYmVnaW49IncuYmVnaW4rLjRzIiBkdXI9IjFzIi8+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ic3Ryb2tlIiB2YWx1ZXM9InRyYW5zcGFyZW50O2JsYWNrO3RyYW5zcGFyZW50IiBiZWdpbj0idy5iZWdpbisuNHMiIGR1cj0iMXMiLz48L3BhdGg+PC9nPjx1c2UgaHJlZj0iIzUyYiIgeD0iLTUwMCIgeT0iLTUwMCIgdHJhbnNmb3JtPSJyb3RhdGUoMTgwKSIvPjwvc3ZnPg=="
+              width="500"
+              height="500"
+            />
+            <p className="underline center-text text-center title-font font-black text-center items-center">
+              𝛀 LEGENDARIES 𝛀
+            </p>
+          </li>
+          {/* <li>
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
-              src="/static/500x500.png"
-              width="500"
-              height="500"
-            />
-          </li>
-          <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
-              src="/static/500x500.png"
-              width="500"
-              height="500"
-            />
-          </li>
-          <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
-              src="/static/500x500.png"
-              width="500"
-              height="500"
-            />
-          </li>
-          <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
-              src="/static/500x500.png"
-              width="500"
-              height="500"
-            />
-          </li>
-          <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
@@ -272,9 +105,9 @@ function Gallery() {
             </div>
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
@@ -290,9 +123,9 @@ function Gallery() {
             </div>
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
@@ -307,9 +140,9 @@ function Gallery() {
             </div>
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/rare_silver1.svg"
               width="500"
               height="500"
@@ -324,86 +157,86 @@ function Gallery() {
             </div>
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
           </li>
           <li>
-            <Image
-              className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-              alt="team icon"
+            <img
+              className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
+              alt="Gallery Image"
               src="/static/500x500.png"
               width="500"
               height="500"
             />
-          </li>
+          </li> */}
         </ul>
       </div>
     </>
