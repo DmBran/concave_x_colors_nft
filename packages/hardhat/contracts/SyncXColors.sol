@@ -677,7 +677,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
       if (syncTraits.rarity_roll % 13 == 0) {
         // 7.7% probability ((77 in 1000)
-        syncTraits.rarity_id = 'Mosiac';
+        syncTraits.rarity_id = 'Mosaic';
         syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // Full Diamond
       } else if (syncTraits.rarity_roll % 11 == 0) {
         // 9% probability (91 in 1000)
