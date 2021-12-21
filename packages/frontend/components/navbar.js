@@ -66,14 +66,14 @@ export const Navbar = () => {
                 </a>
               </Link>
 
-              {1 && (
+              {'' && (
                 <Link href="/mint">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
               )}
-              {1 && (
+              {'' && (
                 <Link href="/display">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
@@ -85,7 +85,7 @@ export const Navbar = () => {
                   FAQ
                 </a>
               </Link>
-              {1 && context.active && context.account && (
+              {'' && context.active && context.account && (
                 <a
                   className="mt-2 lg:mt-0 ml-3 lg:ml-6 ring-4 ring-black text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500"
                   target="_blank"
@@ -96,7 +96,7 @@ export const Navbar = () => {
                     context.account.substring(11, 16)}
                 </a>
               )}
-              {1 && !context.active && (
+              {'' && !context.active && (
                 <button
                   type="button"
                   className={
