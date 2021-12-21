@@ -5,6 +5,8 @@ import { MetaHead } from '../components/head'
 import { Navbar } from '../components/navbar'
 import styles from '../styles/meme.module.css'
 import NoSSR from 'react-no-ssr'
+import HeroSlider from "../components/heroslider";
+import Gallery from "../components/gallery";
 
 export default function Home() {
   const LAUNCH_DATE = process.env.NEXT_PUBLIC_LAUNCH_DATE
@@ -140,24 +142,22 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="md:mt-10 sm:w-full md:w-full md:w-2/3 w-5/6">
-              <div className={'pr-0 md:pr-6'}>
-                <video src="/static/sync.mp4" type="video/mp4" controls></video>
-              </div>
+            <div className="md:mt-2  sm:w-full md:4/6 md:w-4/6 w-5/6">
+              <HeroSlider />
             </div>
           </div>
         </div>
+        {/*Gallery Section */}
         <div className={styles.gallery}>
           <div className="container px-5 py-24 mx-auto">
+
             <div className="flex flex-col text-center w-full mb-0">
-              <h1 className="title-font sm:text-4xl text-3xl font-black mb-4">
-                GALLERY COMING SOON!
-              </h1>
-              <h1 className="title-font sm:text-xl text-xl font-black mb-4">
-                CHECK BACK TOMORROW!
+              <h1 className="title-font sm:text-4xl text-3xl font-black mb-4 py-24">
+                GALLERY
               </h1>
             </div>
-            <div className="flex text-center center-text flex-wrap text-xl">
+            <Gallery />
+            <div className="flex md:w-1/3 mx-auto justify-center align-top text-center text-xl">
               {/*<div className="p-2 md:w-1/2 w-full">
                 <div className="h-full flex items-center p-4 flex-col">
                   <img
@@ -169,9 +169,9 @@ export default function Home() {
                   />
                   <div className="flex-grow p-5 text-center">
                     <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
+
                       <p className="text-gray-700 ">Traits XYZ</p>
-                    
+
                   </div>
                 </div>
               </div>
@@ -186,9 +186,9 @@ export default function Home() {
                   />
                   <div className="flex-grow p-5 text-center">
                     <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
+
                       <p className="text-gray-700 ">Traits XYZ</p>
-                    
+
                   </div>
                 </div>
               </div>
@@ -203,9 +203,9 @@ export default function Home() {
                   />
                   <div className="flex-grow p-5 text-center">
                     <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
+
                       <p className="text-gray-700 ">Traits XYZ</p>
-                    
+
                   </div>
                 </div>
               </div>
@@ -220,9 +220,9 @@ export default function Home() {
                   />
                   <div className="flex-grow p-5 text-center">
                     <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
+
                       <p className="text-gray-700 ">Traits XYZ</p>
-                    
+
                   </div>
                 </div>
               </div>
@@ -237,9 +237,9 @@ export default function Home() {
                   />
                   <div className="flex-grow p-5 text-center">
                     <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
+
                       <p className="text-gray-700 ">Traits XYZ</p>
-                    
+
                   </div>
                 </div>
               </div>
@@ -254,9 +254,9 @@ export default function Home() {
                   />
                   <div className="flex-grow p-5 text-center">
                     <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
+
                       <p className="text-gray-700 ">Traits XYZ</p>
-                    
+
                   </div>
                 </div>
               </div>
@@ -264,6 +264,26 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+
+
+        {/*Media Section*/}
+        <section className="text-gray-700 body-font py-24">
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-col text-center w-full mb-20">
+              <h1 className="title-font sm:text-4xl text-3xl font-black mb-4 text-gray-900">
+                MEDIA
+              </h1>
+            </div>
+            <div className="flex justify-center">
+              <div className="p-2 md:w-1/2 w-full">
+                <div className={'pr-0 md:pr-6'}>
+                <video src="/static/sync.mp4" type="video/mp4" controls/>
+              </div>
+              </div>
+            </div>
+          </div>
+        </section>
         {/*Team Section*/}
         <section className="text-gray-700 body-font py-24">
           <div className="container px-5 py-24 mx-auto">
