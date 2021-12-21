@@ -44,6 +44,9 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: 0,
   },
+  mocha: {
+    timeout: 120000,
+  },
   networks: {
     hardhat: {
       chainId: 1337,
