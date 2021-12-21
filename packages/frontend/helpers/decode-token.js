@@ -7,7 +7,7 @@ export const decodeToken = (tokenURI) => {
     const buffImg = new Buffer(buffImg64, 'base64')
     const svg = buffImg.toString('utf8')
     const meta = JSON.parse(buffAscii)
-
+    const svg64 = `data:image/svg+xml;base64,${buffImg64}`
     let rarity,
       theme,
       colors,
@@ -33,6 +33,7 @@ export const decodeToken = (tokenURI) => {
       rarity,
       colors,
       theme,
+      svg64,
       meta,
       svg,
     }

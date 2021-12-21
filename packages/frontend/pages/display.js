@@ -152,8 +152,9 @@ export default function Display() {
                             height: 200,
                             cursor: 'pointer',
                           }}
-                          dangerouslySetInnerHTML={{ __html: svg.svg }}
-                        ></div>
+                        >
+                          <img src={`${svg.svg64}`} />
+                        </div>
                       </div>
                     ))}
                   {!loaded && <Loader />}

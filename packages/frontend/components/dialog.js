@@ -25,7 +25,7 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
           </button>
           <div
             className={
-              'w-full py-20 px-10 bg-white bg-opacity-90 items-center border-gray-800 border-8'
+              'w-full py-20 px-10 bg-white  items-center border-gray-800 border-8'
             }
           >
             <div>
@@ -44,8 +44,9 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                             height: 200,
                             cursor: 'pointer',
                           }}
-                          dangerouslySetInnerHTML={{ __html: svg.svg }}
-                        ></div>
+                        >
+                          <img src={`${svg.svg64}`} />
+                        </div>
                       </div>
                     </div>
                     <div className="mx-auto lg:mx-0 lg:ml-5">
@@ -88,7 +89,7 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                         >
                           Colors:
                         </span>
-                        {!svg.colors?.length && <span>Greyscale</span>}
+                        {!svg.colors?.length && <span> Grayscale</span>}
                       </p>
                       {svg.colors && (
                         <p className={'mb-1 text-lg text-black'}>

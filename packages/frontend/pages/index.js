@@ -48,7 +48,7 @@ export default function Home() {
               </NoSSR>
             </div>
           </div>
-          <div className="container mx-auto flex px-5 py-24 lg:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8">
+          <div className="container mx-auto flex px-5 py-10 md:py-24 lg:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8">
             <div className="sm:w-full md:w-full lg:flex-grow  md:w-1/3 lg:pr-20 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
               <h1 className="title-font text-center sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-2">
                 SYNC X COLORS
@@ -273,7 +273,7 @@ export default function Home() {
               </h1>
             </div>
             <div className="flex flex-wrap -m-2 text-xl">
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-3"
@@ -292,7 +292,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-1"
@@ -301,22 +301,22 @@ export default function Home() {
                     width="90"
                     height="90"
                   />
-                  <div className="flex-grow ml-5">
-                    <h2 className="text-gray-900 title-font font-bold">
+                  <div className="flex-grow ml-5 lg:ml-1 ">
+                    <h2 className="lg:text-lg text-gray-900 title-font font-bold">
                       cryptographer87
                     </h2>
                     <a
                       href="https://twitter.com/cryptographer87"
                       target="_blank"
                     >
-                      <p style={{ fontSize: '16px' }} className="text-gray-700">
+                      <p style={{ fontSize: '15px' }} className="text-gray-700">
                         @cryptographer87
                       </p>
                     </a>
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full w- flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
@@ -335,7 +335,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
@@ -352,7 +352,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"

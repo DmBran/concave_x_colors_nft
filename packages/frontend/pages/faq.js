@@ -28,106 +28,145 @@ export default function Display() {
                     </p>
                   </div>
                   <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-                    <div className="w-full lg:w-1/2 px-4 py-2">
-                      <div className="mb-4">
-                        <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
-                          What are{' '}
-                          <a
-                            href="https://opensea.io/collection/the-colors-dot-art"
-                            target="_blank"
-                            className={'underline'}
-                          >
-                            The Colors
-                          </a>{' '}
-                          tokens for?
-                        </p>
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        I don't own any{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>
+                        . Why should I mint a greyscale Sync?
+                      </p>
 
-                        <span>
-                          All Sync NFTs start as greyscale NFTs. The Colors
-                          tokens can be used to colorize your Sync NFTs. Up to 3
-                          Colors can be synced during the minting process. This
-                          will generate a uniquely colored Sync NFT,
-                          corresponding to the Colors chosen.
-                        </span>
-                      </div>
-                      <div className="mb-4">
-                        <p className="font-bold text-black text-lg uppercase rounded-md py-2 px-4">
-                          Can{' '}
-                          <a
-                            href="https://opensea.io/collection/the-colors-dot-art"
-                            target="_blank"
-                            className={'underline'}
-                          >
-                            The Colors
-                          </a>{' '}
-                          tokens be reused?
-                        </p>
-
-                        <span>
-                          Yes! You can reuse your Colors NFTs as many times as
-                          you want. If you have minted multiple Syncs, your
-                          Colors NFTs can be synced multiple times to Color
-                          different Syncs.
-                        </span>
-                      </div>
-                      <div className="mb-4">
-                        <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
-                          What is the maximum number of{' '}
-                          <a
-                            href="https://opensea.io/collection/the-colors-dot-art"
-                            target="_blank"
-                            className={'underline'}
-                          >
-                            The Colors
-                          </a>{' '}
-                          tokens per mint?
-                        </p>
-
-                        <span>You can mint up to 10 Syncs each time.</span>
-                      </div>
+                      <span>
+                        All effects from Colors NFTs are purely visual. Greys
+                        stand out with slick animations and procedural variation
+                        to create unique effects. Both grey and colored versions
+                        will have equal weight and utility in Concave Finance;
+                        you are not getting something less valuable in that
+                        regard. Lastly, the chance of minting a rare token are
+                        the same regardless of whether Colors NFTs are used.
+                      </span>
                     </div>
-                    <div className="w-full lg:w-1/2 px-4 py-2">
-                      <div className="mb-4">
-                        <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
-                          Will the same{' '}
-                          <a
-                            href="https://opensea.io/collection/the-colors-dot-art"
-                            target="_blank"
-                            className={'underline'}
-                          >
-                            The Colors
-                          </a>{' '}
-                          always generate the same mint?
-                        </p>
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        What utility will Sync NFTs have?
+                      </p>
 
-                        <span className="px-4 py-2">
-                          No! Our algorithm will generative a background based
-                          upon a seed generated during mint. This seeding will
-                          be used to generate the patterns.
-                        </span>
-                      </div>
-                      <div className="mb-4">
-                        <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
-                          How do I update my Sync X Color NFT color palette?
-                        </p>
+                      <span>
+                        As publicized, our Syncs will grant eligibility to be
+                        whitelisted for Concave Finance's token launch. Holding
+                        Syncs through a snapshot will grant retroactive airdrops
+                        of their token. It's also been teased that all NFTs
+                        under their umbrella will have their place in Concave's
+                        metaverse plan.
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg uppercase rounded-md py-2 px-4">
+                        Can{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>{' '}
+                        tokens be reused?
+                      </p>
 
-                        <span className="px-4 py-2">
-                          You can go to our official website, and click on the
-                          Sync NFT you want to update. There, you will be shown
-                          the option to update your Sync's color palette.
-                        </span>
-                      </div>
-                      <div className="mb-4">
-                        <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
-                          How much does it cost to update my Sync X Color NFT
-                          color palette?
-                        </p>
+                      <span>
+                        Yes! You can reuse your Colors NFTs as many times as you
+                        want. If you have minted multiple Syncs, your Colors
+                        NFTs can be synced multiple times to Color different
+                        Syncs.
+                      </span>
+                    </div>
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        What are{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>{' '}
+                        tokens for?
+                      </p>
 
-                        <span className="px-4 py-2">
-                          It will cost 0.005 ETH for each update, plus gas on
-                          top of that.
-                        </span>
-                      </div>
+                      <span>
+                        All Sync NFTs start as greyscale NFTs. The Colors tokens
+                        can be used to colorize your Sync NFTs. Up to 3 Colors
+                        can be synced during the minting process. This will
+                        generate a uniquely colored Sync NFT, corresponding to
+                        the Colors chosen.
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        Will the same{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>{' '}
+                        always generate the same mint?
+                      </p>
+
+                      <span className="px-4 py-2">
+                        No! Our algorithm will generative a background based
+                        upon a seed generated during mint. This seeding will be
+                        used to generate the patterns.
+                      </span>
+                    </div>
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        What is the maximum number of{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>{' '}
+                        tokens per mint?
+                      </p>
+
+                      <span>You can mint up to 10 Syncs at a time.</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        How do I update my Sync X Color NFT color palette?
+                      </p>
+
+                      <span className="px-4 py-2">
+                        You can go to our official website, and click on the
+                        Sync NFT you want to update. There, you will be shown
+                        the option to update your Sync's color palette.
+                      </span>
+                    </div>
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        How much does it cost to update my Sync X Color NFT
+                        color palette?
+                      </p>
+
+                      <span className="px-4 py-2">
+                        It will cost 0.005 ETH for each update, plus gas on top
+                        of that.
+                      </span>
                     </div>
                   </div>
                 </div>
