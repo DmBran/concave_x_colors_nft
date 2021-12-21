@@ -29,6 +29,8 @@ let deployer;
 let thirdParty;
 // 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
 let constantAddress;
+const TEAM = '0x263853ef2C3Dd98a986799aB72E3b78334EB88cb';
+//const TEAM = '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC';
 
 /**
  Helper Functions
@@ -126,19 +128,61 @@ describe('syncXColors: Owner functions', () => {
             ).to.equal(ethers.utils.parseEther((price_in_ether*100).toString()))
         });
 
+        /*
         it(`after 100 mints test withdrawal 50/50`, async () => {
             await mintThirdParty(100);
             expect(await syncXColors.totalSupply()).to.equal(100);
+            expect(
+                await waffle.provider.getBalance(TREASURY)
+            ).to.equal(ethers.utils.parseEther('0'));
+            expect(
+                await waffle.provider.getBalance(TEAM)
+            ).to.equal(ethers.utils.parseEther('0'));
             await syncXColors.withdrawOwner();
             let balance = ethers.utils.formatEther(ethers.utils.parseEther((price_in_ether*100).toString()));
             let treasuryBalance = ethers.utils.formatEther((await waffle.provider.getBalance(TREASURY)).toString());
-            let teamBalance = ethers.utils.formatEther((await waffle.provider.getBalance(TREASURY)).toString());
+            let teamBalance = ethers.utils.formatEther((await waffle.provider.getBalance(TEAM)).toString());
             expect(+treasuryBalance).to.equal(+balance / 2);
             expect(+teamBalance).to.equal(+balance / 2);
             expect(
                 await waffle.provider.getBalance(syncXColors.address)
             ).to.equal(ethers.utils.parseEther('0'));
         });
+       */
+
+        it(`restrict withdrawal from third party`, async () => {
+            await mintThirdParty(100);
+            expect(await syncXColors.totalSupply()).to.equal(100);
+            await expect(syncXColors.connect(thirdParty).withdrawOwner()).to.be.revertedWith(
+              "Ownable: caller is not the owner"
+            );
+        });
+
+        /*
+         * replace TEAM in contract for the test to work
+        it(`team withdrawal`, async () => {
+            await mintThirdParty(100);
+            expect(await syncXColors.totalSupply()).to.equal(100);
+            let teamBalanceOrg = await waffle.provider.getBalance(TEAM);
+            expect(
+                await waffle.provider.getBalance(TREASURY)
+            ).to.equal(ethers.utils.parseEther('0'));
+            expect(
+                await waffle.provider.getBalance(TEAM)
+            ).to.equal(ethers.utils.parseEther('10000'));
+            await syncXColors.connect(constantAddress).withdrawTeam();
+            let balance = ethers.utils.formatEther(ethers.utils.parseEther((price_in_ether*100).toString()));
+            let treasuryBalance = ethers.utils.formatEther((await waffle.provider.getBalance(TREASURY)).toString());
+            let teamBalance = ethers.utils.formatEther((await waffle.provider.getBalance(TEAM)).toString());
+            expect(+treasuryBalance).to.equal(+balance / 2);
+            expect(teamBalance).to.equal("10002.5");
+            expect(
+                await waffle.provider.getBalance(syncXColors.address)
+            ).to.equal(ethers.utils.parseEther('0'));
+        });
+         */
+
+    });
 
 })
 
