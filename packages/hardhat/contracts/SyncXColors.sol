@@ -179,9 +179,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       _mintAmount > 0 && _mintAmount <= maxMintAmount,
       'Max mint 10 per tx'
     );
-    require(_mintIndex + _mintAmount <= MAX_SUPPLY, 'Exceeds supply');
     require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
-
     if (msg.sender == TEAM) {
       require(
         MintedReserves + _mintAmount <= TotalReservedAmount,
@@ -190,6 +188,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       // Update reserve count
       MintedReserves += _mintAmount;
     } else {
+      require(_mintIndex + _mintAmount <= MAX_SUPPLY, 'Exceeds supply');
       require(msg.value == (mintPrice * _mintAmount), 'Insufficient funds');
       // Validate colorTokenIds
       require(isHolder(colorTokenIds), 'COLORS not owned by sender.');

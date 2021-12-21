@@ -6,7 +6,7 @@ const prettier = require('prettier')
 /**
  Contract Constants & Variables
  */
-const THE_COLORS = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
+const THE_COLORS = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
 const TREASURY = '0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2'
 const MAX_SUPPLY = 4300
 
@@ -24,15 +24,17 @@ let colorsOwnerSigner
 /**
  Helper Variables
  */
-let syncXColors
-let deployer
-let thirdParty
+let syncXColors;
+let deployer;
+let thirdParty;
+// 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
+let constantAddress;
 
 /**
  Helper Functions
  */
 const deploy = async () => {
-  ;[deployer, thirdParty] = await ethers.getSigners()
+  [deployer, thirdParty, constantAddress] = await ethers.getSigners();
   SyncXColors = await ethers.getContractFactory('SyncXColors')
   syncXColors = await SyncXColors.deploy()
   console.log('>_')
@@ -262,13 +264,23 @@ describe('Public Functions', () => {
       expect(await syncXColors.totalSupply()).to.equal(1);
     });
 
+    /* Works, but takes 2m
     it('Should check sold out limit', async () => {
       await mintThirdParty(MAX_SUPPLY);
       expect(await syncXColors.totalSupply()).to.equal(MAX_SUPPLY);
       await expect(mintThirdParty(1)).to.be.revertedWith(
         "Exceeds supply"
       );
+      // for this to work change TEAM address in contract
+      await syncXColors.connect(constantAddress).mint(10, []);
+      expect(await syncXColors.totalSupply()).to.equal(MAX_SUPPLY+10);
+      await syncXColors.connect(constantAddress).mint(7, []);
+      expect(await syncXColors.totalSupply()).to.equal(MAX_SUPPLY+17);
+      await expect(syncXColors.connect(constantAddress).mint(1, [])).to.be.revertedWith(
+        "Not enough reserve tokens"
+      );
     });
+     */
 
     /*
         describe("public sale active check",() => {
