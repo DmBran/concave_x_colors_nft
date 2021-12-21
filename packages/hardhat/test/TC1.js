@@ -54,15 +54,9 @@ const mintThirdParty = async (_mintAmount) => {
   let quota = _mintAmount
   while (quota > 0) {
     let toMint = quota > 10 ? 10 : quota
-    if (toMint > 1) {
-      await syncXColors.connect(thirdParty).mintMany(toMint, {
-        value: ethers.utils.parseEther((price_in_ether * toMint).toString()),
-      })
-    } else {
-      await syncXColors.connect(thirdParty).mint({
-        value: ethers.utils.parseEther((price_in_ether * toMint).toString()),
-      })
-    }
+    await syncXColors.connect(thirdParty).mint(toMint, [], {
+      value: ethers.utils.parseEther((price_in_ether * toMint).toString()),
+    })
     quota -= toMint
   }
 }
@@ -248,14 +242,31 @@ describe("Public Functions", () => {
         await syncXColors.mint(10, [], {value:ethers.utils.parseEther((price_in_ether * 10).toString())});
         expect(await syncXColors.balanceOf(deployer.address)).to.be.eq(
           '10'
-        )
+        );
       });
 
       it('Should not mint more than 10 limit', async () => {
         await expect(syncXColors.mint(11, [], {value:price})).to.be.revertedWith(
           "Max mint 10 per tx"
-        )
+        );
       });
+
+      it('Should check third part mint', async () => {
+        await syncXColors.connect(thirdParty).mint(1, [], {value:price});
+        expect(await syncXColors.balanceOf(thirdParty.address)).to.be.eq(
+          '1'
+        );
+        expect(await syncXColors.totalSupply()).to.equal(1);
+      });
+
+      it('Should check sold out limit', async () => {
+        await mintThirdParty(MAX_SUPPLY);
+        expect(await syncXColors.totalSupply()).to.equal(MAX_SUPPLY);
+        await expect(mintThirdParty(1)).to.be.revertedWith(
+          "Exceeds supply"
+        );
+      });
+
     /*
         describe("public sale active check",() => {
             it(`mint should fail with "public sale not active" if public sale not active yet`, async () => {
