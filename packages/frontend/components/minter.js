@@ -197,7 +197,7 @@ export const Minter = (props) => {
   }
 
   function getMintText(loading) {
-    if (loading) return 'Processing'
+    if (loading) return 'MINTING...'
 
     if (tokenID) {
       return 'Color ∞ Sync!'
@@ -226,7 +226,7 @@ export const Minter = (props) => {
     }
     if (context.account) {
       return (
-        <div className={styles.modal}>
+        <div className={'w-full mx-auto lg:w-2/3 rounded py-10 px-6 lg:px-0'}>
           {tokenID && (
             <div className={'mt-0 mb-10'}>
               <p
@@ -277,7 +277,7 @@ export const Minter = (props) => {
                       key={svg.color}
                       className={
                         'border-solid border-gray-800  border-4 color shadow-lg ' +
-                        (svg.selected ? styles.colorActive : ' border-white')
+                        (mintColors && svg.selected ? styles.colorActive : ' border-white')
                       }
                       style={{
                         width: 75,

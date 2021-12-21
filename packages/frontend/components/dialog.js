@@ -25,7 +25,7 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
           </button>
           <div
             className={
-              'w-full py-20 px-10 bg-white bg-opacity-90 items-center border-gray-800 border-8'
+              'w-full py-20 px-10 bg-white  items-center border-gray-800 border-8'
             }
           >
             <div>

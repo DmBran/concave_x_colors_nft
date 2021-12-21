@@ -17,7 +17,7 @@ export default function Mint() {
           <div className={styles.main}>
             <main
               className={
-                'container mx-auto flex px-5 py-24 md:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8'
+                'container mx-auto flex px-5 py-6 lg:py-24 md:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8'
               }
             >
               <Minter tokenID={query.tokenID} />
