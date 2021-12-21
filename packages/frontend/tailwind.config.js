@@ -830,6 +830,22 @@ module.exports = {
       40: '40',
       50: '50',
     },
+    extend: {
+      animation: {
+        slideL : 'slideL 500ms linear',
+        slideR : 'slideR 500ms linear',
+      },
+      keyframes: {
+        slideL: {
+          '0%' : {transform: 'translateX(-100%)'},
+          '100%' : {transform: 'translateX(0)'}
+        },
+        slideR: {
+          '0%' : {transform: 'translateX(100%)'},
+          '100%' : {transform: 'translateX(0)'}
+        }
+      }
+    },
   },
   variantOrder: [
     'first',
