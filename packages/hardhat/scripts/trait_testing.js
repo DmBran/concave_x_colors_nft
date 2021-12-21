@@ -28,9 +28,10 @@ async function main() {
     const transaction1 = await thisSyncContract.mint(1, [], {
       value: ethers.utils.parseEther(GAS_PER_MINT),
     })
-    const uri = await decodeToken(thisSyncContract.tokenURI(i))
-    console.log(uri)
-    output_svg(i, uri);
+    const uri = await thisSyncContract.tokenURI(i);
+    uri_decoded = decodeToken(uri);
+    console.log(uri_decoded);
+    output_svg(i, uri_decoded);
 
     //const svg = await thisSyncContract.getTokenSVG(i)
     //output_svg(i, svg.toString())
@@ -73,9 +74,10 @@ function output_svg(tokenId, uri) {
   console.log(`../../svg/test/${uri.theme}_${tokenId}_Colors(${uri.colors}).svg`)
   console.log(uri['svg'].toString())
   fs.writeFile(
-    `../../svg/test/${uri['theme']}_${tokenId}_Colors(${uri['colors']}.svg`,
-    uri.svg.toString(),
+    `../../svg/test/${uri['theme']}_${tokenId}_Colors(${uri['colors']}).svg`,
+    uri['svg'].toString(),
     (err) => {
+		fs.close();
       // In case of a error throw err.
       if (err) console.log(err)
     }
@@ -114,12 +116,9 @@ function decodeToken(tokenURI){
     }
 
     return {
-      syncCount,
-      rarity,
-      colors,
-      theme,
-      meta,
-      svg,
+      'colors':colors,
+      'theme':theme,
+      'svg':svg,
     }
   } catch (e) {
     console.log(e)

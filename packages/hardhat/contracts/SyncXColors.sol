@@ -466,7 +466,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       ';',
       infColors[2],
       '" dur="4s" fill="freeze"/>',
-      '<animate id="a" begin="s.begin;s.begin+1s;s.begin+2s;s.begin+3s;s.begin+4s;s.begin+5s;s.begin+6s" ',
+      '<animate id="a" begin="s.begin;a.end ',
       'attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>',
       '<animate id="s" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;s.end" to= "-1800" dur="6s"/></path></g>'
     );
@@ -658,24 +658,22 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
       syncTraits.infColors = syncTraits.baseColors;
+      
       bytes[] memory upgrades = new bytes[](3);
       upgrades[0] = '#214F70';
       upgrades[1] = '#FAF7C0';
       upgrades[2] = '#222222';
-      if (_colorTokenIds[tokenId].length == 0) {
-        syncTraits.infColors[0] = upgrades[syncTraits.rarity_roll % 3];
-      }
-
       if (syncTraits.rarity_roll % 13 == 0) {
         // 7.7% probability ((77 in 1000)
         syncTraits.rarity_id = 'Mosiac';
         syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // Full Diamond
+        upgrades[2] = '#3A424F';
       } else if (syncTraits.rarity_roll % 11 == 0) {
         // 9% probability (91 in 1000)
         syncTraits.rarity_id = 'Drift';
         syncTraits.symbol = '\xE2\x9C\xA7\x20\x20\x20\x20'; //Empty Diamond
+        upgrades[2] = '#3A424F';
       }
-    }
 
     //Background generation
     for (uint256 i = 0; i < 15; i++) {
