@@ -309,10 +309,7 @@ export default function Home() {
                       href="https://twitter.com/cryptographer87"
                       target="_blank"
                     >
-                      <p
-                        style={{ 'font-size': '16px' }}
-                        className="text-gray-700"
-                      >
+                      <p style={{ fontSize: '16px' }} className="text-gray-700">
                         @cryptographer87
                       </p>
                     </a>

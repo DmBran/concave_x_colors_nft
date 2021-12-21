@@ -27,6 +27,7 @@ export const sendTx = async (web3, { cost, to, from, data, count }) => {
     }
 
     const tx = await web3.eth.sendTransaction(txData, from)
+    console.log(tx)
 
     if (!tx?.transactionHash) throw 'Error'
 
