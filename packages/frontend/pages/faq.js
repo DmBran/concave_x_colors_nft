@@ -130,8 +130,11 @@ export default function Display() {
                       </span>
                     </div>
                     <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
-                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
-                        What is the maximum number of{' '}
+                      <p
+                        id="multimint"
+                        className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4"
+                      >
+                        What happens when I multi-mint with{' '}
                         <a
                           href="https://opensea.io/collection/the-colors-dot-art"
                           target="_blank"
@@ -139,10 +142,15 @@ export default function Display() {
                         >
                           The Colors
                         </a>{' '}
-                        tokens per mint?
+                        tokens?
                       </p>
 
-                      <span>You can mint up to 10 Syncs at a time.</span>
+                      <span>
+                        When performing a multimint with a specific color
+                        palette, each mint will be supplied the same color
+                        palette combo, but will still yield a unique generative
+                        result due to our algorithm.
+                      </span>
                     </div>
                   </div>
                   <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
@@ -159,13 +167,72 @@ export default function Display() {
                     </div>
                     <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
                       <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        What is the maximum number of{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>{' '}
+                        tokens per mint?
+                      </p>
+
+                      <span>You can mint up to 10 Syncs at a time.</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        Does the order of{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>{' '}
+                        tokens matter?
+                      </p>
+
+                      <span>
+                        Yes! Switching up the order of the colors passed to the
+                        mint will yield different generative results.
+                      </span>
+                    </div>
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        Is there a way to see the outcome of{' '}
+                        <a
+                          href="https://opensea.io/collection/the-colors-dot-art"
+                          target="_blank"
+                          className={'underline'}
+                        >
+                          The Colors
+                        </a>{' '}
+                        rendering before mint?
+                      </p>
+
+                      <span>No, because where is the fun in that?</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
+                        How much does it cost to mint a Sync?
+                      </p>
+
+                      <span>The mint price is 0.05 ETH, plus gas costs</span>
+                    </div>
+                    <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
+                      <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
                         How much does it cost to update my Sync X Color NFT
                         color palette?
                       </p>
 
                       <span className="px-4 py-2">
-                        It will cost 0.005 ETH for each update, plus gas on top
-                        of that.
+                        It will cost 0.005 ETH for each update, plus gas costs.
                       </span>
                     </div>
                   </div>
