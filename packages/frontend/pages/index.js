@@ -273,7 +273,7 @@ export default function Home() {
               </h1>
             </div>
             <div className="flex flex-wrap -m-2 text-xl">
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-3"
@@ -292,7 +292,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-1"
@@ -301,22 +301,22 @@ export default function Home() {
                     width="90"
                     height="90"
                   />
-                  <div className="flex-grow ml-5">
-                    <h2 className="text-gray-900 title-font font-bold">
+                  <div className="flex-grow ml-5 lg:ml-1 ">
+                    <h2 className="lg:text-lg text-gray-900 title-font font-bold">
                       cryptographer87
                     </h2>
                     <a
                       href="https://twitter.com/cryptographer87"
                       target="_blank"
                     >
-                      <p style={{ fontSize: '16px' }} className="text-gray-700">
+                      <p style={{ fontSize: '15px' }} className="text-gray-700">
                         @cryptographer87
                       </p>
                     </a>
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full w- flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
@@ -335,7 +335,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
@@ -352,7 +352,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="p-2 lg:w-1/5 md:w-1/2 w-full">
+              <div className="p-2 xl:w-1/5 md:w-1/2 w-full">
                 <div className="h-full flex items-center border-gray-900 border-4 p-4 bg-gray-300 bg-opacity-50 ">
                   <img
                     className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"

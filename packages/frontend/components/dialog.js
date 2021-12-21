@@ -88,7 +88,7 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                         >
                           Colors:
                         </span>
-                        {!svg.colors?.length && <span>Greyscale</span>}
+                        {!svg.colors?.length && <span> Grayscale</span>}
                       </p>
                       {svg.colors && (
                         <p className={'mb-1 text-lg text-black'}>
