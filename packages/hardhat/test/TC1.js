@@ -128,7 +128,6 @@ describe('syncXColors: Owner functions', () => {
             ).to.equal(ethers.utils.parseEther((price_in_ether*100).toString()))
         });
 
-        /*
         it(`after 100 mints test withdrawal 50/50`, async () => {
             await mintThirdParty(100);
             expect(await syncXColors.totalSupply()).to.equal(100);
@@ -148,7 +147,6 @@ describe('syncXColors: Owner functions', () => {
                 await waffle.provider.getBalance(syncXColors.address)
             ).to.equal(ethers.utils.parseEther('0'));
         });
-       */
 
         it(`restrict withdrawal from third party`, async () => {
             await mintThirdParty(100);
