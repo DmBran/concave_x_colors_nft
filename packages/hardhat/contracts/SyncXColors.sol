@@ -305,9 +305,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
           '{"trait_type":"Colors","value":"',
           getColorDescriptor(tokenId),
           '"},',
-          '{"trait_type":Resync_Count","value":"',
+          '{"trait_type":"Resync_Count","value":',
           _resync_count[tokenId].toString(),
-          '"}]'
+          '}]'
         )
       );
   }
@@ -624,6 +624,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#3A424F'; // Dark Blue
       syncTraits.infColors[2] = '#FFC768'; // Oly yellow
       syncTraits.logoColors = '#FFC768'; // Oly-yellow
+      syncTraits.driftColors = '#FFC768';
     } else if (syncTraits.rarity_roll % 19 == 0) {
       // ~4% probability (50-10 in 1000)
       syncTraits.rarity_id = 'Silver';
@@ -635,7 +636,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#C0C0C0'; // silver
       syncTraits.infColors[2] = '#CD7F32'; // Gold
       syncTraits.logoColors = 'black';
-
+      syncTraits.driftColors = 'black';
       // Silver has 1 in 4 chance of upgrading to gold
       // (contract memory usage happened to be more efficient this way)
       if (syncTraits.rarity_roll % 95 == 0) {
@@ -652,17 +653,15 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.symbol = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
-      syncTraits.infColors = syncTraits.baseColors; // Must be copy to ensure gifted infinity color role on grayscale is applied correctly
+      syncTraits.infColors = syncTraits.baseColors;
       bytes[] memory upgrades = new bytes[](3);
       upgrades[0] = '#214F70';
       upgrades[1] = '#FAF7C0';
       upgrades[2] = '#222222';
-      //upgrades[3] = '#FF0000';
-      //upgrades[4] = '#0000FF';
       if (_colorTokenIds[tokenId].length == 0) {
         syncTraits.infColors[0] = upgrades[syncTraits.rarity_roll % 3];
       }
-      //syncTraits.logoColors = syncTraits.baseColors;
+
       if (syncTraits.rarity_roll % 13 == 0) {
         // 7.7% probability ((77 in 1000)
         syncTraits.rarity_id = 'Mosiac';
