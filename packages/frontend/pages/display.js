@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useWeb3Context } from 'web3-react'
-import SyncXColors from '../../../artifacts/contracts/SyncXColors.sol/Sync.json'
+import SyncXColors from '../artifacts/contracts/SyncXColors.sol/SyncXColors.json'
 import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import { Loader } from '../components/loader'
@@ -9,6 +9,7 @@ import { Navbar } from '../components/navbar'
 import styles from '../styles/meme.module.css'
 import SyncModal from '../components/dialog.js'
 import process from 'process'
+import { decodeToken } from '../helpers/decode-token'
 
 export default function Display() {
   const { query } = useRouter()
@@ -50,16 +51,12 @@ export default function Display() {
     const svgs = []
 
     if (tokenID) {
-      const svgElement = await contract.methods
-        .getTokenSVG(
-          context.library.eth.abi.encodeParameter('uint256', tokenID)
-        )
-        .call()
-      const meta = await contract.methods
-        .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenID))
-        .call()
-      console.log(meta)
-      svgs.push({ svg: svgElement, tokenId: tokenID, meta })
+      const tokenMeta = await contract.methods.tokenURI(tokenID).call()
+      const traits = decodeToken(tokenMeta)
+      svgs.push({
+        tokenId: tokenID,
+        ...traits,
+      })
       setSvgs(svgs)
       return
     }
@@ -73,26 +70,14 @@ export default function Display() {
           context.library.eth.abi.encodeParameter('uint256', i)
         )
         .call()
-      const svg2 = await contract.methods
-        .getTokenSVG(
-          context.library.eth.abi.encodeParameter('uint256', tokenId)
-        )
-        .call()
-      // const meta64 = await contract.methods
-      //   .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenId))
-      //   .call()
-      try {
-        //console.log(atob(meta64.replace("data:application/json;base64,","")))
-        //const meta = JSON.parse(atob(meta64.replace("data:application/json;base64,","")))
-        const svg = svg2.replace('<svg', '<svg viewbox="0 0 500 500"')
-        svgs.push({
-          tokenId,
-          //meta,
-          svg,
-        })
-      } catch {
-        console.error(`Failure to parse metadata for token ${tokenId}`)
-      }
+
+      const tokenMeta = await contract.methods.tokenURI(tokenId).call()
+
+      const traits = decodeToken(tokenMeta)
+      svgs.push({
+        tokenId,
+        ...traits,
+      })
     }
 
     setSvgs(svgs)

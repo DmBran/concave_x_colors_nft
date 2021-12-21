@@ -101,8 +101,9 @@ export default function Display() {
                         </p>
 
                         <span className="px-4 py-2">
-                          No! Ignoring rarities, there are six potential
-                          permutations per max color combination!
+                          No! Our algorithm will generative a background based
+                          upon a seed generated during mint. This seeding will
+                          be used to generate the patterns.
                         </span>
                       </div>
                       <div className="mb-4">

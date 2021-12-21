@@ -2,11 +2,13 @@ import Router from 'next/router'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useWeb3Context } from 'web3-react'
-import TheColors from '../../../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json'
-import SyncXColors from '../../../artifacts/contracts/SyncXColors.sol/Sync.json'
+import TheColors from '../artifacts/contracts/legacy_colors/TheColors.sol/TheColors.json'
+import SyncXColors from '../artifacts/contracts/SyncXColors.sol/SyncXColors.json'
 import styles from '../styles/meme.module.css'
 import { Loader } from './loader'
 import process from 'process'
+import { decodeToken } from '../helpers/decode-token'
+import { sendTx } from '../helpers/send-tx'
 
 export const Minter = (props) => {
   const context = useWeb3Context()
@@ -20,22 +22,17 @@ export const Minter = (props) => {
   const MINT_COST = process.env.NEXT_PUBLIC_MINT_COST
   const COLOR_COST = process.env.NEXT_PUBLIC_COLOR_COST
 
-  const [svgs, setSvgs] = useState(null)
+  const [svgs, setSvgs] = useState([])
   const [sync, setSync] = useState(null)
   const [amountMinted, setAmountMinted] = useState(null)
-  const [mintColors, setMintColors] = useState(null)
-  const [mintCount, setMintCount] = useState(null)
+  const [mintColors, setMintColors] = useState(0)
+  const [mintCount, setMintCount] = useState(1)
   const [tokenID, setTokenID] = useState(null)
   const [address, setAddress] = useState(null)
   const [submitting, setSubmitting] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
-    if (!mintCount) setMintCount(1)
-
-    if (!mintColors) setMintColors(0)
-    setSvgs([])
-
     if (context.active && context.networkId === NETWORK) {
       const syncContract = new context.library.eth.Contract(
         SyncXColors.abi,
@@ -49,6 +46,9 @@ export const Minter = (props) => {
         setTokenID(props.tokenID)
         const svg = await fetchSync(syncContract, props.tokenID)
         setSync(svg)
+      } else {
+        setTokenID(undefined)
+        setSync(undefined)
       }
 
       setAddress(context.account)
@@ -92,146 +92,67 @@ export const Minter = (props) => {
 
   async function mintSync() {
     setSubmitting('syncs')
-    let txToast
-    try {
-      const contract = new context.library.eth.Contract(
-        SyncXColors.abi,
-        SYNC_CONTRACT
-      )
 
-      const tokens = svgs
-        .filter((svg) => svg.selected)
-        .map((svg) => parseInt(svg.tokenId))
+    const contract = new context.library.eth.Contract(
+      SyncXColors.abi,
+      SYNC_CONTRACT
+    )
 
-      const txCall = contract.methods.mintMany(mintCount, tokens)
-      const ethAmount = context.library.utils.toWei(MINT_COST, 'ether')
-      const value = mintCount * ethAmount
+    const tokens = svgs
+      .filter((svg) => svg.selected)
+      .map((svg) => parseInt(svg.tokenId))
 
-      const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
+    const txCall = contract.methods.mint(mintCount, tokens)
 
-      const gasEstimate = await context.library.eth.estimateGas({
-        value,
-        from,
-        data,
-        to,
-      })
+    const tx = await sendTx(context.library, {
+      data: txCall.encodeABI(),
+      to: SYNC_CONTRACT,
+      cost: MINT_COST,
+      count: mintCount,
+      from: address,
+    })
 
-      // The BUFFOOOOOR
-      const gas = parseInt(gasEstimate * 1.1)
-
-      const tx = {
-        value,
-        from,
-        data,
-        gas,
-        to
-      }
-      console.log(tx)
-      txToast = toast.loading('Transaction processing')
-      const tx2 = await context.library.eth
-        .sendTransaction(tx, address)
-        .catch(() => {
-          toast.error('Transaction failed!', {
-            id: txToast,
-          })
-          setSubmitting(undefined)
-        })
-      console.log(tx2)
-      if (!tx2?.transactionHash) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-        setSubmitting(undefined)
-      } else {
-        toast.success('Transaction successful!', {
-          id: txToast,
-        })
-        return Router.push(`/display?mintCount=${mintCount}`)
-      }
-    } catch (ex) {
-      console.log(ex)
-      setSubmitting(undefined)
-      if (txToast) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-      }
-    }
+    setSubmitting(undefined)
+    if (tx?.transactionHash)
+      return Router.push(`/display?mintCount=${mintCount}`)
+    return
   }
 
   async function fetchSync(contract, tokenID) {
-    const svgElement = await contract.methods
-      .getTokenSVG(context.library.eth.abi.encodeParameter('uint256', tokenID))
+    const tokenURI = await contract.methods
+      .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenID))
       .call()
-    return svgElement
+    const token = decodeToken(tokenURI)
+    return token.svg
   }
 
   async function remintSync() {
     setSubmitting('sync')
-    let txToast
-    try {
-      const contract = new context.library.eth.Contract(
-        SyncXColors.abi,
-        SYNC_CONTRACT
-      )
 
-      const tokens = svgs
-        .filter((svg) => svg.selected)
-        .map((svg) => parseInt(svg.tokenId))
-      const txCall = contract.methods.updateColors(props.tokenID, tokens)
-      const ethAmount = context.library.toWei(COLOR_COST, 'ether')
-      const value = mintCount * ethAmount
+    const contract = new context.library.eth.Contract(
+      SyncXColors.abi,
+      SYNC_CONTRACT
+    )
 
-      const [from, to, data] = [address, SYNC_CONTRACT, txCall.encodeABI()]
+    const tokens = svgs
+      .filter((svg) => svg.selected)
+      .map((svg) => parseInt(svg.tokenId))
 
-      const gasEstimate = await context.library.eth.estimateGas({
-        value,
-        from,
-        data,
-        to,
-      })
+    const txCall = contract.methods.updateColors(props.tokenID, tokens)
 
-      // The BUFFOOOOOR
-      const gas = parseInt(gasEstimate * 1.1)
+    const tx = await sendTx(context.library, {
+      data: txCall.encodeABI(),
+      to: SYNC_CONTRACT,
+      cost: COLOR_COST,
+      from: address,
+      count: 1,
+    })
 
-      const tx = {
-        value,
-        from,
-        data,
-        gas,
-        to,
-      }
+    setSubmitting(undefined)
+    if (tx?.transactionHash)
+      return Router.push(`/display?tokenID=${props.tokenID}`)
 
-      txToast = toast.loading('Transaction processing')
-      const tx2 = await context.library.eth
-        .sendTransaction(tx, address)
-        .catch(() => {
-          toast.error('Transaction failed!', {
-            id: txToast,
-          })
-          setSubmitting(undefined)
-        })
-      console.log(tx2)
-      if (!tx2?.transactionHash) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-        setSubmitting(undefined)
-      } else {
-        toast.success('Transaction successful!', {
-          id: txToast,
-        })
-        return Router.push(`/display?tokenID=${props.tokenID}`)
-      }
-    } catch (ex) {
-      console.log(ex)
-      setSubmitting(undefined)
-      if (txToast) {
-        toast.error('Transaction failed!', {
-          id: txToast,
-        })
-      }
-    }
+    return
   }
 
   function selectColor(svg) {
@@ -285,6 +206,10 @@ export const Minter = (props) => {
     }
   }
 
+  function noColorsSelected() {
+    return svgs.filter((svg) => svg.selected).length === 0
+  }
+
   if (context.active) {
     if (context.networkId !== NETWORK) {
       return (
@@ -302,14 +227,40 @@ export const Minter = (props) => {
     if (context.account) {
       return (
         <div className={styles.modal}>
-          {colorsOwned > 0 && (
-            <div className={'mb-10'}>
+          {tokenID && (
+            <div className={'mt-0 mb-10'}>
               <p
                 className={
                   'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-0 mt-0 uppercase'
                 }
               >
-                Select Your Color Primitives
+                Current Sync X Color
+              </p>
+              <div className={'flex colors justify-center content-center'}>
+                {!sync && <Loader />}
+                {sync && (
+                  <div className={'border-gray-800 border-4 m-4'}>
+                    <div
+                      className={styles.sync}
+                      style={{
+                        width: 200,
+                        height: 200,
+                      }}
+                      dangerouslySetInnerHTML={{ __html: sync }}
+                    ></div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+          {colorsOwned > 0 && (
+            <div className={'mb-10 '}>
+              <p
+                className={
+                  'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-0 mt-0 uppercase'
+                }
+              >
+                Select {tokenID ? 'New' : 'Your'} Color Primitives
               </p>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
                 (up to three)
@@ -356,26 +307,7 @@ export const Minter = (props) => {
               </p>
             </div>
           )}
-          {tokenID && (
-            <div className={'mt-10 mb-10'}>
-              <p
-                className={
-                  'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-0 mt-0 uppercase'
-                }
-              >
-                Sync X Color
-              </p>
-              <div className={'flex colors justify-center content-center'}>
-                {!sync && <Loader />}
-                {sync && (
-                  <div
-                    className={styles.sync}
-                    dangerouslySetInnerHTML={{ __html: sync }}
-                  ></div>
-                )}
-              </div>
-            </div>
-          )}
+
           {!tokenID && (
             <div className={'flex mb-10 content-center justify-center'}>
               <div
@@ -446,14 +378,79 @@ export const Minter = (props) => {
               </button>
             )}
           </div>
+          {colorsOwned > 0 && noColorsSelected() && (
+            <div className={'-mt-5 content-center justify-center flex mb-10'}>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                minting greyscale until colors selected
+              </p>
+            </div>
+          )}
 
           {!tokenID && (
-            <div className={'text-center justify-center'}>
+            <div className={'text-center justify-center mb-10'}>
               <p className={'uppercase text-2xl font-bold'}>
                 {amountMinted?.toLocaleString()} / {MAX_SUPPLY.toLocaleString()}
               </p>
             </div>
           )}
+
+          <p className={'text-center font-bold uppercase'}>
+            {tokenID ? 'PRICE: ' : '1 SYNC = '}
+            {tokenID ? COLOR_COST.toString() : MINT_COST.toString()}{' '}
+            <span
+              style={{ top: '2px' }}
+              className={'inline-block align-top relative'}
+            >
+              <svg
+                width="10"
+                version="1.1"
+                shapeRendering="geometricPrecision"
+                textRendering="geometricPrecision"
+                imageRendering="optimizeQuality"
+                fillRule="evenodd"
+                clipRule="evenodd"
+                viewBox="0 0 784.37 1277.39"
+              >
+                <g id="Layer_x0020_1">
+                  <metadata id="CorelCorpID_0Corel-Layer" />
+                  <g id="_1421394342400">
+                    <g>
+                      <polygon
+                        fill="#343434"
+                        fillRule="nonzero"
+                        points="392.07,0 383.5,29.11 383.5,873.74 392.07,882.29 784.13,650.54 "
+                      />
+                      <polygon
+                        fill="#8C8C8C"
+                        fillRule="nonzero"
+                        points="392.07,0 -0,650.54 392.07,882.29 392.07,472.33 "
+                      />
+                      <polygon
+                        fill="#3C3C3B"
+                        fillRule="nonzero"
+                        points="392.07,956.52 387.24,962.41 387.24,1263.28 392.07,1277.38 784.37,724.89 "
+                      />
+                      <polygon
+                        fill="#8C8C8C"
+                        fillRule="nonzero"
+                        points="392.07,1277.38 392.07,956.52 -0,724.89 "
+                      />
+                      <polygon
+                        fill="#141414"
+                        fillRule="nonzero"
+                        points="392.07,882.29 784.13,650.54 392.07,472.33 "
+                      />
+                      <polygon
+                        fill="#393939"
+                        fillRule="nonzero"
+                        points="0,650.54 392.07,882.29 392.07,472.33 "
+                      />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </span>
+          </p>
         </div>
       )
     }

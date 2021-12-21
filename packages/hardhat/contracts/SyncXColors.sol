@@ -25,7 +25,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
   // Declare Public
   address public constant THE_COLORS =
-    address(0x5FbDB2315678afecb367f032d93F642f64180aa3); //0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+    address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
@@ -86,7 +86,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
 
-    string memory svgData = generateSVGImage(syncTraits);
+    string memory svgData = generateSVGImage(tokenId, syncTraits);
     string memory image = Base64.encode(bytes(svgData));
 
     return
@@ -120,7 +120,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
 
-    return generateSVGImage(syncTraits);
+    return generateSVGImage(tokenId, syncTraits);
   }
 
   /**
@@ -145,9 +145,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   function withdraw() internal {
     bool sent;
     uint256 balance = address(this).balance;
-    (sent, ) = payable(TEAM).call{value: balance * 50 / 100}("");
+    (sent, ) = payable(TEAM).call{value: (balance * 50) / 100}('');
     require(sent);
-    (sent, ) = payable(TREASURY).call{value: balance * 50 / 100}("");
+    (sent, ) = payable(TREASURY).call{value: (balance * 50) / 100}('');
     require(sent);
   }
 
@@ -175,7 +175,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   {
     // Requires
     uint256 _mintIndex = totalSupply();
-    require(_mintAmount > 0 && _mintAmount <= maxMintAmount, 'Max mint 10 per tx');
+    require(
+      _mintAmount > 0 && _mintAmount <= maxMintAmount,
+      'Max mint 10 per tx'
+    );
     require(_mintIndex + _mintAmount <= MAX_SUPPLY, 'Exceeds supply');
     require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
 
@@ -289,22 +292,24 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint256 tokenId,
     SyncTraitsStruct memory syncTraits
   ) internal view returns (string memory) {
-    bytes memory buffer = abi.encodePacked(
-      '"attributes":[',
-      '{"trait_type":"Theme","value":"',
-      syncTraits.rarity_id,
-      '"},',
-      '{"trait_type":"Rarity","value":"',
-      syncTraits.symbol,
-      '"},',
-      '{"trait_type":"Colors","value":"',
-      getColorDescriptor(tokenId),
-      '"},',
-      '{"resync_count":',
-      _resync_count[tokenId],
-      '}]'
-    );
-    return string(abi.encodePacked(buffer));
+    return
+      string(
+        abi.encodePacked(
+          '"attributes":[',
+          '{"trait_type":"Theme","value":"',
+          syncTraits.rarity_id,
+          '"},',
+          '{"trait_type":"Rarity","value":"',
+          syncTraits.symbol,
+          '"},',
+          '{"trait_type":"Colors","value":"',
+          getColorDescriptor(tokenId),
+          '"},',
+          '{"trait_type":"Resync_Count","value":',
+          _resync_count[tokenId].toString(),
+          '}]'
+        )
+      );
   }
 
   /**
@@ -332,7 +337,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   /**
    * Generates the SVG
    */
-  function generateSVGImage(SyncTraitsStruct memory syncTraits)
+  function generateSVGImage(uint256 tokenId, SyncTraitsStruct memory syncTraits)
     private
     pure
     returns (string memory)
@@ -342,13 +347,15 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes memory svgLogo = generateSVGLogo(
       syncTraits.baseColors,
       syncTraits.logoColors,
-      syncTraits.rarity_roll
+      syncTraits.rarity_roll,
+      tokenId.toString()
     );
     bytes memory svgDrift = generateSVGDrift(
       syncTraits.baseColors,
       syncTraits.driftColors,
       syncTraits.rarity_roll,
-      syncTraits.symbol
+      syncTraits.symbol,
+      tokenId.toString()
     );
     return
       string(
@@ -435,7 +442,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     returns (bytes memory)
   {
     bytes memory infinity1 = abi.encodePacked(
-      '<g id="infinity_1"><path id="infinity" stroke-dasharray="0" stroke-dashoffset="0" stroke-width="16" ',
+      '<g><path stroke-dasharray="0" stroke-dashoffset="0" stroke-width="16" ',
       'd="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">',
       '<animate begin="s.begin" attributeType="XML" attributeName="stroke" values="',
       infColors[0],
@@ -448,7 +455,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes memory infinity2 = abi.encodePacked(
       '<animate begin="s.begin" attributeType="XML" attributeName="stroke-dasharray" values="0;50;0" dur="6s" fill="freeze"/>',
       '<animate begin="a.begin" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>',
-      '</path><path id="infinity_2" stroke-dasharray="300" stroke-dashoffset="300" stroke-width="16" ',
+      '</path><path stroke-dasharray="300" stroke-dashoffset="300" stroke-width="16" ',
       'd="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">'
     );
     bytes memory infinity3 = abi.encodePacked(
@@ -472,18 +479,17 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   function generateSVGLogo(
     bytes[] memory baseColors,
     bytes memory logoColors,
-    uint16 rarity_roll
+    uint16 rarity_roll,
+    string memory tokenId
   ) private pure returns (bytes memory) {
     bytes memory logo = abi.encodePacked(
-      '<g id="b">',
+      '<g id="',tokenId,'b">',
       '<path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" ',
       'stroke="black" fill-opacity="0.9" stroke-width=".7">'
     );
 
     if (
-      rarity_roll % 499 == 0 ||
-      rarity_roll % 241 == 0 ||
-      rarity_roll % 19 == 0
+      rarity_roll % 499 == 0 || rarity_roll % 241 == 0 || rarity_roll % 19 == 0
     ) {
       //Shimmer
       logo = abi.encodePacked(
@@ -527,7 +533,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes[] memory baseColors,
     bytes memory driftColors,
     uint16 rarity_roll,
-    bytes7 rarity_id
+    bytes7 rarity_id,
+    string memory tokenId
   ) private pure returns (bytes memory) {
     if (rarity_roll % 11 != 0) {
       // Drift is colored as a single color unless Tokyo Drift trait
@@ -563,7 +570,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       baseColors[2],
       ';transparent" begin="w.begin+.4s" dur="1s"/>',
       '<animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+.4s" dur="1s"/>',
-      '</path></g><use href="#b" x="-500" y="-500" transform="rotate(180)"/>'
+      '</path></g><use href="#',tokenId,'b" x="-500" y="-500" transform="rotate(180)"/>'
     );
 
     return abi.encodePacked(borders1, borders2, borders3);
@@ -621,6 +628,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#3A424F'; // Dark Blue
       syncTraits.infColors[2] = '#FFC768'; // Oly yellow
       syncTraits.logoColors = '#FFC768'; // Oly-yellow
+      syncTraits.driftColors = '#FFC768';
     } else if (syncTraits.rarity_roll % 19 == 0) {
       // ~4% probability (50-10 in 1000)
       syncTraits.rarity_id = 'Silver';
@@ -632,7 +640,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.infColors[1] = '#C0C0C0'; // silver
       syncTraits.infColors[2] = '#CD7F32'; // Gold
       syncTraits.logoColors = 'black';
-
+      syncTraits.driftColors = 'black';
       // Silver has 1 in 4 chance of upgrading to gold
       // (contract memory usage happened to be more efficient this way)
       if (syncTraits.rarity_roll % 95 == 0) {
@@ -649,19 +657,15 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.symbol = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
-      syncTraits.infColors[0] = syncTraits.baseColors[0]; // Must be copy to ensure gifted infinity color role on grayscale is applied correctly
-      syncTraits.infColors[1] = syncTraits.baseColors[1];
-      syncTraits.infColors[2] = syncTraits.baseColors[2];
+      syncTraits.infColors = syncTraits.baseColors;
       bytes[] memory upgrades = new bytes[](3);
       upgrades[0] = '#214F70';
       upgrades[1] = '#FAF7C0';
       upgrades[2] = '#222222';
-      //upgrades[3] = '#FF0000';
-      //upgrades[4] = '#0000FF';
       if (_colorTokenIds[tokenId].length == 0) {
         syncTraits.infColors[0] = upgrades[syncTraits.rarity_roll % 3];
       }
-      //syncTraits.logoColors = syncTraits.baseColors;
+
       if (syncTraits.rarity_roll % 13 == 0) {
         // 7.7% probability ((77 in 1000)
         syncTraits.rarity_id = 'Mosiac';
