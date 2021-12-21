@@ -226,7 +226,10 @@ export default function Display() {
                         How much does it cost to mint a Sync?
                       </p>
 
-                      <span>The mint price is 0.05 ETH, plus gas costs</span>
+                      <span>
+                        The mint price is {process.env.NEXT_PUBLIC_MINT_COST}{' '}
+                        ETH, plus gas costs
+                      </span>
                     </div>
                     <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
                       <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
@@ -235,7 +238,8 @@ export default function Display() {
                       </p>
 
                       <span className="px-4 py-2">
-                        It will cost 0.005 ETH for each update, plus gas costs.
+                        It will cost {process.env.NEXT_PUBLIC_COLOR_COST} ETH
+                        for each update, plus gas costs.
                       </span>
                     </div>
                   </div>

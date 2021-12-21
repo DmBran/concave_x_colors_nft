@@ -70,16 +70,18 @@ export const Footer = () => {
           </svg>
         </a>
       </div>
-      {<div className={'mt-10 text-center'}>
-        <p className={'font-bold uppercase'}>Contract Address</p>
-        <a
-          href={`https://etherscan.io/contract/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
-          target="_blank"
-          className={' text-center block font-xs'}
-        >
-          {process.env.NEXT_PUBLIC_SYNC_CONTRACT}
-        </a>
-      </div> }
+      {
+        <div className={'mt-10 text-center'}>
+          <p className={'font-bold uppercase'}>Contract Address</p>
+          <a
+            href={`https://etherscan.io/contract/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
+            target="_blank"
+            className={' text-center block font-xs'}
+          >
+            {process.env.NEXT_PUBLIC_SYNC_CONTRACT}
+          </a>
+        </div>
+      }
       <div className={'flex justify-center  flex-1 flex-grow text-center'}>
         <p className={'text-center text-sm mt-20 font-xs'}>
           <span className={'block'}>DISCLAIMER</span> All purchases are final.
