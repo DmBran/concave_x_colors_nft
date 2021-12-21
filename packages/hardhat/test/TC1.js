@@ -282,52 +282,11 @@ describe('Public Functions', () => {
     });
      */
 
-    /*
-        describe("public sale active check",() => {
-            it(`mint should fail with "public sale not active" if public sale not active yet`, async () => {
-                await expect(
-                    syncXColors.connect(thirdParty).mint()
-                ).to.be.revertedWith('public sale not active')
-            })
-            it(`mint should not fail with "public sale not active" if public sale is active `, async () => {
-                await syncXColors.setPublicMintActive(true)
-                // expect(await syncXColors.totalSupply()).to.equal(200);
-                await expect(
-                    syncXColors.connect(thirdParty).mint()
-                ).to.not.be.revertedWith('public sale not active')
-            })
-        })
-        describe("insufficent funds check",() => {
-            it(`mint should fail with "insufficient funds" if msg.value < price`, async () => {
-                await mintAllColorsHolders()
-                expect(await syncXColors.totalSupply()).to.equal(200);
-                // await mintThirdParty(MAX_SUPPLY - 200)
-                // expect(await syncXColors.totalSupply()).to.equal(MAX_SUPPLY);
-                // expect(await syncXColors.isSoldOut()).to.equal(true);
-                await expect(
-                    syncXColors.connect(thirdParty).mint()
-                ).to.be.revertedWith('insufficient funds')
-            }).timeout(0)
-            it(`mint should pass if msg.value >= price`, async () => {
-                await syncXColors.setPublicMintActive(true)
-                // expect(await syncXColors.totalSupply()).to.equal(200);
-                // await mintThirdParty(MAX_SUPPLY - 200)
-                // expect(await syncXColors.totalSupply()).to.equal(MAX_SUPPLY);
-                // expect(await syncXColors.isSoldOut()).to.equal(true);
-                await expect(
-                    syncXColors.connect(thirdParty).mint({value:ethers.utils.parseEther((price_in_ether).toString())})
-                ).to.not.be.reverted
-            }).timeout(0)
-        })
-        describe("counting",() => {
-            it(`totalSupply should increase by 1 after mint()`, async () => {
-                await syncXColors.setPublicMintActive(true)
-                expect(await syncXColors.totalSupply()).to.equal(0);
-                await syncXColors.connect(thirdParty).mint({value:ethers.utils.parseEther((price_in_ether).toString())})
-                expect(await syncXColors.totalSupply()).to.equal(1);
-            }).timeout(0)
-        })
-       */
+    it('Should not mint if not enough funds', async () => {
+      await expect(syncXColors.mint(1, [], {value:ethers.utils.parseEther("0.01")})).to.be.revertedWith(
+        "Insufficient funds"
+      );
+    });
   })
 
   describe('mint()', () => {
