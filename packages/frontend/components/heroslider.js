@@ -93,7 +93,7 @@ function HeroSlider() {
           />
         </div>
         <button
-          className="h-10 w-10 bg-green-200 font-bold text-4xl rounded-full"
+          className="h-10 w-10 ring-2 ring-black bg-green-200 font-bold text-4xl rounded-full"
           onClick={handleNext}
         >
           {'>'}

@@ -7,6 +7,7 @@ import styles from '../styles/meme.module.css'
 import NoSSR from 'react-no-ssr'
 import HeroSlider from '../components/heroslider'
 import Gallery from '../components/gallery'
+import ColorGallery from '../components/colorgallery'
 
 export default function Home() {
   const LAUNCH_DATE = process.env.NEXT_PUBLIC_LAUNCH_DATE
@@ -152,118 +153,22 @@ export default function Home() {
           <div className="container px-5 py-36 mx-auto">
             <div className="flex flex-col text-center w-full pb-12">
               <h1 className="title-font sm:text-4xl text-3xl font-black ">
+                COLORS
+              </h1>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                (rarities will vary)
+              </p>
+            </div>
+            <ColorGallery />
+            <div className="mt-20  flex flex-col text-center w-full pb-12">
+              <h1 className="title-font sm:text-4xl text-3xl font-black ">
                 RARITIES
               </h1>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
-                (colors may vary)
+                (colors will vary)
               </p>
             </div>
             <Gallery />
-            <div className="flex mb-12 md:w-1/3 mx-auto justify-center align-top text-center text-xl">
-              {/*<div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-
-                      <p className="text-gray-700 ">Traits XYZ</p>
-
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-
-                      <p className="text-gray-700 ">Traits XYZ</p>
-
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-
-                      <p className="text-gray-700 ">Traits XYZ</p>
-
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-
-                      <p className="text-gray-700 ">Traits XYZ</p>
-
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-
-                      <p className="text-gray-700 ">Traits XYZ</p>
-
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-
-                      <p className="text-gray-700 ">Traits XYZ</p>
-
-                  </div>
-                </div>
-              </div>
-              */}
-            </div>
           </div>
         </div>
 
