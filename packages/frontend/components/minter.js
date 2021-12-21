@@ -22,22 +22,17 @@ export const Minter = (props) => {
   const MINT_COST = process.env.NEXT_PUBLIC_MINT_COST
   const COLOR_COST = process.env.NEXT_PUBLIC_COLOR_COST
 
-  const [svgs, setSvgs] = useState(null)
+  const [svgs, setSvgs] = useState([])
   const [sync, setSync] = useState(null)
   const [amountMinted, setAmountMinted] = useState(null)
-  const [mintColors, setMintColors] = useState(null)
-  const [mintCount, setMintCount] = useState(null)
+  const [mintColors, setMintColors] = useState(0)
+  const [mintCount, setMintCount] = useState(1)
   const [tokenID, setTokenID] = useState(null)
   const [address, setAddress] = useState(null)
   const [submitting, setSubmitting] = useState(null)
   const [colorsOwned, setColorsOwned] = useState(null)
 
   useEffect(async () => {
-    if (!mintCount) setMintCount(1)
-
-    if (!mintColors) setMintColors(0)
-    setSvgs([])
-
     if (context.active && context.networkId === NETWORK) {
       const syncContract = new context.library.eth.Contract(
         SyncXColors.abi,
@@ -211,6 +206,10 @@ export const Minter = (props) => {
     }
   }
 
+  function noColorsSelected() {
+    return svgs.filter((svg) => svg.selected).length === 0
+  }
+
   if (context.active) {
     if (context.networkId !== NETWORK) {
       return (
@@ -379,6 +378,13 @@ export const Minter = (props) => {
               </button>
             )}
           </div>
+          {colorsOwned > 0 && noColorsSelected() && (
+            <div className={'-mt-5 content-center justify-center flex mb-10'}>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                minting greyscale until colors selected
+              </p>
+            </div>
+          )}
 
           {!tokenID && (
             <div className={'text-center justify-center mb-10'}>
