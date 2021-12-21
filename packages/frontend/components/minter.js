@@ -123,7 +123,7 @@ export const Minter = (props) => {
       .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenID))
       .call()
     const token = decodeToken(tokenURI)
-    return token.svg
+    return token
   }
 
   async function remintSync() {
@@ -238,7 +238,7 @@ export const Minter = (props) => {
               </p>
               <div className={'flex colors justify-center content-center'}>
                 {!sync && <Loader />}
-                {sync && (
+                {sync?.svg64 && (
                   <div className={'border-gray-800 border-4 m-4'}>
                     <div
                       className={styles.sync}
@@ -246,8 +246,9 @@ export const Minter = (props) => {
                         width: 200,
                         height: 200,
                       }}
-                      dangerouslySetInnerHTML={{ __html: sync }}
-                    ></div>
+                    >
+                      <img src={`${sync.svg64}`} />
+                    </div>
                   </div>
                 )}
               </div>

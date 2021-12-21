@@ -44,8 +44,9 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                             height: 200,
                             cursor: 'pointer',
                           }}
-                          dangerouslySetInnerHTML={{ __html: svg.svg }}
-                        ></div>
+                        >
+                          <img src={`${svg.svg64}`} />
+                        </div>
                       </div>
                     </div>
                     <div className="mx-auto lg:mx-0 lg:ml-5">
