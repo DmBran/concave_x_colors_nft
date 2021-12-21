@@ -26,6 +26,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   // Declare Public
   address public constant THE_COLORS =
     address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+  //address public THE_COLORS =
+    //address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
@@ -71,6 +73,14 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
   // Constructor
   constructor() ERC721('Sync x Colors', 'SyncXColors') {}
+
+  /**
+   * For tests only
+   *
+  function setColorAddress(address colorAddress) public {
+    THE_COLORS = colorAddress;
+  }
+  */
 
   /**
    * Returns NFT tokenURI JSON
@@ -179,9 +189,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       _mintAmount > 0 && _mintAmount <= maxMintAmount,
       'Max mint 10 per tx'
     );
-    require(_mintIndex + _mintAmount - 1 <= MAX_SUPPLY, 'Exceeds supply');
     require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
-
     if (msg.sender == TEAM) {
       require(
         MintedReserves + _mintAmount <= TotalReservedAmount,
@@ -190,6 +198,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       // Update reserve count
       MintedReserves += _mintAmount;
     } else {
+      require(_mintIndex + _mintAmount <= MAX_SUPPLY, 'Exceeds supply');
       require(msg.value == (mintPrice * _mintAmount), 'Insufficient funds');
       // Validate colorTokenIds
       require(isHolder(colorTokenIds), 'COLORS not owned by sender.');
@@ -360,7 +369,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     return
       string(
         abi.encodePacked(
-          '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" viewbox="0 0 500 500" style="background-color:#111111">',
+          '<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewbox="0 0 500 500" style="background-color:#111111">',
           svgBG,
           svgInfinity,
           svgLogo,
@@ -485,7 +494,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes memory logo = abi.encodePacked(
       '<g id="',tokenId,'b">',
       '<path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" ',
-      'stroke="black" fill-opacity="0.9" stroke-width=".7">'
+      'stroke="black" fill-opacity="0.9" stroke-width="0.7">'
     );
 
     if (
@@ -547,29 +556,29 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       'black">',
       rarity_id,
       '</text>',
-      '<path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity=".7" fill-opacity=".7" fill="transparent">'
+      '<path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity="0.7" fill-opacity="0.7" fill="transparent">'
       '<animate id="w" attributeName="fill" values="transparent;',
       baseColors[0],
-      ';transparent" begin="p.begin+.67s;p.begin+2.67s;p.begin+4.67s" dur="1s"/>',
+      ';transparent" begin="p.begin+0.67s;p.begin+2.67s;p.begin+4.67s" dur="1s"/>',
       '<animate begin="w.begin" attributeName="stroke" values="transparent;black;transparent" dur="1s"/>',
       '</path>'
     );
 
     bytes memory borders2 = abi.encodePacked(
-      '<path d="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity=".5" fill-opacity=".5" fill="transparent">',
+      '<path d="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity="0.5" fill-opacity="0.5" fill="transparent">',
       '<animate attributeName="fill" values="transparent;',
       baseColors[1],
-      ';transparent" begin="w.begin+.2s" dur="1s"/>',
-      '<animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+.2s" dur="1s"/>',
+      ';transparent" begin="w.begin+0.2s" dur="1s"/>',
+      '<animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+0.2s" dur="1s"/>',
       '</path>'
     );
 
     bytes memory borders3 = abi.encodePacked(
-      '<path d="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity=".3" fill-opacity="0.3" fill="transparent">',
+      '<path d="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity="0.3" fill-opacity="0.3" fill="transparent">',
       '<animate attributeName="fill" values="transparent;',
       baseColors[2],
-      ';transparent" begin="w.begin+.4s" dur="1s"/>',
-      '<animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+.4s" dur="1s"/>',
+      ';transparent" begin="w.begin+0.4s" dur="1s"/>',
+      '<animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+0.4s" dur="1s"/>',
       '</path></g><use href="#',tokenId,'b" x="-500" y="-500" transform="rotate(180)"/>'
     );
 
@@ -668,7 +677,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
       if (syncTraits.rarity_roll % 13 == 0) {
         // 7.7% probability ((77 in 1000)
-        syncTraits.rarity_id = 'Mosiac';
+        syncTraits.rarity_id = 'Mosaic';
         syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // Full Diamond
       } else if (syncTraits.rarity_roll % 11 == 0) {
         // 9% probability (91 in 1000)

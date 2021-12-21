@@ -11,8 +11,11 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
       onClose={() => setIsOpen(false)}
     >
       <div className="flex items-center justify-center min-h-screen">
-        <div className="relative rounded lg:w-1/2 sm:w-full mx-auto p-8">
-          <Dialog.Overlay />
+        <div className="relative rounded lg:w-2/3 xl:w-1/2 sm:w-full mx-auto p-8">
+          <Dialog.Overlay
+            style={{ zIndex: -1 }}
+            className="fixed inset-0 bg-black opacity-30"
+          />
           <button
             className="text-black text-3xl font-bold uppercase absolute"
             style={{
@@ -25,7 +28,7 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
           </button>
           <div
             className={
-              'w-full py-20 px-10 bg-white bg-opacity-90 items-center border-gray-800 border-8'
+              'z-10 w-full py-20 px-10 bg-white  items-center border-gray-800 border-8'
             }
           >
             <div>
@@ -44,11 +47,12 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                             height: 200,
                             cursor: 'pointer',
                           }}
-                          dangerouslySetInnerHTML={{ __html: svg.svg }}
-                        ></div>
+                        >
+                          <img src={`${svg.svg64}`} />
+                        </div>
                       </div>
                     </div>
-                    <div className="mx-auto lg:mx-0 lg:ml-5">
+                    <div className={`mt-10 lg:mt-0 md:mx-auto lg:mx-0 lg:ml-5`}>
                       <p className={' text-lg mb-1 text-black'}>
                         <span
                           className={'font-bold uppercase text-lg title-font'}

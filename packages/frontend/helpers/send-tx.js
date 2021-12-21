@@ -36,9 +36,7 @@ export const sendTx = async (web3, { cost, to, from, data, count }) => {
   } catch (ex) {
     console.log(ex)
     let error = 'Transaction failed!'
-    if (/err: insufficient funds for gas/.test(ex.message))
-      error = 'Insufficient gas funds!'
-    else if (/err: insufficient funds/.test(ex.message))
+    if (/err: insufficient funds/.test(ex.message))
       error = 'Insufficient funds!'
     if (txToast) {
       toast.error(error, { id: txToast })

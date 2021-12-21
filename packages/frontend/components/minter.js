@@ -26,6 +26,7 @@ export const Minter = (props) => {
   const [sync, setSync] = useState(null)
   const [amountMinted, setAmountMinted] = useState(null)
   const [mintColors, setMintColors] = useState(0)
+  const [selectedColors, setSelectedColors] = useState({})
   const [mintCount, setMintCount] = useState(1)
   const [tokenID, setTokenID] = useState(null)
   const [address, setAddress] = useState(null)
@@ -98,9 +99,9 @@ export const Minter = (props) => {
       SYNC_CONTRACT
     )
 
-    const tokens = svgs
-      .filter((svg) => svg.selected)
-      .map((svg) => parseInt(svg.tokenId))
+    const tokens = Object.keys(selectedColors).map((colorID) =>
+      parseInt(colorID)
+    )
 
     const txCall = contract.methods.mint(mintCount, tokens)
 
@@ -123,7 +124,7 @@ export const Minter = (props) => {
       .tokenURI(context.library.eth.abi.encodeParameter('uint256', tokenID))
       .call()
     const token = decodeToken(tokenURI)
-    return token.svg
+    return token
   }
 
   async function remintSync() {
@@ -134,9 +135,9 @@ export const Minter = (props) => {
       SYNC_CONTRACT
     )
 
-    const tokens = svgs
-      .filter((svg) => svg.selected)
-      .map((svg) => parseInt(svg.tokenId))
+    const tokens = Object.keys(selectedColors).map((colorID) =>
+      parseInt(colorID)
+    )
 
     const txCall = contract.methods.updateColors(props.tokenID, tokens)
 
@@ -158,18 +159,22 @@ export const Minter = (props) => {
   function selectColor(svg) {
     if (svg.selected) {
       delete svg.selected
+      delete selectedColors[svg.tokenId]
       setMintColors('unselect-' + svg.tokenId)
+      setSelectedColors(selectedColors)
       return
     }
 
-    if (svgs.filter((x) => x.selected).length === MAX_COLORS) {
+    if (Object.keys(selectedColors).length === MAX_COLORS) {
       toast.error('Max number of colors selected!')
       return
     }
 
+    selectedColors[svg.tokenId] = 1
     svg.selected = 1
 
     setMintColors(svg.tokenId)
+    setSelectedColors(selectedColors)
   }
 
   async function beginMint() {
@@ -197,7 +202,7 @@ export const Minter = (props) => {
   }
 
   function getMintText(loading) {
-    if (loading) return 'Processing'
+    if (loading) return 'MINTING...'
 
     if (tokenID) {
       return 'Color ∞ Sync!'
@@ -206,8 +211,8 @@ export const Minter = (props) => {
     }
   }
 
-  function noColorsSelected() {
-    return svgs.filter((svg) => svg.selected).length === 0
+  function colorsSelected() {
+    return Object.keys(selectedColors).length
   }
 
   if (context.active) {
@@ -226,7 +231,7 @@ export const Minter = (props) => {
     }
     if (context.account) {
       return (
-        <div className={styles.modal}>
+        <div className={'w-full mx-auto lg:w-2/3 rounded py-10 px-6 lg:px-0'}>
           {tokenID && (
             <div className={'mt-0 mb-10'}>
               <p
@@ -238,7 +243,7 @@ export const Minter = (props) => {
               </p>
               <div className={'flex colors justify-center content-center'}>
                 {!sync && <Loader />}
-                {sync && (
+                {sync?.svg64 && (
                   <div className={'border-gray-800 border-4 m-4'}>
                     <div
                       className={styles.sync}
@@ -246,8 +251,9 @@ export const Minter = (props) => {
                         width: 200,
                         height: 200,
                       }}
-                      dangerouslySetInnerHTML={{ __html: sync }}
-                    ></div>
+                    >
+                      <img src={`${sync.svg64}`} />
+                    </div>
                   </div>
                 )}
               </div>
@@ -277,7 +283,9 @@ export const Minter = (props) => {
                       key={svg.color}
                       className={
                         'border-solid border-gray-800  border-4 color shadow-lg ' +
-                        (svg.selected ? styles.colorActive : ' border-white')
+                        (selectedColors[svg.tokenId] == 1
+                          ? styles.colorActive
+                          : ' border-white')
                       }
                       style={{
                         width: 75,
@@ -378,10 +386,25 @@ export const Minter = (props) => {
               </button>
             )}
           </div>
-          {colorsOwned > 0 && noColorsSelected() && (
+          {!tokenID && colorsOwned > 0 && colorsSelected() === 0 && (
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
-                minting greyscale until colors selected
+                minting greyscale since no colors are selected
+              </p>
+            </div>
+          )}
+
+          {!tokenID && colorsSelected() > 0 && mintCount > 1 && (
+            <div className={'-mt-5 content-center justify-center flex mb-10'}>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                same color palette will be used for all mints
+                <a
+                  className={'block text-blue-500 underlined'}
+                  target="_blank"
+                  href="https://syncxcolors.xyz/faq#multimint"
+                >
+                  read more
+                </a>
               </p>
             </div>
           )}
