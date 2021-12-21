@@ -29,7 +29,7 @@ async function main() {
       value: ethers.utils.parseEther(GAS_PER_MINT),
     })
     const uri = await decodeToken(thisSyncContract.tokenURI(i))
-   
+    console.log(uri)
     output_svg(i, uri);
 
     //const svg = await thisSyncContract.getTokenSVG(i)

@@ -86,7 +86,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
 
-    string memory svgData = generateSVGImage(syncTraits);
+    string memory svgData = generateSVGImage(tokenId, syncTraits);
     string memory image = Base64.encode(bytes(svgData));
 
     return
@@ -120,7 +120,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
     SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
 
-    return generateSVGImage(syncTraits);
+    return generateSVGImage(tokenId, syncTraits);
   }
 
   /**
@@ -337,7 +337,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   /**
    * Generates the SVG
    */
-  function generateSVGImage(SyncTraitsStruct memory syncTraits)
+  function generateSVGImage(uint256 tokenId, SyncTraitsStruct memory syncTraits)
     private
     pure
     returns (string memory)
@@ -347,13 +347,15 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes memory svgLogo = generateSVGLogo(
       syncTraits.baseColors,
       syncTraits.logoColors,
-      syncTraits.rarity_roll
+      syncTraits.rarity_roll,
+      tokenId.toString()
     );
     bytes memory svgDrift = generateSVGDrift(
       syncTraits.baseColors,
       syncTraits.driftColors,
       syncTraits.rarity_roll,
-      syncTraits.symbol
+      syncTraits.symbol,
+      tokenId.toString()
     );
     return
       string(
@@ -440,7 +442,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     returns (bytes memory)
   {
     bytes memory infinity1 = abi.encodePacked(
-      '<g id="infinity_1"><path id="infinity" stroke-dasharray="0" stroke-dashoffset="0" stroke-width="16" ',
+      '<g><path stroke-dasharray="0" stroke-dashoffset="0" stroke-width="16" ',
       'd="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">',
       '<animate begin="s.begin" attributeType="XML" attributeName="stroke" values="',
       infColors[0],
@@ -453,7 +455,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes memory infinity2 = abi.encodePacked(
       '<animate begin="s.begin" attributeType="XML" attributeName="stroke-dasharray" values="0;50;0" dur="6s" fill="freeze"/>',
       '<animate begin="a.begin" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>',
-      '</path><path id="infinity_2" stroke-dasharray="300" stroke-dashoffset="300" stroke-width="16" ',
+      '</path><path stroke-dasharray="300" stroke-dashoffset="300" stroke-width="16" ',
       'd="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">'
     );
     bytes memory infinity3 = abi.encodePacked(
@@ -477,10 +479,11 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   function generateSVGLogo(
     bytes[] memory baseColors,
     bytes memory logoColors,
-    uint16 rarity_roll
+    uint16 rarity_roll,
+    string memory tokenId
   ) private pure returns (bytes memory) {
     bytes memory logo = abi.encodePacked(
-      '<g id="b">',
+      '<g id="',tokenId,'b">',
       '<path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" ',
       'stroke="black" fill-opacity="0.9" stroke-width=".7">'
     );
@@ -530,7 +533,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes[] memory baseColors,
     bytes memory driftColors,
     uint16 rarity_roll,
-    bytes7 rarity_id
+    bytes7 rarity_id,
+    string memory tokenId
   ) private pure returns (bytes memory) {
     if (rarity_roll % 11 != 0) {
       // Drift is colored as a single color unless Tokyo Drift trait
@@ -566,7 +570,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       baseColors[2],
       ';transparent" begin="w.begin+.4s" dur="1s"/>',
       '<animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+.4s" dur="1s"/>',
-      '</path></g><use href="#b" x="-500" y="-500" transform="rotate(180)"/>'
+      '</path></g><use href="#',tokenId,'b" x="-500" y="-500" transform="rotate(180)"/>'
     );
 
     return abi.encodePacked(borders1, borders2, borders3);
