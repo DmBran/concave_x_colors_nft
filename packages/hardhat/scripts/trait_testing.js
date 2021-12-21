@@ -31,11 +31,11 @@ async function main() {
     const uri = await thisSyncContract.tokenURI(i)
     console.log(uri)
     console.log(base64DecodeUnicode(uri))
-    
+
     //const svg = await thisSyncContract.getTokenSVG(i)
     //output_svg(i, svg.toString())
   }
-  
+
   /*
   for (let i = 25; i < 50; i++) {
     const transaction2 = await thisSyncContract.mint(1, [0], {
@@ -80,9 +80,9 @@ function output_svg(name, contents) {
   )
 }
 function base64DecodeUnicode(str) {
-    let base64ToString = Buffer.from(str, "base64"); //.toString();
-    //console.log(base64ToString);
-    let base64ToStringNew = base64ToString.toString('utf-8');
-	//base64ToString = JSON.parse(base64ToString);
-	return base64ToStringNew;
+  let base64ToString = Buffer.from(str, 'base64') //.toString();
+  //console.log(base64ToString);
+  let base64ToStringNew = base64ToString.toString('utf-8')
+  //base64ToString = JSON.parse(base64ToString);
+  return base64ToStringNew
 }

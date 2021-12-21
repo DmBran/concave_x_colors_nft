@@ -145,9 +145,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   function withdraw() internal {
     bool sent;
     uint256 balance = address(this).balance;
-    (sent, ) = payable(TEAM).call{value: balance * 50 / 100}("");
+    (sent, ) = payable(TEAM).call{value: (balance * 50) / 100}('');
     require(sent);
-    (sent, ) = payable(TREASURY).call{value: balance * 50 / 100}("");
+    (sent, ) = payable(TREASURY).call{value: (balance * 50) / 100}('');
     require(sent);
   }
 
@@ -175,7 +175,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   {
     // Requires
     uint256 _mintIndex = totalSupply();
-    require(_mintAmount > 0 && _mintAmount <= maxMintAmount, 'Max mint 10 per tx');
+    require(
+      _mintAmount > 0 && _mintAmount <= maxMintAmount,
+      'Max mint 10 per tx'
+    );
     require(_mintIndex + _mintAmount - 1 <= MAX_SUPPLY, 'Exceeds supply');
     require(colorTokenIds.length <= 3, '# COLORS tokenIds must be <=3');
 
@@ -289,22 +292,24 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint256 tokenId,
     SyncTraitsStruct memory syncTraits
   ) internal view returns (string memory) {
-    bytes memory buffer = abi.encodePacked(
-      '"attributes":[',
-      '{"trait_type":"Theme","value":"',
-      syncTraits.rarity_id,
-      '"},',
-      '{"trait_type":"Rarity","value":"',
-      syncTraits.symbol,
-      '"},',
-      '{"trait_type":"Colors","value":"',
-      getColorDescriptor(tokenId),
-      '"},',
-      '{"resync_count":',
-      _resync_count[tokenId],
-      '}]'
-    );
-    return string(buffer);
+    return
+      string(
+        abi.encodePacked(
+          '"attributes":[',
+          '{"trait_type":"Theme","value":"',
+          syncTraits.rarity_id,
+          '"},',
+          '{"trait_type":"Rarity","value":"',
+          syncTraits.symbol,
+          '"},',
+          '{"trait_type":"Colors","value":"',
+          getColorDescriptor(tokenId),
+          '"},',
+          '{"trait_type":Resync_Count","value":"',
+          _resync_count[tokenId].toString(),
+          '"}]'
+        )
+      );
   }
 
   /**
@@ -481,9 +486,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     );
 
     if (
-      rarity_roll % 499 == 0 ||
-      rarity_roll % 241 == 0 ||
-      rarity_roll % 19 == 0
+      rarity_roll % 499 == 0 || rarity_roll % 241 == 0 || rarity_roll % 19 == 0
     ) {
       //Shimmer
       logo = abi.encodePacked(
@@ -649,9 +652,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.symbol = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
-      syncTraits.infColors[0] = syncTraits.baseColors[0]; // Must be copy to ensure gifted infinity color role on grayscale is applied correctly
-      syncTraits.infColors[1] = syncTraits.baseColors[1];
-      syncTraits.infColors[2] = syncTraits.baseColors[2];
+      syncTraits.infColors = syncTraits.baseColors; // Must be copy to ensure gifted infinity color role on grayscale is applied correctly
       bytes[] memory upgrades = new bytes[](3);
       upgrades[0] = '#214F70';
       upgrades[1] = '#FAF7C0';
