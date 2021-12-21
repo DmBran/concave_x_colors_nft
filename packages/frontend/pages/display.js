@@ -45,10 +45,11 @@ export default function Display() {
 
       setLoaded(true)
     }
-  }, [context, modalSvg])
+  }, [context])
 
   async function updateSyncs(contract, account, tokenID, mintCount) {
     const svgs = []
+    setLoaded(false)
 
     if (tokenID) {
       const tokenMeta = await contract.methods.tokenURI(tokenID).call()
@@ -58,6 +59,7 @@ export default function Display() {
         ...traits,
       })
       setSvgs(svgs)
+      setLoaded(true)
       return
     }
 
@@ -81,6 +83,7 @@ export default function Display() {
     }
 
     setSvgs(svgs)
+    setLoaded(true)
   }
 
   return (
@@ -135,7 +138,7 @@ export default function Display() {
                     'flex flex-wrap colors justify-center content-center'
                   }
                 >
-                  {svgs &&
+                  {loaded && svgs &&
                     svgs.map((svg) => (
                       <div
                         className={'border-gray-800 border-4 m-4'}

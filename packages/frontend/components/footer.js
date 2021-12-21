@@ -70,7 +70,7 @@ export const Footer = () => {
           </svg>
         </a>
       </div>
-      {0 && <div className={'mt-10 text-center'}>
+      {<div className={'mt-10 text-center'}>
         <p className={'font-bold uppercase'}>Contract Address</p>
         <a
           href={`https://etherscan.io/contract/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
