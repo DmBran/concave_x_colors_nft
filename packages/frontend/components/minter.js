@@ -389,7 +389,7 @@ export const Minter = (props) => {
           {!tokenID && colorsOwned > 0 && colorsSelected() === 0 && (
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
-                minting greyscale until colors selected
+                minting greyscale since no colors are selected
               </p>
             </div>
           )}
