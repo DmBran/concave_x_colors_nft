@@ -6,7 +6,6 @@ pragma abicoder v2;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Strings.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
-import '@openzeppelin/contracts/security/Pausable.sol';
 import 'base64-sol/base64.sol';
 import './legacy_colors/TheColors.sol';
 import './legacy_colors/INFTOwner.sol';
@@ -24,8 +23,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   uint256 public constant MAX_SUPPLY = 4317 - TotalReservedAmount;
 
   // Declare Public
-  address public constant THE_COLORS =
-    address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+  address public constant THE_COLORS = address(0x9fdb31F8CE3cB8400C7cCb2299492F2A498330a4);
+  //  address(0x5FbDB2315678afecb367f032d93F642f64180aa3);
   //address public THE_COLORS =
     //address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
@@ -578,8 +577,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     // Calculate traits
     syncTraits.baseColors = getColorsHexStrings(tokenId);
 
-    if (syncTraits.rarity_roll % 499 == 0) {
-      // 0.2% probability (2 in 1000)
+    if (syncTraits.rarity_roll % 333 == 0) {
+      // 0.2% probability (3 in 1000)
       syncTraits.theme = 'Concave';
       syncTraits.sigil = '\xE2\x9D\xAA\x20\xE2\x9D\xAB'; //( ) 0xE2 0x9D 0xAA [] 0xE2 0x9D 0xAB  E2\xA6\x85\x20\xE2\xA6\x86 ()
       syncTraits.bgColors[0] = '#214F70'; //Light Blue

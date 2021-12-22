@@ -29,15 +29,19 @@ async function main() {
   TO_MINT = 1000; //# Mints for each color
   
   for (let i = 0; i < TO_MINT; i++) {
+	colorTokenIds = [];
+	/*
 	if (i<250){
 		colorTokenIds = [];
+	
 	}else if (i < 500){
-		colorTokenIds = [0];
+		colorTokenIds = getRandomInts(0,9,1);
 	}else if (i < 750){
-		colorTokenIds = [0,1];
+		colorTokenIds = getRandomInts(0,9,2);
 	}else{
-		colorTokenIds = [0,1,2];
+		colorTokenIds = getRandomInts(0,9,3);;
 	}
+	* */
     const transaction1 = await thisSyncContract.mint(1, colorTokenIds, {
       value: ethers.utils.parseEther(GAS_PER_MINT),
     })
@@ -58,12 +62,30 @@ main()
     process.exit(1)
   })
 
+function getRandomInts(min, max, quantity) {
+    const array = [];
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    while (true){
+		num = Math.floor(Math.random() * (max - min + 1)) + min;
+		if (array.includes(num) == false){
+			array.push( num );
+		
+			if (array.length == quantity){
+				return array;
+			}
+		}
+	}
+    
+    return array
+}
+
 function output_svg(tokenId, uri, numColors=0) {
   const fs = require('fs')
   //console.log(`../../svg/test/${uri.theme}_${tokenId}.svg`)
   //console.log(uri['svg'].toString())
   fs.writeFile(
-    `../../svg/test/${uri['theme']}/${uri['theme']}_${tokenId}_Colors${numColors}.svg`,
+    `../../svg/test/${uri['theme']}/${uri['theme']}_${numColors}_${tokenId}.svg`,
     uri['svg'].toString(),
     (err) => {
 
