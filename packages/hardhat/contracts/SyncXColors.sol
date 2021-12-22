@@ -232,36 +232,20 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   }
 
   /**
-   * Return colors description as string
-  function getColorDescriptor(uint256 tokenId)
-    private
-    view
-    returns (string memory)
-  {
-    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
-    uint256 length = _colorTokenIds[tokenId].length;
-    string memory colorDescriptor;
-    for (uint256 i = 0; i < length; i++) {
-      colorDescriptor = string(
-        abi.encodePacked(
-          colorDescriptor,
-          TheColors(THE_COLORS).getHexColor(uint256(colorTokenIds[i])),
-          ','
-        )
-      );
-    }
-    return colorDescriptor;
-  }
-   */
-
-  /**
    * Generate attributes json
    */
   function generateAttributes(
     uint256 tokenId,
     SyncTraitsStruct memory syncTraits
   ) internal view returns (string memory) {
-    bytes[] memory colorArray = getColorsHexStrings(tokenId);
+    uint16[] memory colorTokenIds = _colorTokenIds[tokenId];
+    uint256 length = colorTokenIds.length;
+    bytes[] memory colorArray = new bytes[](3);
+    for (uint256 i = 0; i < length; i++) {
+      colorArray[i] = bytes(
+        TheColors(THE_COLORS).getHexColor(uint256(colorTokenIds[i]))
+      );
+    }
     // fixing assembly overflow error, too much params
     string memory attributes = string(
         abi.encodePacked(
