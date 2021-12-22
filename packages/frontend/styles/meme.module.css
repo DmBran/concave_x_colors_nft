@@ -115,18 +115,9 @@
   max-height: 100%;
 }
 .colorActive {
-  border: 5px solid transparent;
-  border-image: linear-gradient(
-    to bottom right,
-    #ff9aa2 0,
-    #ffb7b2 20%,
-    #ffdac1 40%,
-    #e2f0cb 65%,
-    #b5ead7 80%,
-    #c7ceea 100%
-  );
-  border-image-slice: 1;
+  border: 5px solid white;
 }
+
 @keyframes diagonal {
   0% {
     background-position: 0% 10%;

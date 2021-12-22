@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useWeb3Context } from 'web3-react'
 
 export const Navbar = () => {
-
   const context = useWeb3Context()
 
   const [active, setActive] = useState(false)
@@ -67,26 +66,20 @@ export const Navbar = () => {
                 </a>
               </Link>
 
-              {(
-                <Link
-                  prefetch={false}
-                  href={`/mint`}
-                >
+              {
+                <Link prefetch={false} href={`/mint`}>
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
-              )}
-              {(
-                <Link
-                  prefetch={false}
-                  href={`/display`}
-                >
+              }
+              {
+                <Link prefetch={false} href={`/display`}>
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>
                 </Link>
-              )}
+              }
               <Link href={`/faq`}>
                 <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                   FAQ

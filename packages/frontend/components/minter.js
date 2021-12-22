@@ -268,7 +268,9 @@ export const Minter = (props) => {
               >
                 Select {tokenID ? 'New' : 'Your'} Color Primitives
               </p>
-              <p className={'text-black text-center mb-3 font-late-500 text-xs'}>
+              <p
+                className={'text-black text-center mb-3 font-late-500 text-xs'}
+              >
                 (up to three)
               </p>
               <div
@@ -282,17 +284,17 @@ export const Minter = (props) => {
                       onClick={() => selectColor(svg)}
                       key={svg.color}
                       className={
-                        'border-solid border-gray-800  border-4 color shadow-lg ' +
+                        'border-solid border-4 border-gray-800 opacity-85  color shadow-lg ' +
                         (selectedColors[svg.tokenId] == 1
-                          ? styles.colorActive
-                          : ' border-white')
+                          ? `${styles.colorActive} ring-4 ring-offset-0 ring-blue-700`
+                          : 'border-white')
                       }
                       style={{
                         width: 75,
                         height: 75,
                         background: svg.color,
                         cursor: 'pointer',
-                        margin: 5,
+                        margin: 10,
                       }}
                     ></div>
                   ))}
@@ -325,14 +327,14 @@ export const Minter = (props) => {
               >
                 <div
                   className={
-                    'flex flex-row h-10 w-full rounded-lg relative bg-transparent'
+                    'border-1 border-black flex flex-row h-10 w-full rounded-lg relative bg-transparent'
                   }
                 >
                   <button
                     onClick={() => mintCountIncrement('decrement')}
                     data-action="decrement"
                     className={
-                      'bg-white border-r border-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none'
+                      'bg-white border-2 border-slate-700 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none'
                     }
                   >
                     <span className={'m-auto text-2xl font-thin'}>−</span>
@@ -342,7 +344,7 @@ export const Minter = (props) => {
                     max={MAX_MINT_COUNT}
                     type="text"
                     className={
-                      'bg-white outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
+                      'border-2 border-r-0 border-l-0 border-slate-700 bg-white outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
                     }
                     name="custom-input-number"
                     onChange={(e) => {
@@ -356,7 +358,7 @@ export const Minter = (props) => {
                     onClick={() => mintCountIncrement('increment')}
                     data-action="increment"
                     className={
-                      'bg-white border-l border-l-slate-500 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer'
+                      'bg-white border-2 border-slate-700 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer'
                     }
                   >
                     <span className={'m-auto text-2xl font-thin'}>+</span>
@@ -388,15 +390,23 @@ export const Minter = (props) => {
           </div>
           {!tokenID && colorsOwned > 0 && colorsSelected() === 0 && (
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
-              <p className={'text-black font-bold text-center mb-3 font-late-500 text-xs'}>
-                minting greyscale since no colors are selected
+              <p
+                className={
+                  'px-10 py-8 bg-red-400 ring-4 ring-offset-10 ring-black text-black font-bold underline text-center mb-3 font-late-500 text-sm uppercase'
+                }
+              >
+                We recommend you select a color to apply to your mint!
               </p>
             </div>
           )}
 
           {!tokenID && colorsSelected() > 0 && mintCount > 1 && (
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
-              <p className={'text-black font-bold text-center mb-3 font-late-500 text-xs'}>
+              <p
+                className={
+                  'text-black font-bold text-center mb-3 font-late-500 text-xs'
+                }
+              >
                 same color palette will be used for all mints
                 <a
                   className={'block text-blue-500 underlined'}

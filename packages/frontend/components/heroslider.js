@@ -2,7 +2,6 @@ import React from 'react'
 import { Slide } from 'react-slideshow-image'
 import 'react-slideshow-image/dist/styles.css'
 
-
 function HeroSlider() {
   const images = [
     '/static/urare_driftedge2.svg',
@@ -14,7 +13,7 @@ function HeroSlider() {
     '/static/grey_c8.svg',
     '/static/Olympus_574_Colors2.svg',
     '/static/Mosaic_457_Colors1.svg',
-    '/static/Common_886_Colors3.svg'
+    '/static/Common_886_Colors3.svg',
   ]
 
   return (

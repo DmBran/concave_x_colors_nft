@@ -83,7 +83,7 @@ export const Footer = () => {
           <img width="34" src="/static/opensea.svg" />
         </a>
       </div>
-      {(
+      {
         <div className={'mt-10 text-center'}>
           <p className={'text-black font-bold uppercase'}>Contract Address</p>
           <a
@@ -94,7 +94,7 @@ export const Footer = () => {
             {process.env.NEXT_PUBLIC_SYNC_CONTRACT}
           </a>
         </div>
-      )}
+      }
       <div className={'flex justify-center  flex-1 flex-grow text-center'}>
         <p className={'text-center text-sm mt-20 font-xs'}>
           <span className={'block'}>DISCLAIMER</span> All purchases are final.
