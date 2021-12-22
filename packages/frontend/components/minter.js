@@ -302,7 +302,7 @@ export const Minter = (props) => {
               </div>
             </div>
           )}
-          {colorsOwned === 0 && (
+          {colorsOwned === 0 && !tokenID && (
             <div className={'mb-10'}>
               <p
                 className={
@@ -401,6 +401,17 @@ export const Minter = (props) => {
                 }
               >
                 We recommend you select a color to apply to your mint!
+              </p>
+            </div>
+          )}
+          {tokenID && (colorsOwned === 0 || colorsSelected() === 0) && (
+            <div className={'-mt-5 content-center justify-center flex mb-10'}>
+              <p
+                className={
+                  'px-10 py-8 bg-red-400 ring-4 ring-offset-10 ring-black text-black font-bold underline text-center mb-3 font-late-500 text-sm uppercase'
+                }
+              >
+                resyncing without a colors nft has no effect
               </p>
             </div>
           )}
