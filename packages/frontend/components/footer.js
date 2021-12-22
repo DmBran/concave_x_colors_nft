@@ -74,7 +74,7 @@ export const Footer = () => {
           </svg>
         </a>
         <a
-          href={`https://opensea.com/`}
+          href={`https://opensea.io/collection/sync-x-colors`}
           target="_blank"
           className={
             ' relative top-1 ml-1 inline-block self-start align-top title-font text-md font-black mb-4 uppercase'
