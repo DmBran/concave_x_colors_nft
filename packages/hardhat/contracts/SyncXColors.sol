@@ -262,6 +262,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint256 tokenId,
     SyncTraitsStruct memory syncTraits
   ) internal view returns (string memory) {
+    bytes[] memory colorArray = getColorsHexStrings(tokenId);
     // fixing assembly overflow error, too much params
     string memory attributes = string(
         abi.encodePacked(
@@ -278,13 +279,13 @@ contract SyncXColors is ERC721Enumerable, Ownable {
         abi.encodePacked(
           attributes,
           '{"trait_type":"Color 1","value":"',
-          syncTraits.baseColors[0],
+          colorArray[0],
           '"},',
           '{"trait_type":"Color 2","value":"',
-          syncTraits.baseColors[1],
+          colorArray[1],
           '"},',
           '{"trait_type":"Color 3","value":"',
-          syncTraits.baseColors[2],
+          colorArray[2],
           '"},',
           '{"trait_type":"Resyncs","value":"',
           _resync_count[tokenId].toString(),
