@@ -565,7 +565,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     // Retrieve seed from storage
     uint256 seed = _seed[tokenId];
     syncTraits.rarity_roll = uint16(
-      1 + ((seed & 0x7FF) % 1000) // range 1 to 2047 % 1000 - ~ slightly bottom heavy but round numbers nicer
+      1 + ((seed & 0x3FF) % 1000) // range 1 to 2047 % 1000 - ~ slightly bottom heavy but round numbers nicer
     );
 
     // Calculate traits
@@ -574,7 +574,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     if (syncTraits.rarity_roll % 333 == 0) {
       // 0.3% probability (3 in 1000)
       syncTraits.theme = 'Concave';
-      syncTraits.sigil = '\xE2\x9D\xAA\x20\xE2\x9D\xAB'; //( ) 0xE2 0x9D 0xAA [] 0xE2 0x9D 0xAB  E2\xA6\x85\x20\xE2\xA6\x86 ()
+      syncTraits.sigil = '\xE2\x9D\xAA\x20\xE2\x9D\xAB'; //( )
       syncTraits.bgColors[0] = '#214F70'; //Light Blue
       syncTraits.bgColors[1] = '#2E2E3F'; //Dark Blue
       syncTraits.bgColors[2] = '#2E2E3F'; //Dark Blue
@@ -586,7 +586,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     } else if (syncTraits.rarity_roll % 241 == 0) {
       // 0.4% probability (4 in 1000)
       syncTraits.theme = 'Olympus';
-      syncTraits.sigil = '\xF0\x9D\x9B\x80\x20\x20\x20'; //OMEGA
+      syncTraits.sigil = '\xF0\x9D\x9B\x80\x20\x20\x20'; // OMEGA
       syncTraits.bgColors[0] = '#80A6AF'; // Oly Blue
       syncTraits.bgColors[1] = '#3A424F'; // Dark Blue
       syncTraits.bgColors[2] = '#80A6AF'; // Oly Blue
@@ -598,7 +598,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     } else if (syncTraits.rarity_roll % 19 == 0) {
       // ~4% probability (50-10 in 1000)
       syncTraits.theme = 'Silver';
-      syncTraits.sigil = '\xE2\x98\x86\x20\x20\x20\x20'; // 1x empty Star: 0xE2 0x98 0x86 Empty Star
+      syncTraits.sigil = '\xE2\x98\x86\x20\x20\x20\x20'; // Empty Star
       syncTraits.bgColors[0] = '#c0c0c0'; // Silver
       syncTraits.bgColors[1] = '#e5e4e2'; // Platinum
       syncTraits.bgColors[2] = '#c0c0c0'; // Silver
@@ -612,7 +612,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       if (syncTraits.rarity_roll % 95 == 0) {
         // `~1% probability (10 in 1000)
         syncTraits.theme = 'Gold'; // Gold
-        syncTraits.sigil = '\xE2\x98\x85\x20\x20\x20\x20'; //0xE2 0x98 0x85 Full star
+        syncTraits.sigil = '\xE2\x98\x85\x20\x20\x20\x20'; // Full star
         syncTraits.bgColors[0] = '#CD7F32'; // Gold
         syncTraits.bgColors[2] = '#725d18'; // Darker Gold
         syncTraits.infColors[0] = 'black';
@@ -620,7 +620,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       }
     } else {
       syncTraits.theme = 'Common'; // Common
-      syncTraits.sigil = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
+      syncTraits.sigil = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
       syncTraits.infColors = syncTraits.baseColors;
