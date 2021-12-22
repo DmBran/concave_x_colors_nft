@@ -25,7 +25,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
   // Declare Public
   address public constant THE_COLORS =
-    address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
+    address(0x5FbDB2315678afecb367f032d93F642f64180aa3);
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
@@ -36,20 +36,11 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     address(0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2);
   address private constant TEAM =
     address(0x263853ef2C3Dd98a986799aB72E3b78334EB88cb);
-  //address private constant T1 =
-  //  address(0xC41bfB693bB4a5C18920dFf539C3fB48B0fB2272);
-  //address private constant T2 =
-  //  address(0x75C2d12733cbe7126eDbd013Abf96304904036DE);
-  //address private constant T3 =
-  //  address(0x49F25d848125Ac3945C14557EF7DE12b83f37325);
-  //address private constant T4 =
-  //  address(0xC7E1cA89Bd4EEb818629A4971BC5306f488000C5);
-  //address private constant T5 =
-  //  address(0x8Df8646305B62A822E2A50e0CA2bc8b08f8b1d3d);
-  //bool internal _isPublicMintActive;
+
   mapping(uint256 => uint16[]) private _colorTokenIds;
   mapping(uint256 => uint256) private _seed; // Trait seed is generated at time of mint and stored on-chain
   mapping(uint256 => uint8) private _resync_count; //Store count of color resyncs applied
+  
   // Struct for NFT traits
   struct SyncTraitsStruct {
     uint8[] shape_color;
@@ -65,8 +56,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes[] infColors;
     bytes logoColors;
     bytes driftColors;
-    bytes rarity_id;
-    bytes7 symbol;
+    bytes theme;
+    bytes7 sigil;
   }
 
   // Constructor
@@ -112,33 +103,6 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       );
   }
 
-  /**
-   * TODO: REMOVE AFTER TESTS. Returns SVG
-   */
-  function getTokenSVG(uint256 tokenId) external view returns (string memory) {
-    require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
-
-    SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
-
-    return generateSVGImage(tokenId, syncTraits);
-  }
-
-  /**
-   * TODO: REMOVE AFTER TESTS. Returns Base64 SVG
-   */
-  /*
-  function getBase64TokenSVG(uint256 tokenId)
-    external
-    view
-    returns (string memory)
-  {
-    require(_exists(tokenId), 'ERC721: operator query for nonexistent token');
-
-    SyncTraitsStruct memory syncTraits = generateTraits(tokenId);
-    string memory image = Base64.encode(bytes(generateSVGImage(syncTraits)));
-    return string(abi.encodePacked('data:application/json;base64', image));
-  }
-  */
   /**
    * Withdraw accrued funds from contract. 50% treasury, 10% to each team member
    */
@@ -296,10 +260,10 @@ contract SyncXColors is ERC721Enumerable, Ownable {
         abi.encodePacked(
           '"attributes":[',
           '{"trait_type":"Theme","value":"',
-          syncTraits.rarity_id,
+          syncTraits.theme,
           '"},',
           '{"trait_type":"Rarity","value":"',
-          syncTraits.symbol,
+          syncTraits.sigil,
           '"},',
           '{"trait_type":"Colors","value":"',
           getColorDescriptor(tokenId),
@@ -353,7 +317,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.baseColors,
       syncTraits.driftColors,
       syncTraits.rarity_roll,
-      syncTraits.symbol,
+      syncTraits.sigil,
       tokenId.toString()
     );
     return
@@ -465,8 +429,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       ';',
       infColors[2],
       '" dur="4s" fill="freeze"/>',
-      '<animate id="a" begin="s.begin;a.end ',
-      'attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>',
+      '<animate id="a" begin="s.begin;a.end" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>',
       '<animate id="s" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;s.end" to= "-1800" dur="6s"/></path></g>'
     );
     return abi.encodePacked(infinity1, infinity2, infinity3);
@@ -481,6 +444,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint16 rarity_roll,
     string memory tokenId
   ) private pure returns (bytes memory) {
+    
     bytes memory logo = abi.encodePacked(
       '<g id="',tokenId,'b">',
       '<path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" ',
@@ -498,8 +462,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
         '<set attributeName="fill" to="',
         logoColors,
         '"/>',
-        '<animate begin="s.begin;s.end" attributeType="XML" attributeName="stroke-dashoffset" from="0" to="280" dur="6s" fill="freeze"/>',
-        '<animate begin="s.begin;s.end" attributeType="XML" attributeName="stroke" values="',
+        '<animate begin="s.begin" attributeType="XML" attributeName="stroke-dashoffset" from="0" to="280" dur="6s" fill="freeze"/>',
+        '<animate begin="s.begin" attributeType="XML" attributeName="stroke" values="',
         baseColors[0],
         ';',
         baseColors[1],
@@ -512,12 +476,12 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     } else {
       logo = abi.encodePacked(
         logo,
-        '<animate id="p" begin="s.begin" attributeName="fill" dur="6s" '
-        'values="black;black;',
+        '<animate begin="s.begin" attributeName="fill" dur="6s" '
+        'values="black;',
         baseColors[0],
-        ';black;black;',
+        ';black;',
         baseColors[1],
-        ';black;black;',
+        ';black;',
         baseColors[2],
         ';black"/>'
       );
@@ -532,7 +496,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes[] memory baseColors,
     bytes memory driftColors,
     uint16 rarity_roll,
-    bytes7 rarity_id,
+    bytes7 sigil,
     string memory tokenId
   ) private pure returns (bytes memory) {
     if (rarity_roll % 11 != 0) {
@@ -544,12 +508,12 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     bytes memory borders1 = abi.encodePacked(
       '</path><text x="2" y="40" font-size="3em" fill-opacity="0.3" fill="',
       'black">',
-      rarity_id,
+      sigil,
       '</text>',
       '<path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity=".7" fill-opacity=".7" fill="transparent">'
       '<animate id="w" attributeName="fill" values="transparent;',
       baseColors[0],
-      ';transparent" begin="p.begin+.67s;p.begin+2.67s;p.begin+4.67s" dur="1s"/>',
+      ';transparent" begin="s.begin+.17s;s.begin+2.17s;s.begin+4.17s" dur="1s"/>',
       '<animate begin="w.begin" attributeName="stroke" values="transparent;black;transparent" dur="1s"/>',
       '</path>'
     );
@@ -606,8 +570,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
     if (syncTraits.rarity_roll % 499 == 0) {
       // 0.2% probability (2 in 1000)
-      syncTraits.rarity_id = 'Concave';
-      syncTraits.symbol = '\xE2\x9D\xAA\x20\xE2\x9D\xAB'; //( ) 0xE2 0x9D 0xAA [] 0xE2 0x9D 0xAB  E2\xA6\x85\x20\xE2\xA6\x86 ()
+      syncTraits.theme = 'Concave';
+      syncTraits.sigil = '\xE2\x9D\xAA\x20\xE2\x9D\xAB'; //( ) 0xE2 0x9D 0xAA [] 0xE2 0x9D 0xAB  E2\xA6\x85\x20\xE2\xA6\x86 ()
       syncTraits.bgColors[0] = '#214F70'; //Light Blue
       syncTraits.bgColors[1] = '#2E2E3F'; //Dark Blue
       syncTraits.bgColors[2] = '#2E2E3F'; //Dark Blue
@@ -618,8 +582,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.driftColors = '#FAF7C0';
     } else if (syncTraits.rarity_roll % 241 == 0) {
       // 0.4% probability (4 in 1000)
-      syncTraits.rarity_id = 'Olympus';
-      syncTraits.symbol = '\xF0\x9D\x9B\x80\x20\x20\x20'; //OMEGA
+      syncTraits.theme = 'Olympus';
+      syncTraits.sigil = '\xF0\x9D\x9B\x80\x20\x20\x20'; //OMEGA
       syncTraits.bgColors[0] = '#80A6AF'; // Oly Blue
       syncTraits.bgColors[1] = '#3A424F'; // Dark Blue
       syncTraits.bgColors[2] = '#80A6AF'; // Oly Blue
@@ -630,8 +594,8 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       syncTraits.driftColors = '#FFC768';
     } else if (syncTraits.rarity_roll % 19 == 0) {
       // ~4% probability (50-10 in 1000)
-      syncTraits.rarity_id = 'Silver';
-      syncTraits.symbol = '\xE2\x98\x86\x20\x20\x20\x20'; // 1x empty Star: 0xE2 0x98 0x86 Empty Star
+      syncTraits.theme = 'Silver';
+      syncTraits.sigil = '\xE2\x98\x86\x20\x20\x20\x20'; // 1x empty Star: 0xE2 0x98 0x86 Empty Star
       syncTraits.bgColors[0] = '#c0c0c0'; // Silver
       syncTraits.bgColors[1] = '#e5e4e2'; // Platinum
       syncTraits.bgColors[2] = '#c0c0c0'; // Silver
@@ -644,36 +608,40 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       // (contract memory usage happened to be more efficient this way)
       if (syncTraits.rarity_roll % 95 == 0) {
         // `~1% probability (10 in 1000)
-        syncTraits.rarity_id = 'Gold'; // Gold
-        syncTraits.symbol = '\xE2\x98\x85\x20\x20\x20\x20'; //0xE2 0x98 0x85 Full star
+        syncTraits.theme = 'Gold'; // Gold
+        syncTraits.sigil = '\xE2\x98\x85\x20\x20\x20\x20'; //0xE2 0x98 0x85 Full star
         syncTraits.bgColors[0] = '#CD7F32'; // Gold
         syncTraits.bgColors[2] = '#725d18'; // Darker Gold
         syncTraits.infColors[0] = 'black';
         syncTraits.infColors[2] = '#E5E4E2'; // Platinum
       }
     } else {
-      syncTraits.rarity_id = 'Common'; // Common
-      syncTraits.symbol = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
+      syncTraits.theme = 'Common'; // Common
+      syncTraits.sigil = '\xE2\x97\x8F\x20\x20\x20\x20'; // Circle 0xE2 0x97 0x8F
       syncTraits.driftColors = 'white';
       syncTraits.bgColors = syncTraits.baseColors;
       syncTraits.infColors = syncTraits.baseColors;
-      
+
       bytes[] memory upgrades = new bytes[](3);
       upgrades[0] = '#214F70';
       upgrades[1] = '#FAF7C0';
       upgrades[2] = '#222222';
+      
       if (syncTraits.rarity_roll % 13 == 0) {
         // 7.7% probability ((77 in 1000)
-        syncTraits.rarity_id = 'Mosiac';
-        syncTraits.symbol = '\xE2\x9C\xA6\x20\x20\x20\x20'; // Full Diamond
+        syncTraits.theme = 'Mosaic';
+        syncTraits.sigil = '\xE2\x9C\xA6\x20\x20\x20\x20'; // Full Diamond
         upgrades[2] = '#3A424F';
       } else if (syncTraits.rarity_roll % 11 == 0) {
         // 9% probability (91 in 1000)
-        syncTraits.rarity_id = 'Drift';
-        syncTraits.symbol = '\xE2\x9C\xA7\x20\x20\x20\x20'; //Empty Diamond
+        syncTraits.theme = 'Tokyo Drift';
+        syncTraits.sigil = '\xE2\x9C\xA7\x20\x20\x20\x20'; //Empty Diamond
         upgrades[2] = '#3A424F';
       }
-
+      if (_colorTokenIds[tokenId].length == 0){
+        syncTraits.baseColors[0] = upgrades[syncTraits.rarity_roll % 3];
+      }
+    }
     //Background generation
     for (uint256 i = 0; i < 15; i++) {
       syncTraits.shape_x[i] = uint16(1 + ((seed & 0x3FF) % 500));

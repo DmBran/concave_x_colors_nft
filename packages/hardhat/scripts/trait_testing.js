@@ -4,7 +4,7 @@ async function main() {
 
   await network.provider.send('hardhat_setBalance', [
     '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
-    '0xFFFF0000000000000000',
+    '0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
   ])
 
   //Usage: npx hardhat run scripts/interact.js --network localhost
@@ -24,42 +24,31 @@ async function main() {
   const transaction1 = await thisColorsContract.mintNextColors(10)
   const GAS_PER_MINT = '0.05'
   // Mint 100 SyncXColors, outputs to SVG/Test/<tokenId>.SVG
-  for (let i = 0; i < 1; i++) {
-    const transaction1 = await thisSyncContract.mint(1, [], {
+  rarity_counters = {Common:0, 'Tokyo Drift':0, Mosaic:0, Silver:0, Gold:0, Olympus:0, Concave:0};
+  
+  TO_MINT = 1000; //# Mints for each color
+  
+  for (let i = 0; i < TO_MINT; i++) {
+	if (i<250){
+		colorTokenIds = [];
+	}else if (i < 500){
+		colorTokenIds = [0];
+	}else if (i < 750){
+		colorTokenIds = [0,1];
+	}else{
+		colorTokenIds = [0,1,2];
+	}
+    const transaction1 = await thisSyncContract.mint(1, colorTokenIds, {
       value: ethers.utils.parseEther(GAS_PER_MINT),
     })
     const uri = await thisSyncContract.tokenURI(i);
     uri_decoded = decodeToken(uri);
-    console.log(uri_decoded);
-    output_svg(i, uri_decoded);
+    rarity_counters[uri_decoded.theme] += 1
+	output_svg(i, uri_decoded, colorTokenIds.length);
 
-    //const svg = await thisSyncContract.getTokenSVG(i)
-    //output_svg(i, svg.toString())
   }
-
-  /*
-  for (let i = 25; i < 50; i++) {
-    const transaction2 = await thisSyncContract.mint(1, [0], {
-      value: ethers.utils.parseEther(GAS_PER_MINT),
-    })
-    const svg = await thisSyncContract.getTokenSVG(i)
-    output_svg(i, svg.toString())
-  }
-  for (let i = 50; i < 75; i++) {
-    const transaction3 = await thisSyncContract.mint(1, [0, 1], {
-      value: ethers.utils.parseEther(GAS_PER_MINT),
-    })
-    const svg = await thisSyncContract.getTokenSVG(i)
-    output_svg(i, svg.toString())
-  }
-  for (let i = 75; i < 100; i++) {
-    const transaction4 = await thisSyncContract.mint(1, [0, 1, 2], {
-      value: ethers.utils.parseEther(GAS_PER_MINT),
-    })
-    const svg = await thisSyncContract.getTokenSVG(i)
-    output_svg(i, svg.toString())
-  }
-  * */
+  
+  console.log(rarity_counters);
 }
 
 main()
@@ -69,15 +58,15 @@ main()
     process.exit(1)
   })
 
-function output_svg(tokenId, uri) {
+function output_svg(tokenId, uri, numColors=0) {
   const fs = require('fs')
-  console.log(`../../svg/test/${uri.theme}_${tokenId}_Colors(${uri.colors}).svg`)
-  console.log(uri['svg'].toString())
+  //console.log(`../../svg/test/${uri.theme}_${tokenId}.svg`)
+  //console.log(uri['svg'].toString())
   fs.writeFile(
-    `../../svg/test/${uri['theme']}_${tokenId}_Colors(${uri['colors']}).svg`,
+    `../../svg/test/${uri['theme']}/${uri['theme']}_${tokenId}_Colors${numColors}.svg`,
     uri['svg'].toString(),
     (err) => {
-		fs.close();
+
       // In case of a error throw err.
       if (err) console.log(err)
     }
