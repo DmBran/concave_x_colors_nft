@@ -15,7 +15,9 @@ export const decodeToken = (tokenURI) => {
 
     for (let i = 0; i < meta.attributes.length; ++i) {
       if (/^Color/.test(meta.attributes[i].trait_type)) {
-        colors.push(meta.attributes[i].value)
+        if (meta.attributes[i].value){
+          colors.push(meta.attributes[i].value)
+        }
       }
       if (meta.attributes[i].trait_type === 'Rarity') {
         rarity = meta.attributes[i].value

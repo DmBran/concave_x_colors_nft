@@ -83,7 +83,7 @@ export const Footer = () => {
           <img width="34" src="/static/opensea.svg" />
         </a>
       </div>
-      {'' && (
+      {(
         <div className={'mt-10 text-center'}>
           <p className={'font-bold uppercase'}>Contract Address</p>
           <a

@@ -2,10 +2,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useWeb3Context } from 'web3-react'
-import { useRouter } from 'next/router'
 
 export const Navbar = () => {
-  const { query } = useRouter()
 
   const context = useWeb3Context()
 
@@ -63,38 +61,38 @@ export const Navbar = () => {
             }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
           >
             <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-              <Link href={`/${query.syncophant ? '?syncophant=1' : ''}`}>
+              <Link href={`/`}>
                 <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                   Home
                 </a>
               </Link>
 
-              {query.syncophant && (
+              {(
                 <Link
                   prefetch={false}
-                  href={`/mint${query.syncophant ? '?syncophant=1' : ''}`}
+                  href={`/mint`}
                 >
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
               )}
-              {query.syncophant && (
+              {(
                 <Link
                   prefetch={false}
-                  href={`/display${query.syncophant ? '?syncophant=1' : ''}`}
+                  href={`/display`}
                 >
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>
                 </Link>
               )}
-              <Link href={`/faq${query.syncophant ? '?syncophant=1' : ''}`}>
+              <Link href={`/faq`}>
                 <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                   FAQ
                 </a>
               </Link>
-              {query.syncophant && context.active && context.account && (
+              {context.active && context.account && (
                 <a
                   className="mt-2 lg:mt-0 ml-3 lg:ml-6 ring-4 ring-black text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500"
                   target="_blank"
@@ -105,7 +103,7 @@ export const Navbar = () => {
                     context.account.substring(11, 16)}
                 </a>
               )}
-              {query.syncophant && !context.active && (
+              {!context.active && (
                 <button
                   type="button"
                   className={
