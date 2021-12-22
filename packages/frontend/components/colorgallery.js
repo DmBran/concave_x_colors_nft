@@ -5,7 +5,7 @@ function ColorGallery() {
     <>
       <div className={styles.playpause}>
         <ul className="grid center-text text-center grid-cols-2 lg:grid-cols-4 gap-4">
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -13,7 +13,7 @@ function ColorGallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="text-center title-font font-black items-center">
               GREYSCALE
             </p>
           </li>
@@ -26,11 +26,11 @@ function ColorGallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="text-center title-font font-black items-center">
               ONE COLOR
             </p>
           </li>
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -38,11 +38,11 @@ function ColorGallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="text-center title-font font-black items-center">
               TWO COLORS
             </p>
           </li>
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -50,7 +50,7 @@ function ColorGallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="text-center title-font font-black items-center">
               THREE COLORS
             </p>
           </li>
