@@ -67,7 +67,7 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                         >
                           Sigil:
                         </span>{' '}
-                        {svg.rarity}
+                        {svg.sigil}
                       </p>
 
                       <p className={'mb-1 text-lg text-black'}>
@@ -76,7 +76,7 @@ const ModalDialog = ({ isOpen, setIsOpen, svg }) => {
                         >
                           Rarity:
                         </span>{' '}
-                        {svg.theme}
+                        {svg.rarity}
                       </p>
                       <p className={'mb-1 text-lg text-black'}>
                         <span

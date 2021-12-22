@@ -9,21 +9,21 @@ export const decodeToken = (tokenURI) => {
     const meta = JSON.parse(buffAscii)
     const svg64 = `data:image/svg+xml;base64,${buffImg64}`
     let rarity,
-      theme,
-      colors,
+      sigil,
+      colors = [],
       syncCount = 0
 
     for (let i = 0; i < meta.attributes.length; ++i) {
-      if (meta.attributes[i].trait_type === 'Colors') {
-        colors = meta.attributes[i].value.split(',').filter((v) => v.length)
+      if (/^Color/.test(meta.attributes[i].trait_type)) {
+        colors.push(meta.attributes[i].value)
       }
       if (meta.attributes[i].trait_type === 'Rarity') {
         rarity = meta.attributes[i].value
       }
-      if (meta.attributes[i].trait_type === 'Theme') {
-        theme = meta.attributes[i].value
+      if (meta.attributes[i].trait_type === 'Sigil') {
+        sigil = meta.attributes[i].value
       }
-      if (meta.attributes[i].trait_type === 'Resync_Count') {
+      if (meta.attributes[i].trait_type === 'Resyncs') {
         syncCount = meta.attributes[i].value
       }
     }
@@ -32,7 +32,7 @@ export const decodeToken = (tokenURI) => {
       syncCount,
       rarity,
       colors,
-      theme,
+      sigil,
       svg64,
       meta,
       svg,
