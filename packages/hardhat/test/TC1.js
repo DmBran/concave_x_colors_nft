@@ -6,7 +6,7 @@ const prettier = require('prettier')
 /**
  Contract Constants & Variables
  */
-const THE_COLORS = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
+let THE_COLORS = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
 const TREASURY = '0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2'
 const MAX_SUPPLY = 4300
 
@@ -25,20 +25,37 @@ let colorsOwnerSigner
  Helper Variables
  */
 let syncXColors;
+let colorsNFT;
 let deployer;
 let thirdParty;
 // 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC
 let constantAddress;
 const TEAM = '0x263853ef2C3Dd98a986799aB72E3b78334EB88cb';
 //const TEAM = '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC';
+let colorTokenIds;
 
 /**
  Helper Functions
  */
 const deploy = async () => {
   [deployer, thirdParty, constantAddress] = await ethers.getSigners();
-  SyncXColors = await ethers.getContractFactory('SyncXColors')
-  syncXColors = await SyncXColors.deploy()
+  let SyncXColors = await ethers.getContractFactory('SyncXColors');
+  syncXColors = await SyncXColors.deploy();
+  let ColorsNFT =  await ethers.getContractFactory('TheColors');
+  colorsNFT = await ColorsNFT.deploy();
+  // COLOR tests
+  /*
+  THE_COLORS = colorsNFT.address;
+  syncXColors.setColorAddress(THE_COLORS);
+  let tokenCount = randomIntFromInterval(1, 3);
+  await colorsNFT.mintNextColors(tokenCount);
+  let numOfTokens = (await colorsNFT.balanceOf(deployer.address)).toNumber();
+  expect(tokenCount).to.equal(numOfTokens);
+  colorTokenIds = []; 
+  for (var i = 0; i < tokenCount; i++) {
+    colorTokenIds.push((await colorsNFT.tokenByIndex(i)).toNumber());
+  }
+ */
   console.log('>_')
 }
 
@@ -75,6 +92,22 @@ const getNewColorsMinter = async (address) => {
   ])
   let signer = await ethers.provider.getSigner(address)
   return signer
+}
+function randomIntFromInterval(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+function getSvgFromTokenUri(base64svg) {
+  let buff = new Buffer(base64svg.split(',')[1], 'base64');
+  let buffAscii = buff.toString('utf8');
+  let buffImgData = buffAscii.split(',')[1];
+  let buffImg64 = buffImgData.substring(0, buffImgData.length - 1);
+  let buffImg = new Buffer(buffImg64, 'base64');
+  let buffImgAscii = buffImg.toString('utf8');
+  let prettySvg = prettier.format(buffImgAscii, {
+    semi: false,
+    parser: 'html',
+  });
+  return prettySvg;
 }
 
 /**
@@ -185,28 +218,55 @@ describe('syncXColors: Owner functions', () => {
 })
 
 describe('Public Functions', () => {
-  // TODO: color test
   beforeEach(deploy)
   describe('mint()', () => {
+
     it('Should mint grayscale', async () => {
       await syncXColors.mint(1, [], { value: price })
       expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
       expect(await syncXColors.totalSupply()).to.equal(1)
       let base64svg = await syncXColors.tokenURI(0)
-      let buff = new Buffer(base64svg.split(',')[1], 'base64')
-      let buffAscii = buff.toString('utf8')
-      let buffImgData = buffAscii.split(',')[1]
-      let buffImg64 = buffImgData.substring(0, buffImgData.length - 1)
-      let buffImg = new Buffer(buffImg64, 'base64')
-      let buffImgAscii = buffImg.toString('utf8')
-      let prettySvg = prettier.format(buffImgAscii, {
-        semi: false,
-        parser: 'html',
-      })
+      let prettySvg = getSvgFromTokenUri(base64svg);
       await fs.writeFile('test/output/test1.svg', prettySvg, (err) => {
         if (err) console.log(err)
       })
     })
+
+    // uncomment setColorAddress, and make THE_COLORS non constant
+    /*
+    it('Should mint color from random number between 1-3', async () => {
+      await syncXColors.mint(1, colorTokenIds, { value: price })
+      expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
+      expect(await syncXColors.totalSupply()).to.equal(1)
+      let base64svg = await syncXColors.tokenURI(0)
+      let prettySvg = getSvgFromTokenUri(base64svg);
+      await fs.writeFile('test/output/test2.svg', prettySvg, (err) => {
+        if (err) console.log(err)
+      })
+    })
+
+    it('Should change the color after mint', async () => {
+      await syncXColors.mint(1, [], { value: price })
+      expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
+      expect(await syncXColors.totalSupply()).to.equal(1)
+      let base64svg = await syncXColors.tokenURI(0)
+      let prettySvg = getSvgFromTokenUri(base64svg);
+      await fs.writeFile('test/output/test3.svg', prettySvg, (err) => {
+        if (err) console.log(err)
+      })
+      await expect(syncXColors.updateColors(0, colorTokenIds, { value: 0 })).to.be.revertedWith(
+        'Insufficient funds'
+      );
+      await syncXColors.updateColors(0, colorTokenIds, { value: ethers.utils.parseEther(resyncPrice.toString())});
+      expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
+      expect(await syncXColors.totalSupply()).to.equal(1)
+      base64svg = await syncXColors.tokenURI(0)
+      prettySvg = getSvgFromTokenUri(base64svg);
+      await fs.writeFile('test/output/test33.svg', prettySvg, (err) => {
+        if (err) console.log(err)
+      })
+    })
+   */
 
     it('Should mint more than 1 limit', async () => {
       //console.log(ethers.utils.formatEther(await ethers.provider.getBalance(deployer.address)));

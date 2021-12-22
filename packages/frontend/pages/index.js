@@ -5,6 +5,9 @@ import { MetaHead } from '../components/head'
 import { Navbar } from '../components/navbar'
 import styles from '../styles/meme.module.css'
 import NoSSR from 'react-no-ssr'
+import HeroSlider from '../components/heroslider'
+import Gallery from '../components/gallery'
+import ColorGallery from '../components/colorgallery'
 
 export default function Home() {
   const LAUNCH_DATE = process.env.NEXT_PUBLIC_LAUNCH_DATE
@@ -71,9 +74,9 @@ export default function Home() {
                   className={'underline'}
                   style={{ color: '#047c45' }}
                 >
-                  TheColors.NFT
-                </a>{' '}
-                Project.
+                  The Colors
+                </a>
+                .
               </p>
               <p className="mb-8 leading-relaxed text-xl font-bold">
                 Own a <b>Sync X Colors NFT</b> to qualify for the elusive
@@ -140,130 +143,52 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="md:mt-10 sm:w-full md:w-full md:w-2/3 w-5/6">
-              <div className={'pr-0 md:pr-6'}>
-                <video src="/static/sync.mp4" type="video/mp4" controls></video>
-              </div>
+            <div className="md:mt-2  sm:w-full md:4/6 md:w-4/6 w-5/6">
+              <HeroSlider />
             </div>
           </div>
         </div>
+        {/*Gallery Section */}
         <div className={styles.gallery}>
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-col text-center w-full mb-0">
-              <h1 className="title-font sm:text-4xl text-3xl font-black mb-4">
-                GALLERY COMING SOON!
+          <div className="container px-5 py-36 mx-auto">
+            <div className="flex flex-col text-center w-full pb-12">
+              <h1 className="title-font sm:text-4xl text-3xl font-black ">
+                COLORS
               </h1>
-              <h1 className="title-font sm:text-xl text-xl font-black mb-4">
-                CHECK BACK TOMORROW!
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                (rarities will vary)
+              </p>
+            </div>
+            <ColorGallery />
+            <div className="mt-20  flex flex-col text-center w-full pb-12">
+              <h1 className="title-font sm:text-4xl text-3xl font-black ">
+                RARITIES
               </h1>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                (colors will vary)
+              </p>
             </div>
-            <div className="flex text-center center-text flex-wrap text-xl">
-              {/*<div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
-                      <p className="text-gray-700 ">Traits XYZ</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
-                      <p className="text-gray-700 ">Traits XYZ</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
-                      <p className="text-gray-700 ">Traits XYZ</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
-                      <p className="text-gray-700 ">Traits XYZ</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
-                      <p className="text-gray-700 ">Traits XYZ</p>
-                    
-                  </div>
-                </div>
-              </div>
-              <div className="p-2 md:w-1/2 w-full">
-                <div className="h-full flex items-center p-4 flex-col">
-                  <img
-                    className="w-full bg-gray-100 object-cover object-center flex-shrink-0"
-                    alt="team icon"
-                    src="/static/500x500.png"
-                    width="500"
-                    height="500"
-                  />
-                  <div className="flex-grow p-5 text-center">
-                    <h2 className="text-gray-900 title-font font-bold">XYZ</h2>
-                    
-                      <p className="text-gray-700 ">Traits XYZ</p>
-                    
-                  </div>
-                </div>
-              </div>
-              */}
-            </div>
+            <Gallery />
           </div>
         </div>
+
+        {/*Media Section*/}
+        <section className="text-gray-700 body-font py-24">
+          <div className="container px-5  mx-auto">
+            <div className="flex flex-col text-center w-full mb-20">
+              <h1 className="title-font sm:text-4xl text-3xl font-black mb-4 text-gray-900">
+                MEDIA
+              </h1>
+            </div>
+            <div className="flex justify-center">
+              <div className="p-2 md:w-1/2 w-full">
+                <div className={'pr-0 md:pr-6'}>
+                  <video src="/static/sync.mp4" type="video/mp4" controls />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
         {/*Team Section*/}
         <section className="text-gray-700 body-font py-24">
           <div className="container px-5 py-24 mx-auto">

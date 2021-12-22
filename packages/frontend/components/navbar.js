@@ -67,14 +67,14 @@ export const Navbar = () => {
               </Link>
 
               {1 && (
-                <Link href="/mint">
+                <Link prefetch={false} href="/mint">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
               )}
               {1 && (
-                <Link href="/display">
+                <Link prefetch={false} href="/display">
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>

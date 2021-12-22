@@ -19,7 +19,7 @@ export default function Display() {
             <div>
               <section className="text-gray-700">
                 <div className="container px-5 py-0 mx-auto">
-                  <div className=" mb-10">
+                  <div className="mb-10">
                     <h1 className="text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-4 text-black text-gray-900 pt-0 mt-0 uppercase">
                       Frequently Asked Questions
                     </h1>
@@ -43,12 +43,15 @@ export default function Display() {
 
                       <span>
                         All effects from Colors NFTs are purely visual. Greys
-                        stand out with slick animations and procedural variation
-                        to create unique effects. Both grey and colored versions
-                        will have equal weight and utility in Concave Finance;
-                        you are not getting something less valuable in that
-                        regard. Lastly, the chance of minting a rare token are
-                        the same regardless of whether Colors NFTs are used.
+                        stand out on their own, with slick animations and enough
+                        procedural variation to create unique effects. As a nod
+                        to our roots, grey Syncs also have a high chance to come
+                        with Concave Finance's official colors included. Both
+                        grey and colored versions will have equal weight and
+                        utility in the Concave Finance plan; you are not getting
+                        something less valuable in that regard. Also, the chance
+                        of minting a rare token are the same regardless of
+                        whether Colors NFTs are used.
                       </span>
                     </div>
                     <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
@@ -124,9 +127,9 @@ export default function Display() {
                       </p>
 
                       <span className="px-4 py-2">
-                        No! Our algorithm will generative a background based
-                        upon a seed generated during mint. This seeding will be
-                        used to generate the patterns.
+                        No! Our algorithm will produce a background based upon a
+                        random seed generated during mint. This random seed will
+                        be used to generate the patterns.
                       </span>
                     </div>
                     <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
@@ -223,7 +226,10 @@ export default function Display() {
                         How much does it cost to mint a Sync?
                       </p>
 
-                      <span>The mint price is 0.05 ETH, plus gas costs</span>
+                      <span>
+                        The mint price is {process.env.NEXT_PUBLIC_MINT_COST}{' '}
+                        ETH, plus gas costs
+                      </span>
                     </div>
                     <div className="w-full lg:w-1/2 px-4 py-2 mb-4">
                       <p className="font-bold text-black text-lg  uppercase rounded-md py-2 px-4">
@@ -232,7 +238,8 @@ export default function Display() {
                       </p>
 
                       <span className="px-4 py-2">
-                        It will cost 0.005 ETH for each update, plus gas costs.
+                        It will cost {process.env.NEXT_PUBLIC_COLOR_COST} ETH
+                        for each update, plus gas costs.
                       </span>
                     </div>
                   </div>
