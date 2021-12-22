@@ -143,8 +143,10 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="md:mt-2  sm:w-full md:4/6 md:w-4/6 w-5/6">
-              <HeroSlider />
+            <div className="mt-10 lg:mt-2 w-full md:w-full lg:w-4/6">
+              <div className="lg:mr-10" style={{ maxWidth: '600px' }}>
+                <HeroSlider />
+              </div>
             </div>
           </div>
         </div>
@@ -153,15 +155,6 @@ export default function Home() {
           <div className="container px-5 py-36 mx-auto">
             <div className="flex flex-col text-center w-full pb-12">
               <h1 className="title-font sm:text-4xl text-3xl font-black ">
-                COLORS
-              </h1>
-              <p className={'text-center mb-3 font-late-500 text-xs'}>
-                (rarities will vary)
-              </p>
-            </div>
-            <ColorGallery />
-            <div className="mt-20  flex flex-col text-center w-full pb-12">
-              <h1 className="title-font sm:text-4xl text-3xl font-black ">
                 RARITIES
               </h1>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
@@ -169,6 +162,15 @@ export default function Home() {
               </p>
             </div>
             <Gallery />
+            <div className="mt-20   flex flex-col text-center w-full pb-12">
+              <h1 className="title-font sm:text-4xl text-3xl font-black ">
+                COLORS
+              </h1>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                (rarities will vary)
+              </p>
+            </div>
+            <ColorGallery />
           </div>
         </div>
 
