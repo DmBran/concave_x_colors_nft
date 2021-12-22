@@ -268,7 +268,7 @@ export const Minter = (props) => {
               >
                 Select {tokenID ? 'New' : 'Your'} Color Primitives
               </p>
-              <p className={'text-center mb-3 font-late-500 text-xs'}>
+              <p className={'text-black text-center mb-3 font-late-500 text-xs'}>
                 (up to three)
               </p>
               <div
@@ -342,7 +342,7 @@ export const Minter = (props) => {
                     max={MAX_MINT_COUNT}
                     type="text"
                     className={
-                      'outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
+                      'bg-white outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
                     }
                     name="custom-input-number"
                     onChange={(e) => {
@@ -388,7 +388,7 @@ export const Minter = (props) => {
           </div>
           {!tokenID && colorsOwned > 0 && colorsSelected() === 0 && (
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
-              <p className={'text-center mb-3 font-late-500 text-xs'}>
+              <p className={'text-black font-bold text-center mb-3 font-late-500 text-xs'}>
                 minting greyscale since no colors are selected
               </p>
             </div>
@@ -396,7 +396,7 @@ export const Minter = (props) => {
 
           {!tokenID && colorsSelected() > 0 && mintCount > 1 && (
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
-              <p className={'text-center mb-3 font-late-500 text-xs'}>
+              <p className={'text-black font-bold text-center mb-3 font-late-500 text-xs'}>
                 same color palette will be used for all mints
                 <a
                   className={'block text-blue-500 underlined'}

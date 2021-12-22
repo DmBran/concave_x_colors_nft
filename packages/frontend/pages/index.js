@@ -86,9 +86,9 @@ export default function Home() {
                 Our NFT collection is 100% generated and stored on chain!
               </p>
               <div className="flex justify-center py-2">
-                <Link href="/">
+                <Link href="/mint">
                   <button className=" inline-flex border-gray-800 border-4 text-gray-700 bg-green-200 py-2 px-6 focus:outline-none hover:text-gray-900 rounded text-lg">
-                    Minting Soon!
+                    Mint Now!
                   </button>
                 </Link>
                 <a

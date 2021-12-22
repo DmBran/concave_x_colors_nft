@@ -85,7 +85,7 @@ export const Footer = () => {
       </div>
       {(
         <div className={'mt-10 text-center'}>
-          <p className={'font-bold uppercase'}>Contract Address</p>
+          <p className={'text-black font-bold uppercase'}>Contract Address</p>
           <a
             href={`https://etherscan.io/address/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
             target="_blank"
