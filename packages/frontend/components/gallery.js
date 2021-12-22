@@ -74,8 +74,8 @@ function Gallery() {
               width="500"
               height="500"
             />
-            <p className="underline center-text text-center title-font font-black text-center items-center">
-              𝛀 LEGENDARIES 𝛀
+            <p className="center-text text-center title-font font-black text-center items-center">
+              𝛀 LEGENDARY 𝛀
             </p>
           </li>
           {/* <li>
