@@ -4,7 +4,7 @@ function Gallery() {
   return (
     <>
       <div className={styles.playpause}>
-        <ul className="grid center-text text-center grid-cols-3 lg:grid-cols-6 gap-4">
+        <ul className="grid text-center grid-cols-2 lg:grid-cols-6 gap-4">
           <li className=" center-text text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
@@ -13,11 +13,11 @@ function Gallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="text-center title-font font-black items-center">
               &#9679; COMMON &#9679;
             </p>
           </li>
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -25,12 +25,12 @@ function Gallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="text-center title-font font-black items-center">
               &#10023; UNCOMMON &#10023;
             </p>
           </li>
 
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -38,11 +38,11 @@ function Gallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="title-font font-black text-center items-center">
               &#10022; RARE &#10022;
             </p>
           </li>
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -50,11 +50,11 @@ function Gallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="text-center title-font font-black items-center">
               &#9734; SUPER RARE &#9734;
             </p>
           </li>
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -62,11 +62,11 @@ function Gallery() {
               width="500"
               height="500"
             />
-            <p className="center-text text-center title-font font-black text-center items-center">
+            <p className="title-font font-black text-center items-center">
               &#9733; ULTRA RARE &#9733;
             </p>
           </li>
-          <li className=" center-text text-center">
+          <li className="text-center">
             <img
               className="w-full bg-gray-100 border-4 border-black mb-2 object-cover object-center flex-shrink-0"
               alt="Gallery Image"
@@ -74,8 +74,8 @@ function Gallery() {
               width="500"
               height="500"
             />
-            <p className="underline center-text text-center title-font font-black text-center items-center">
-              𝛀 LEGENDARIES 𝛀
+            <p className="text-center title-font font-black items-center">
+              𝛀 LEGENDARY 𝛀
             </p>
           </li>
           {/* <li>
