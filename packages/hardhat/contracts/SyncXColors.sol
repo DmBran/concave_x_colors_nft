@@ -102,7 +102,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
                 'data:image/svg+xml;base64,',
                 image,
                 '",',
-                generateNameDescription(tokenId),
+                generateNameDescription(),
                 ',',
                 generateAttributes(tokenId, syncTraits),
                 '}'
@@ -218,7 +218,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   /**
    * Return NFT description
    */
-  function generateNameDescription(uint256 tokenId)
+  function generateNameDescription()
     internal
     pure
     returns (string memory)
@@ -227,17 +227,13 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       string(
         abi.encodePacked(
           '"external_url":"https://syncxcolors.xyz",',
-          unicode'"description":"The SYNCxColors are generated and stored entirely on-chain, and may be linked with up to 3 COLORS primitives for epic effect.',
-          '\\nToken id: #',
-          tokenId.toString(),
-          '"'
+          unicode'"description":"Sync X Colors is a unique, on-chain generative collection of Syncs on Ethereum. Each of Syncs can be re-colored with new Colors at any time."'
         )
       );
   }
 
   /**
    * Return colors description as string
-   */
   function getColorDescriptor(uint256 tokenId)
     private
     view
@@ -257,6 +253,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     }
     return colorDescriptor;
   }
+   */
 
   /**
    * Generate attributes json
@@ -265,24 +262,36 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint256 tokenId,
     SyncTraitsStruct memory syncTraits
   ) internal view returns (string memory) {
-    return
-      string(
+    // fixing assembly overflow error, too much params
+    string memory attributes = string(
         abi.encodePacked(
           '"attributes":[',
-          '{"trait_type":"Theme","value":"',
+          '{"trait_type":"Rarity","value":"',
           syncTraits.theme,
           '"},',
-          '{"trait_type":"Rarity","value":"',
+          '{"trait_type":"Sigil","value":"',
           syncTraits.sigil,
-          '"},',
-          '{"trait_type":"Colors","value":"',
-          getColorDescriptor(tokenId),
-          '"},',
-          '{"trait_type":"Resync_Count","value":',
-          _resync_count[tokenId].toString(),
-          '}]'
+          '"},'
         )
-      );
+    );
+    attributes = string(
+        abi.encodePacked(
+          attributes,
+          '{"trait_type":"Color 1","value":"',
+          syncTraits.baseColors[0],
+          '"},',
+          '{"trait_type":"Color 2","value":"',
+          syncTraits.baseColors[1],
+          '"},',
+          '{"trait_type":"Color 3","value":"',
+          syncTraits.baseColors[2],
+          '"},',
+          '{"trait_type":"Resyncs","value":"',
+          _resync_count[tokenId].toString(),
+          '"}]'
+      )
+    );
+    return attributes;
   }
 
   /**
