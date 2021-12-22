@@ -26,8 +26,6 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   address public constant THE_COLORS = 
     address(0x9fdb31F8CE3cB8400C7cCb2299492F2A498330a4);
 
-  //address public THE_COLORS =
-    //address(0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9);
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
   uint256 public constant resyncPrice = 0.005 ether; // Price per color resync
   uint256 public constant maxMintAmount = 10; // Max amount of mints per transaction
@@ -64,14 +62,6 @@ contract SyncXColors is ERC721Enumerable, Ownable {
 
   // Constructor
   constructor() ERC721('Sync x Colors', 'SyncXColors') {}
-
-  /**
-   * For tests only
-   *
-  function setColorAddress(address colorAddress) public {
-    THE_COLORS = colorAddress;
-  }
-  */
 
   /**
    * Returns NFT tokenURI JSON
@@ -456,7 +446,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     );
 
     if (
-      rarity_roll % 499 == 0 || rarity_roll % 241 == 0 || rarity_roll % 19 == 0
+      rarity_roll % 333 == 0 || rarity_roll % 241 == 0 || rarity_roll % 19 == 0
     ) {
       //Shimmer
       logo = abi.encodePacked(
