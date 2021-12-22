@@ -227,7 +227,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       string(
         abi.encodePacked(
           '"external_url":"https://syncxcolors.xyz",',
-          unicode'"description":"Sync X Colors is a unique, on-chain generative collection of Syncs on Ethereum. Each of Syncs can be re-colored with new Colors at any time."'
+          unicode'"description":"Sync X Colors is a unique, on-chain generative collection of Syncs on Ethereum. Each Sync can be re-colored with new Colors at any time."'
         )
       );
   }
