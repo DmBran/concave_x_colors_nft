@@ -94,7 +94,7 @@ export default function Display() {
         <div className={styles.main}>
           <div
             className={
-              'text-center justify-center container mx-auto flex px-5 py-24 md:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8'
+              'text-center justify-center container mx-auto flex px-5 py-24 md:flex-row flex-col items-center bg-white border-gray-800 border-8'
             }
           >
             {!context.active && (

@@ -319,53 +319,58 @@ export const Minter = (props) => {
           )}
 
           {!tokenID && (
-            <div className={'flex mb-10 content-center justify-center'}>
-              <div
-                className={
-                  'flex content-center justify-center custom-number-input rounded-lg h-10 w-32'
-                }
-              >
+            <>
+              <p className={'text-center font-bold mb-2 uppercase'}>
+                Mint Count
+              </p>
+              <div className={'flex mb-10 content-center justify-center'}>
                 <div
                   className={
-                    'border-1 border-black flex flex-row h-10 w-full rounded-lg relative bg-transparent'
+                    'flex content-center justify-center custom-number-input rounded-lg h-10 w-32'
                   }
                 >
-                  <button
-                    onClick={() => mintCountIncrement('decrement')}
-                    data-action="decrement"
+                  <div
                     className={
-                      'bg-white border-2 border-slate-700 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none'
+                      'border-1 border-black flex flex-row h-10 w-full rounded-lg relative bg-transparent'
                     }
                   >
-                    <span className={'m-auto text-2xl font-thin'}>−</span>
-                  </button>
-                  <input
-                    min="1"
-                    max={MAX_MINT_COUNT}
-                    type="text"
-                    className={
-                      'border-2 border-r-0 border-l-0 border-slate-700 bg-white outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
-                    }
-                    name="custom-input-number"
-                    onChange={(e) => {
-                      setMintCount(
-                        Math.min(e.target.value ?? 1, MAX_MINT_COUNT)
-                      )
-                    }}
-                    value={mintCount ?? 1}
-                  />
-                  <button
-                    onClick={() => mintCountIncrement('increment')}
-                    data-action="increment"
-                    className={
-                      'bg-white border-2 border-slate-700 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer'
-                    }
-                  >
-                    <span className={'m-auto text-2xl font-thin'}>+</span>
-                  </button>
+                    <button
+                      onClick={() => mintCountIncrement('decrement')}
+                      data-action="decrement"
+                      className={
+                        'bg-white border-2 border-slate-700 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none'
+                      }
+                    >
+                      <span className={'m-auto text-2xl font-thin'}>−</span>
+                    </button>
+                    <input
+                      min="1"
+                      max={MAX_MINT_COUNT}
+                      type="text"
+                      className={
+                        'border-2 border-r-0 border-l-0 border-slate-700 bg-white outline-none focus:outline-none text-center w-full  font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none'
+                      }
+                      name="custom-input-number"
+                      onChange={(e) => {
+                        setMintCount(
+                          Math.min(e.target.value ?? 1, MAX_MINT_COUNT)
+                        )
+                      }}
+                      value={mintCount ?? 1}
+                    />
+                    <button
+                      onClick={() => mintCountIncrement('increment')}
+                      data-action="increment"
+                      className={
+                        'bg-white border-2 border-slate-700 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer'
+                      }
+                    >
+                      <span className={'m-auto text-2xl font-thin'}>+</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           )}
           <div className={'content-center justify-center flex mb-10'}>
             {submitting != 'syncs' && (
