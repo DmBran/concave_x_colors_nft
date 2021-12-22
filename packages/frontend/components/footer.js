@@ -87,7 +87,7 @@ export const Footer = () => {
         <div className={'mt-10 text-center'}>
           <p className={'font-bold uppercase'}>Contract Address</p>
           <a
-            href={`https://etherscan.io/contract/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
+            href={`https://etherscan.io/address/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
             target="_blank"
             className={' text-center block font-xs'}
           >
