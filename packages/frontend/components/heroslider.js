@@ -24,7 +24,7 @@ function HeroSlider() {
           <Slide transitionDuration={250} autoplay={false}>
             {images.map((image, index) => (
               <div className="each-slide" key={index}>
-                <img className="w-3/4 h-3/4 p-4 mx-auto" src={image} />
+                <img className="w-7/8 h-7/8 p-4 mx-auto" src={image} />
               </div>
             ))}
           </Slide>
