@@ -101,7 +101,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
                 'data:image/svg+xml;base64,',
                 image,
                 '",',
-                generateNameDescription(tokenId),
+                generateNameDescription(),
                 ',',
                 generateAttributes(tokenId, syncTraits),
                 '}'
@@ -217,7 +217,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   /**
    * Return NFT description
    */
-  function generateNameDescription(uint256 tokenId)
+  function generateNameDescription()
     internal
     pure
     returns (string memory)
@@ -226,17 +226,13 @@ contract SyncXColors is ERC721Enumerable, Ownable {
       string(
         abi.encodePacked(
           '"external_url":"https://syncxcolors.xyz",',
-          unicode'"description":"The SYNCxColors are generated and stored entirely on-chain, and may be linked with up to 3 COLORS primitives for epic effect.',
-          '\\nToken id: #',
-          tokenId.toString(),
-          '"'
+          unicode'"description":"Sync X Colors is a unique, on-chain generative collection of Syncs on Ethereum. Each of Syncs can be re-colored with new Colors at any time."'
         )
       );
   }
 
   /**
    * Return colors description as string
-   */
   function getColorDescriptor(uint256 tokenId)
     private
     view
@@ -256,6 +252,7 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     }
     return colorDescriptor;
   }
+   */
 
   /**
    * Generate attributes json
@@ -264,24 +261,37 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     uint256 tokenId,
     SyncTraitsStruct memory syncTraits
   ) internal view returns (string memory) {
-    return
-      string(
+    bytes[] memory colorArray = getColorsHexStrings(tokenId);
+    // fixing assembly overflow error, too much params
+    string memory attributes = string(
         abi.encodePacked(
           '"attributes":[',
-          '{"trait_type":"Theme","value":"',
+          '{"trait_type":"Rarity","value":"',
           syncTraits.theme,
           '"},',
-          '{"trait_type":"Rarity","value":"',
+          '{"trait_type":"Sigil","value":"',
           syncTraits.sigil,
+          '"},'
+        )
+    );
+    attributes = string(
+        abi.encodePacked(
+          attributes,
+          '{"trait_type":"Color 1","value":"',
+          colorArray[0],
           '"},',
-          '{"trait_type":"Colors","value":"',
-          getColorDescriptor(tokenId),
+          '{"trait_type":"Color 2","value":"',
+          colorArray[1],
           '"},',
-          '{"trait_type":"Resync_Count","value":',
+          '{"trait_type":"Color 3","value":"',
+          colorArray[2],
+          '"},',
+          '{"trait_type":"Resyncs","value":',
           _resync_count[tokenId].toString(),
           '}]'
-        )
-      );
+      )
+    );
+    return attributes;
   }
 
   /**
@@ -571,14 +581,14 @@ contract SyncXColors is ERC721Enumerable, Ownable {
     // Retrieve seed from storage
     uint256 seed = _seed[tokenId];
     syncTraits.rarity_roll = uint16(
-      1 + ((seed & 0x3FF0000000000000000000000000000) % 1000) // range 1 to 2047 % 1000 - ~ slightly bottom heavy but round numbers nicer
+      1 + ((seed & 0x7FF) % 1000) // range 1 to 2047 % 1000 - ~ slightly bottom heavy but round numbers nicer
     );
 
     // Calculate traits
     syncTraits.baseColors = getColorsHexStrings(tokenId);
 
     if (syncTraits.rarity_roll % 333 == 0) {
-      // 0.2% probability (3 in 1000)
+      // 0.3% probability (3 in 1000)
       syncTraits.theme = 'Concave';
       syncTraits.sigil = '\xE2\x9D\xAA\x20\xE2\x9D\xAB'; //( ) 0xE2 0x9D 0xAA [] 0xE2 0x9D 0xAB  E2\xA6\x85\x20\xE2\xA6\x86 ()
       syncTraits.bgColors[0] = '#214F70'; //Light Blue

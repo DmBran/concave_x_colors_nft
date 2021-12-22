@@ -115,10 +115,10 @@ function decodeToken(tokenURI){
       if (meta.attributes[i].trait_type === 'Colors') {
         colors = meta.attributes[i].value.split(',').filter((v) => v.length)
       }
-      if (meta.attributes[i].trait_type === 'Rarity') {
+      if (meta.attributes[i].trait_type === 'Sigil') {
         rarity = meta.attributes[i].value
       }
-      if (meta.attributes[i].trait_type === 'Theme') {
+      if (meta.attributes[i].trait_type === 'Rarity') {
         theme = meta.attributes[i].value
       }
       if (meta.attributes[i].trait_type === 'Resync_Count') {

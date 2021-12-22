@@ -2,8 +2,11 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useWeb3Context } from 'web3-react'
+import { useRouter } from 'next/router'
 
 export const Navbar = () => {
+  const { query } = useRouter()
+
   const context = useWeb3Context()
 
   const [active, setActive] = useState(false)
@@ -60,32 +63,38 @@ export const Navbar = () => {
             }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
           >
             <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-              <Link href="/">
+              <Link href={`/${query.syncophant ? '?syncophant=1' : ''}`}>
                 <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                   Home
                 </a>
               </Link>
 
-              {1 && (
-                <Link prefetch={false} href="/mint">
+              {query.syncophant && (
+                <Link
+                  prefetch={false}
+                  href={`/mint${query.syncophant ? '?syncophant=1' : ''}`}
+                >
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
                   </a>
                 </Link>
               )}
-              {1 && (
-                <Link prefetch={false} href="/display">
+              {query.syncophant && (
+                <Link
+                  prefetch={false}
+                  href={`/display${query.syncophant ? '?syncophant=1' : ''}`}
+                >
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>
                 </Link>
               )}
-              <Link href="/faq">
+              <Link href={`/faq${query.syncophant ? '?syncophant=1' : ''}`}>
                 <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                   FAQ
                 </a>
               </Link>
-              {1 && context.active && context.account && (
+              {query.syncophant && context.active && context.account && (
                 <a
                   className="mt-2 lg:mt-0 ml-3 lg:ml-6 ring-4 ring-black text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500"
                   target="_blank"
@@ -96,7 +105,7 @@ export const Navbar = () => {
                     context.account.substring(11, 16)}
                 </a>
               )}
-              {1 && !context.active && (
+              {query.syncophant && !context.active && (
                 <button
                   type="button"
                   className={

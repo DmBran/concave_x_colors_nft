@@ -143,8 +143,10 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className="md:mt-2  sm:w-full md:4/6 md:w-4/6 w-5/6">
-              <HeroSlider />
+            <div className="mt-10 lg:mt-2 w-full md:w-full lg:w-4/6">
+              <div className="lg:mr-10" style={{ maxWidth: '600px' }}>
+                <HeroSlider />
+              </div>
             </div>
           </div>
         </div>
@@ -153,15 +155,6 @@ export default function Home() {
           <div className="container px-5 py-36 mx-auto">
             <div className="flex flex-col text-center w-full pb-12">
               <h1 className="title-font sm:text-4xl text-3xl font-black ">
-                COLORS
-              </h1>
-              <p className={'text-center mb-3 font-late-500 text-xs'}>
-                (rarities will vary)
-              </p>
-            </div>
-            <ColorGallery />
-            <div className="mt-20  flex flex-col text-center w-full pb-12">
-              <h1 className="title-font sm:text-4xl text-3xl font-black ">
                 RARITIES
               </h1>
               <p className={'text-center mb-3 font-late-500 text-xs'}>
@@ -169,6 +162,15 @@ export default function Home() {
               </p>
             </div>
             <Gallery />
+            <div className="mt-20   flex flex-col text-center w-full pb-12">
+              <h1 className="title-font sm:text-4xl text-3xl font-black ">
+                COLORS
+              </h1>
+              <p className={'text-center mb-3 font-late-500 text-xs'}>
+                (rarities will vary)
+              </p>
+            </div>
+            <ColorGallery />
           </div>
         </div>
 
@@ -295,72 +297,6 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="text-gray-700 body-font py-24 pt-0">
-          <div className="container px-5 py-24 mx-auto">
-            <div className="flex flex-col text-center w-full mb-20">
-              <h1 className="title-font sm:text-4xl text-3xl font-black mb-4 text-gray-900">
-                LISTINGS
-              </h1>
-            </div>
-            <div className="flex self-center mx-auto  max-w-4xl flex-wrap justify-center content-center">
-              <div className="w-full  lg:w-1/2 mb-10  lg:mb-10 self-center text-center">
-                <a
-                  href="https://nftcalendar.io/event/sync-x-colors-nft-collection-a-concave-finance-project/"
-                  target="_blank"
-                  className={
-                    'inline-block relative top-5 align-top title-font text-md font-black mb-4 uppercase'
-                  }
-                >
-                  <img
-                    className="ml-3 inline object-cover object-center rounded"
-                    alt="NFT Calendar"
-                    src="/static/nftcalendar-logo.svg"
-                    width="100"
-                  />
-                </a>
-              </div>
-              <div className="w-full  sm:my-4 mb-10 lg:w-1/2 mb-4 self-center text-center">
-                <a
-                  href={`https://opensea.com/asset/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
-                  target="_blank"
-                  className={
-                    ' inline-block self-start align-top title-font text-md font-black mb-4 uppercase'
-                  }
-                >
-                  <img width="100" src="/static/opensea.svg" />
-                </a>
-              </div>
-              <div className="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
-                <a
-                  href="https://www.earlycoins.io/coin-details/61bf34fb5c05686df9f02bf9"
-                  target="_blank"
-                  className={
-                    'inline-block title-font text-md font-black uppercase'
-                  }
-                >
-                  <img
-                    width="250"
-                    src="https://www.earlycoins.io/images/header-logo.png"
-                  />
-                </a>
-              </div>
-              <div className="w-full  mb-10 lg:mt-10 lg:w-1/2 mb-4 self-center text-center">
-                <a
-                  href="https://nftprojectlist.com/projects/"
-                  target="_blank"
-                  className={
-                    'inline-block title-font text-md font-black uppercase'
-                  }
-                >
-                  <img
-                    width="300"
-                    src="https://nftprojectlist.com/wp-content/uploads/2021/08/logo-transparent-300x51.png"
-                  />
-                </a>
               </div>
             </div>
           </div>
