@@ -44,6 +44,13 @@ export const Minter = (props) => {
       setAmountMinted(minted)
 
       if (props.tokenID) {
+        const owner = await syncContract.methods
+          .tokenOfOwnerByIndex(context.account, props.tokenID)
+          .call()
+          .catch((ex) => {
+            console.error("Incorrect token owner!")
+          })
+        if (!owner) return Router.push(`/`)
         setTokenID(props.tokenID)
         const svg = await fetchSync(syncContract, props.tokenID)
         setSync(svg)
