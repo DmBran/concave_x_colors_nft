@@ -63,7 +63,7 @@ export const Navbar = () => {
             }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
           >
             <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-              <Link href={`/${query.syncophant && '?syncophant=1'}`}>
+              <Link href={`/${query.syncophant ? '?syncophant=1' : ''}`}>
                 <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                   Home
                 </a>
@@ -72,7 +72,7 @@ export const Navbar = () => {
               {query.syncophant && (
                 <Link
                   prefetch={false}
-                  href={`/mint${query.syncophant && '?syncophant=1'}`}
+                  href={`/mint${query.syncophant ? '?syncophant=1' : ''}`}
                 >
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     Mint
@@ -82,14 +82,14 @@ export const Navbar = () => {
               {query.syncophant && (
                 <Link
                   prefetch={false}
-                  href={`/display${query.syncophant && '?syncophant=1'}`}
+                  href={`/display${query.syncophant ? '?syncophant=1' : ''}`}
                 >
                   <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                     My NFTs
                   </a>
                 </Link>
               )}
-              <Link href={`/faq${query.syncophant && '?syncophant=1'}`}>
+              <Link href={`/faq${query.syncophant ? '?syncophant=1' : ''}`}>
                 <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
                   FAQ
                 </a>
