@@ -18,6 +18,6 @@ Mints: 1000x
 	
   Olympus:        	 6                   4
 	
-  Concave:         	 0                   1
+  Concave:         	 0                   2
 
 </pre>
