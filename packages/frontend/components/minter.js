@@ -45,7 +45,9 @@ export const Minter = (props) => {
 
       if (props.tokenID) {
         const id = parseInt(props.tokenID)
-        const owner = await syncContract.methods.ownerOf(props.tokenID).call()
+        const owner = await syncContract.methods.ownerOf(props.tokenID).call().catch(x => {
+          console.log("Token does not exist")
+        })
 
         if (owner === context.account) {
           setTokenID(id.toString())
