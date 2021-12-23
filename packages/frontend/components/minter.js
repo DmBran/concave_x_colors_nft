@@ -44,9 +44,19 @@ export const Minter = (props) => {
       setAmountMinted(minted)
 
       if (props.tokenID) {
-        setTokenID(props.tokenID)
-        const svg = await fetchSync(syncContract, props.tokenID)
-        setSync(svg)
+        const id = parseInt(props.tokenID)
+        const owner = await syncContract.methods.ownerOf(props.tokenID).call().catch(x => {
+          console.log("Token does not exist")
+        })
+
+        if (owner === context.account) {
+          setTokenID(id.toString())
+          const svg = await fetchSync(syncContract, id)
+          setSync(svg)
+        } else {
+          toast.error('Invalid Token Owner!')
+          return Router.push(`/`)
+        }
       } else {
         setTokenID(undefined)
         setSync(undefined)
@@ -397,7 +407,7 @@ export const Minter = (props) => {
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
               <p
                 className={
-                  'px-10 py-8 bg-red-400 ring-4 ring-offset-10 ring-black text-black font-bold underline text-center mb-3 font-late-500 text-sm uppercase'
+                  'px-10 py-8 bg-red-400 ring-4 ring-offset-10 ring-black text-black font-bold text-center mb-3 font-late-500 text-sm uppercase'
                 }
               >
                 We recommend you select a color to apply to your mint!
@@ -408,7 +418,7 @@ export const Minter = (props) => {
             <div className={'-mt-5 content-center justify-center flex mb-10'}>
               <p
                 className={
-                  'px-10 py-8 bg-red-400 ring-4 ring-offset-10 ring-black text-black font-bold underline text-center mb-3 font-late-500 text-sm uppercase'
+                  'px-10 py-8 bg-red-400 ring-4 ring-offset-10 ring-black text-black font-bold text-center mb-3 font-late-500 text-sm uppercase'
                 }
               >
                 resyncing without a colors nft has no effect
