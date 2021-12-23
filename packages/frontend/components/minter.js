@@ -44,28 +44,14 @@ export const Minter = (props) => {
       setAmountMinted(minted)
 
       if (props.tokenID) {
-        let found = false,
-          breakLoop = false
-        for (var i = 0; i < MAX_SUPPLY; ++i) {
-          const tokenID = await syncContract.methods
-            .tokenOfOwnerByIndex(context.account, i)
-            .call()
-            .catch((err) => {
-              breakLoop = true
-            })
+        const id = parseInt(props.tokenID)
+        const owner = await syncContract.methods.ownerOf(props.tokenID).call()
 
-          if (breakLoop) break
-          if (tokenID == props.tokenID) {
-            found = true
-            const id = parseInt(props.tokenID)
-            setTokenID(id.toString())
-            const svg = await fetchSync(syncContract, id)
-            setSync(svg)
-            break
-          }
-        }
-
-        if (!found) {
+        if (owner === context.account) {
+          setTokenID(id.toString())
+          const svg = await fetchSync(syncContract, id)
+          setSync(svg)
+        } else {
           toast.error('Invalid Token Owner!')
           return Router.push(`/`)
         }
