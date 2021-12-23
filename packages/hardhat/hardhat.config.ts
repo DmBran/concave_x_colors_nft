@@ -55,6 +55,7 @@ const config: HardhatUserConfig = {
     mainnet: {
       url: process.env.MAINNET_API_URL,
       accounts: [`0x${process.env.PRIVATE_KEY}`],
+      // 80 Gwei
       gasPrice: 80000000000,
     },
     ropsten: {
