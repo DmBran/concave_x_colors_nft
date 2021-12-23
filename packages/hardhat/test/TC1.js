@@ -6,7 +6,7 @@ const prettier = require('prettier')
 /**
  Contract Constants & Variables
  */
-let THE_COLORS = '0x3C4CfA9540c7aeacBbB81532Eb99D5E870105CA9'
+let THE_COLORS = '0x9fdb31F8CE3cB8400C7cCb2299492F2A498330a4'
 const TREASURY = '0x48aE900E9Df45441B2001dB4dA92CE0E7C08c6d2'
 const MAX_SUPPLY = 4300
 
@@ -109,6 +109,13 @@ function getSvgFromTokenUri(base64svg) {
   });
   return prettySvg;
 }
+function getMeta(base64svg) {
+  let buff = new Buffer(base64svg.split(',')[1], 'base64');
+  let buffAscii = buff.toString('utf8');
+  let buffJSON = JSON.parse(buffAscii);
+  return buffJSON;
+}
+
 
 /**
  TESTS
@@ -226,19 +233,52 @@ describe('Public Functions', () => {
       expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
       expect(await syncXColors.totalSupply()).to.equal(1)
       let base64svg = await syncXColors.tokenURI(0)
+      let jsonObj = getMeta(base64svg);
+      //console.info(jsonObj.attributes);
       let prettySvg = getSvgFromTokenUri(base64svg);
       await fs.writeFile('test/output/test1.svg', prettySvg, (err) => {
         if (err) console.log(err)
       })
     })
 
-    // uncomment setColorAddress, and make THE_COLORS non constant
     /*
-    it('Should mint color from random number between 1-3', async () => {
+    it('Should check meta', async () => {
       await syncXColors.mint(1, colorTokenIds, { value: price })
       expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
       expect(await syncXColors.totalSupply()).to.equal(1)
       let base64svg = await syncXColors.tokenURI(0)
+      let jsonObj = getMeta(base64svg);
+      //console.info(jsonObj.attributes);
+    })
+   */
+
+
+    /*
+    it('Should check roll', async () => {
+      let token = 0;
+      for (var i = 0; i < 999; i++) {
+        await syncXColors.mint(1, [], { value: price })
+        let base64svg = await syncXColors.tokenURI(token)
+        let jsonObj = getMeta(base64svg);
+        //console.info(jsonObj.attributes[0].value);
+        token++;
+      }
+    })
+   */
+
+
+    // uncomment setColorAddress, and make THE_COLORS non constant
+    /*
+    it('Should mint color from random number between 1-3', async () => {
+      await syncXColors.mint(1, colorTokenIds, { value: price })
+      console.info(colorTokenIds.length);
+      expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
+      expect(await syncXColors.totalSupply()).to.equal(1)
+      let base64svg = await syncXColors.tokenURI(0)
+      let jsonObj = getMeta(base64svg);
+      console.info("COLOR 2");
+      console.info("test2");
+      console.info(jsonObj.attributes);
       let prettySvg = getSvgFromTokenUri(base64svg);
       await fs.writeFile('test/output/test2.svg', prettySvg, (err) => {
         if (err) console.log(err)
@@ -250,6 +290,10 @@ describe('Public Functions', () => {
       expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
       expect(await syncXColors.totalSupply()).to.equal(1)
       let base64svg = await syncXColors.tokenURI(0)
+      let jsonObj = getMeta(base64svg);
+      console.info("GRAY 2");
+      console.info("test3");
+      console.info(jsonObj.attributes);
       let prettySvg = getSvgFromTokenUri(base64svg);
       await fs.writeFile('test/output/test3.svg', prettySvg, (err) => {
         if (err) console.log(err)
@@ -258,9 +302,14 @@ describe('Public Functions', () => {
         'Insufficient funds'
       );
       await syncXColors.updateColors(0, colorTokenIds, { value: ethers.utils.parseEther(resyncPrice.toString())});
+      console.info(colorTokenIds.length);
       expect(await syncXColors.balanceOf(deployer.address)).to.be.eq('1')
       expect(await syncXColors.totalSupply()).to.equal(1)
       base64svg = await syncXColors.tokenURI(0)
+      jsonObj = getMeta(base64svg);
+      console.info("COLOR 3");
+      console.info("test33");
+      console.info(jsonObj.attributes);
       prettySvg = getSvgFromTokenUri(base64svg);
       await fs.writeFile('test/output/test33.svg', prettySvg, (err) => {
         if (err) console.log(err)
