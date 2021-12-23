@@ -45,12 +45,17 @@ const config: HardhatUserConfig = {
     deployer: 0,
   },
   mocha: {
-    timeout: 120000,
+    timeout: 6000000,
   },
   networks: {
     hardhat: {
       chainId: 1337,
       gas: 'auto',
+    },
+    mainnet: {
+      url: process.env.MAINNET_API_URL,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      gasPrice: 80000000000,
     },
     ropsten: {
       //gas: 2100000,
@@ -70,6 +75,11 @@ const config: HardhatUserConfig = {
       gasPrice: parseUnits('20', 'gwei').toNumber(),
       accounts: [process.env.POLYGON_DEPLOYER_PRIVATE_KEY || defaultPrivateKey],
     },
+    rinkeby: {
+      url: process.env.RINKEBY_API_URL,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+    },
+
   },
 }
 
