@@ -51,7 +51,7 @@ export default function Home() {
               </NoSSR>
             </div>
           </div>
-          <div className="container mx-auto flex px-5 py-10 md:py-24 lg:flex-row flex-col bg-gray-300 bg-opacity-50 items-center border-gray-800 border-8">
+          <div className="container mx-auto flex px-5 py-10 md:py-24 lg:flex-row flex-col bg-white items-center border-gray-800 border-8">
             <div className="sm:w-full md:w-full lg:flex-grow  md:w-1/3 lg:pr-20 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
               <h1 className="title-font text-center sm:text-4xl text-3xl mb-4 font-black text-gray-900 pt-2">
                 SYNC X COLORS
