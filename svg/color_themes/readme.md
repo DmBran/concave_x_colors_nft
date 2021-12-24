@@ -1,3 +1,0 @@
-
-XMas themes:
-
