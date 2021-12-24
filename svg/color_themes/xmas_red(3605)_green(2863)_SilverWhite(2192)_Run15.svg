@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' viewbox='0 0 500 500' style='background-color:#111111'>
+<g fill-opacity='0.3'>
+<rect fill = '#f8f5ef' x = '46.0' y = '23.0' width='544' height='732'
+                    transform = 'rotate(134)'/>
+<circle fill = '#f8f5ef' cx='337' cy='169' r = '269'/>
+<circle fill = '#d13f49' cx='203' cy='102' r = '380'/>
+<rect fill = '#d13f49' x = '25.0' y = '12.5' width='734' height='768'
+                    transform = 'rotate(68)'/>
+<circle fill = '#f8f5ef' cx='265' cy='133' r = '365'/>
+<circle fill = '#f8f5ef' cx='443' cy='478' r = '346'/>
+<rect fill = '#d13f49' x = '184.0' y = '220.0' width='636' height='718'
+                    transform = 'rotate(311)'/>
+<circle fill = '#f8f5ef' cx='487' cy='500' r = '374'/>
+<rect fill = '#f8f5ef' x = '116.0' y = '58.0' width='614' height='556'
+                    transform = 'rotate(15)'/>
+<rect fill = '#f8f5ef' x = '129.0' y = '192.5' width='582' height='600'
+                    transform = 'rotate(177)'/>
+<circle fill = '#f8f5ef' cx='151' cy='76' r = '373'/>
+<rect fill = '#d13f49' x = '217.0' y = '108.5' width='624' height='772'
+                    transform = 'rotate(116)'/>
+<rect fill = '#42ae4e' x = '222.0' y = '111.0' width='720' height='518'
+                    transform = 'rotate(52)'/>
+<rect fill = '#42ae4e' x = '250.0' y = '125.0' width='748' height='624'
+                    transform = 'rotate(288)'/>
+<rect fill = '#d13f49' x = '82.0' y = '169.0' width='744' height='530'
+                    transform = 'rotate(235)'/>
+</g>
+
+        <g>
+        <path stroke-dasharray="0" stroke-dashoffset="0" stroke-width="16" d="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">
+        <animate begin="s.begin" attributeType="XML" attributeName="stroke" values="#d13f49;#f8f5ef;#d13f49" dur="4s" fill="freeze"/>
+        <animate begin="s.begin" attributeType="XML" attributeName="stroke-dasharray" values="0;50;0" dur="6s" fill="freeze"/>
+        <animate begin="a.begin" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>
+        </path><path stroke-dasharray="300" stroke-dashoffset="300" stroke-width="16" d="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">
+        <animate begin="s.begin" attributeType="XML" attributeName="stroke" values="#d13f49;#42ae4e;#d13f49" dur="4s" fill="freeze"/>
+        <animate id="a" begin="s.begin;a.end" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>
+        <animate id="s" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;s.end" to= "-1800" dur="6s"/></path></g><g id="147b">
+        <path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" stroke="black" fill-opacity="0.9" stroke-width="0.7">
+        <animate begin="s.begin" attributeName="fill" dur="6s" values="black;#d13f49;black;#f8f5ef;black;#42ae4e;black"/>
+        </path>
+        <text x="2" y="40" font-size="3em" fill-opacity="0.3" fill="black">    </text>
+        <path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity="0.7" fill-opacity="0.7" fill="transparent">
+        <animate id="w" attributeName="fill" values="transparent;white;transparent" begin="s.begin+.17s;s.begin+2.17s;s.begin+4.17s" dur="1s"/>
+        <animate begin="w.begin" attributeName="stroke" values="transparent;black;transparent" dur="1s"/>
+        </path><path d="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity="0.5" fill-opacity="0.5" fill="transparent"
+        ><animate attributeName="fill" values="transparent;white;transparent" begin="w.begin+0.2s" dur="1s"/>
+        <animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+0.2s" dur="1s"/>
+        </path>
+        <path d="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity="0.3" fill-opacity="0.3" fill="transparent">
+        <animate attributeName="fill" values="transparent;white;transparent" begin="w.begin+0.4s" dur="1s"/>
+        <animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+0.4s" dur="1s"/>
+        </path></g><use href="#147b" x="-500" y="-500" transform="rotate(180)"/>
+</svg>
