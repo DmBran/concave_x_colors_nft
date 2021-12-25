@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<svg  xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='500' height='500' viewbox='0 0 500 500' style='background-color:#111111'>
+<g fill-opacity='0.3'>
+<rect fill = '#1fb9f3' x = '157.0' y = '114.0' width='732' height='608'
+                    transform = 'rotate(6)'/>
+<rect fill = '#f8f5ef' x = '28.0' y = '86.0' width='604' height='734'
+                    transform = 'rotate(257)'/>
+<circle fill = '#1fb9f3' cx='41' cy='213' r = '250'/>
+<rect fill = '#1fb9f3' x = '138.5' y = '26.5' width='674' height='740'
+                    transform = 'rotate(198)'/>
+<circle fill = '#f8f5ef' cx='330' cy='217' r = '360'/>
+<rect fill = '#f8f5ef' x = '227.5' y = '72.0' width='592' height='764'
+                    transform = 'rotate(1)'/>
+<circle fill = '#1fb9f3' cx='416' cy='267' r = '364'/>
+<circle fill = '#1fb9f3' cx='282' cy='121' r = '353'/>
+<circle fill = '#f8f5ef' cx='92' cy='202' r = '395'/>
+<circle fill = '#f8f5ef' cx='459' cy='163' r = '277'/>
+<circle fill = '#0b0b02' cx='3' cy='13' r = '302'/>
+<circle fill = '#0b0b02' cx='160' cy='381' r = '379'/>
+<rect fill = '#f8f5ef' x = '114.0' y = '29.0' width='564' height='522'
+                    transform = 'rotate(178)'/>
+<circle fill = '#f8f5ef' cx='98' cy='43' r = '346'/>
+<circle fill = '#f8f5ef' cx='198' cy='174' r = '374'/>
+<rect fill = '#1fb9f3' x = '3.5' y = '54.5' width='696' height='550'
+                    transform = 'rotate(342)'/>
+<rect fill = '#0b0b02' x = '32.5' y = '187.0' width='660' height='706'
+                    transform = 'rotate(307)'/>
+<circle fill = '#f8f5ef' cx='282' cy='20' r = '257'/>
+<circle fill = '#0b0b02' cx='107' cy='76' r = '260'/>
+<circle fill = '#f8f5ef' cx='135' cy='104' r = '278'/>
+<rect fill = '#1fb9f3' x = '137.5' y = '28.0' width='792' height='630'
+                    transform = 'rotate(330)'/>
+<circle fill = '#0b0b02' cx='333' cy='289' r = '251'/>
+<rect fill = '#f8f5ef' x = '82.5' y = '243.0' width='774' height='630'
+                    transform = 'rotate(125)'/>
+<circle fill = '#f8f5ef' cx='137' cy='304' r = '362'/>
+<rect fill = '#1fb9f3' x = '196.0' y = '99.0' width='614' height='560'
+                    transform = 'rotate(95)'/>
+<rect fill = '#1fb9f3' x = '183.0' y = '246.5' width='678' height='600'
+                    transform = 'rotate(239)'/>
+<circle fill = '#f8f5ef' cx='418' cy='26' r = '340'/>
+<rect fill = '#1fb9f3' x = '58.0' y = '145.5' width='786' height='794'
+                    transform = 'rotate(64)'/>
+</g>
+
+        <g>
+        <path stroke-dasharray="0" stroke-dashoffset="0" stroke-width="16" d="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">
+        <animate begin="s.begin" attributeType="XML" attributeName="stroke" values="#1fb9f3;#0b0b02;#1fb9f3" dur="4s" fill="freeze"/>
+        <animate begin="s.begin" attributeType="XML" attributeName="stroke-dasharray" values="0;50;0" dur="6s" fill="freeze"/>
+        <animate begin="a.begin" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>
+        </path><path stroke-dasharray="300" stroke-dashoffset="300" stroke-width="16" d="M195.5 248c0 30 37.5 30 52.5 0s 52.5-30 52.5 0s-37.5 30-52.5 0s-52.5-30-52.5 0" fill="none">
+        <animate begin="s.begin" attributeType="XML" attributeName="stroke" values="#1fb9f3;#f8f5ef;#1fb9f3" dur="4s" fill="freeze"/>
+        <animate id="a" begin="s.begin;a.end" attributeType="XML" attributeName="stroke-width" values="16;20;16" dur="1s" fill="freeze"/>
+        <animate id="s" attributeType="XML" attributeName="stroke-dashoffset" begin="0s;s.end" to= "-1800" dur="6s"/></path></g><g id="147b">
+        <path d="M194 179H131c-34 65 0 143 0 143h63C132 251 194 179 194 179Zm-26 128H144s-25-35 0-111h23S126 245 168 307Z" stroke="black" fill-opacity="0.9" stroke-width="0.7">
+        <animate begin="s.begin" attributeName="fill" dur="6s" values="black;#1fb9f3;black;#0b0b02;black;#f8f5ef;black"/>
+        </path>
+        <text x="2" y="40" font-size="3em" fill-opacity="0.3" fill="black">    </text>
+        <path d="M90 203c-21 41 0 91 0 91h11c0 0-16-42 0-91z" stroke-opacity="0.7" fill-opacity="0.7" fill="transparent">
+        <animate id="w" attributeName="fill" values="transparent;white;transparent" begin="s.begin+.17s;s.begin+2.17s;s.begin+4.17s" dur="1s"/>
+        <animate begin="w.begin" attributeName="stroke" values="transparent;black;transparent" dur="1s"/>
+        </path><path d="M60 212c-17 34 0 74 0 74h9c0-1-13-34 0-74z" stroke-opacity="0.5" fill-opacity="0.5" fill="transparent"
+        ><animate attributeName="fill" values="transparent;white;transparent" begin="w.begin+0.2s" dur="1s"/>
+        <animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+0.2s" dur="1s"/>
+        </path>
+        <path d="M37 221c-13 26 0 57 0 57h7c0 0-10-26 0-57z" stroke-opacity="0.3" fill-opacity="0.3" fill="transparent">
+        <animate attributeName="fill" values="transparent;white;transparent" begin="w.begin+0.4s" dur="1s"/>
+        <animate attributeName="stroke" values="transparent;black;transparent" begin="w.begin+0.4s" dur="1s"/>
+        </path></g><use href="#147b" x="-500" y="-500" transform="rotate(180)"/>
+</svg>
