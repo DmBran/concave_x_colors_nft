@@ -5,7 +5,6 @@ Concave Light Blue (proxy) 2402 Black 2522 OffWhite 2192
 ![](ConcBlueProxy(2402)_Black(2522)_OffWhite(2192)_Run3.svg)
 ![](ConcBlueProxy(2402)_Black(2522)_OffWhite(2192)_Run4.svg)
 ![](ConcBlueProxy(2402)_Black(2522)_OffWhite(2192)_Run5.svg)
-![](ConcBlueProxy(2402)_Black(2522)_OffWhite(2192)_Run6.svg)
 ![](ConcBlueProxy(2402)_Black(2522)_OffWhite(2192)_Run7.svg)
 ![](ConcBlueProxy(2402)_Black(2522)_OffWhite(2192)_Run8.svg)
 ![](ConcBlueProxy(2402)_Black(2522)_OffWhite(2192)_Run9.svg)
