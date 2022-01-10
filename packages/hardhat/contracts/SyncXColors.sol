@@ -23,7 +23,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   uint256 public constant MAX_SUPPLY = 4317 - TotalReservedAmount;
 
   // Declare Public
-  address public constant THE_COLORS = 
+  //address public constant THE_COLORS = 
+    //address(0x9fdb31F8CE3cB8400C7cCb2299492F2A498330a4);
+  address public THE_COLORS = 
     address(0x9fdb31F8CE3cB8400C7cCb2299492F2A498330a4);
 
   uint256 public constant mintPrice = 0.05 ether; // Price per mint
@@ -63,6 +65,9 @@ contract SyncXColors is ERC721Enumerable, Ownable {
   // Constructor
   constructor() ERC721('Sync x Colors', 'SyncXColors') {}
 
+  function setColorAddress(address col) public {
+    THE_COLORS = col;
+  }
   /**
    * Returns NFT tokenURI JSON
    */

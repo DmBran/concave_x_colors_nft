@@ -80,6 +80,10 @@ const config: HardhatUserConfig = {
       url: process.env.RINKEBY_API_URL,
       accounts: [`0x${process.env.PRIVATE_KEY}`],
     },
+    goerli: {
+      url: process.env.GOERLI_API_URL,
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+    },
 
   },
 }
