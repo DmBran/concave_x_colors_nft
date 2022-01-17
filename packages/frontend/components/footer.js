@@ -43,7 +43,7 @@ export const Footer = () => {
         <a
           className={`${styles.discord}`}
           target="_blank"
-          href="https://discord.gg/nTf5q6MM"
+          href="https://discord.gg/PDwkZZyu2e"
         >
           <svg
             fill="#000000"

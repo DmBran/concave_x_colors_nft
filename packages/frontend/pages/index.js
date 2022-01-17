@@ -116,7 +116,7 @@ export default function Home() {
                   />
                 </a>
                 <a
-                  href="https://discord.gg/SejJhQvz"
+                  href="https://discord.gg/PDwkZZyu2e"
                   target="_blank"
                   className="ml-5 inline-flex md:inline-block"
                 >
