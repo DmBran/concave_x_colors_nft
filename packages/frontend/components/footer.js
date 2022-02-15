@@ -1,5 +1,5 @@
-import styles from '../styles/meme.module.css'
 import process from 'process'
+import styles from '../styles/meme.module.css'
 
 export const Footer = () => {
   return (
@@ -82,19 +82,52 @@ export const Footer = () => {
         >
           <img width="34" src="/static/opensea.svg" />
         </a>
+        <a
+          href="https://twitter.com/syncxcolors"
+          target="_blank"
+          className={styles.icon}
+          style={{
+            position: 'relative',
+            top: '3px',
+            left: '2px',
+          }}
+        >
+          <img
+            alt="Twitter Icon"
+            src="/static/twitter.svg"
+            width="33"
+            style={{
+              width: '33px',
+            }}
+          />
+        </a>
       </div>
-      {
-        <div className={'mt-10 text-center'}>
-          <p className={'text-black font-bold uppercase'}>Contract Address</p>
-          <a
-            href={`https://etherscan.io/address/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
-            target="_blank"
-            className={' text-center block font-xs'}
-          >
-            {process.env.NEXT_PUBLIC_SYNC_CONTRACT}
-          </a>
-        </div>
-      }
+
+      <div className={'mt-10 text-center'}>
+        <p className={'text-black font-bold uppercase'}>
+          Sync Contract Address
+        </p>
+        <a
+          href={`https://etherscan.io/address/${process.env.NEXT_PUBLIC_SYNC_CONTRACT}`}
+          target="_blank"
+          className={' text-center block font-xs'}
+        >
+          {process.env.NEXT_PUBLIC_SYNC_CONTRACT}
+        </a>
+      </div>
+      <div className={'mt-10 text-center'}>
+        <p className={'text-black font-bold uppercase'}>
+          Rental Contract Address
+        </p>
+        <a
+          href={`https://etherscan.io/address/${process.env.NEXT_PUBLIC_AIR_CONTRACT}`}
+          target="_blank"
+          className={' text-center block font-xs'}
+        >
+          {process.env.NEXT_PUBLIC_AIR_CONTRACT}
+        </a>
+      </div>
+
       <div className={'flex justify-center  flex-1 flex-grow text-center'}>
         <p className={'text-center text-sm mt-20 font-xs'}>
           <span className={'block'}>DISCLAIMER</span> All purchases are final.

@@ -1,12 +1,20 @@
 /*  ./components/Navbar.jsx     */
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { useWeb3Context } from 'web3-react'
-
+import styles from '../styles/meme.module.css'
 export const Navbar = () => {
+  const router = useRouter()
   const context = useWeb3Context()
-
+  //console.log(router.pathname)
   const [active, setActive] = useState(false)
+  const [path, setPath] = useState(undefined)
+
+  useEffect(() => {
+    const path = router.pathname
+    setPath(path)
+  }, [])
 
   const handleClick = () => {
     setActive(!active)
@@ -60,28 +68,70 @@ export const Navbar = () => {
             }   w-full lg:inline-flex lg:flex-grow lg:w-auto`}
           >
             <div className="lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto">
-              <Link href={`/`}>
-                <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
-                  Home
-                </a>
-              </Link>
-
               {
                 <Link prefetch={false} href={`/mint`}>
-                  <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
-                    Mint
+                  <a
+                    className={`text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500 ${
+                      path === '/mint' || path === '/resync'
+                        ? styles.activeNavBar
+                        : ''
+                    }`}
+                  >
+                    Mint / Resync
                   </a>
                 </Link>
               }
+              {/* {
+                <Link prefetch={false} href={`/rent`}>
+                  <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
+                    Rent
+                  </a>
+                </Link>
+              } */}
+              {/* {
+                <Link prefetch={false} href={`/balances`}>
+                  <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
+                    Balances
+                  </a>
+                </Link>
+              } */}
+              {
+                <Link prefetch={false} href={`/stake`}>
+                  <a
+                    className={`text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500 ${
+                      path === '/stake' || path === '/balances'
+                        ? styles.activeNavBar
+                        : ''
+                    }`}
+                  >
+                    Staking
+                  </a>
+                </Link>
+              }
+              {/* {
+                <Link prefetch={false} href={`/unstake`}>
+                  <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
+                    Unstake
+                  </a>
+                </Link>
+              } */}
               {
                 <Link prefetch={false} href={`/display`}>
-                  <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
+                  <a
+                    className={`text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500 ${
+                      path === '/display' ? styles.activeNavBar : ''
+                    }`}
+                  >
                     My NFTs
                   </a>
                 </Link>
               }
               <Link href={`/faq`}>
-                <a className="text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500">
+                <a
+                  className={`text-black uppercase lg:inline-flex lg:w-auto w-full px-3 py-2 rounded font-bold items-center justify-center hover:text-indigo-500 ${
+                    path === '/faq' ? styles.activeNavBar : ''
+                  }`}
+                >
                   FAQ
                 </a>
               </Link>
@@ -93,7 +143,10 @@ export const Navbar = () => {
                 >
                   {context.account.substring(0, 5) +
                     '....' +
-                    context.account.substring(11, 16)}
+                    context.account.substring(
+                      context.account.length - 5,
+                      context.account.length
+                    )}
                 </a>
               )}
               {!context.active && (

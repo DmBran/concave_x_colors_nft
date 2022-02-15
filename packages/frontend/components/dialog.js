@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react'
-import styles from '../styles/meme.module.css'
 import Link from 'next/link'
+import styles from '../styles/meme.module.css'
 import { Loader } from './loader'
 
 const ModalDialog = ({ isOpen, setIsOpen, svg }) => {

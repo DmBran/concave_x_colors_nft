@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import Countdown from 'react-countdown'
+import NoSSR from 'react-no-ssr'
+import ColorGallery from '../components/colorgallery'
 import { Footer } from '../components/footer'
+import Gallery from '../components/gallery'
 import { MetaHead } from '../components/head'
+import HeroSlider from '../components/heroslider'
 import { Navbar } from '../components/navbar'
 import styles from '../styles/meme.module.css'
-import NoSSR from 'react-no-ssr'
-import HeroSlider from '../components/heroslider'
-import Gallery from '../components/gallery'
-import ColorGallery from '../components/colorgallery'
 
 export default function Home() {
   const LAUNCH_DATE = process.env.NEXT_PUBLIC_LAUNCH_DATE
@@ -186,6 +186,13 @@ export default function Home() {
               <div className="p-2 md:w-1/2 w-full">
                 <div className={'pr-0 md:pr-6'}>
                   <video src="/static/sync.mp4" type="video/mp4" controls />
+                </div>
+              </div>
+            </div>
+            <div className="flex mt-20 justify-center">
+              <div className="p-2 md:w-1/2 w-full">
+                <div className={'pr-0 md:pr-6'}>
+                  <video src="/static/sync2.mp4" type="video/mp4" controls />
                 </div>
               </div>
             </div>

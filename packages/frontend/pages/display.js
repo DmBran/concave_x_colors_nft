@@ -1,18 +1,19 @@
 import { useRouter } from 'next/router'
+import process from 'process'
 import React, { useEffect, useState } from 'react'
 import { useWeb3Context } from 'web3-react'
-import SyncXColors from '../artifacts/contracts/SyncXColors.sol/SyncXColors.json'
+import SyncXColors from '../artifacts/SyncXColors.json'
+import SyncModal from '../components/dialog.js'
 import { Footer } from '../components/footer'
 import { MetaHead } from '../components/head'
 import { Loader } from '../components/loader'
 import { Navbar } from '../components/navbar'
-import styles from '../styles/meme.module.css'
-import SyncModal from '../components/dialog.js'
-import process from 'process'
 import { decodeToken } from '../helpers/decode-token'
+import styles from '../styles/meme.module.css'
 
 export default function Display() {
-  const { query } = useRouter()
+  const router = useRouter()
+  const query = router.query
   const context = useWeb3Context()
   const NETWORK = Number(process.env.NEXT_PUBLIC_NETWORK)
   const SYNC_CONTRACT = process.env.NEXT_PUBLIC_SYNC_CONTRACT
@@ -20,11 +21,16 @@ export default function Display() {
   const [modalSvg, setModalSvg] = useState(null)
   const [svgs, setSvgs] = useState(null)
   const [reveal, setReveal] = useState(null)
+  const [display, setDisplay] = useState(null)
   const [multi, setMulti] = useState(null)
   const [loaded, setLoaded] = useState(null)
 
   useEffect(async () => {
     const filter = []
+
+    if (router.pathname === '/display' && !query.resync) setDisplay(true)
+
+    console.log([router.pathname, display])
     if (query.tokenID || query.mintCount) setReveal(true)
 
     if (context.active && context.networkId === NETWORK) {
@@ -92,89 +98,87 @@ export default function Display() {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.main}>
-          <div
-            className={
-              'text-center justify-center container mx-auto flex px-5 py-24 md:flex-row flex-col items-center bg-white border-gray-800 border-8'
-            }
-          >
-            {!context.active && (
-              <div className={'flex-1 flex center-content justify-center'}>
-                <p className={'font-bold title-font uppercase text-4xl'}>
-                  Please Connect via MetaMask
-                </p>
-              </div>
-            )}
-            {context.active && (
-              <div className={'mb-10'}>
-                {reveal && (
-                  <p
-                    className={
-                      'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-2 font-black text-gray-900 pt-0 mt-0 uppercase'
-                    }
-                  >
-                    Your Sync X Color{multi ? 's' : ''}
-                  </p>
-                )}
-                {!reveal && (
-                  <div>
-                    <p
-                      className={
-                        'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-2 font-black text-gray-900 pt-0 mt-0 uppercase'
-                      }
-                    >
-                      Your Owned Syncs
-                    </p>
-                    <p className={'text-center mb-4 font-late-500 text-sm'}>
-                      Select an NFT to view your traits OR to{' '}
-                      <span className={'font-bold text-md underline'}>
-                        re-SYNC
-                      </span>{' '}
-                      your colors!
-                    </p>
-                  </div>
-                )}
+          <main className={'relative container mx-auto  '}>
+            <div>
+              <div
+                className={
+                  'bg-white  border-gray-800 border-8 relative container mx-auto flex px-5 py-6 lg:py-24 md:flex-row flex-col items-center'
+                }
+              >
                 <div
                   className={
-                    'flex flex-wrap colors justify-center content-center'
+                    'text-center justify-center container mx-auto flex px-5  md:flex-row flex-col items-center bg-white'
                   }
                 >
-                  {loaded &&
-                    svgs &&
-                    svgs.map((svg) => (
-                      <div
-                        className={'border-gray-800 border-4 m-4'}
-                        key={svg.tokenId}
-                      >
-                        <div
-                          className={styles.sync}
-                          onClick={() => {
-                            setIsOpen(true)
-                            setModalSvg(svg)
-                          }}
-                          style={{
-                            width: 200,
-                            height: 200,
-                            cursor: 'pointer',
-                          }}
-                        >
-                          <img src={`${svg.svg64}`} />
-                        </div>
-                      </div>
-                    ))}
-                  {!loaded && (
-                    <div className="mt-10">
-                      <Loader />
+                  {!context.active && (
+                    <div
+                      className={'flex-1 flex center-content justify-center'}
+                    >
+                      <p className={'font-bold title-font uppercase text-4xl'}>
+                        Please Connect via MetaMask
+                      </p>
                     </div>
                   )}
-                  {loaded && !svgs?.length && (
-                    <div className={'font-bold title-font uppercase text-2xl'}>
-                      No owned Color X Sync NFTs
+                  {context.active && (
+                    <div className={'mb-10'}>
+                      {
+                        <p
+                          className={
+                            'text-center mb-1 text-xl font-bold title-font sm:text-4xl text-3xl mb-2 font-black text-gray-900 pt-0 mt-0 uppercase'
+                          }
+                        >
+                          Your Sync X Color{multi ? 's' : ''}
+                        </p>
+                      }
+                      <div
+                        className={
+                          'flex flex-wrap colors justify-center content-center'
+                        }
+                      >
+                        {loaded &&
+                          svgs &&
+                          svgs.map((svg) => (
+                            <div
+                              className={'border-gray-800 border-4 m-4'}
+                              key={svg.tokenId}
+                            >
+                              <div
+                                className={styles.sync}
+                                onClick={() => {
+                                  setIsOpen(true)
+                                  setModalSvg(svg)
+                                }}
+                                style={{
+                                  width: 200,
+                                  height: 200,
+                                  cursor: 'pointer',
+                                }}
+                              >
+                                <img src={`${svg.svg64}`} />
+                              </div>
+                            </div>
+                          ))}
+                        {!loaded && (
+                          <div className="mt-10">
+                            <Loader />
+                          </div>
+                        )}
+                        {loaded && !svgs?.length && (
+                          <div
+                            className={
+                              'font-bold title-font uppercase text-2xl'
+                            }
+                          >
+                            No owned Color X Sync NFTs
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          </main>
         </div>
         <Footer />
       </div>
